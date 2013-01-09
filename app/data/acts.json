@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "data": [
+      {
+        "type": "Story",
+        "data": {
+          "id": 74868,
+          "type": "zeega",
+          "fetch": true
+        }
+      },
+      {
+        "type": "Road",
+        "data": {
+          "id": 1,
+          "type": "interactive",
+          "fetch": false
+        }
+      },
+      {
+        "type": "Reststop",
+        "data": {
+          "id": 1,
+          "type": "form",
+          "fetch": false
+
+        }
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "data": [
+      {
+        "type": "Story",
+        "data": {}
+      },
+      {
+        "type": "Road",
+        "data": {}
+      },
+      {
+        "type": "Reststop",
+        "data": {}
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "data": [
+      {
+        "type": "Story",
+        "data": {}
+      },
+      {
+        "type": "Road",
+        "data": {}
+      },
+      {
+        "type": "Reststop",
+        "data": {}
+      }
+    ]
+  }
+]

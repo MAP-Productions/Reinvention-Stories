@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "media": "walkthrough",
+    "data": [
+      {
+        "icon": "...",
+        "media": "tutorial",
+        "cue": 3
+      },
+      {
+        "icon": "...",
+        "media": "tutorial",
+        "cue": 5
+      },
+      {
+        "icon": "...",
+        "media": "tutorial",
+        "cue": 7
+      },
+      {
+        "icon": "...",
+        "media": "tutorial",
+        "cue": 9
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "media": false,
+    "data": []
+  },
+  {
+    "id": 3,
+    "media": false,
+    "data": []
+  }
+]

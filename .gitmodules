@@ -1,0 +1,3 @@
+[submodule "vendor/zeegaplayer"]
+	path = vendor/zeegaplayer
+	url = git@github.com:Zeega/Zeega-Player.git

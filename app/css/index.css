@@ -1,0 +1,11 @@
+@import "../../vendor/bootstrap/css/bootstrap.css";
+@import "../../vendor/zeegaplayer/assets/css/zeega.css";
+@import "../../app/css/reinvention.css";
+
+
+/* Put development-only CSS below this line. */
+[id^='ZEEGA-player-'] {
+  z-index: 9;
+  width: 100%;
+  height: 600px;
+}
