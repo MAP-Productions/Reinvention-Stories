@@ -75,7 +75,27 @@
       if ( media.paused ) {
         media.play();
       }
+
+      media.playbackRate += scaled / 10;
+
+      /*
+
+      Original algorithm:
       media.playbackRate += 0.33;
+
+
+
+      TODO: alternative algorith:
+
+      media.playbackRate = Math.round( media.playbackRate + (scaled / 10) );
+
+      or
+
+      media.playbackRate += scaled / 100;
+
+      console.log( media.playbackRate );
+
+      */
 
       /*
 
@@ -104,7 +124,7 @@
     // this will allow users to click on "elements"
     // presented on the video surface.
     if ( scaled === 0 ) {
-      media.playbackRate = 0;
+      media.playbackRate = 1;
       media.pause();
     }
 
