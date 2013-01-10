@@ -15,7 +15,7 @@
       }, this);
     },
     merge: function() {
-      return Array.from( arguments ).reduce(function( initial, obj ) {
+      return [].slice.call( arguments ).reduce(function( initial, obj ) {
         return Abstract.assign( initial, obj );
       }, {});
     },
