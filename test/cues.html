@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Media Scroll Control</title>
+  <script src="http://cdn.popcornjs.org/code/dist/popcorn-complete.js"></script>
+  <script src="/vendor/js/libs/jquery.js"></script>
+  <script src="/vendor/js/libs/abstract.js"></script>
+  <script src="/vendor/js/libs/media-scroll-control.js"></script>
+
+  <style>
+
+    #reinvention-road {
+      width: 100%;
+      margin: 0 auto;
+      z-index: 997;
+    }
+
+    #reinvention-road img {
+      width: 250px;
+      height: 250px;
+      position: absolute;
+      top: 100px;
+      z-index: 998;
+    }
+
+    #video {
+      width: 100%;
+    }
+
+    #reinvention-road video:not(#video) {
+      z-index: 999;
+      margin: auto auto;
+      position: absolute;
+      width: 720px;
+      height: 405px;
+    }
+
+    .hidden {
+      visibility: hidden;
+    }
+
+    .image {
+      position: absolute;
+    }
+
+
+    .left {
+      left: 0px;
+    }
+
+    .right {
+      right: 0px;
+    }
+
+
+  </style>
+</head>
+<body>
+
+<div id="reinvention-road">
+  <video id="video" controls>
+    <source src="/app/media/walkthrough.mp4"></source>
+    <source src="/app/media/walkthrough.ogv"></source>
+    <source src="/app/media/walkthrough.webm"></source>
+  </video>
+</div>
+
+<script>
+var ACT_DATA = [
+  {
+    "id": 1,
+    "video": "walkthrough",
+    "data": [
+      {
+        "image": "SV_A1_AntiViolenceRally.png",
+        "video": "tutorial",
+        "start": 3
+      },
+      {
+        "image": "SV_A1_BlessingoftheBikes.png",
+        "video": "tutorial",
+        "start": 6
+      },
+      {
+        "image": "SV_A1_CityGarden.png",
+        "video": "tutorial",
+        "start": 9
+      },
+      {
+        "image": "SV_A1_Mural.png",
+        "video": "tutorial",
+        "start": 12
+      },
+      {
+        "image": "SV_A1_PaintingtheGate.png",
+        "video": "tutorial",
+        "start": 15
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "video": false,
+    "data": []
+  },
+  {
+    "id": 3,
+    "video": false,
+    "data": []
+  }
+];
+
+
+</script>
+
+<script src="tests/cues.js"></script>
+
+</body>
+</html>
