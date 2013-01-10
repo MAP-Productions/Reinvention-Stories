@@ -12,7 +12,7 @@
 
   $(function() {
 
-    var scrollable, $primary, $container, images, videos, dims;
+    var scrollable, $primary, $container, images, videos, current, previous, dims;
 
     scrollable = Popcorn( Scrollable("#video").media, {
       frameAnimation: true
@@ -94,10 +94,16 @@
       // TODO: Abstract this operation
       $container.find("video:not(#video)").remove();
       $primary.animate({ opacity: 1 }, "fast");
+
+      previous = null;
     });
 
     $("#reinvention-road").on("click", ".icons", function() {
-      var video = videos[ $(this).prop("video") ];
+      var video = videos[ current = $(this).prop("video") ];
+
+      if ( previous === current ) {
+        return;
+      }
 
       // Stop the primary main video and fade to 50%
       $primary.media.pause();
@@ -107,8 +113,8 @@
       // TODO: Abstract this operation
       $container.find("video:not(#video)").remove();
 
-      // Append the child video element
-      $container.append( video );
+      // Reset video to play from beginning
+      video.get(0).currentTime = 0;
 
       // Set the child element's position, relative
       // to the dimensions of the primary video
@@ -117,10 +123,23 @@
         left: dims.width / 4 + "px"
       });
 
+      // Append the child video element
+      $container.append( video );
+
       // Play the newly placed video element
       // (Dereference the jQuery object to use the
       // video element's native play() method)
       video.get(0).play();
+
+      // When the video has played to the end,
+      // trigger a click on the primary video surface.
+      // This will cause the video to close and the
+      // primary video to fade in.
+      video.one("ended", function() {
+        $primary.triggerHandler("click");
+      });
+
+      previous = current;
     });
 
 
