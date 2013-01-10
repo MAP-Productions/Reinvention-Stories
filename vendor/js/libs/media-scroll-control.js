@@ -76,7 +76,8 @@
         media.play();
       }
 
-      media.playbackRate += scaled / 10;
+      // media.playbackRate += scaled / 10;
+      media.playbackRate += 0.33;
 
       /*
 
