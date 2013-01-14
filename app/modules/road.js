@@ -58,11 +58,16 @@ define([
         },
 
         beforeRender: function() {
-            console.log( "Road.Views.Item: beforeRender" );
         },
 
         afterRender: function() {
             console.log( "Road.Views.Item: afterRender" );
+
+            new ScrollableCueset(
+                Abstract.merge({ selector: "#video" }, this.model.attributes )
+            );
+
+            // console.log( this.model.attributes );
 
             //
             //

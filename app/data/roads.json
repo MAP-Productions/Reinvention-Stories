@@ -2,37 +2,42 @@
   {
     "id": 1,
     "video": "walkthrough",
-    "data": [
+    "cues": [
       {
-        "image": "...",
+        "image": "SV_A1_AntiViolenceRally.png",
         "video": "tutorial",
         "start": 3
       },
       {
-        "image": "...",
+        "image": "SV_A1_BlessingoftheBikes.png",
         "video": "tutorial",
-        "start": 5
+        "start": 6
       },
       {
-        "image": "...",
-        "video": "tutorial",
-        "start": 7
-      },
-      {
-        "image": "...",
+        "image": "SV_A1_CityGarden.png",
         "video": "tutorial",
         "start": 9
+      },
+      {
+        "image": "SV_A1_Mural.png",
+        "video": "tutorial",
+        "start": 12
+      },
+      {
+        "image": "SV_A1_PaintingtheGate.png",
+        "video": "tutorial",
+        "start": 15
       }
     ]
   },
   {
     "id": 2,
     "video": false,
-    "data": []
+    "cues": []
   },
   {
     "id": 3,
     "video": false,
-    "data": []
+    "cues": []
   }
 ]
