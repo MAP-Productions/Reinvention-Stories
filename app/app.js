@@ -3,7 +3,9 @@ define([
     "jquery",
     "lodash",
     "backbone",
-    "layoutmanager"
+    "layoutmanager",
+    "scrollable",
+    "scrollablecueset"
 ],
 
 function( $, _, Backbone ) {

@@ -1,7 +1,10 @@
-(function() {
+(function( exports ) {
   // Alias $p.code` to something that sounds more like
   // what it does.
   Popcorn.prototype.register = Popcorn.prototype.code;
+
+  var IMAGE_PATH = "/app/image/",
+      VIDEO_PATH = "/app/video/";
 
   function sources( path, name ) {
     return [ "mp4", "ogv", "webm" ].reduce(function( initial, val ) {
@@ -10,108 +13,112 @@
     }, "");
   }
 
-  $(function() {
+  function ScrollableCueset( options ) {
+    var images, videos, current, previous, dims;
 
-    var scrollable, $primary, $container, images, videos, current, previous, dims;
+    Abstract.put.call( this, options );
 
-    scrollable = Popcorn( Scrollable("#video").media, {
+    // Use the provided selector to find
+    // the given video element that will serve
+    // as the primary for this ScrollableCueset
+    this.node = document.querySelector( this.selector );
+    this.original = this.node.cloneNode();
+    this.node.innerHTML = sources( VIDEO_PATH, this.video );
+
+    this.scrollable = Popcorn( Scrollable( this.node ).media, {
       frameAnimation: true
     });
 
-    $primary = $(scrollable.media);
-    $primary.media = scrollable;
-    $container = $primary.parent();
+    this.$primary = $(this.scrollable.media);
+    this.$primary.media = this.scrollable;
+    this.$container = this.$primary.parent();
 
     images = {};
     videos = {};
 
     dims = {
-      width: $container.width(),
-      height: $container.height()
+      width: this.$container.width(),
+      height: this.$container.height()
     };
 
 
-    ACT_DATA.forEach(function( act ) {
+    if ( this.cues.length ) {
 
-      var cues = act.data;
+      this.cues.forEach(function( cue, k ) {
+        var image, video, side;
 
-      if ( cues.length ) {
-        cues.forEach(function( cue, k ) {
-          var image, video, side;
+        // Register behaviours to execute at
+        // the start and end phase of a popcorn
+        // track event.
+        this.scrollable.register(
+          Abstract.merge({}, cue, {
+            end: cue.start + 4,
+            onStart: function( track ) {
+              images[ track.image ].fadeIn();
+            },
+            onEnd: function( track ) {
+              images[ track.image ].fadeOut();
+            }
+          })
+        );
 
-          // Register behaviours to execute at
-          // the start and end phase of a popcorn
-          // track event.
-          scrollable.register(
-            Abstract.merge({}, cue, {
-              end: cue.start + 4,
-              onStart: function( track ) {
-                images[ track.image ].fadeIn();
-              },
-              onEnd: function( track ) {
-                images[ track.image ].fadeOut();
-              }
-            })
-          );
+        // Alternatate which side the image is
+        // displayed on.
+        side = k % 2 === 0 ? "left" : "right";
 
-          // Alternatate which side the image is
-          // displayed on.
-          side = k % 2 === 0 ? "left" : "right";
-
-          // Generate an element in a jQuery object for the
-          // image icon to display
-          image = $("<img>").addClass( side + " icons" ).prop({
-            src: "/app/img/icons/road/" + cue.image,
-            video: cue.video,
-            hidden: true
-          });
-
-          // Generate an element in a jQuery object for the
-          // video that is associated with this image icon
-          video = $("<video>").attr( "id", cue.video ).html(
-            sources( "/app/media/", cue.video )
-          );
-
-          // TODO: Experiment with making the image
-          //        dimensions based on the video
-          //
-          // http://www.duebel.me/web-video-pixel-dimensions/
-
-          $container.append( image );
-
-          // Store references to the newly created image and video
-          // jQuert elements in a free-var cache.
-          images[ cue.image ] = image;
-          videos[ cue.video ] = video;
+        // Generate an element in a jQuery object for the
+        // image icon to display
+        image = $("<img>").addClass( side + " icons" ).prop({
+          src: IMAGE_PATH + cue.image,
+          video: cue.video,
+          hidden: true
         });
-      }
-    });
 
+        // Generate an element in a jQuery object for the
+        // video that is associated with this image icon
+        video = $("<video>").attr( "id", cue.video ).html(
+          sources( VIDEO_PATH, cue.video )
+        );
 
-    $primary.on("click", function() {
+        // TODO: Experiment with making the image
+        //        dimensions based on the video
+        //
+        // http://www.duebel.me/web-video-pixel-dimensions/
+
+        this.$container.append( image );
+
+        // Store references to the newly created image and video
+        // jQuert elements in a free-var cache.
+        images[ cue.image ] = image;
+        videos[ cue.video ] = video;
+
+      }.bind(this));
+    }
+
+    this.$primary.on("click", function() {
       console.log( "video surface clicked" );
       // Remove any residual video elements
       // TODO: Abstract this operation
-      $container.find("video:not(#video)").remove();
-      $primary.animate({ opacity: 1 }, "fast");
+      this.$container.find("video:not(#video)").remove();
+      this.$primary.animate({ opacity: 1 }, "fast");
 
       previous = null;
-    });
+    }.bind(this));
 
-    $("#reinvention-road").on("click", ".icons", function() {
-      var video = videos[ current = $(this).prop("video") ];
+    $("#reinvention-road").on("click", ".icons", function( event ) {
+      var video = videos[ current = $(event.currentTarget).prop("video") ];
 
       if ( previous === current ) {
         return;
       }
 
       // Stop the primary main video and fade to 50%
-      $primary.media.pause();
-      $primary.animate({ opacity: 0.5 }, "fast");
+      this.$primary.media.pause();
+      this.$primary.animate({ opacity: 0.5 }, "fast");
 
       // Remove any residual video elements
       // TODO: Abstract this operation
-      $container.find("video:not(#video)").remove();
+      this.$container.find("video:not(#video)").remove();
 
       // Reset video to play from beginning
       video.get(0).currentTime = 0;
@@ -124,7 +131,7 @@
       });
 
       // Append the child video element
-      $container.append( video );
+      this.$container.append( video );
 
       // Play the newly placed video element
       // (Dereference the jQuery object to use the
@@ -136,14 +143,27 @@
       // This will cause the video to close and the
       // primary video to fade in.
       video.one("ended", function() {
-        $primary.triggerHandler("click");
-      });
+        this.$primary.triggerHandler("click");
+      }.bind(this));
 
       previous = current;
-    });
+    }.bind(this));
 
 
-    $primary.media.play();
+    this.$primary.media.play();
+  }
 
-  });
-}(this));
+
+  ScrollableCueset.prototype.reset = function() {
+    $("#reinvention-road").empty().append( this.original );
+  };
+
+
+  exports.ScrollableCueset = ScrollableCueset;
+
+  if ( typeof define === "function" &&
+      define.amd && define.amd.ScrollableCueset ) {
+    define( "scrollablecueset", [], function () { return ScrollableCueset; } );
+  }
+
+}( this ));

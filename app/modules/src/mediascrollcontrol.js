@@ -3,22 +3,22 @@
   function scale( value, fromLow, fromHigh, toLow, toHigh ) {
     return ( value - fromLow ) * ( toHigh - toLow ) /
             ( fromHigh - fromLow ) + toLow;
-  };
+  }
 
   function delta( e ) {
-    var delta, abs;
+    var dlt, abs;
 
     // "wheel" events appear to inverse the delta
     if ( e.type === "wheel" ) {
-      delta = e.deltaY;
+      dlt = e.deltaY;
       abs = Math.abs( e.deltaY );
 
       if ( e.deltaY < 0 ) {
-        delta += abs * 2;
+        dlt += abs * 2;
       } else {
-        delta -= abs * 2;
+        dlt -= abs * 2;
       }
-      return delta;
+      return dlt;
     }
 
     return e.wheelDeltaY;
@@ -144,5 +144,10 @@
   };
 
   exports.Scrollable = Scrollable;
+
+  if ( typeof define === "function" &&
+      define.amd && define.amd.Scrollable ) {
+    define( "scrollable", [], function () { return Scrollable; } );
+  }
 
 }( this ));
