@@ -22,6 +22,9 @@ require.config({
         abstract: "../vendor/js/libs/abstract",
         store: "../vendor/js/libs/store",
 
+        scrollable: "../app/modules/src/mediascrollcontrol",
+        scrollablecueset: "../app/modules/src/scrollablecueset",
+
         // Specialty
         zeegaplayer: "../vendor/zeegaplayer/dist/debug/zeega",
 
@@ -49,6 +52,9 @@ require.config({
         zeegaplayer: [ "jquery", "backbone" ],
 
         bootstrap: [ "jquery" ],
+
+        scrollable: [ "zeegaplayer" ],
+        scrollablecueset: [ "scrollable" ],
 
         // Backbone.LayoutManager depends on Backbone.
         layoutmanager: [ "backbone" ],

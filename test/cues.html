@@ -6,7 +6,7 @@
   <script src="http://cdn.popcornjs.org/code/dist/popcorn-complete.js"></script>
   <script src="/vendor/js/libs/jquery.js"></script>
   <script src="/vendor/js/libs/abstract.js"></script>
-  <script src="/vendor/js/libs/media-scroll-control.js"></script>
+  <script src="/app/modules/src/mediascrollcontrol.js"></script>
 
   <style>
 
@@ -60,9 +60,12 @@
 
 <div id="reinvention-road">
   <video id="video" controls>
-    <source src="/app/media/walkthrough.mp4"></source>
-    <source src="/app/media/walkthrough.ogv"></source>
-    <source src="/app/media/walkthrough.webm"></source>
+
+    <!--
+    <source src="/app/video/walkthrough.mp4"></source>
+    <source src="/app/video/walkthrough.ogv"></source>
+    <source src="/app/video/walkthrough.webm"></source>
+    -->
   </video>
 </div>
 
@@ -114,7 +117,18 @@ var ACT_DATA = [
 
 </script>
 
-<script src="tests/cues.js"></script>
+<script src="/app/modules/scrollablecueset.js"></script>
 
+<script>
+$(function() {
+
+  // inspectable instance
+  window.sc = new ScrollableCueset({
+    selector: "#video",
+    file: ACT_DATA[0].video,
+    cues: ACT_DATA[0].data
+  });
+});
+</script>
 </body>
 </html>

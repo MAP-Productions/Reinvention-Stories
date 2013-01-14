@@ -174,6 +174,12 @@ module.exports = function(grunt) {
             wrap: false
         },
 
+        srctomodule: {
+            files: [
+                "app/modules/src/*.js"
+            ]
+        },
+
         // The headless QUnit testing environment is provided for "free" by Grunt.
         // Simply point the configuration to your test directory.
         qunit: {
@@ -213,5 +219,16 @@ module.exports = function(grunt) {
     // The release task will run the debug tasks and then minify the
     // dist/debug/require.js file and CSS files.
     grunt.registerTask("release", "debug min mincss");
+
+    // TODO: Finish the automation of src's to modules.
+    // grunt.registerMultiTask( "srctomodule", "AMD-ify a source file ", function() {
+    //     var files = grunt.file.expandFiles( this.file.src );
+
+    //     files.forEach(function( file ) {
+    //         var src = grunt.file.read( file );
+
+    //         console.log( src );
+    //     });
+    // });
 
 };

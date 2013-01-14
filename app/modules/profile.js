@@ -5,10 +5,6 @@ define([
 
     var Profile = App.module();
 
-    {
-        icon,
-
-    }
     Profile.Model = Backbone.Model.extend({
         defaults: {
             icon: null,
