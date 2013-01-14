@@ -2,6 +2,48 @@
   position: absolute;
 }
 
+#reinvention-road {
+  width: 100%;
+  margin: 0 auto;
+  z-index: 997;
+}
+
+#reinvention-road img {
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  top: 100px;
+  z-index: 998;
+}
+
+#video {
+  width: 100%;
+}
+
+#reinvention-road video:not(#video) {
+  z-index: 999;
+  margin: auto auto;
+  position: absolute;
+  width: 720px;
+  height: 405px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.image {
+  position: absolute;
+}
+
+
+.left {
+  left: 0px;
+}
+
+.right {
+  right: 0px;
+}
 
 [class^="icon-"] {
   background-image: url("/vendor/bootstrap/img/glyphicons-halflings.png");
