@@ -111,7 +111,8 @@ function( App, Story, Road, Reststop ) {
             );
 
             config = [ "path", "act", "type", "id" ].reduce(function( initial, val ) {
-                return ( initial[ val ] = data.shift(), initial );
+                initial[ val ] = data.shift();
+                return initial;
             }, {});
 
             this.reset();

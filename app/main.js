@@ -69,7 +69,7 @@ function( App, Router, DOM ) {
             }
         } else {
             if ( !isHidden ) {
-                return
+                return;
             } else {
                 nav.removeClass("hidden").fadeIn();
                 return;
