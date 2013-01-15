@@ -1,0 +1,101 @@
+.rest-stop-point {
+    position: absolute;
+    left: 30%;
+    top: 45%;
+    width: 20px;
+    height: 19px;
+    background: url(../img/plus-circle.png);
+}
+
+.rest-stop-question {
+    position: absolute;
+    top: 11%;
+    right: 7%;
+    width: 374px;
+    background: rgba(255,255,255,0.8);
+}
+
+.rest-stop-question h1 {
+    background: #fff;
+    color: #ee127b;
+    font: bold 22.3px/26.77px adelle_basic, serif;
+    margin: 0;
+    padding: 13px 30px 11px;
+}
+
+.rest-stop-question .fields {
+    padding: 10px 23px 13px;
+}
+
+.rest-stop-question .fields textarea {
+    color: #7c7c7c;
+    font: normal 14px/17px adelle_basic, serif;
+    width: 96%;
+    padding: 2%;
+    border: none;
+    box-shadow: 0 0 1% #ededed inset;
+    border-radius: 0;
+    min-height: 45px;
+}
+
+.rest-stop-question .fields input[type=text] {
+    display: inline-block;
+    font: normal 14px/17px adelle_basic, serif;
+    width: 24%;
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 0 4px #ededed inset;
+    margin: 0 1% 0 0;
+    height: 15px;
+    padding: 7px 8px 5px;
+    color: #7c7c7c;
+}
+
+.rest-stop-question .fields button {
+    display: inline-block;
+    height: 27px;
+    border: none;
+    background: #8c737f;
+    font: 9px brandon_grotesque_bold, sans-serif;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin: 0 1% 0 0;
+    padding: 9px 0;
+    width: 17.8%;
+}
+
+.rest-stop-question .fields button:last-child {
+    margin: 0;
+}
+
+.rest-stop-answer {
+    position: absolute;
+    left: 7%;
+    top: 15%;
+    width: 282px;
+    padding-left: 30px;
+    text-shadow: 4px 0 10px rgba(0,0,0,0.55);
+    background: url(../img/plus-circle.png) no-repeat 0 9px;
+}
+
+.rest-stop-answer p {
+    color: #fff;
+    font: 20px/25px hand_of_seanregular, sans-serif;
+}
+
+.rest-stop-answer .meta {
+    color: #fff;
+    font: 9.68px/15.2px brandon_grotesque_bold, sans-serif;
+    text-transform: uppercase;
+}
+
+.rest-stop-answer .meta .name {
+    border-right: 1px solid #fff;
+    padding-right: 7px;
+    margin-right: 5px;
+}
+
+.rest-stop-answer .meta .date-time {
+    display: block;
+}
