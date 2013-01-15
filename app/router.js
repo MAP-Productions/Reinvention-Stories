@@ -79,7 +79,7 @@ function( App, Act, Road, Session, acts ) {
 
             if ( type === "road" ) {
                 App.layout.setViews({
-                    "#reinvention-viewport": new Road.Views.Item( id )
+                    "#reinvention-viewport": new Road.Views.Item({ id: id })
                 });
             }
         },
