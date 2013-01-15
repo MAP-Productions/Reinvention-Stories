@@ -76,48 +76,7 @@
         media.play();
       }
 
-      // media.playbackRate += scaled / 10;
       media.playbackRate += 0.33;
-
-      /*
-
-      Original algorithm:
-      media.playbackRate += 0.33;
-
-
-
-      TODO: alternative algorith:
-
-      media.playbackRate = Math.round( media.playbackRate + (scaled / 10) );
-
-      or
-
-      media.playbackRate += scaled / 100;
-
-      console.log( media.playbackRate );
-
-      */
-
-      /*
-
-      TODO: Improve the following algorithm for a better
-      scrolling experience.
-
-      // Currently, |scaled| is > 0...
-      if ( scaled > this.last ) {
-        // If |scaled| is also > |this.last| reading,
-        // continue increasing the playbackRate.
-        media.playbackRate += 0.33;
-      } else {
-        // If |scaled| is < |this.last| reading,
-        // decrease the playbackRate.
-        media.playbackRate -= 0.33;
-
-        if ( media.playbackRate < 0 ) {
-          media.playbackRate = 0;
-        }
-      }
-      */
     }
 
     // 0 is the center value. If the mousewheel is at 0
