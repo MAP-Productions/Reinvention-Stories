@@ -2,18 +2,30 @@
   position: absolute;
 }
 
+#reinvention-reststop {
+  width: 100%;
+  margin: 0 auto;
+  z-index: 994;
+}
+
+#reinvention-reststop-background {
+  width: 100%;
+  margin: 0 auto;
+  z-index: 995;
+}
+
 #reinvention-road {
   width: 100%;
   margin: 0 auto;
-  z-index: 997;
+  z-index: 994;
 }
 
 #reinvention-road img {
   width: 250px;
-  height: 250px;
+  /*height: 250px;*/
   position: absolute;
   top: 100px;
-  z-index: 998;
+  z-index: 995;
 }
 
 #video {
@@ -21,7 +33,7 @@
 }
 
 #reinvention-road video:not(#video) {
-  z-index: 999;
+  z-index: 996;
   margin: auto auto;
   position: absolute;
   width: 720px;
@@ -44,6 +56,34 @@
 .right {
   right: 0px;
 }
+
+#caption {
+  z-index: 997;
+  margin: auto auto;
+  position: absolute;
+  width: 720px;
+}
+
+#caption .progress-outer {
+  width: 720px;
+  height: 20px;
+}
+
+#caption .progress-inner {
+  width: 0px;
+  height: 5px;
+  background-color: magenta;
+}
+
+#caption .text {
+  width: 645px;
+  float: left;
+}
+#caption .time {
+  width: 75px;
+  float: right;
+}
+
 
 [class^="icon-"] {
   background-image: url("/vendor/bootstrap/img/glyphicons-halflings.png");
