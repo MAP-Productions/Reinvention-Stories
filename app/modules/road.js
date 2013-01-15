@@ -9,8 +9,6 @@ define([
 
     Road = App.module();
 
-    Reinvention.Roads = new Map();
-
     function roadById( id ) {
         var i = 0,
             length = roads.length;
@@ -58,28 +56,14 @@ define([
             this.model = Road.Items.get( config.id );
         },
 
-        beforeRender: function() {
-
-            // TODO:
-            //
-            // Reinvention.Roads.forEach(function() ... reset all roads )
-
-
-        },
-
         afterRender: function() {
             var scrollable;
 
-            console.log(
-                "Road.Views.Item: afterRender (video container), create ScrollableCueset"
-            );
-
             scrollable = new ScrollableCueset(
-                Abstract.merge({ selector: "#video" }, this.model.attributes )
+                Abstract.merge(
+                    { selector: "#video" }, this.model.attributes
+                )
             );
-
-
-            // Reinvention.Roads.set( this, scrollable );
         }
     });
 
