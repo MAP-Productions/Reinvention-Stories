@@ -46,5 +46,33 @@ define([
     Reststop.Items = new Reststop.Collection();
 
 
+    // http://search.twitter.com/search.json?q=@zeega&rpp=100&result_type=recent
+
+    Reststop.Views.Item = Backbone.View.extend({
+        manage: true,
+
+        template: "reststop/item",
+
+        data: function() {
+            return {
+                model: this.model
+            };
+        },
+
+        initialize: function( config ) {
+            //
+        },
+
+        beforeRender: function() {
+
+            console.log( "Reststop.Views.Item: beforeRender" );
+        },
+
+        afterRender: function() {
+        }
+    });
+
+
+
     return Reststop;
 });
