@@ -20,6 +20,7 @@ require.config({
         bootstrap: "../vendor/bootstrap/js/bootstrap",
         es6shim: "../vendor/js/libs/es6",
         abstract: "../vendor/js/libs/abstract",
+        moment: "../vendor/js/libs/moment",
         store: "../vendor/js/libs/store",
 
         scrollable: "../app/modules/src/mediascrollcontrol",
