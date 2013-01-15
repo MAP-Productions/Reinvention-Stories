@@ -20,12 +20,7 @@ function( $, _, Backbone ) {
 
     // Localize or create a new JavaScript Template object.
     // ...Preload some templates that we can avoid requesting:
-    JST = window.JST = window.JST || {
-        // Map Surfaces are actually just blank——there are only two
-        // in the app and they are part of the primary UI and therefore
-        // can be bootstrapped directly into main.html
-        surface: ""
-    };
+    JST = window.JST = window.JST || {};
 
     // Create global "namespace"
     window.Reinvention = {
