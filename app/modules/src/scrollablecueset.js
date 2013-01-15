@@ -44,7 +44,7 @@
   }
 
   function ScrollableCueset( options ) {
-    var images, videos, current, previous, dims;
+    var images, videos, captions, current, previous, dims;
 
     Abstract.put.call( this, options );
 
@@ -65,6 +65,7 @@
 
     images = {};
     videos = {};
+    captions = {};
 
     dims = {
       width: this.$container.width(),
@@ -121,22 +122,29 @@
         // jQuert elements in a free-var cache.
         images[ cue.image ] = image;
         videos[ cue.video ] = video;
+        captions[ cue.video ] = cue.caption;
 
       }.bind(this));
     }
 
     this.$primary.on("click", function() {
-      console.log( "video surface clicked" );
+      console.log( "Return to Main Road" );
       // Remove any residual video elements
       // TODO: Abstract this operation
-      this.$container.find("video:not(#video)").remove();
+      this.$container.find("video:not(#video),#caption").remove();
       this.$primary.animate({ opacity: 1 }, "fast");
 
       previous = null;
     }.bind(this));
 
     $("#reinvention-road").on("click", ".icons", function( event ) {
-      var video = videos[ current = $(event.currentTarget).prop("video") ];
+      var current, caption, video;
+
+      current = $(event.currentTarget).prop("video");
+      caption = captions[ current ];
+      video = videos[ current ];
+      video.media = Popcorn( video[0] );
+
 
       if ( previous === current ) {
         return;
@@ -148,7 +156,8 @@
 
       // Remove any residual video elements
       // TODO: Abstract this operation
-      this.$container.find("video:not(#video)").remove();
+      this.$container.find("video:not(#video),#caption").remove();
+
 
       // Reset video to play from beginning
       video.get(0).currentTime = 0;
@@ -162,30 +171,65 @@
 
       // Append the child video element
       this.$container.append( video );
+      this.$container.append( JST.caption );
+
+      // This is somewhat insane and hard to look at.
+      $("#caption").css({
+
+        top: ( parseInt( video.css("top"), 10 ) + video.height() + 2 ) + "px",
+        left: video.css("left")
+
+      }).find(".text").html( caption );
 
       // Play the newly placed video element
       // (Dereference the jQuery object to use the
       // video element's native play() method)
       video.get(0).play();
 
-      // When the video has played to the end,
-      // trigger a click on the primary video surface.
+      // When the video has played to the end or is
+      // scrolled by a mouse wheel, trigger a click on the
+      // primary video surface. [pg 7]
+      //
       // This will cause the video to close and the
-      // primary video to fade in.
-      video.one("ended", function() {
+      // primary video to fade in/restore
+      video.one("ended wheel mousewheel", function() {
         this.$primary.triggerHandler("click");
       }.bind(this));
+
+
+      // Draw the progress, caption and time nodes
+      //
+      // TODO: This needs to be redesigned for dynamic creation
+      // and insertion.
+      //
+      // Intially based on:
+      // http://jsfiddle.net/rwaldron/DY9jG/
+      //
+      video.media.on("canplayall", function() {
+        var $progress = this.$container.find(".progress-inner"),
+            $time = this.$container.find(".time");
+
+        video.media.on("timeupdate", function() {
+          $progress.width(
+            (this.currentTime() / this.duration()) * 720
+          );
+          $time.html(
+            smpte( this.currentTime() ) + "/" + smpte( this.duration() )
+          );
+        });
+      }.bind(this));
+
 
       previous = current;
     }.bind(this));
 
 
-    this.$primary.media.play();
+    // this.$primary.media.play();
   }
 
 
   ScrollableCueset.prototype.reset = function() {
-    $("#reinvention-road").empty().append( this.original );
+    this.node.parentNode.appendChild( this.original );
   };
 
 
