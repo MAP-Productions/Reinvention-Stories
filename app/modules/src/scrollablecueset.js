@@ -4,7 +4,37 @@
   Popcorn.prototype.register = Popcorn.prototype.code;
 
   var IMAGE_PATH = "/app/image/",
-      VIDEO_PATH = "/app/video/";
+      VIDEO_PATH = "/app/video/",
+      JST = exports.JST || {};
+
+  // TODO: This should be moved to a file and dynamically preloaded
+  JST.caption = "<div id='caption'><div class='progress-outer'><div class='progress-inner'></div></div><div class='text'></div><div class='time'></div></div>";
+
+  function pad( value, width, padding ) {
+    var str, len, diff;
+    str = value + "";
+    len = str.length;
+    diff = width - len;
+
+    if ( diff === 0 ) {
+      return "";
+    }
+
+    return Array.apply(null, new Array(diff)).map(function() {
+      return padding;
+    }).join("");
+  }
+
+  function lpad( value, width, padding ) {
+      //console.log(value);
+    return pad( value, width, padding ) + (value + "");
+  }
+  function smpte( value ) {
+    return [
+      lpad( Math.floor( value / 60 ), 2, 0 ),
+      lpad( Math.floor( value ) % 60, 2, 0 )
+    ].join(":");
+  }
 
   function sources( path, name ) {
     return [ "mp4", "ogv", "webm" ].reduce(function( initial, val ) {
