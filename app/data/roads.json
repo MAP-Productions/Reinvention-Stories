@@ -4,40 +4,29 @@
     "video": "Road_Act1",
     "cues": [
       {
-        "image": "SV_A1_MuralProject.png",
-        "video": "RoadMovie_Act1",
-        "caption": "This is the mural project",
+        "clip": "SV_A1_BlessingoftheBikes2",
+        "caption": "The bikes!",
         "start": 1
       },
       {
-        "image": "SV_A1_BlessingoftheBikes2.png",
-        "video": "tutorial",
-        "caption": "This is about bikes",
-        "start": 3
+        "clip": "SV_A1_FestivalMontage",
+        "caption": "The festival!",
+        "start": 8
       },
       {
-        "image": "SV_A1_GayMensChorus.png",
-        "video": "tutorial",
-        "caption": "This is about the gay men's chorus",
-        "start": 5
+        "clip": "SV_A1_GayMensChorus",
+        "caption": "The gay men's chorus",
+        "start": 15
       },
       {
-        "image": "SV_A1_RollerGirls.png",
-        "video": "tutorial",
-        "caption": "This is about roller girls",
-        "start": 7
+        "clip": "SV_A1_MuralProject",
+        "caption": "The mural!",
+        "start": 22
       },
       {
-        "image": "SV_A1_FestivalMontage.png",
-        "video": "tutorial",
-        "caption": "A festival!!",
-        "start": 9
-      },
-      {
-        "image": "SV_A1_WordlCup.png",
-        "video": "tutorial",
-        "caption": "The World Cup!",
-        "start": 11
+        "clip": "SV_A1_WordlCup",
+        "caption": "The world cup!",
+        "start": 29
       }
     ]
   },

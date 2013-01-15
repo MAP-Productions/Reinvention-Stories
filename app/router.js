@@ -3,7 +3,7 @@ define([
 
     "modules/act",
     "modules/road",
-    //"modules/rest",
+    "modules/reststop",
     "modules/session",
 
 
@@ -12,7 +12,7 @@ define([
 
 ],
 
-function( App, Act, Road, Session, acts ) {
+function( App, Act, Road, Reststop, Session, acts ) {
     var Router;
 
     window.Session = window.Session || Session;
@@ -41,8 +41,7 @@ function( App, Act, Road, Session, acts ) {
             App.useLayout("main").setViews({
                 // 1. Introductory Video
 
-                // "#intro": new Surface.View( "la", 34.02, -118.20, 10 ),
-
+                // 2. Main scene:
                 ".acts": new Act.Views.List()
 
             }).render();
@@ -62,9 +61,9 @@ function( App, Act, Road, Session, acts ) {
         },
 
         index: function() {
+            // If first visit, show introductory video
             if ( Session.get("isFirst") ) {
-                console.log( "Is first visit..." );
-                // If first visit, show introductory video
+
                 this.intro();
             } else {
                 console.log( "Index: (non-first)" );
@@ -82,6 +81,13 @@ function( App, Act, Road, Session, acts ) {
                     "#reinvention-viewport": new Road.Views.Item({ id: id })
                 });
             }
+
+            if ( type === "reststop" ) {
+                App.layout.setViews({
+                    "#reinvention-viewport": new Reststop.Views.Item({ id: id })
+                });
+            }
+
         },
 
         intro: function() {
