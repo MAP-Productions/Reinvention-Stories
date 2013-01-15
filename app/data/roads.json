@@ -1,32 +1,43 @@
 [
   {
     "id": 1,
-    "video": "walkthrough",
+    "video": "Road_Act1",
     "cues": [
       {
-        "image": "SV_A1_AntiViolenceRally.png",
+        "image": "SV_A1_MuralProject.png",
+        "video": "RoadMovie_Act1",
+        "caption": "This is the mural project",
+        "start": 1
+      },
+      {
+        "image": "SV_A1_BlessingoftheBikes2.png",
         "video": "tutorial",
+        "caption": "This is about bikes",
         "start": 3
       },
       {
-        "image": "SV_A1_BlessingoftheBikes.png",
+        "image": "SV_A1_GayMensChorus.png",
         "video": "tutorial",
-        "start": 6
+        "caption": "This is about the gay men's chorus",
+        "start": 5
       },
       {
-        "image": "SV_A1_CityGarden.png",
+        "image": "SV_A1_RollerGirls.png",
         "video": "tutorial",
+        "caption": "This is about roller girls",
+        "start": 7
+      },
+      {
+        "image": "SV_A1_FestivalMontage.png",
+        "video": "tutorial",
+        "caption": "A festival!!",
         "start": 9
       },
       {
-        "image": "SV_A1_Mural.png",
+        "image": "SV_A1_WordlCup.png",
         "video": "tutorial",
-        "start": 12
-      },
-      {
-        "image": "SV_A1_PaintingtheGate.png",
-        "video": "tutorial",
-        "start": 15
+        "caption": "The World Cup!",
+        "start": 11
       }
     ]
   },
