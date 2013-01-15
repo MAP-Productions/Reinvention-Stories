@@ -137,7 +137,7 @@
       if ( !media.paused ) {
         media.pause();
       }
-      media.currentTime -= 0.10;
+      media.currentTime -= 0.33;
     }
 
     this.last = scaled;
