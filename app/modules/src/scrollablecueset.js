@@ -105,6 +105,10 @@
           hidden: true
         });
 
+        image.css({
+          top: (dims.height / 2 - 125) + "px"
+        });
+
         // Generate an element in a jQuery object for the
         // video that is associated with this image icon
         video = $("<video>").attr( "id", cue.video ).html(
@@ -192,7 +196,7 @@
       //
       // This will cause the video to close and the
       // primary video to fade in/restore
-      video.one("ended wheel mousewheel", function() {
+      video.add( this.$primary ).one("ended wheel mousewheel", function() {
         this.$primary.triggerHandler("click");
       }.bind(this));
 
