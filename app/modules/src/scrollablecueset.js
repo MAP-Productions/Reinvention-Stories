@@ -76,19 +76,81 @@
     if ( this.cues.length ) {
 
       this.cues.forEach(function( cue, k ) {
-        var image, video, side;
+        var image, video, side, last, relative, step, op, isFwd;
 
         // Register behaviours to execute at
         // the start and end phase of a popcorn
         // track event.
+        //
+        //
+        isFading = false;
+        relative = 0;
+        last = 0;
+        step = 0.05;
+        isFwd = true;
+
+
         this.scrollable.register(
           Abstract.merge({}, cue, {
-            end: cue.start + 4,
+            end: cue.start + 7,
             onStart: function( track ) {
-              images[ track.image ].fadeIn();
+              // TODO: Scale up image size
+              // images[ track.clip ].fadeIn();
             },
+
+            onFrame: function( track ) {
+              var current, image, opacity;
+
+              current = +this.currentTime().toFixed(2);
+              image = images[ track.clip ];
+              opacity = image.css("opacity");
+              isFwd = current >= last && isFwd ? true : false;
+
+              if ( current > last ) {
+                isFwd = true;
+              } else if ( current === last ) {
+                isFwd = isFwd;
+              } else {
+                isFwd = false;
+              }
+
+              // TODO: Refactor and DRY out.
+              if ( isFwd ) {
+                if ( opacity < 1 && current > track.start ) {
+                  op = "+";
+                }
+                if ( opacity > 0 && current > track.end - 3 ) {
+                  op = "-";
+                }
+              } else {
+                if ( opacity < 1 && current < track.end ) {
+                  op = "+";
+                }
+                if ( opacity > 0 && current < track.start + 3 ) {
+                  op = "-";
+                }
+              }
+
+              image.css({
+                //
+                // op=step
+                // eg.
+                //
+                // +=0.05
+                // -=0.05
+                //
+                opacity: [ op, step ].join("=")
+              });
+
+              // console.log( isFwd ? "FORWARD" : "BACKWARD", op, image.css("opacity") );
+
+              last = current;
+            },
+
             onEnd: function( track ) {
-              images[ track.image ].fadeOut();
+
+              // TODO: Scale down image size
+              images[ track.clip ].css({ opacity: 0 });
             }
           })
         );
@@ -100,9 +162,9 @@
         // Generate an element in a jQuery object for the
         // image icon to display
         image = $("<img>").addClass( side + " icons" ).prop({
-          src: IMAGE_PATH + cue.image,
-          video: cue.video,
-          hidden: true
+          src: IMAGE_PATH + cue.clip + ".png",
+          video: cue.clip//,
+          // hidden: true
         });
 
         image.css({
@@ -111,8 +173,8 @@
 
         // Generate an element in a jQuery object for the
         // video that is associated with this image icon
-        video = $("<video>").attr( "id", cue.video ).html(
-          sources( VIDEO_PATH, cue.video )
+        video = $("<video>").attr( "id", cue.clip ).html(
+          sources( VIDEO_PATH, cue.clip )
         );
 
         // TODO: Experiment with making the image
@@ -124,9 +186,9 @@
 
         // Store references to the newly created image and video
         // jQuert elements in a free-var cache.
-        images[ cue.image ] = image;
-        videos[ cue.video ] = video;
-        captions[ cue.video ] = cue.caption;
+        images[ cue.clip ] = image;
+        videos[ cue.clip ] = video;
+        captions[ cue.clip ] = cue.caption;
 
       }.bind(this));
     }
