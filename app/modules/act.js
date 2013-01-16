@@ -160,9 +160,6 @@ function( App, Story, Road, Reststop ) {
         },
 
         initialize: function() {
-            // console.log( arg );
-
-
             console.log( "Act.Views.List: initialize" );
         }
     });
