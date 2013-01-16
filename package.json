@@ -16,7 +16,9 @@
     "grunt-contrib-uglify": "~0.1.0",
     "grunt-cli": "~0.1.0",
     "grunt": "~0.3.17",
-    "grunt-update-submodules": "~0.2.0"
+    "grunt-update-submodules": "~0.2.0",
+    "colors": "~0.6.0",
+    "optimist": "latest"
   },
   "keywords": []
 }
