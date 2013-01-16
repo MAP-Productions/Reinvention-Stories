@@ -67,6 +67,7 @@ function( App, Router, DOM ) {
     });
     */
 
+    /*
     DOM.doc.on( "mousemove", "html", function() {
         var nav, hasClass;
 
@@ -89,4 +90,5 @@ function( App, Router, DOM ) {
             }
         }
     });
+    */
 });

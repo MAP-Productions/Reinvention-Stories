@@ -56,7 +56,7 @@
     height: 27px;
     border: none;
     background: #8c737f;
-    font: 9px brandon_grotesque_bold, sans-serif;
+    font: 700 9px brandon_grotesque, sans-serif;
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 0.18em;
@@ -81,12 +81,12 @@
 
 .reststop-answer p {
     color: #fff;
-    font: 20px/25px hand_of_seanregular, sans-serif;
+    font: 20px/25px hand_of_sean, sans-serif;
 }
 
 .reststop-answer .meta {
     color: #fff;
-    font: 9.68px/15.2px brandon_grotesque_bold, sans-serif;
+    font: 700 9.68px/15.2px brandon_grotesque, sans-serif;
     text-transform: uppercase;
 }
 

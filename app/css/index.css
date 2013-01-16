@@ -1,21 +1,36 @@
 @import "../../vendor/bootstrap/css/bootstrap.css";
 @import "../../vendor/zeegaplayer/assets/css/zeega.css";
+@import "../../app/css/nav.css";
 @import "../../app/css/reinvention.css";
 @import "../../app/css/reststop.css";
 
+/* brandon grotesque - bold (weight 700) */
 @font-face {
-    font-family: "brandon_grotesque_boldregular";
-    src: url("../fonts/brandon-bld/brandon_bld-webfont.eot");
-    src: url("../fonts/brandon-bld/brandon_bld-webfont.eot?#iefix") format("embedded-opentype"),
-         url("../fonts/brandon-bld/brandon_bld-webfont.woff") format("woff"),
-         url("../fonts/brandon-bld/brandon_bld-webfont.ttf") format("truetype"),
-         url("../fonts/brandon-bld/brandon_bld-webfont.svg#brandon_grotesque_boldregular") format("svg");
-    font-weight: normal;
+    font-family: "brandon_grotesque";
+    src: url("../fonts/brandon/brandon_bld-webfont.eot");
+    src: url("../fonts/brandon/brandon_bld-webfont.eot?#iefix") format("embedded-opentype"),
+         url("../fonts/brandon/brandon_bld-webfont.woff") format("woff"),
+         url("../fonts/brandon/brandon_bld-webfont.ttf") format("truetype"),
+         url("../fonts/brandon/brandon_bld-webfont.svg#brandon_grotesque_boldregular") format("svg");
+    font-weight: 700;
     font-style: normal;
 }
 
+/* brandon grotesque - black (weight 900) */
 @font-face {
-    font-family: "hand_of_seanregular";
+    font-family: 'brandon_grotesque';
+    src: url('../fonts/brandon/brandon_blk-webfont.eot');
+    src: url('../fonts/brandon/brandon_blk-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/brandon/brandon_blk-webfont.woff') format('woff'),
+         url('../fonts/brandon/brandon_blk-webfont.ttf') format('truetype'),
+         url('../fonts/brandon/brandon_blk-webfont.svg#brandon_grotesque_blackRg') format('svg');
+    font-weight: 900;
+    font-style: normal;
+}
+
+/* hand of sean */
+@font-face {
+    font-family: "hand_of_sean";
     src: url("../fonts/hand-of-sean/handsean-webfont.eot");
     src: url("../fonts/hand-of-sean/handsean-webfont.eot?#iefix") format("embedded-opentype"),
          url("../fonts/hand-of-sean/handsean-webfont.woff") format("woff"),
@@ -25,6 +40,7 @@
     font-style: normal;
 }
 
+/* adelle basic - normal */
 @font-face {
     font-family: "adelle_basic";
     src: url("../fonts/adelle-basic/adellebasicreg.eot");
@@ -36,8 +52,9 @@
     font-style: normal;
 }
 
+/* adelle basic - bold */
 @font-face {
-    font-family: "adelle_basic_bold";
+    font-family: "adelle_basic";
     src: url("../fonts/adelle-basic/adellebasicbold.eot");
     src: url("../fonts/adelle-basic/adellebasicbold.eot?#iefix") format("embedded-opentype"),
          url("../fonts/adelle-basic/adellebasicbold.woff") format("woff"),
