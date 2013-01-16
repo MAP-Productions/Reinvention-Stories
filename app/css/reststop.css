@@ -1,13 +1,13 @@
-.rest-stop-point {
+.reststop-point {
     position: absolute;
     left: 30%;
     top: 45%;
     width: 20px;
-    height: 19px;
-    background: url(../img/plus-circle.png);
+    height: 29px;
+    background: url(../img/plus-circle.png) no-repeat 0 9px;
 }
 
-.rest-stop-question {
+.reststop-question {
     position: absolute;
     top: 11%;
     right: 7%;
@@ -15,7 +15,7 @@
     background: rgba(255,255,255,0.8);
 }
 
-.rest-stop-question h1 {
+.reststop-question h1 {
     background: #fff;
     color: #ee127b;
     font: bold 22.3px/26.77px adelle_basic, serif;
@@ -23,11 +23,11 @@
     padding: 13px 30px 11px;
 }
 
-.rest-stop-question .fields {
+.reststop-question .fields {
     padding: 10px 23px 13px;
 }
 
-.rest-stop-question .fields textarea {
+.reststop-question .fields textarea {
     color: #7c7c7c;
     font: normal 14px/17px adelle_basic, serif;
     width: 96%;
@@ -38,7 +38,7 @@
     min-height: 45px;
 }
 
-.rest-stop-question .fields input[type=text] {
+.reststop-question .fields input[type=text] {
     display: inline-block;
     font: normal 14px/17px adelle_basic, serif;
     width: 24%;
@@ -51,7 +51,7 @@
     color: #7c7c7c;
 }
 
-.rest-stop-question .fields button {
+.reststop-question .fields button {
     display: inline-block;
     height: 27px;
     border: none;
@@ -65,11 +65,11 @@
     width: 17.8%;
 }
 
-.rest-stop-question .fields button:last-child {
+.reststop-question .fields button:last-child {
     margin: 0;
 }
 
-.rest-stop-answer {
+.reststop-answer {
     position: absolute;
     left: 7%;
     top: 15%;
@@ -79,23 +79,23 @@
     background: url(../img/plus-circle.png) no-repeat 0 9px;
 }
 
-.rest-stop-answer p {
+.reststop-answer p {
     color: #fff;
     font: 20px/25px hand_of_seanregular, sans-serif;
 }
 
-.rest-stop-answer .meta {
+.reststop-answer .meta {
     color: #fff;
     font: 9.68px/15.2px brandon_grotesque_bold, sans-serif;
     text-transform: uppercase;
 }
 
-.rest-stop-answer .meta .name {
+.reststop-answer .meta .name {
     border-right: 1px solid #fff;
     padding-right: 7px;
     margin-right: 5px;
 }
 
-.rest-stop-answer .meta .date-time {
+.reststop-answer .meta .date-time {
     display: block;
 }

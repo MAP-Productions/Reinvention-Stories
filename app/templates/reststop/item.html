@@ -1,9 +1,21 @@
-<div id="reinvention-reststop">
-  <video controls>
+<div id="reinvention-reststop" data-view="<%=model.get("id")%>">
+  <video autoplay>
     <source src="/app/video/<%=model.get("video")%>.mp4"></source>
     <source src="/app/video/<%=model.get("video")%>.ogv"></source>
     <source src="/app/video/<%=model.get("video")%>.webm"></source>
   </video>
 
+
+  <div class="reststop-question">
+    <h1>In a time of personal struggle, how did you lift yourself up?</h1>
+    <div class="fields">
+      <textarea>Type your answer here or hit “Shuffle” for a new question to consider.</textarea>
+<!--       <input type="text" placeholder="Name" />
+      <input type="text" placeholder="Location" />
+ -->
+      <button>Shuffle</button>
+      <button>Submit</button>
+    </div>
+  </div>
 
 </div>
