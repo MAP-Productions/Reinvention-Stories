@@ -59,30 +59,5 @@ function( App, Router, Nav ) {
     });
     */
 
-    /*
-    DOM.doc.on( "mousemove", "html", function() {
-        var nav, hasClass;
-
-        nav = $("#reinvention-menu");
-        isHidden = nav.hasClass("hidden");
-
-        if ( event.pageY > 100 ) {
-            if ( isHidden ) {
-                return;
-            } else {
-                nav.addClass("hidden").fadeOut();
-                return;
-            }
-        } else {
-            if ( !isHidden ) {
-                return;
-            } else {
-                nav.removeClass("hidden").fadeIn();
-                return;
-            }
-        }
-    });
-    */
-
 
 });
