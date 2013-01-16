@@ -1,0 +1,85 @@
+#reinvention-menu {
+    height: 85px;
+    padding-bottom: 23px;
+    overflow: hidden;
+    background: url(../img/menu-bg.png) repeat-x center;
+    position: absolute;
+    width: 100%;
+}
+
+#reinvention-menu .carat {
+    width: 20px;
+    height: 9px;
+    background: url(../img/menu-carat.png);
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    margin-left: -10px;
+}
+
+#reinvention-menu .menu-content {
+    height: 77px;
+    padding: 6px 14px 0;
+    position: relative;
+}
+
+#reinvention-menu .menu-section {
+    float: left;
+    height: 77px;
+    border-left: 1px solid #d2d2d3;
+}
+
+#reinvention-menu .menu-section:first-child {
+    border: none;
+}
+
+#reinvention-menu .logo {
+    display: block;
+    margin: 32px 11px 0 3px;
+}
+
+#reinvention-menu .meta-menu {
+    margin: 5px 0 0;
+}
+
+#reinvention-menu .meta-menu li {
+    display: inline-block;
+    font: 900 11.5px/11px brandon_grotesque, sans-serif;
+    text-transform: uppercase;
+    border-right: 1px solid #a6a6a8;
+    padding-right: 7px;
+    margin-right: 3px;
+    height: 11px;
+}
+
+#reinvention-menu .meta-menu li:last-child {
+    border: none;
+}
+
+#reinvention-menu .meta-menu li a {
+    color: #54514b;
+}
+
+#reinvention-menu .meta-menu li a:hover,
+#reinvention-menu .meta-menu li a.active {
+    text-decoration: none;
+    color: #e620a0;
+}
+
+#reinvention-menu .image-link {
+    background-image: url(../img/nav-sprite.png);
+    display: inline-block;
+    float: left;
+    width: 61px;
+    height: 58px;
+    text-indent: -9999px;
+    margin: 11px 3px;
+}
+
+#reinvention-menu .image-link.map {
+    background-position: 0 0;
+}
+
+#reinvention-menu .image-link.story-1 {
+    background-position: 0 -58px;
+}
