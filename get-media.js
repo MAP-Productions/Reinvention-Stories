@@ -3,57 +3,81 @@
 //  This script needs to be migrated to a grunt task
 //
 //
-var fs, colors, optimist, exec, exts;
+var fs, colors, optimist, spawn, URL, mediafiles, exts, path, displays;
 
 fs = require("fs");
 colors = require("colors");
 argv = require("optimist").argv;
-exec = require("child_process").exec;
+spawn = require("child_process").spawn;
+URL = require("url");
 exts = [ "mp4", "webm", "ogv" ];
-path = "app/video";
-tmpl = [
-  "cd %%PATH%%",
-  "wget https://dl.dropbox.com/u/3531958/reinvention/%%FILE%%"
-].join(" && ").replace(/%%PATH%%/, path );
+mediafiles = JSON.parse( fs.readFileSync(".mediafiles") );
+displays = {
+  updating: "green",
+  fetching: "green",
+  exists: "grey"
+};
+
+PATH = "app/video";
+tmpl = "https://dl.dropbox.com/u/3531958/reinvention/%%FILE%%";
 
 
-function runcmd( cmd ) {
+function download( url ) {
+  var file, stream, curl;
 
-  argv.v && console.log( "Running: ", cmd );
+  file = URL.parse( url ).pathname.split("/").pop();
+  stream = fs.createWriteStream( [ PATH, file ].join("/") );
+  curl = spawn( "curl", [ url ] );
 
-  exec( cmd, function( error, stdout, stderr ) {
-    console.log( ("stdout: " + stdout).green );
-    console.log( ("stderr: " + stderr).yellow );
+  curl.stdout.on( "data", function( data ) {
+    stream.write( data );
+    console.log( "Writing...", data.length, " to ", [ PATH, file ].join("/") );
+  });
 
-    if ( error !== null ) {
-      console.log( ("exec error: " + error).red );
+  curl.stdout.on( "end", function( data ) {
+    stream.end();
+    console.log( (file + " downloaded to " + PATH).green );
+  });
+
+  curl.on( "exit", function( code ) {
+    if ( code !== 0 ) {
+      console.log( ("Failed: " + code).red );
     }
   });
-}
+};
 
 
-[
-  "Intro", "RestStop1", "RoadMovie_Act1", "Road_Act1",
-  "SV_A1_BlessingoftheBikes2", "SV_A1_FestivalMontage", "SV_A1_GayMensChorus",
-  "SV_A1_MuralProject", "SV_A1_WordlCup"
+console.log( mediafiles );
 
-].forEach(function( media ) {
+
+mediafiles.forEach(function( media ) {
 
   exts.forEach(function( ext ) {
-    var file, cmd;
+    var file;
 
     file = [ media, ext ].join(".");
-    cmd = tmpl.replace(/%%FILE%%/, file );
+    url = tmpl.replace(/%%FILE%%/, file );
 
     fs.exists( [ path, file ].join("/") , function( exists ) {
-      var status = exists ? "EXISTS" : "FETCHING";
+      var isRunnable, status;
 
-      if ( !exists || argv.update ) {
-        // console.log( "Running: ", cmd );
-        runcmd( cmd );
+      isRunnable = false;
+      status = exists ? "EXISTS" : "FETCHING";
+
+      if ( !exists ) {
+        isRunnable = true;
       }
 
-      console.log( status, file );
+      if ( argv.update ) {
+        isRunnable = true;
+        status = "UPDATING";
+      }
+
+      console.log( (status + ": " + file)[ displays[ status.toLowerCase() ] ] );
+
+      if ( isRunnable && !argv.dryrun ) {
+        download( url );
+      }
     });
   });
 });
