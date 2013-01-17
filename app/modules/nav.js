@@ -9,7 +9,7 @@ function() {
     function mousemove( event ) {
         // Upvars declared in enclosing scope
         nav = $("#reinvention-menu");
-        isHidden = nav.hasClass("hidden");
+        isHidden = nav.hasClass("rolledup");
 
         if ( last > 100 && event.pageY <= 100 ) {
             isLocked = false;
@@ -22,25 +22,31 @@ function() {
         if ( event.pageY > 100 ) {
             if ( !isHidden ) {
                 isLocked = true;
-                nav.fadeOut( 400, function() {
-                    $(this).addClass("hidden");
+                nav.addClass("rolledup");
+                nav.animate( {
+                    top: '-77px'
+                }, 500, function() {
                     isLocked = false;
                 });
             }
         } else {
             if ( isHidden ) {
                 isLocked = true;
-                nav.fadeIn( 200, function() {
-                    $(this).removeClass("hidden");
+                nav.removeClass("rolledup");
+                nav.animate( {
+                    top: 0
+                }, 500, function() {
                     isLocked = false;
                 });
             }
         }
     }
 
-    //$(document).on( "mousemove", mousemove );
+    $(document).on( "mousemove", mousemove );
 
-    //mousemove({ pageY: 99 });
+    _.delay( function() {
+        mousemove({ pageY: 99 });
+    }, 2000 );
 
     return {
         mousemove: mousemove

@@ -11,17 +11,35 @@
 #reinvention-menu .carat {
     width: 20px;
     height: 9px;
-    background: url(../img/menu-carat.png);
+    background: url(../img/menu-carat.png) 0 -9px;
     position: absolute;
     left: 50%;
     bottom: 10px;
     margin-left: -10px;
 }
 
+#reinvention-menu.rolledup .carat {
+    background-position: 0 0;
+}
+
 #reinvention-menu .menu-content {
     height: 77px;
     padding: 6px 14px 0;
     position: relative;
+    -webkit-transition-property: opacity;
+    -moz-transition-property: opacity;
+    -ms-transition-property: opacity;
+    -o-transition-property: opacity;
+    transition-property: opacity;
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    -ms-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+#reinvention-menu.rolledup .menu-content {
+    opacity: 0;
 }
 
 #reinvention-menu .menu-section {
