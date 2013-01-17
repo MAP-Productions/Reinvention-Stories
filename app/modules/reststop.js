@@ -176,7 +176,12 @@ define([
 
         this.$answer = $(
             $.parseHTML(
-                Reststop.templates.answer( tweet ).trim()
+                Reststop.templates.answer(
+                    Abstract.merge({}, tweet, {
+                        relative: moment( this.created ).from( Date.now() ),
+                        formal: moment( this.created ).format("MMMM D, YYYY")
+                    })
+                ).trim()
             )
         ).css( this.style );
 
