@@ -50,53 +50,73 @@ function( App, Intro, Act, Story, Road, Reststop, Session, acts ) {
 
         routes: {
             "": "index",
-
-            "act/:act/:type/:id": "show"
-            // routes to view specific story via URL
+            ":act/:type/:id": "show"
         },
 
         go: function() {
+            console.log( "GO", [].slice.call(arguments).join("/") );
             return this.navigate(
-                Array.from(arguments).join("/"), true
+                [].slice.call(arguments).join("/"), true
             );
         },
 
         index: function() {
-            // If first visit, show introductory video
-            if ( Session.get("isFirst") ) {
-
-                this.intro();
-            } else {
-                console.log( "Index: (non-first)" );
-            }
+            this.show( 1, "intro", 1 );
         },
 
         show: function( act, type, id ) {
-            // act, type, id
-            //
-            // reinvention-viewport
-            // console.log( App.layout.setViews() );
+            var Type, layout, view, model, isNew, html;
 
-            if ( type === "road" ) {
-                App.layout.setViews({
-                    "#reinvention-viewport": new Road.Views.Item({ id: id })
-                });
+            layout = {};
+            isNew = false;
+            html = $("#reinvention-viewport").html();
+
+
+            if ( html ) {
+                $("#reinvention-viewport").empty();
             }
 
-            if ( type === "reststop" ) {
-                App.layout.setViews({
-                    "#reinvention-viewport": new Reststop.Views.Item({ id: id })
-                });
-            }
 
+
+            if ( [ "intro", "road", "reststop", "story" ].indexOf(type) > -1 ) {
+                Type = Act.Types[ type ];
+                model = Type.Items.get(id);
+                view = model.get("view");
+
+                if ( !view ) {
+                    isNew = true;
+                }
+
+                console.log( "Type: ", type );
+
+                // layout[ "#reinvention-viewport" ] = view || new Type.Views.Item({ id: id });
+                // $("#reinvention-viewport").append( view.el );
+                //
+
+                if ( App.current.type === type && App.current.id === +id ) {
+                    console.log( "Refusing to re-render current view" );
+                    return;
+                }
+
+                Abstract.assign( App.current, {
+                    id: +id,
+                    type: type
+                });
+
+                layout = App.layout.setViews({
+                    "#reinvention-viewport": view || new Type.Views.Item({ id: id })
+                });
+
+                if ( view ) {
+                    layout.render();
+                }
+            }
         },
 
-        intro: function() {
-            // render the intro view
-            console.log( "Render the intro view" );
+        reset: function() {
+            $("#reinvention-viewport").empty();
         }
     });
 
-    // Required, return the module for AMD compliance.
     return Router;
 });
