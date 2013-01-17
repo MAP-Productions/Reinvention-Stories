@@ -1,17 +1,19 @@
 define([
     "app",
 
+    "modules/intro",
     "modules/story",
     "modules/road",
     "modules/reststop"
 
 ],
-function( App, Story, Road, Reststop ) {
+function( App, Intro, Story, Road, Reststop ) {
 
     var Act = App.module();
 
     // Make [[Get]] property accessible constructors
     Act.Types = {
+        Intro: Intro,
         Story: Story,
         Road: Road,
         Reststop: Reststop
