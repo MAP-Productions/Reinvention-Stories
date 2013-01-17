@@ -7,25 +7,15 @@
   z-index: 994;
 }
 
-#reinvention-reststop .post {
-  z-index: 995;
-  color: "white";
-  padding: 5px;
-}
 
-.reststop-post .name {
-  float: left;
-  width: 30%;
-}
-
-.reststop-post .date {
-  float: right;
-  width: 65%;
-}
-
-
-#reinvention-reststop video {
+#reinvention-reststop video,
+#reinvention-road video,
+#reinvention-intro video  {
   width: 100%;
+}
+
+#reinvention-intro video {
+ width: 100%;
 }
 
 #reinvention-reststop-background {
@@ -50,11 +40,8 @@
   opacity: 0;
 }
 
-#video {
-  width: 100%;
-}
 
-#reinvention-road video:not(#video) {
+#reinvention-road video:not([role=main]) {
   z-index: 996;
   margin: auto auto;
   position: absolute;

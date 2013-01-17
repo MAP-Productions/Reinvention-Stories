@@ -1,7 +1,6 @@
 .reststop-point {
+    z-index: 995;
     position: absolute;
-    left: 30%;
-    top: 45%;
     width: 20px;
     height: 29px;
     background: url(../img/plus-circle.png) no-repeat 0 9px;
@@ -51,7 +50,8 @@
     color: #7c7c7c;
 }
 
-.reststop-question .fields button {
+.reststop-question .fields [type=button],
+.reststop-question .fields [type=submit] {
     display: inline-block;
     height: 27px;
     border: none;
@@ -65,7 +65,7 @@
     width: 17.8%;
 }
 
-.reststop-question .fields button:last-child {
+.reststop-question .fields [type=submit] {
     margin: 0;
 }
 
