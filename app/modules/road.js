@@ -63,15 +63,22 @@ define([
         },
         afterRender: function() {
             console.log( "Road.Views.Item: afterRender" );
+            var act, id, scs;
 
+            act = this.model.get("act");
+            id = this.model.get("id");
 
-            new ScrollableCueset(
+            scs = new ScrollableCueset(
                 Abstract.merge(
-                    { selector: "#video-" + this.model.get("id") },
+                    { selector: "#video-" + id },
                     this.model.attributes
                 )
             );
 
+            // Jump to the reststop
+            scs.scrollable.on("ended", function() {
+                App.router.go( act, "reststop", id );
+            });
         }
     });
 
