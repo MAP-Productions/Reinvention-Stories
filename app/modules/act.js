@@ -80,7 +80,9 @@ function( App, Intro, Story, Road, Reststop ) {
 
         template: "act/item",
 
-        tagName: "li",
+        tagName: "div",
+
+        className: "menu-section icons",
 
         data: function() {
             return {
@@ -92,8 +94,6 @@ function( App, Intro, Story, Road, Reststop ) {
     Act.Views.List = Backbone.View.extend({
         keep: true,
         // manage: true,
-        template: "act/list",
-
         className: "act-wrapper",
 
         beforeRender: function() {

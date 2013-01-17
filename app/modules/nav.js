@@ -1,15 +1,17 @@
 require([],
 function() {
 
-    var nav, isHidden, isLocked, last;
+    var $nav, isRolledup, isLocked, last;
 
     isLocked = false;
     last = 0;
 
     function mousemove( event ) {
+        event = event || { pageY: 0 };
+
         // Upvars declared in enclosing scope
-        nav = $("#reinvention-menu");
-        isHidden = nav.hasClass("hidden");
+        $nav = $("#reinvention-menu");
+        isRolledup = $nav.hasClass("rolledup");
 
         if ( last > 100 && event.pageY <= 100 ) {
             isLocked = false;
@@ -20,18 +22,23 @@ function() {
         }
 
         if ( event.pageY > 100 ) {
-            if ( !isHidden ) {
+            if ( !isRolledup ) {
                 isLocked = true;
-                nav.fadeOut( 400, function() {
-                    $(this).addClass("hidden");
+                $nav.animate({
+                    top: "-77px"
+                }, 500, function() {
+                    $(this).addClass("rolledup");
                     isLocked = false;
                 });
             }
         } else {
-            if ( isHidden ) {
+            if ( isRolledup ) {
                 isLocked = true;
-                nav.fadeIn( 200, function() {
-                    $(this).removeClass("hidden");
+
+                $nav.animate( {
+                    top: 0
+                }, 500, function() {
+                    $(this).removeClass("rolledup");
                     isLocked = false;
                 });
             }
@@ -40,7 +47,12 @@ function() {
 
     $(document).on( "mousemove", mousemove );
 
-    mousemove({ pageY: 99 });
+    // Trigger the mousemove with a fake event.pageY = 99 to hold the menu open.
+    // NOTE: this is note straight forward, because the the transition timer
+    // is buried in CSS
+    setTimeout( mousemove, 2000 );
+
+
 
     return {
         mousemove: mousemove

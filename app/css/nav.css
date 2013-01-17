@@ -1,0 +1,145 @@
+#reinvention-menu {
+    height: 85px;
+    padding-bottom: 23px;
+    overflow: hidden;
+    background: url(../img/menu-bg.png) repeat-x center;
+    position: absolute;
+    width: 100%;
+    z-index: 20;
+}
+
+#reinvention-menu .carat {
+    width: 20px;
+    height: 9px;
+    background: url(../img/menu-carat.png) 0 -9px;
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    margin-left: -10px;
+}
+
+#reinvention-menu.rolledup .carat {
+    background-position: 0 0;
+}
+
+#reinvention-menu .menu-content {
+    height: 77px;
+    padding: 6px 14px 0;
+    position: relative;
+    -webkit-transition-property: opacity;
+    -moz-transition-property: opacity;
+    -ms-transition-property: opacity;
+    -o-transition-property: opacity;
+    transition-property: opacity;
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    -ms-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+#reinvention-menu.rolledup .menu-content {
+    opacity: 0;
+}
+
+#reinvention-menu .menu-section {
+    float: left;
+    height: 77px;
+    margin: 0;
+    list-style-type: none;
+}
+
+#reinvention-menu .menu-section.icons {
+    padding: 0 8px 0 4px;
+    border-left: 1px solid #d2d2d3;
+}
+
+#reinvention-menu .menu-section .section-title {
+    font: 700 9.66px brandon_grotesque, sans-serif;
+    width: 77px;
+    text-transform: uppercase;
+    color: #828282;
+    float: left;
+    height: 15px;
+    margin: 27px -29px 0 -31px;
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+#reinvention-menu .logo {
+    display: block;
+    margin: 27px 11px 0 3px;
+}
+
+#reinvention-menu .meta-menu {
+    margin: 5px 0 0;
+}
+
+#reinvention-menu .meta-menu li {
+    display: inline-block;
+    font: 900 11.5px/11px brandon_grotesque, sans-serif;
+    text-transform: uppercase;
+    border-right: 1px solid #a6a6a8;
+    padding-right: 7px;
+    margin-right: 3px;
+    height: 11px;
+}
+
+#reinvention-menu .meta-menu li:last-child {
+    border: none;
+}
+
+#reinvention-menu .meta-menu li a {
+    color: #54514b;
+}
+
+#reinvention-menu .meta-menu li a:hover,
+#reinvention-menu .meta-menu li a.active {
+    text-decoration: none;
+    color: #e620a0;
+}
+
+#reinvention-menu .image-link {
+    background-image: url(../img/nav-sprite.png);
+    display: inline-block;
+    float: left;
+    width: 61px;
+    height: 60px;
+    text-indent: -9999px;
+    margin: 9px 3px 0;
+}
+
+#reinvention-menu .image-link.map {
+    background-position: 0 0;
+}
+
+#reinvention-menu .image-link.road {
+    background-position: 0 -60px;
+}
+
+#reinvention-menu .image-link.act1-story {
+    background-position: 0 -120px;
+}
+
+#reinvention-menu .image-link.act2-story {
+    background-position: 0 -180px;
+}
+
+#reinvention-menu .image-link.act3-story {
+    background-position: 0 -240px;
+}
+
+#reinvention-menu .image-link.act1-reststop {
+    background-position: 0 -300px;
+}
+
+#reinvention-menu .image-link.act2-reststop {
+    background-position: 0 -360px;
+}
+
+#reinvention-menu .image-link.act3-reststop {
+    background-position: 0 -420px;
+}
