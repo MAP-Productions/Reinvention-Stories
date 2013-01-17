@@ -39,7 +39,6 @@ define([
 
     Story.Items = new Story.Collection();
 
-
     Story.Views.Item = Backbone.View.extend({
 
         template: "story/item",
@@ -52,36 +51,33 @@ define([
 
         initialize: function( config ) {
             this.model = Story.Items.get( config.id );
+            this.model.set({
+                view: this,
+                rendered: true
+            });
         },
 
         beforeRender: function() {
             console.log( "Story.Views.Item: beforeRender" );
 
             $(".ZEEGA-player").remove();
-
-            new Zeega.player({
-                autoplay: true,
-
-                data: this.model.get("text")
-            }, {
-                target: "#reinvention-viewport",
-                next: ".next",
-                prev: ".prev"
-            });
         },
 
         afterRender: function() {
+
             console.log( "Story.Views.Item: afterRender" );
 
-            //
-            //
-            // 1. Load profiles
-            //
-            // 2. add scrolling media handlers
-            //
-            //
-            //
-            //
+            new Zeega.player({
+                autoplay: true,
+                data: this.model.get("text")
+            }, {
+                target: "#reinvention-story",
+                next: ".next",
+                prev: ".prev"
+            });
+
+            $("#reinvention-story").append( $(".ZEEGA-player").detach() );
+
         }
     });
 
