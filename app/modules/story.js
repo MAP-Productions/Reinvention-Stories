@@ -58,17 +58,25 @@ define([
         },
 
         afterRender: function() {
-            var zp = new Zeega.player({
+            var act, id, zp;
+
+            act = this.model.get("act");
+            id = this.model.get("id");
+
+            zp = new Zeega.player({
                 autoplay: true,
                 data: this.model.get("text"),
                 target: "#reinvention-story"
-            }, {
-                next: ".next",
-                prev: ".prev"
             });
 
-            console.log( zp );
+            window.zp = zp;
 
+            zp.on("deadend_frame", function() {
+                this.off("deadend_frame").on("ended", function() {
+                    console.log( "ended" );
+                    App.router.go( act, "road", id );
+                });
+            });
         }
     });
 
