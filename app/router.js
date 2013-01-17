@@ -33,9 +33,6 @@ function( App, Intro, Act, Story, Road, Reststop, Session, acts ) {
 
     Router = Backbone.Router.extend({
         initialize: function() {
-
-            console.log( "Backbone.Router.initialize" );
-
             App.useLayout("main");
         },
 
@@ -45,14 +42,13 @@ function( App, Intro, Act, Story, Road, Reststop, Session, acts ) {
         },
 
         go: function() {
-            // console.log( "GO", [].slice.call(arguments).join("/") );
             return this.navigate(
                 [].slice.call(arguments).join("/"), true
             );
         },
 
         index: function() {
-            this.show( 1, "intro", 1 );
+            this.go( 1, "intro", 1 );
         },
 
         show: function( act, type, id ) {
