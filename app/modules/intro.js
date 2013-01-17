@@ -36,9 +36,11 @@ define([
             var $pop = Popcorn("#reinvention-intro video");
 
             function handler() {
-                App.router.go( "act", 1, "story", 1 );
+                App.router.go( 1, "story", 74868 );
             }
 
+            // Set up "Skip Intro" from 8s-12s.
+            // Jump when the video ends.
             $pop.code({
                 start: 8,
                 end: 12,
@@ -48,7 +50,7 @@ define([
                 onEnd: function() {
                     this.off( "click", handler );
                 }
-            });
+            }).on( "ended", handler );
         }
     });
 
