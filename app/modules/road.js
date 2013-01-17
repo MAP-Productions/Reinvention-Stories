@@ -31,6 +31,7 @@ define([
             this.set(
                 _.extend( road, roadById( road.id ) )
             );
+
             Road.Items.add( this );
         }
     });
@@ -54,6 +55,9 @@ define([
 
         initialize: function( config ) {
             this.model = Road.Items.get( config.id );
+            this.model.set({
+                view: this
+            });
         },
 
         afterRender: function() {
@@ -61,7 +65,8 @@ define([
 
             scrollable = new ScrollableCueset(
                 Abstract.merge(
-                    { selector: "#video" }, this.model.attributes
+                    { selector: "#video-" + this.model.get("id") },
+                    this.model.attributes
                 )
             );
         }

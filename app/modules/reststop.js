@@ -37,14 +37,15 @@ define([
     Reststop.Model = Backbone.Model.extend({
         defaults: {
             id: null,
-            profiles: null
+            profiles: null,
+            // The view is preloaded to the first question
+            question: 0
         },
 
         initialize: function( reststop ) {
             this.set(
                 _.extend( reststop, restById( reststop.id ) )
             );
-            console.log( this );
             Reststop.Items.add( this );
         }
     });
@@ -60,6 +61,10 @@ define([
 
         template: "reststop/item",
 
+        events: {
+            "click .reststop-question form": "ask"
+        },
+
         data: function() {
             return {
                 model: this.model
@@ -67,8 +72,10 @@ define([
         },
 
         initialize: function( config ) {
-            console.log( "Reststop.Views.Item: initialize" );
             this.model = Reststop.Items.get( config.id );
+            this.model.set({
+                view: this
+            });
         },
 
         afterRender: function() {
@@ -87,6 +94,48 @@ define([
 
             // Initial request...
             Answer.request();
+
+            this.form();
+            this.ask();
+        },
+
+        form: function() {
+            var $form, $shuffle, $submit;
+
+            $form = $(".reststop-question form");
+            $shuffle = $form.find("[name='shuffle']");
+            $submit = $form.find("[name='submit']");
+
+            $form.on("submit", function( event ) {
+                event.preventDefault();
+                console.log( "form submission" );
+            });
+        },
+
+        ask: function() {
+            var questions, current, index;
+
+            questions = this.model.get("questions");
+            current = this.model.get("question");
+            index = (function() {
+                var k = 0;
+
+                do {
+                    k = Math.round( Math.random() * questions.length - 1 );
+                } while ( k === current );
+
+                return k;
+            }());
+
+            if ( !questions[ index ] ) {
+                index = 0;
+            }
+
+            this.model.set( "question", index );
+
+            $(".reststop-question h1").html(
+                questions[ index ]
+            );
         }
     });
 
@@ -100,7 +149,7 @@ define([
         this.$reststop = $("#reinvention-reststop");
         this.$point = $("<div>");
         this.coords = {
-            x: ( Math.random() * ( (DOM.doc.width() - 300) - 20 ) + 20 ).toFixed(),
+            x: ( Math.random() * ( (DOM.doc.width() - 475) - 20 ) + 20 ).toFixed(),
             y: ( Math.random() * ( (DOM.doc.height() - 150) - 110 ) + 110 ).toFixed()
         };
         this.style = {
@@ -128,13 +177,10 @@ define([
 
 
         this.$point.on("mouseover mouseleave click", function( event ) {
-
             if ( event.type === "click" ) {
                 this.reveal();
-
             } else {
                 this.$point.show();
-
                 this.$point.finish().animate({
                     opacity: event.type === "mouseover" ? 1 : 0.25
                 }, 200);
@@ -148,8 +194,6 @@ define([
     }
 
     Answer.prototype.reveal = function() {
-        // console.log( Answer.Rendered.length );
-        console.log( priv.get( this ) );
 
         // Hide Other answers
         Answer.Rendered.forEach(function( answer ) {
@@ -165,10 +209,10 @@ define([
         return this;
     };
 
-    // Cache of all jQuery object
+    // Cache of all jQuery objects
     Answer.Rendered = [];
 
-
+    // Validation for tweets
     Answer.isValid = function( tweet ) {
         return !Answer.isValid.knownIds.has( tweet.id );// &&
         //     [ "RT", "@" ].every(function( prefix ) {
@@ -176,8 +220,11 @@ define([
         //     });
     };
 
+    // Use by Answer.isValid to filter already-seen tweets
     Answer.isValid.knownIds = new Set();
 
+    // Request tweets from twitter API. These are used to
+    // populate the reststop view with mousesensitive "points"
     Answer.request = function() {
         return $.ajax({
             type: "GET",
@@ -190,10 +237,10 @@ define([
         });
     };
 
+    // Answer factory
     Answer.create = function( tweet ) {
         return new Answer( tweet );
     };
-
 
     return Reststop;
 });
