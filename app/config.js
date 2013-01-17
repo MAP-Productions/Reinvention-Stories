@@ -2,7 +2,7 @@
 require.config({
 
     // Initialize the application with the main application file.
-    deps: [ "es6shim",  "abstract", "zeegaplayer", "bootstrap", "main" ],
+    deps: [ "es6shim",  "abstract", "layout", "zeegaplayer", "bootstrap", "main" ],
 
     paths: {
         // JavaScript folders.
