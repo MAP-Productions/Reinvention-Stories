@@ -73,14 +73,10 @@ define([
 
         initialize: function( config ) {
             this.model = Reststop.Items.get( config.id );
-            this.model.set({
-                view: this
-            });
         },
 
         beforeRender: function() {
             console.log( "Reststop.Views.Item: beforeRender" );
-
             Answer.isValid.knownIds = new Set();
         },
         afterRender: function() {
@@ -155,7 +151,7 @@ define([
         this.$point = $("<div>");
         this.coords = {
             x: ( Math.random() * ( (DOM.doc.width() - 475) - 20 ) + 20 ).toFixed(),
-            y: ( Math.random() * ( (DOM.doc.height() - 150) - 110 ) + 110 ).toFixed()
+            y: ( Math.random() * ( (DOM.doc.height() - 200) - 110 ) + 110 ).toFixed()
         };
         this.style = {
             left: this.coords.x + "px",
@@ -224,10 +220,7 @@ define([
 
     // Validation for tweets
     Answer.isValid = function( tweet ) {
-        return !Answer.isValid.knownIds.has( tweet.id );// &&
-        //     [ "RT", "@" ].every(function( prefix ) {
-        //         return tweet.text.indexOf( prefix ) === -1;
-        //     });
+        return !Answer.isValid.knownIds.has( tweet.id );
     };
 
     // Use by Answer.isValid to filter already-seen tweets
