@@ -14,7 +14,6 @@
         "type": "Road",
         "data": {
           "id": 1,
-          "type": "interactive",
           "fetch": false
         }
       },
@@ -22,7 +21,6 @@
         "type": "Reststop",
         "data": {
           "id": 1,
-          "type": "form",
           "fetch": false
         }
       }

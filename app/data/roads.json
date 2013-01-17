@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "act": 1,
     "video": "Road_Act1",
     "cues": [
       {
@@ -32,11 +33,13 @@
   },
   {
     "id": 2,
+    "act": 2,
     "video": false,
     "cues": []
   },
   {
     "id": 3,
+    "act": 3,
     "video": false,
     "cues": []
   }
