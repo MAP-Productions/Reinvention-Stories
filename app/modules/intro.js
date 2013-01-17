@@ -30,18 +30,9 @@ define([
 
         initialize: function( config ) {
             this.model = Intro.Items.get( config.id );
-            this.model.set({
-                view: this
-            });
-        },
-
-        beforeRender: function() {
-            console.log( "Intro.Views.Item: beforeRender" );
         },
 
         afterRender: function() {
-            console.log( "Intro.Views.Item: afterRender" );
-
             var $pop = Popcorn("#reinvention-intro video");
 
             function handler() {

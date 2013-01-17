@@ -55,20 +55,23 @@ define([
 
         initialize: function( config ) {
             this.model = Road.Items.get( config.id );
-            this.model.set({
-                view: this
-            });
         },
+        beforeRender: function() {
+            console.log( "Road.Views.Item: beforeRender" );
 
+
+        },
         afterRender: function() {
-            var scrollable;
+            console.log( "Road.Views.Item: afterRender" );
 
-            scrollable = new ScrollableCueset(
+
+            new ScrollableCueset(
                 Abstract.merge(
                     { selector: "#video-" + this.model.get("id") },
                     this.model.attributes
                 )
             );
+
         }
     });
 

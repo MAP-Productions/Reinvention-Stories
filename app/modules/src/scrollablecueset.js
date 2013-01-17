@@ -48,8 +48,6 @@
 
     Abstract.put.call( this, options );
 
-    console.log( this );
-
     // Use the provided selector to find
     // the given video element that will serve
     // as the primary for this ScrollableCueset
