@@ -101,7 +101,7 @@ function( App, Intro, Story, Road, Reststop ) {
             // the Act.Views.Item nodes.
             Act.Items.each(function( act ) {
                 this.insertView(
-                    new Act.Views.Item({ model: act })
+                    "ul", new Act.Views.Item({ model: act })
                 );
             }, this);
         }
