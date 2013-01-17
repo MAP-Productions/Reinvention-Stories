@@ -80,7 +80,9 @@ function( App, Intro, Story, Road, Reststop ) {
 
         template: "act/item",
 
-        tagName: "li",
+        tagName: "div",
+
+        className: "menu-section icons",
 
         data: function() {
             return {
@@ -99,8 +101,6 @@ function( App, Intro, Story, Road, Reststop ) {
 
     Act.Views.List = Backbone.View.extend({
         // manage: true,
-        template: "act/list",
-
         className: "act-wrapper",
 
         events: {
@@ -180,7 +180,7 @@ function( App, Intro, Story, Road, Reststop ) {
             // the Act.Views.Item nodes.
             Act.Items.each(function( act ) {
                 this.insertView(
-                    "ul", new Act.Views.Item({ model: act })
+                    new Act.Views.Item({ model: act })
                 );
             }, this);
         },

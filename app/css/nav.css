@@ -5,6 +5,7 @@
     background: url(../img/menu-bg.png) repeat-x center;
     position: absolute;
     width: 100%;
+    z-index: 20;
 }
 
 #reinvention-menu .carat {
@@ -26,11 +27,13 @@
 #reinvention-menu .menu-section {
     float: left;
     height: 77px;
-    border-left: 1px solid #d2d2d3;
+    margin: 0;
+    list-style-type: none;
 }
 
-#reinvention-menu .menu-section:first-child {
-    border: none;
+#reinvention-menu .menu-section.icons {
+    padding: 0 8px 0 4px;
+    border-left: 1px solid #d2d2d3;
 }
 
 #reinvention-menu .logo {
@@ -71,7 +74,7 @@
     display: inline-block;
     float: left;
     width: 61px;
-    height: 58px;
+    height: 60px;
     text-indent: -9999px;
     margin: 11px 3px;
 }
@@ -80,6 +83,30 @@
     background-position: 0 0;
 }
 
-#reinvention-menu .image-link.story-1 {
-    background-position: 0 -58px;
+#reinvention-menu .image-link.road {
+    background-position: 0 -60px;
+}
+
+#reinvention-menu .image-link.act1-story {
+    background-position: 0 -120px;
+}
+
+#reinvention-menu .image-link.act2-story {
+    background-position: 0 -180px;
+}
+
+#reinvention-menu .image-link.act3-story {
+    background-position: 0 -240px;
+}
+
+#reinvention-menu .image-link.act1-reststop {
+    background-position: 0 -300px;
+}
+
+#reinvention-menu .image-link.act2-reststop {
+    background-position: 0 -360px;
+}
+
+#reinvention-menu .image-link.act3-reststop {
+    background-position: 0 -420px;
 }
