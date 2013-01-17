@@ -78,6 +78,11 @@ define([
             });
         },
 
+        beforeRender: function() {
+            console.log( "Reststop.Views.Item: beforeRender" );
+
+            Answer.isValid.knownIds = new Set();
+        },
         afterRender: function() {
             var id, interval;
 

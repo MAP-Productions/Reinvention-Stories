@@ -65,18 +65,11 @@ function( App, Intro, Act, Story, Road, Reststop, Session, acts ) {
         },
 
         show: function( act, type, id ) {
+            console.log( "SHOW", act, type, id );
             var Type, layout, view, model, isNew, html;
 
             layout = {};
             isNew = false;
-            html = $("#reinvention-viewport").html();
-
-
-            if ( html ) {
-                $("#reinvention-viewport").empty();
-            }
-
-
 
             if ( [ "intro", "road", "reststop", "story" ].indexOf(type) > -1 ) {
                 Type = Act.Types[ type ];
@@ -89,12 +82,11 @@ function( App, Intro, Act, Story, Road, Reststop, Session, acts ) {
 
                 console.log( "Type: ", type );
 
-                // layout[ "#reinvention-viewport" ] = view || new Type.Views.Item({ id: id });
-                // $("#reinvention-viewport").append( view.el );
-                //
+                if ( App.cache[ App.current.type + App.current.id ] ) {
 
-                if ( App.current.type === type && App.current.id === +id ) {
-                    console.log( "Refusing to re-render current view" );
+                    $("#reinvention-viewport").html(
+                        App.cache[ App.current.type + App.current.id ]
+                    );
                     return;
                 }
 

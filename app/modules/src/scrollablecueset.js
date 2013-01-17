@@ -48,6 +48,8 @@
 
     Abstract.put.call( this, options );
 
+    console.log( this );
+
     // Use the provided selector to find
     // the given video element that will serve
     // as the primary for this ScrollableCueset
@@ -197,7 +199,7 @@
       console.log( "Return to Main Road" );
       // Remove any residual video elements
       // TODO: Abstract this operation
-      this.$container.find("video:not(#video),#caption").remove();
+      this.$container.find("video:not(#video-" + this.id + "),#caption").remove();
       this.$primary.animate({ opacity: 1 }, "fast");
 
       previous = null;
@@ -222,7 +224,7 @@
 
       // Remove any residual video elements
       // TODO: Abstract this operation
-      this.$container.find("video:not(#video),#caption").remove();
+      this.$container.find("video:not(#video-" + this.id + "),#caption").remove();
 
 
       // Reset video to play from beginning

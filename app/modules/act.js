@@ -107,58 +107,73 @@ function( App, Intro, Story, Road, Reststop ) {
             click: "run"
         },
 
-
         reset: function() {
+            $(".ZEEGA-player").remove();
             $("#reinvention-viewport").empty();
         },
 
         run: function( event ) {
+            // TODO:
+            //
+            //      This should be moved to its own abstraction, elsewhere in the
+            //      program.
+            //
+            //
+            var routeExpr, data, config, Type, view, model;
 
-            // console.log( "Act.Views.Item:run" );
+            routeExpr = Backbone.Router.prototype._routeToRegExp( "/:act/:type/:id" );
+            data = routeExpr.exec(
+                ( $(event.target).attr("href") || $(event.target).prop("href") ).slice(1)
+            );
 
-            // // // TODO:
-            // // //
-            // // //      This should be moved to its own abstraction, elsewhere in the
-            // // //      program.
-            // // //
-            // // //
-            // var routeExpr, href, data, config;
+            config = [ "path", "act", "type", "id" ].reduce(function( initial, val ) {
+                initial[ val ] = data.shift();
+                return initial;
+            }, {});
 
-            // routeExpr = Backbone.Router.prototype._routeToRegExp( ":act/:type/:id" );
-            // href = $(event.target).attr("href") || $(event.target).prop("href");
-            // data = routeExpr.exec( href.slice(2) );
+            console.log( "RUN", config.act, config.type, config.id );
 
-            // // Handle disabled menu items
-            // if ( data === null ) {
-            //     return;
-            // }
+            if ( App.current.type === config.type && App.current.id === +config.id ) {
+                return;
+            }
 
-            // config = [ "path", "act", "type", "id" ].reduce(function( initial, val ) {
-            //     initial[ val ] = data.shift();
-            //     return initial;
-            // }, {});
-
-
-            // if ( App.current.type === config.type && App.current.id === +config.id ) {
-            //     console.log( "leaving." );
-            //     return;
-            // }
-
-            // Abstract.assign( App.current, {
-            //     type: config.type,
-            //     id: +config.id
-            // });
+            App.cache[ App.current.type + App.current.id ] = $("#reinvention-viewport").children(0).detach();
 
 
-            // // this.reset();
+            Abstract.assign( App.current, {
+                id: +config.id,
+                type: config.type
+            });
 
-            // App.layout.setViews({
 
-            //     "#reinvention-viewport": new Act.Types[ config.type ].Views.Item({
-            //         id: +config.id
-            //     })
+            Type = Act.Types[ config.type ];
+            model = Type.Items.get(config.id);
+            view = model.get("view");
 
-            // }).render();
+            delete App.layout.views["#reinvention-viewport"];
+
+
+            if ( !view ) {
+
+                this.reset();
+
+                App.layout.setViews({
+
+                    "#reinvention-viewport": new Type.Views.Item({
+                        id: config.id
+                    })
+
+                }).render();
+            }
+
+
+
+
+            // console.log( "Act.Views.Item:run", href );
+            // console.log( this.model );
+            // [ "story", "road", "reststop" ].forEach(function( model ) {
+            //     console.log( model, this.model.get( model ).get("id") );
+            // }, this);
         },
         beforeRender: function() {
             // Prior to rendering the Act.View.Lists, render

@@ -52,15 +52,14 @@ define([
         initialize: function( config ) {
             this.model = Story.Items.get( config.id );
             this.model.set({
-                view: this,
-                rendered: true
+                view: this
             });
         },
 
         beforeRender: function() {
             console.log( "Story.Views.Item: beforeRender" );
 
-            $(".ZEEGA-player").remove();
+            // $(".ZEEGA-player").remove();
         },
 
         afterRender: function() {
@@ -71,12 +70,12 @@ define([
                 autoplay: true,
                 data: this.model.get("text")
             }, {
-                target: "#reinvention-story",
+                // target: "#reinvention-story",
                 next: ".next",
                 prev: ".prev"
             });
 
-            $("#reinvention-story").append( $(".ZEEGA-player").detach() );
+            // $("#reinvention-story").append( $(".ZEEGA-player").detach() );
 
         }
     });

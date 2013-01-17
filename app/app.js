@@ -61,6 +61,11 @@ function( $, _, Backbone ) {
 
     // Mix Backbone.Events, modules, and layout management into the App object.
     return _.extend( App, {
+
+        cache: {
+
+        },
+
         current: {
             type: "",
             path: "",
