@@ -44,7 +44,7 @@
   }
 
   function ScrollableCueset( options ) {
-    var images, videos, captions, current, previous, dims;
+    var images, videos, captions, current, previous, dims, $container;
 
     Abstract.put.call( this, options );
 
@@ -63,7 +63,7 @@
 
     this.$primary = $(this.scrollable.media);
     this.$primary.media = this.scrollable;
-    this.$container = this.$primary.parent();
+    this.$container = $container = this.$primary.parent();
 
     images = {};
     videos = {};
@@ -73,7 +73,6 @@
       width: this.$container.width(),
       height: this.$container.height()
     };
-
 
     if ( this.cues.length ) {
 
@@ -96,8 +95,11 @@
           Abstract.merge({}, cue, {
             end: cue.start + 7,
             onStart: function( track ) {
-              // TODO: Scale up image size
-              // images[ track.clip ].fadeIn();
+              $container.append(
+                images[ track.clip ].css({
+                  zIndex: "999 !important"
+                })
+              );
             },
 
             onFrame: function( track ) {
@@ -150,9 +152,11 @@
             },
 
             onEnd: function( track ) {
-
-              // TODO: Scale down image size
-              images[ track.clip ].css({ opacity: 0 });
+              images[ track.clip ].detach();
+              images[ track.clip ].css({
+                opacity: 0,
+                zIndex: "995 !important"
+              });
             }
           })
         );
@@ -165,17 +169,21 @@
         // image icon to display
         image = $("<img>").addClass( side + " icons" ).prop({
           src: IMAGE_PATH + cue.clip + ".png",
-          video: cue.clip//,
-          // hidden: true
+          video: cue.clip
         });
 
-        image.css({
+        image.attr( "id", "image-" + cue.clip ).css({
           top: (dims.height / 2 - 125) + "px"
         });
 
         // Generate an element in a jQuery object for the
         // video that is associated with this image icon
-        video = $("<video>").attr( "id", cue.clip ).html(
+        //
+        //
+        // TODO: The child video should adjust its size according to the window!!!
+        //
+        //
+        video = $("<video>").attr( "id", "video-" + cue.clip ).html(
           sources( VIDEO_PATH, cue.clip )
         );
 
@@ -184,7 +192,7 @@
         //
         // http://www.duebel.me/web-video-pixel-dimensions/
 
-        this.$container.append( image );
+        // this.$container.append( image );
 
         // Store references to the newly created image and video
         // jQuert elements in a free-var cache.
@@ -196,7 +204,6 @@
     }
 
     this.$primary.on("click", function() {
-      console.log( "Return to Main Road" );
       // Remove any residual video elements
       // TODO: Abstract this operation
       this.$container.find("video:not(#video-" + this.id + "),#caption").remove();
