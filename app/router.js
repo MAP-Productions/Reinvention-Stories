@@ -1,29 +1,30 @@
 define([
     "app",
 
+    "modules/intro",
     "modules/act",
+    "modules/story",
     "modules/road",
     "modules/reststop",
     "modules/session",
-
 
     // Data
     "json!data/acts.json"
 
 ],
 
-function( App, Act, Road, Reststop, Session, acts ) {
+function( App, Intro, Act, Story, Road, Reststop, Session, acts ) {
     var Router;
 
-    window.Session = window.Session || Session;
+    // window.Session = window.Session || Session;
 
     // If this is the first visit, there will be no record of any
     // prior visits. For this visit, set "isFirst" to |true|.
     // Subsequent visits will see a valid "isFirst" record and will
     // therefore be set to false.
-    Session.set(
-        "isFirst", Session.get("isFirst") === undefined ? true : false
-    );
+    // Session.set(
+    //     "isFirst", Session.get("isFirst") === undefined ? true : false
+    // );
 
     // Spin up the app with some sortof-bootstrapped data!
     acts.forEach( Act.create );
