@@ -51,31 +51,23 @@ define([
 
         initialize: function( config ) {
             this.model = Story.Items.get( config.id );
-            this.model.set({
-                view: this
-            });
         },
 
         beforeRender: function() {
             console.log( "Story.Views.Item: beforeRender" );
-
-            // $(".ZEEGA-player").remove();
         },
 
         afterRender: function() {
-
-            console.log( "Story.Views.Item: afterRender" );
-
-            new Zeega.player({
+            var zp = new Zeega.player({
                 autoplay: true,
-                data: this.model.get("text")
+                data: this.model.get("text"),
+                target: "#reinvention-story"
             }, {
-                // target: "#reinvention-story",
                 next: ".next",
                 prev: ".prev"
             });
 
-            // $("#reinvention-story").append( $(".ZEEGA-player").detach() );
+            console.log( zp );
 
         }
     });
