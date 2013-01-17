@@ -38,9 +38,9 @@ function() {
         }
     }
 
-    $(document).on( "mousemove", mousemove );
+    //$(document).on( "mousemove", mousemove );
 
-    mousemove({ pageY: 99 });
+    //mousemove({ pageY: 99 });
 
     return {
         mousemove: mousemove
