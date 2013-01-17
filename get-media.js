@@ -3,12 +3,12 @@
 //  This script needs to be migrated to a grunt task
 //
 //
-var fs, colors, optimist, spawn, URL, mediafiles, exts, path, displays;
+var fs, colors, optimist, request, URL, mediafiles, exts, path, displays;
 
 fs = require("fs");
 colors = require("colors");
 argv = require("optimist").argv;
-spawn = require("child_process").spawn;
+request = require("request");
 URL = require("url");
 exts = [ "mp4", "webm", "ogv" ];
 mediafiles = JSON.parse( fs.readFileSync(".mediafiles") );
@@ -23,31 +23,35 @@ tmpl = "https://dl.dropbox.com/u/3531958/reinvention/%%FILE%%";
 
 
 function download( url ) {
-  var file, stream, curl;
+  var file = URL.parse( url ).pathname.split("/").pop();
 
-  file = URL.parse( url ).pathname.split("/").pop();
-  stream = fs.createWriteStream( [ PATH, file ].join("/") );
-  curl = spawn( "curl", [ url ] );
+  request( url ).pipe(
+    fs.createWriteStream( [ PATH, file ].join("/") )
+  );
 
-  curl.stdout.on( "data", function( data ) {
-    stream.write( data );
-    console.log( "Writing...", data.length, " to ", [ PATH, file ].join("/") );
-  });
 
-  curl.stdout.on( "end", function( data ) {
-    stream.end();
-    console.log( (file + " downloaded to " + PATH).green );
-  });
+  // stream = fs.createWriteStream( [ PATH, file ].join("/") );
+  // curl = spawn( "curl", [ url ] );
 
-  curl.on( "exit", function( code ) {
-    if ( code !== 0 ) {
-      console.log( ("Failed: " + code).red );
-    }
-  });
+  // curl.stdout.on( "data", function( data ) {
+  //   stream.write( data );
+  //   console.log( "Writing...", data.length, " to ", [ PATH, file ].join("/") );
+  // });
+
+  // curl.stdout.on( "end", function( data ) {
+  //   stream.end();
+  //   console.log( (file + " downloaded to " + PATH).green );
+  // });
+
+  // curl.on( "exit", function( code ) {
+  //   if ( code !== 0 ) {
+  //     console.log( ("Failed: " + code).red );
+  //   }
+  // });
 };
 
 
-console.log( mediafiles );
+// console.log( mediafiles );
 
 
 mediafiles.forEach(function( media ) {

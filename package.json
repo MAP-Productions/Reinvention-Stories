@@ -18,7 +18,8 @@
     "grunt": "~0.3.17",
     "grunt-update-submodules": "~0.2.0",
     "colors": "~0.6.0",
-    "optimist": "latest"
+    "optimist": "latest",
+    "request": "latest"
   },
   "keywords": []
 }
