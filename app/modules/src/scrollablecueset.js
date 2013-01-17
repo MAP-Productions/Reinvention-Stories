@@ -53,7 +53,7 @@
     // as the primary for this ScrollableCueset
     this.node = document.querySelector( this.selector );
     this.original = this.node.cloneNode();
-    this.node.innerHTML = sources( VIDEO_PATH, this.video );
+    // this.node.innerHTML = sources( VIDEO_PATH, this.video );
 
     this.scrollable = Popcorn( Scrollable( this.node ).media, {
       frameAnimation: true
