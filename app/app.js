@@ -3,7 +3,7 @@ define([
     "jquery",
     "lodash",
     "backbone",
-    "layoutmanager",
+    "layout",
     "scrollable",
     "scrollablecueset"
 ],
@@ -13,7 +13,7 @@ function( $, _, Backbone ) {
 
     // Provide a global location to place configuration settings and module
     // creation.
-    App = {
+    window.App = App = {
         // The root path to run the Application.
         root: "/"
     };
@@ -34,7 +34,7 @@ function( $, _, Backbone ) {
     };
 
     // Configure LayoutManager with Backbone Boilerplate defaults.
-    Backbone.LayoutManager.configure({
+    Backbone.Layout.configure({
         // Allow LayoutManager to augment Backbone.View.prototype.
         manage: true,
 
@@ -61,6 +61,12 @@ function( $, _, Backbone ) {
 
     // Mix Backbone.Events, modules, and layout management into the App object.
     return _.extend( App, {
+        current: {
+            type: "",
+            path: "",
+            id: 0,
+            act: 0
+        },
         // Create a custom object with a nested Views object.
         module: function( props ) {
             return _.extend({
