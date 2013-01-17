@@ -6,6 +6,7 @@
         "type": "Story",
         "data": {
           "id": 74868,
+          "act": 1,
           "type": "zeega",
           "fetch": true
         }
@@ -14,6 +15,7 @@
         "type": "Road",
         "data": {
           "id": 1,
+          "act": 1,
           "fetch": false
         }
       },
@@ -21,6 +23,7 @@
         "type": "Reststop",
         "data": {
           "id": 1,
+          "act": 1,
           "fetch": false
         }
       }
