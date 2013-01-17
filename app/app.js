@@ -8,7 +8,7 @@ define([
     "scrollablecueset"
 ],
 
-function( $, _, Backbone ) {
+function( $, _, Backbone, Layout ) {
     var App, JST;
 
     // Provide a global location to place configuration settings and module
@@ -61,6 +61,13 @@ function( $, _, Backbone ) {
 
     // Mix Backbone.Events, modules, and layout management into the App object.
     return _.extend( App, {
+
+        views: {},
+
+        isCurrent: function( id, type ) {
+            // console.log( "Test isCurrent", [id, type], [App.current.id, App.current.type] );
+            return App.current.id === id && App.current.type === type;
+        },
 
         cache: {
 
