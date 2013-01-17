@@ -1,6 +1,7 @@
 define([
-    "store"
+    // "store"
 
 ], function( Store ) {
-    return new Store("reinvention");
+    // TODO: Deprecate
+    return {};//new Store("reinvention");
 });
