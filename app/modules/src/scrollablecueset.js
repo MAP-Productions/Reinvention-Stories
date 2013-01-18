@@ -250,7 +250,7 @@
       // This is somewhat insane and hard to look at.
       $("#caption").css({
 
-        top: (parseInt(video.css("top")) + parseInt(video.height()) - 30)  + "px",
+        top: (parseInt(video.css("top"), 10) + parseInt(video.height(), 10) - 30)  + "px",
         left: video.css("left"),
         width: dims.width / 2 + "px"
 
