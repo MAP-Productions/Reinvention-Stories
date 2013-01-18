@@ -1,6 +1,7 @@
 require([
     "app",
-    "router"
+    "router",
+    "modules/nav"
 ],
 
 function( App, Router ) {
