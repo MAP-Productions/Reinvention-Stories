@@ -90,6 +90,38 @@
     position: relative;
 }
 
+.email-modal-content .content-right .content-right-inner {
+    margin: 20px auto 0;
+    width: 240px;
+}
+
+.email-modal-content .content-right p {
+    font: 500 12px/13.38px brandon_grotesque, sans-serif;
+}
+
+.email-modal-content .content-right input[type=text] {
+    border: none;
+    box-shadow: 1px 0 2px 1px #c2c2c2 inset;
+    border-radius: 0;
+    color: #fff;
+    float: left;
+    margin: 0;
+    width: 172px;
+    height: 16px;
+    padding: 6px 9px;
+}
+
+.email-modal-content .content-right button {
+    background: #ee127b;
+    border: none;
+    float: left;
+    width: 48px;
+    height: 28px;
+    color: #fff;
+    font: 700 9px brandon_grotesque, sans-serif;
+    text-transform: uppercase;
+}
+
 .email-modal-content .content-right .release-dates {
     position: absolute;
     bottom: 0;
