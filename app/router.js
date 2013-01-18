@@ -9,9 +9,7 @@ define([
     "modules/session",
 
     // Data
-    // "json!data/acts.json"
     "modules/data"
-
 ],
 
 function( App, Intro, Act, Story, Road, Reststop, Session, Data ) {
@@ -27,6 +25,9 @@ function( App, Intro, Act, Story, Road, Reststop, Session, Data ) {
     //     "isFirst", Session.get("isFirst") === undefined ? true : false
     // );
 
+    Object.keys( Act.Types ).forEach(function( key ) {
+        Act.Types[ key.toLowerCase() ] = Act.Types[ key ];
+    });
 
 
     // Spin up the app with some sortof-bootstrapped data!
