@@ -33,7 +33,7 @@ function() {
         } else {
             if ( isRolledup ) {
                 isLocked = true;
-                $nav.removeClass("rolledup").animate( {
+                $nav.removeClass("rolledup").animate({
                     top: 0
                 }, 500, function() {
                     isLocked = false;
