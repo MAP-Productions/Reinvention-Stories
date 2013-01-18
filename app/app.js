@@ -119,7 +119,8 @@ function( $, _, Backbone, Layout ) {
         },
 
         goto: function( act, type ) {
-            var args = type === "intro" ? [ 1, "intro", 1 ] :
+            var args = type === "intro" ?
+                [ 1, "intro", 1 ] :
                 Act.Items.get( act ).next( type );
 
             App.router.go.apply( null, args );
