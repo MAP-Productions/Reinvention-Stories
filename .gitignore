@@ -3,3 +3,5 @@ node_modules
 dist/debug/
 app/video/*
 !app/video/README.md
+!app/video/list.txt
+!app/video/get.sh
