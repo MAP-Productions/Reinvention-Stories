@@ -59,18 +59,26 @@ function( $, _, Backbone, Layout ) {
         }
     });
 
+    function extract( obj, prop ) {
+        // console.log( "extract", prop, "from", obj );
+        return obj.model && obj.$el ?
+            obj.model.get( prop ) : obj.get( prop );
+    }
+
     // Mix Backbone.Events, modules, and layout management into the App object.
     return _.extend( App, {
 
         views: {},
 
         isCurrent: function( id, type ) {
+            // If the |id| is an object, assume we've recieved
+            // either a |view| object or a |model| object.
+            if ( typeof id === "object" ) {
+                type = extract( id, "type" );
+                id = extract( id, "id" );
+            }
             // console.log( "Test isCurrent", [id, type], [App.current.id, App.current.type] );
             return App.current.id === id && App.current.type === type;
-        },
-
-        cache: {
-
         },
 
         current: {
@@ -79,6 +87,7 @@ function( $, _, Backbone, Layout ) {
             id: 0,
             act: 0
         },
+
         // Create a custom object with a nested Views object.
         module: function( props ) {
             return _.extend({
@@ -105,6 +114,13 @@ function( $, _, Backbone, Layout ) {
             return this.layout = new Backbone.Layout(
                 _.extend({ el: "#main" }, options )
             );
+        },
+
+        goto: function( act, type ) {
+            var args = type === "intro" ? [ 1, "intro", 1 ] :
+                Act.Items.get( act ).next( type );
+
+            App.router.go.apply( null, args );
         }
     }, Backbone.Events );
 });
