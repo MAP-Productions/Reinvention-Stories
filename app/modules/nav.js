@@ -24,21 +24,18 @@ function() {
         if ( event.pageY > 100 ) {
             if ( !isRolledup ) {
                 isLocked = true;
-                $nav.animate({
+                $nav.addClass("rolledup").animate({
                     top: "-77px"
                 }, 500, function() {
-                    $(this).addClass("rolledup");
                     isLocked = false;
                 });
             }
         } else {
             if ( isRolledup ) {
                 isLocked = true;
-
-                $nav.animate( {
+                $nav.removeClass("rolledup").animate( {
                     top: 0
                 }, 500, function() {
-                    $(this).removeClass("rolledup");
                     isLocked = false;
                 });
             }
