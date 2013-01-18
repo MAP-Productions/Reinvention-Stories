@@ -20,6 +20,23 @@ body {
   z-index: 994;
 }
 
+#reinvention-story-controls {
+  bottom: 0px;
+
+  padding-bottom: 20px;
+  padding-top: 20px;
+  overflow: hidden;
+  background-color: rgb(230, 230, 230);
+  position: absolute;
+  width: 100%;
+  z-index: 20;
+}
+
+#reinvention-story-controls a {
+  color: #ee127b;
+  font: bold 22.3px/26.77px adelle_basic, serif;
+}
+
 
 #reinvention-reststop video,
 #reinvention-road video,

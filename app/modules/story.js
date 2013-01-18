@@ -82,11 +82,8 @@ define([
             config[ !data ? "url" : "data" ] = !data ?
                 this.model.url() : data;
 
-            zp = new Zeega.player( config );
+            App.global.zeega = zp = new Zeega.player( config );
             isLast = false;
-
-            // TODO: Remove this when the ended event issue is solved.
-            window.zp = zp;
 
             zp.on("deadend_frame", function() {
                 isLast = true;

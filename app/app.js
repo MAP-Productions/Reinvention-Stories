@@ -68,6 +68,8 @@ function( $, _, Backbone, Layout ) {
     // Mix Backbone.Events, modules, and layout management into the App object.
     return _.extend( App, {
 
+        global: {},
+
         views: {},
 
         isCurrent: function( id, type ) {
