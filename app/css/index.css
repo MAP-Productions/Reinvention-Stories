@@ -3,6 +3,19 @@
 @import "../../app/css/nav.css";
 @import "../../app/css/reinvention.css";
 @import "../../app/css/reststop.css";
+@import "../../app/css/modal.css";
+
+/* brandon grotesque - medium (weight 500) */
+@font-face {
+    font-family: "brandon_grotesque";
+    src: url("../fonts/brandon/brandon_med-webfont.eot");
+    src: url("../fonts/brandon/brandon_med-webfont.eot?#iefix") format("embedded-opentype"),
+         url("../fonts/brandon/brandon_med-webfont.woff") format("woff"),
+         url("../fonts/brandon/brandon_med-webfont.ttf") format("truetype"),
+         url("../fonts/brandon/brandon_med-webfont.svg#brandon_grotesque_boldregular") format("svg");
+    font-weight: 500;
+    font-style: normal;
+}
 
 /* brandon grotesque - bold (weight 700) */
 @font-face {
