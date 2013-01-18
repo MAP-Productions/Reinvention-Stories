@@ -3,7 +3,7 @@ define([
     "json!data/acts.json",
     "json!data/stories.json",
     "json!data/roads.json",
-    "json!data/reststops.json",
+    "json!data/reststops.json"
 
 ], function( acts, stories, roads, reststops ) {
     var priv, map, args;
