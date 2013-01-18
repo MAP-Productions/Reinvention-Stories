@@ -174,16 +174,14 @@ define([
         Answer.Rendered.push( this.$answer );
     }
 
-    Answer.prototype.reveal = function() {
+    Answer.prototype.conceal = function( options ) {
+        Answer.conceal( options );
 
-        // Hide Other answers
-        Answer.Rendered.forEach(function( answer ) {
-            if ( answer !== this.$answer ) {
-                answer.fadeOut( 200 , function() {
-                    answer.remove();
-                });
-            }
-        }, this );
+        return this;
+    };
+
+    Answer.prototype.reveal = function() {
+        this.conceal({ except: this.$answer });
 
         this.$answer.appendTo( this.$reststop ).fadeIn();
 
@@ -197,6 +195,22 @@ define([
     Answer.isValid = function( tweet ) {
         return !Answer.isValid.knownIds.has( tweet.id );
     };
+
+    Answer.conceal = function( options ) {
+        options = options || {};
+        options.except = options.except ?
+            (Array.isArray(options.except) ? options.except : [ options.except ]) :
+            [];
+
+        Answer.Rendered.forEach(function( answer ) {
+            if ( options.except.indexOf( answer ) === -1 ) {
+                answer.fadeOut( 200 , function() {
+                    answer.remove();
+                });
+            }
+        }, this );
+    };
+
 
     // Use by Answer.isValid to filter already-seen tweets
     Answer.isValid.knownIds = new Set();
