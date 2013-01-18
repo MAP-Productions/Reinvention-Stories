@@ -2,6 +2,7 @@
   {
     "id": 1,
     "act": 1,
+    "next": false,
     "video": "RestStop1",
     "questions": [
       "In a time of personal struggle, how did you lift yourself up?",
@@ -11,11 +12,13 @@
   {
     "id": 2,
     "act": 2,
+    "next": false,
     "video": "RestStop2"
   },
   {
     "id": 3,
     "act": 3,
+    "next": false,
     "video": "RestStop3"
   }
 ]

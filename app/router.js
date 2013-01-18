@@ -40,13 +40,11 @@ function( App, Intro, Act, Story, Road, Reststop, Session, Data ) {
 
         routes: {
             "": "index",
+            ":act": "show",
             ":act/:type/:id": "show"
         },
 
         go: function() {
-            // if ( this !== App.router ) {
-            //     return App.router.go.apply( App.router, arguments );
-            // }
             return ( this !== App.router ? App.router : this ).navigate(
                 [].slice.call(arguments).join("/"), true
             );
@@ -57,8 +55,15 @@ function( App, Intro, Act, Story, Road, Reststop, Session, Data ) {
         },
 
         show: function( act, type, id ) {
-            // console.log( "SHOW", act, type, id );
             var key, view;
+
+            // Allow default act urls. eg. /#1
+            type = type || "story";
+            // Allow default act urls. eg. /#1
+            // ... this is a serious stretch. It will only work
+            // if there is _actually_ a story with an id for act 2 or 3
+            id = id || Act.Items.get(act).get("story").get("id");
+
 
             if ( [ "intro", "road", "reststop", "story" ].indexOf(type) > -1 ) {
 
@@ -71,6 +76,7 @@ function( App, Intro, Act, Story, Road, Reststop, Session, Data ) {
 
                 // Update the current view type and id
                 Abstract.merge( App.current, {
+                    act: +act,
                     id: +id,
                     type: type
                 });
