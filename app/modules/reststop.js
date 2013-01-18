@@ -66,16 +66,14 @@ define([
             Answer.isValid.knownIds = new Set();
         },
         afterRender: function() {
-            App.isCurrent( this );
             var interval = setInterval(function() {
                 // If the current view |id| has change
-                App.isCurrent( this );
                 if ( App.isCurrent( this ) ) {
                     clearInterval(interval);
                 } else {
                     Answer.request();
                 }
-            }, 2e5);
+            }.bind(this), 2e5);
 
             // Make an initial request for existing answer submissions
             Answer.request();
