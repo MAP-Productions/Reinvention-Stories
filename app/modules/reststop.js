@@ -48,7 +48,8 @@ define([
         template: "reststop/item",
 
         events: {
-            "click .reststop-question form": "ask"
+            "click [name='shuffle']": "ask",
+            "submit #reststop-question-form": "submit"
         },
 
         data: function() {
@@ -78,21 +79,13 @@ define([
             // Make an initial request for existing answer submissions
             Answer.request();
 
-            this.form();
             this.ask();
         },
 
-        form: function() {
-            var $form, $shuffle, $submit;
+        submit: function( event ) {
+            event.preventDefault();
 
-            $form = $(".reststop-question form");
-            $shuffle = $form.find("[name='shuffle']");
-            $submit = $form.find("[name='submit']");
-
-            $form.on("submit", function( event ) {
-                event.preventDefault();
-                console.log( "form submission" );
-            });
+            console.log( "submit the form" );
         },
 
         ask: function() {
