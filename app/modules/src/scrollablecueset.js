@@ -239,7 +239,8 @@
       // to the dimensions of the primary video
       video.css({
         top: dims.height / 4 + "px",
-        left: dims.width / 4 + "px"
+        left: dims.width / 4 + "px",
+        width: dims.width / 2 + "px"
       });
 
       // Append the child video element
@@ -249,8 +250,9 @@
       // This is somewhat insane and hard to look at.
       $("#caption").css({
 
-        top: ( parseInt( video.css("top"), 10 ) + video.height() + 2 ) + "px",
-        left: video.css("left")
+        top: (parseInt(video.css("top")) + parseInt(video.height()) - 30)  + "px",
+        left: video.css("left"),
+        width: dims.width / 2 + "px"
 
       }).find(".text").html( caption );
 

@@ -115,11 +115,11 @@ body {
 }
 
 #caption .text {
-  width: 645px;
+  width: 85%;
   float: left;
 }
 #caption .time {
-  width: 75px;
+  width: 15%;
   float: right;
 }
 
