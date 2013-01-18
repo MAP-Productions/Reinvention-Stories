@@ -28,7 +28,7 @@ define([
 
         initialize: function( reststop ) {
             this.set(
-                _.extend( reststop, Data.from("reststops").byId( reststop.id ) )
+                Abstract.merge( reststop, Data.from("reststops").byId( reststop.id ) )
             );
             this.collection.add( this );
         }

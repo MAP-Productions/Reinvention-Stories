@@ -66,7 +66,7 @@ function( $, _, Backbone, Layout ) {
     }
 
     // Mix Backbone.Events, modules, and layout management into the App object.
-    return _.extend( App, {
+    return Abstract.merge( App, {
 
         global: {},
 
@@ -92,7 +92,7 @@ function( $, _, Backbone, Layout ) {
 
         // Create a custom object with a nested Views object.
         module: function( props ) {
-            return _.extend({
+            return Abstract.merge({
                 Views: {}
             }, props );
         },
@@ -114,7 +114,7 @@ function( $, _, Backbone, Layout ) {
             }
             // Cache the refererence.
             return this.layout = new Backbone.Layout(
-                _.extend({ el: "#main" }, options )
+                Abstract.merge({ el: "#main" }, options )
             );
         },
 

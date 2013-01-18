@@ -24,7 +24,7 @@ define([
         },
         initialize: function( story ) {
             this.set(
-                _.extend( story, Data.from("stories").byId( story.id ) )
+                Abstract.merge( story, Data.from("stories").byId( story.id ) )
             );
             this.collection.add( this );
         }

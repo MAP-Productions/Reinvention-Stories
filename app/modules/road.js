@@ -16,7 +16,7 @@ define([
         },
         initialize: function( road ) {
             this.set(
-                _.extend( road, Data.from("roads").byId( road.id ) )
+                Abstract.merge( road, Data.from("roads").byId( road.id ) )
             );
             this.collection.add( this );
         }
