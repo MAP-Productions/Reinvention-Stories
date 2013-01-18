@@ -18,7 +18,7 @@ function( App, Intro, Story, Road, Reststop ) {
         Road: Road,
         Reststop: Reststop
     };
-
+window.Act = Act;
     // These keys are used by the Act menu click handler to execute handler
     // instructions based on route data.
     Object.keys( Act.Types ).forEach(function( key ) {
