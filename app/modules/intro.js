@@ -8,7 +8,8 @@ define([
     Intro.Model = Backbone.Model.extend({
         defaults: {
             id: 1,
-            video: "Intro"
+            video: "Intro",
+            type: "intro"
         }
     });
 
@@ -36,7 +37,7 @@ define([
             var $pop = Popcorn("#reinvention-intro video");
 
             function handler() {
-                App.router.go( 1, "story", 74868 );
+                App.goto( 1, "story" );
             }
 
             // Set up "Skip Intro" from 8s-12s.
