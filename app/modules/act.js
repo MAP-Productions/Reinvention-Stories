@@ -62,6 +62,22 @@ function( App, Intro, Story, Road, Reststop ) {
 
             // Add the model to the collection for View building
             Act.Items.add( this );
+        },
+
+        playlist: function() {
+            return [ "story", "road", "reststop" ].reduce(function( initial, key ) {
+                //
+                // |this| === this.attributes
+                //
+                initial[ key ] = [ this[ key ].get("act"), key, this[ key ].get("id") ];
+
+                return initial;
+            }.bind( this.attributes ), {});
+
+        },
+
+        next: function( type ) {
+            return this.playlist()[ type ];
         }
     });
 
