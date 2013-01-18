@@ -1,6 +1,9 @@
 # Reinvention
 
 Setup
+```bash
+sudo chmod +x get.sh && ./get.sh
+```
 
 ```bash
 npm install
