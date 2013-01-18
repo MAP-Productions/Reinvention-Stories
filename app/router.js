@@ -9,11 +9,12 @@ define([
     "modules/session",
 
     // Data
-    "json!data/acts.json"
+    // "json!data/acts.json"
+    "modules/data"
 
 ],
 
-function( App, Intro, Act, Story, Road, Reststop, Session, acts ) {
+function( App, Intro, Act, Story, Road, Reststop, Session, Data ) {
     var Router;
 
     // window.Session = window.Session || Session;
@@ -29,7 +30,7 @@ function( App, Intro, Act, Story, Road, Reststop, Session, acts ) {
 
 
     // Spin up the app with some sortof-bootstrapped data!
-    acts.forEach( Act.create );
+    Data.get("acts").forEach( Act.create );
 
     Router = Backbone.Router.extend({
         initialize: function() {
@@ -42,7 +43,10 @@ function( App, Intro, Act, Story, Road, Reststop, Session, acts ) {
         },
 
         go: function() {
-            return this.navigate(
+            // if ( this !== App.router ) {
+            //     return App.router.go.apply( App.router, arguments );
+            // }
+            return ( this !== App.router ? App.router : this ).navigate(
                 [].slice.call(arguments).join("/"), true
             );
         },

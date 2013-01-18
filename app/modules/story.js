@@ -1,43 +1,46 @@
 define([
-    "app"
+    "app",
+    "modules/data"
 
-], function( App ) {
+], function( App, Data ) {
 
-    var Story = App.module();
+    var Story, ZEEGA_URL;
+
+    Story = App.module();
+    ZEEGA_URL = "http://alpha.zeega.org/api/items/";
+
 
     Story.Model = Backbone.Model.extend({
         defaults: {
             isAvailable: false,
-            id: null
+            id: null,
+            type: "story"
         },
         url: function() {
-            return "http://alpha.zeega.org/api/items/" + this.id;
+            return ZEEGA_URL + this.id;
         },
         parse: function( obj ) {
-            var data = obj.items[ 0 ];
-
-            // API requests are coming up empty handed :(
-            if ( !data ) {
-                console.warn(
-                    "Zeega API failed to respond with project data. Requested from: ", this.url()
-                );
-            }
-            return data;
+            return obj.items[ 0 ];
         },
-        initialize: function() {
-            // Push all new Story.Model instances into
-            // the Story.Items collection
-            Story.Items.add( this );
-
-            this.set( "isAvailable", true );
+        initialize: function( story ) {
+            this.set(
+                _.extend( story, Data.from("stories").byId( story.id ) )
+            );
+            this.collection.add( this );
         }
     });
+
+    Story.create = function( story ) {
+        new Story.Model( story );
+    };
 
     Story.Collection = Backbone.Collection.extend({
         model: Story.Model
     });
 
     Story.Items = new Story.Collection();
+
+    Story.Model.prototype.collection = Story.Items;
 
     Story.Views.Item = Backbone.View.extend({
 
@@ -58,47 +61,46 @@ define([
         },
 
         afterRender: function() {
-            var act, id, zp;
+            // http://alpha.zeega.org/74868
+            // http://alpha.zeega.org/__ID__
+            var config, id, act, data, zp, isLast;
 
-            act = this.model.get("act");
-            id = this.model.get("id");
-
-            zp = new Zeega.player({
+            config = {
+                target: "#reinvention-story",
                 autoplay: true,
-                data: this.model.get("text"),
-                target: "#reinvention-story"
-            });
+                window_fit: true
+            };
 
+            id = this.model.get("id");
+            act = this.model.get("act");
+            data = this.model.get("text");
+
+            // Sometimes the Zeega Project data hasn't returned soon enough,
+            // in these cases, provide the url instead. This will give the
+            // Zeega-Player instance the info it needs to request the data
+            // and build a player.
+            config[ !data ? "url" : "data" ] = !data ?
+                this.model.url() : data;
+
+            zp = new Zeega.player( config );
+            isLast = false;
+
+            // TODO: Remove this when the ended event issue is solved.
             window.zp = zp;
 
             zp.on("deadend_frame", function() {
-                this.off("deadend_frame").on("ended", function() {
-                    console.log( "ended" );
-                    App.router.go( act, "road", id );
-                });
+                isLast = true;
+            });
+
+            zp.on("ended", function() {
+                console.log( "ended" );
+
+                if ( isLast ) {
+                    App.goto( act, "road" );
+                }
             });
         }
     });
-
-
-    // Story.Items.from( array )
-    //  array of ids
-    //  array of objects with id property
-    //
-    Story.Items.from = function( marks ) {
-        if ( marks.length ) {
-            marks.forEach(function( story ) {
-                // Do some param hockey... this let's us get away with
-                // passing either an array of ids or an array of objects
-                // with a single id property, set to the value of the
-                // matching story marker
-                story = typeof story === "object" ?
-                    story : { id: story };
-
-                ( new Story.Model(story) ).fetch();
-            });
-        }
-    };
 
     return Story;
 });

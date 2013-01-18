@@ -3,10 +3,10 @@ define([
     "dom",
     "moment",
 
-    "json!data/reststops.json",
+    "modules/data",
     "text!templates/reststop/answer.html"
 
-], function( App, DOM, moment, reststops, answer ) {
+], function( App, DOM, Moment, Data, answer ) {
 
     var Reststop,
         priv = new WeakMap(),
@@ -18,35 +18,19 @@ define([
         answer: _.template( answer )
     };
 
-    // TODO:
-    //
-    // Refactor this and roadById into a single
-    // abstract lookup function.
-    function restById( id ) {
-        var i = 0,
-            length = reststops.length;
-
-        for ( ; i < length; i++ ) {
-            if ( reststops[ i ].id === id ) {
-                return reststops[ i ];
-            }
-        }
-        return null;
-    }
-
     Reststop.Model = Backbone.Model.extend({
         defaults: {
             id: null,
-            profiles: null,
             // The view is preloaded to the first question
-            question: 0
+            question: 0,
+            type: "reststop"
         },
 
         initialize: function( reststop ) {
             this.set(
-                _.extend( reststop, restById( reststop.id ) )
+                _.extend( reststop, Data.from("reststops").byId( reststop.id ) )
             );
-            Reststop.Items.add( this );
+            this.collection.add( this );
         }
     });
 
@@ -55,6 +39,8 @@ define([
     });
 
     Reststop.Items = new Reststop.Collection();
+
+    Reststop.Model.prototype.collection = Reststop.Items;
 
     Reststop.Views.Item = Backbone.View.extend({
         manage: true,
@@ -80,20 +66,18 @@ define([
             Answer.isValid.knownIds = new Set();
         },
         afterRender: function() {
-            var id, interval;
-
-            id = $("#reinvention-reststop").data("view");
-
-            // Request tweets every 20s
-            interval = setInterval(function() {
-                if ( $("#reinvention-reststop").data("view") !== id ) {
+            App.isCurrent( this );
+            var interval = setInterval(function() {
+                // If the current view |id| has change
+                App.isCurrent( this );
+                if ( App.isCurrent( this ) ) {
                     clearInterval(interval);
                 } else {
                     Answer.request();
                 }
             }, 2e5);
 
-            // Initial request...
+            // Make an initial request for existing answer submissions
             Answer.request();
 
             this.form();
@@ -166,7 +150,7 @@ define([
         }, 200 );
 
 
-        this.created = moment(
+        this.created = Moment(
             new Date( tweet.created_at )
         );
 
@@ -174,8 +158,8 @@ define([
             $.parseHTML(
                 Reststop.templates.answer(
                     Abstract.merge({}, tweet, {
-                        relative: moment( this.created ).from( Date.now() ),
-                        formal: moment( this.created ).format("MMMM D, YYYY")
+                        relative: this.created.from( Date.now() ),
+                        formal: this.created.format("MMMM D, YYYY")
                     })
                 ).trim()
             )

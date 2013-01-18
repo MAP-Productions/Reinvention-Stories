@@ -1,38 +1,24 @@
 define([
     "app",
 
-    "json!data/roads.json"
+    "modules/data"
 
-], function( App, roads ) {
+], function( App, Data ) {
 
     var Road;
 
     Road = App.module();
 
-    function roadById( id ) {
-        var i = 0,
-            length = roads.length;
-
-        for ( ; i < length; i++ ) {
-            if ( roads[ i ].id === id ) {
-                return roads[ i ];
-            }
-        }
-        return null;
-    }
-
     Road.Model = Backbone.Model.extend({
         defaults: {
             id: null,
-            profiles: null
+            type: "road"
         },
-
         initialize: function( road ) {
             this.set(
-                _.extend( road, roadById( road.id ) )
+                _.extend( road, Data.from("roads").byId( road.id ) )
             );
-
-            Road.Items.add( this );
+            this.collection.add( this );
         }
     });
 
@@ -41,6 +27,8 @@ define([
     });
 
     Road.Items = new Road.Collection();
+
+    Road.Model.prototype.collection = Road.Items;
 
     Road.Views.Item = Backbone.View.extend({
         manage: true,
@@ -77,7 +65,7 @@ define([
 
             // Jump to the reststop
             scs.scrollable.on("ended", function() {
-                App.router.go( act, "reststop", id );
+                App.goto( act, "reststop" );
             });
         }
     });
