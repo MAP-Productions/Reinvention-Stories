@@ -62,3 +62,83 @@
     height: 80px;
     background: url(../img/stamp.png);
 }
+
+.email-modal-content .content-left {
+    float: left;
+    width: 205px;
+    height: 215px;
+    border-right: 1px solid #eee8dc;
+    border-top: 1px solid #eee8dc;
+}
+
+.email-modal-content .content-left p {
+    font: normal 12px/15.49px adelle_basic, serif;
+    padding: 20px 20px 0;
+}
+
+.email-modal-content .content-left p strong {
+    font-weight: normal;
+    color: #ef0f7e;
+}
+
+.email-modal-content .content-right {
+    float: right;
+    width: 298px;
+    height: 215px;
+    border-top: 1px solid #eee8dc;
+    border-left: 1px solid #f6f3ed;
+    position: relative;
+}
+
+.email-modal-content .content-right .release-dates {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 61px;
+    border-top: 1px solid #eee8dc;
+    box-shadow: 0 -1px 1px #f6f3ed;
+}
+
+.email-modal-content .content-right .release-dates h2 {
+    background: #fff;
+    color: #ed177e;
+    font: 700 10px brandon_grotesque, sans-serif;
+    height: 12px;
+    left: 93px;
+    margin: 0;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    top: -6px;
+    width: 105px;
+}
+
+.email-modal-content .content-right .release-dates ul {
+    margin: 0;
+    list-style-type: none;
+}
+
+.email-modal-content .content-right .release-dates li {
+    color: #6d6a63;
+    float: left;
+    font: 500 12px brandon_grotesque, sans-serif; 
+    height: 47px;
+    width: 86px;
+    border-left: 1px solid #f6f3ed;
+    border-right: 1px solid #eee8dc;
+    text-transform: uppercase;
+    padding: 15px 0 0 12px; 
+}
+
+.email-modal-content .content-right .release-dates li strong {
+    font: bold 13px adelle_basic, serif;
+}
+
+.email-modal-content .content-right .release-dates li:first-child {
+    border-left: none;
+}
+
+.email-modal-content .content-right .release-dates li:last-child {
+    border-right: none;
+}
