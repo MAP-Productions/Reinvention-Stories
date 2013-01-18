@@ -2,7 +2,7 @@
 
 Setup
 ```bash
-sudo chmod +x get.sh && ./get.sh
+cd app/video && sudo chmod +x get.sh && ./get.sh
 ```
 
 ```bash
