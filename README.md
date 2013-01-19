@@ -1,5 +1,9 @@
 # Reinvention
 
+### Install at the web root or sub-domain, not in a sub-directory.
+
+
+
 Setup
 ```bash
 cd app/video && sudo chmod +x get.sh && ./get.sh
