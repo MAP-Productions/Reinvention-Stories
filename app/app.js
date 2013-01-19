@@ -15,7 +15,14 @@ function( $, _, Backbone, Layout ) {
     // creation.
     window.App = App = {
         // The root path to run the Application.
-        root: "/"
+        root: "/",
+
+        current: {
+            type: "",
+            path: "",
+            id: 0,
+            act: 0
+        }
     };
 
     // Localize or create a new JavaScript Template object.
@@ -73,6 +80,8 @@ function( $, _, Backbone, Layout ) {
         views: {},
 
         isCurrent: function( id, type ) {
+            var self = (this === App) ? this : App;
+
             // If the |id| is an object, assume we've recieved
             // either a |view| object or a |model| object.
             if ( typeof id === "object" ) {
@@ -80,21 +89,14 @@ function( $, _, Backbone, Layout ) {
                 id = extract( id, "id" );
             }
             // console.log( "Test isCurrent", [id, type], [App.current.id, App.current.type] );
-            return App.current.id === id && App.current.type === type;
-        },
-
-        current: {
-            type: "",
-            path: "",
-            id: 0,
-            act: 0
+            return self.current.id === id && self.current.type === type;
         },
 
         // Create a custom object with a nested Views object.
         module: function( props ) {
             return Abstract.merge({
                 Views: {}
-            }, props );
+            }, props || {} );
         },
 
         // Helper for using layouts.

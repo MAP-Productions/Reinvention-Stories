@@ -57,18 +57,32 @@ function( App, Intro, Act, Story, Road, Reststop, Session, Data ) {
         show: function( act, type, id ) {
             var key, view;
 
-            // Allow default act urls. eg. /#1
-            type = type || "story";
-            // Allow default act urls. eg. /#1
-            // ... this is a serious stretch. It will only work
-            // if there is _actually_ a story with an id for act 2 or 3
-            id = id || Act.Items.get(act).get("story").get("id");
+            // Support "default" Act urls.
+            //
+            //      eg. /#1, /#2, /#3
+            //
+            if ( type === undefined && id === undefined ) {
 
+                type = "story";
+                id = Act.Items.get(act).get("story").get("id");
+
+                // If there is no information available for
+                // an Act, default to "Act 1, Story"
+                if ( id === null ) {
+                    act = 1;
+                    type = "story";
+                    id = Act.Items.get(1).get("story").get("id");
+
+                    // Immediately redirect to Act 1 Story
+                    this.go( act, type, id );
+                    return;
+                }
+            }
 
             if ( [ "intro", "road", "reststop", "story" ].indexOf(type) > -1 ) {
 
-                // If this type and id are already in the viewport,
-                // do nothing.
+                // Prevent attempts to re-render the current view: if this
+                // type and id are already in the viewport, do nothing.
                 if ( App.isCurrent( id, type ) ) {
                     console.log( "Prevent attempts to re-render the current view" );
                     return;
