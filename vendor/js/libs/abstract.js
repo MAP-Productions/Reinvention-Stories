@@ -14,16 +14,18 @@
         this[ key ] = dictionary[ key ];
       }, this);
     },
+    // Shims ES6 Object.assign()
+    assign: function( O, dictionary ) {
+      dictionary = dictionary || {};
+
+      Abstract.put.call( O, dictionary );
+
+      return O;
+    },
     merge: function() {
       return [].slice.call( arguments ).reduce(function( initial, obj ) {
         return Abstract.assign( initial, obj );
       }, {});
-    },
-    // Shims ES6 Object.assign()
-    assign: function( O, dictionary ) {
-      Abstract.put.call( O, dictionary );
-
-      return O;
     },
     // Shims ES6 Object.mixin()
     mixin: function( receiver, supplier ) {
