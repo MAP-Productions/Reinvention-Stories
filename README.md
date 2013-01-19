@@ -4,10 +4,8 @@
 
 
 
-Setup
-```bash
-cd app/video && sudo chmod +x get.sh && ./get.sh
-```
+## Setup
+
 
 ```bash
 npm install
@@ -30,6 +28,13 @@ bbb debug
 ```bash
 bbb release
 ```
+
+## Localize Video Resources
+
+```bash
+cd app/video && sudo chmod +x get.sh && ./get.sh
+```
+
 
 
 ## Notes
