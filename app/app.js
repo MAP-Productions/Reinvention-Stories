@@ -29,17 +29,6 @@ function( $, _, Backbone, Layout ) {
     // ...Preload some templates that we can avoid requesting:
     JST = window.JST = window.JST || {};
 
-    // Create global "namespace"
-    window.Reinvention = {
-        data: {
-            acts: null,
-            roads: null
-        },
-        Acts: null,
-        Roads: null,
-        Profiles: null
-    };
-
     // Configure LayoutManager with Backbone Boilerplate defaults.
     Backbone.Layout.configure({
         // Allow LayoutManager to augment Backbone.View.prototype.
