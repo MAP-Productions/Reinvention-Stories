@@ -1,11 +1,12 @@
 define([
     "app",
+    "tweet",
     "moment",
 
     "modules/data",
     "text!templates/reststop/answer.html"
 
-], function( App, Moment, Data, answer ) {
+], function( App, Tweet, Moment, Data, answer ) {
 
     var Reststop,
         TWITTER_USER = "rwaldron";
