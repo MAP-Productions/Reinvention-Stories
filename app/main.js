@@ -8,17 +8,21 @@ function( App, Router ) {
 
     var $window, $document, $body, controls;
 
-
     App.router = new Router();
 
     Backbone.history.start({
         root: App.root
     });
 
-
     $window = $(window);
     $document = $(document);
     $body = $("body");
+
+    App.DOM = {
+        $window: $window,
+        $document: $document,
+        $body: $body
+    };
 
 
     controls = {

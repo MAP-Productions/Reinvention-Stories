@@ -1,15 +1,13 @@
 define([
     "app",
-    "dom",
     "moment",
 
     "modules/data",
     "text!templates/reststop/answer.html"
 
-], function( App, DOM, Moment, Data, answer ) {
+], function( App, Moment, Data, answer ) {
 
     var Reststop,
-        priv = new WeakMap(),
         TWITTER_USER = "rwaldron";
 
     Reststop = App.module();
@@ -125,8 +123,8 @@ define([
         this.$reststop = $("#reinvention-reststop");
         this.$point = $("<div>");
         this.coords = {
-            x: ( Math.random() * ( (DOM.doc.width() - 475) - 20 ) + 20 ).toFixed(),
-            y: ( Math.random() * ( (DOM.doc.height() - 200) - 110 ) + 110 ).toFixed()
+            x: ( Math.random() * ( (App.DOM.$document.width() - 475) - 20 ) + 20 ).toFixed(),
+            y: ( Math.random() * ( (App.DOM.$document.height() - 200) - 110 ) + 110 ).toFixed()
         };
         this.style = {
             left: this.coords.x + "px",
@@ -167,9 +165,6 @@ define([
                 }, 200);
             }
         }.bind(this));
-
-        // Save a private copy of the tweet data
-        priv.set( this, Abstract.assign({}, tweet) );
 
         Answer.Rendered.push( this.$answer );
     }
