@@ -17,6 +17,8 @@ function( $, _, Backbone, Layout ) {
         // The root path to run the Application.
         root: "/",
 
+        // Initialize "View" state tracking, used to
+        // prevent resetting the currently displayed view
         current: {
             type: "",
             path: "",
