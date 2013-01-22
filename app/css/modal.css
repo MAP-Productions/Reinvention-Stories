@@ -61,6 +61,7 @@
     width: 198px;
     height: 80px;
     background: url(../img/stamp.png);
+    z-index: 1;
 }
 
 .email-modal-content .content-left {
@@ -103,23 +104,53 @@
     border: none;
     box-shadow: 1px 0 2px 1px #c2c2c2 inset;
     border-radius: 0;
-    color: #fff;
+    color: #ed177e;
     float: left;
+    font: normal 13.38px adelle_basic, serif;
     margin: 0;
     width: 172px;
-    height: 16px;
-    padding: 6px 9px;
+    height: 12px;
+    padding: 8px 9px;
+}
+
+/* these declarations need to be seperated like this or they do not work */
+/* for webkit browsers */
+.email-modal-content .content-right input[type=text]::-webkit-input-placeholder {
+    color: #6d6a63;
+}
+
+/* for firefox > 18 */
+.email-modal-content .content-right input[type=text]:-moz-placeholder {
+    color: #6d6a63;
+}
+
+/* for firefox < 18 */
+.email-modal-content .content-right input[type=text]::-moz-placeholder {
+    color: #6d6a63;
+}
+
+/* for IE */
+.email-modal-content .content-right input[type=text]:-ms-placeholder {
+    color: #6d6a63;
 }
 
 .email-modal-content .content-right button {
-    background: #ee127b;
     border: none;
     float: left;
     width: 48px;
     height: 28px;
+    padding: 9px 0;
     color: #fff;
     font: 700 9px brandon_grotesque, sans-serif;
     text-transform: uppercase;
+    background: #ed137b; /* Old browsers */
+    background: -moz-linear-gradient(-45deg,  #ed137b 0%, #ed137b 49%, #db0e72 51%, #db0e72 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#ed137b), color-stop(49%,#ed137b), color-stop(51%,#db0e72), color-stop(100%,#db0e72)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg,  #ed137b 0%,#ed137b 49%,#db0e72 51%,#db0e72 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg,  #ed137b 0%,#ed137b 49%,#db0e72 51%,#db0e72 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg,  #ed137b 0%,#ed137b 49%,#db0e72 51%,#db0e72 100%); /* IE10+ */
+    background: linear-gradient(135deg,  #ed137b 0%,#ed137b 49%,#db0e72 51%,#db0e72 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ed137b', endColorstr='#db0e72',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 .email-modal-content .content-right .release-dates {
