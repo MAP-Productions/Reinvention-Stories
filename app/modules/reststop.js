@@ -1,6 +1,6 @@
 define([
     "app",
-    "tweet",
+    "modules/tweet",
     "moment",
 
     "modules/data",
