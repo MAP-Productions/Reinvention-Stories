@@ -43,8 +43,14 @@
     }, "");
   }
 
+  function scale( x, fromLow, fromHigh, toLow, toHigh ) {
+    return ( x - fromLow ) * ( toHigh - toLow ) /
+            ( fromHigh - fromLow ) + toLow;
+  }
+
+
   function ScrollableCueset( options ) {
-    var images, videos, captions, current, previous, dims, $container;
+    var images, videos, captions, current, previous, dims, $container, handler, isOpen;
 
     Abstract.put.call( this, options );
 
@@ -63,6 +69,8 @@
     this.$primary.media = this.scrollable;
     this.$container = $container = this.$primary.parent();
 
+    isOpen = false;
+
     images = {};
     videos = {};
     captions = {};
@@ -75,7 +83,7 @@
     if ( this.cues.length ) {
 
       this.cues.forEach(function( cue, k ) {
-        var image, video, side, last, relative, step, op, isFwd;
+        var image, video, side, last, relative, step, fade;
 
         // Register behaviours to execute at
         // the start and end phase of a popcorn
@@ -88,16 +96,29 @@
         step = 0.05;
         isFwd = true;
 
+        cue.end = cue.start + 7;
+        cue.prompt = cue.end - 4;
+
+        fade = {
+          up: {
+            start: cue.start,
+            end: cue.start + 3
+          },
+          down: {
+            start: cue.end - 3,
+            end: cue.end
+          }
+        };
 
         this.scrollable.register(
           Abstract.merge({}, cue, {
-            end: cue.start + 7,
+
             onStart: function( track ) {
               $container.append(
-                images[ track.clip ].css({
-                  zIndex: "999 !important"
-                })
+                images[ track.clip ]
               );
+
+              console.log( "start", track );
             },
 
             onFrame: function( track ) {
@@ -105,56 +126,44 @@
 
               current = +this.currentTime().toFixed(2);
               image = images[ track.clip ];
-              opacity = image.css("opacity");
-              isFwd = current >= last && isFwd ? true : false;
 
-              if ( current > last ) {
-                isFwd = true;
-              } else if ( current === last ) {
-                isFwd = isFwd;
-              } else {
-                isFwd = false;
+              if ( current === last ) {
+                return;
               }
 
-              // TODO: Refactor and DRY out.
-              if ( isFwd ) {
-                if ( opacity < 1 && current > track.start ) {
-                  op = "+";
-                }
-                if ( opacity > 0 && current > track.end - 3 ) {
-                  op = "-";
-                }
-              } else {
-                if ( opacity < 1 && current < track.end ) {
-                  op = "+";
-                }
-                if ( opacity > 0 && current < track.start + 3 ) {
-                  op = "-";
-                }
+              opacity = scale( current, fade.up.start, fade.up.end, 0, 1 );
+
+              if ( current >= fade.down.start ) {
+                opacity = scale( current, fade.down.start, fade.down.end, 1, 0 );
+              }
+
+              if ( opacity >= 1 ) {
+                opacity = 1;
               }
 
               image.css({
-                //
-                // op=step
-                // eg.
-                //
-                // +=0.05
-                // -=0.05
-                //
-                opacity: [ op, step ].join("=")
+                opacity: opacity
               });
 
-              // console.log( isFwd ? "FORWARD" : "BACKWARD", op, image.css("opacity") );
+              if ( Math.round(current) === cue.start + 3 && !this.paused() && !isOpen ) {
+                this.pause();
+
+                handler({
+                  currentTarget: image[0]
+                });
+              }
+
+
 
               last = current;
             },
 
             onEnd: function( track ) {
               images[ track.clip ].detach();
-              images[ track.clip ].css({
-                opacity: 0,
-                zIndex: "995 !important"
-              });
+              // images[ track.clip ].css({
+              //   // opacity: 0,
+              //   zIndex: "995 !important"
+              // });
             }
           })
         );
@@ -210,7 +219,7 @@
       previous = null;
     }.bind(this));
 
-    $("#reinvention-road").on("click", ".icons", function( event ) {
+    handler = function( event ) {
       var current, caption, video;
 
       current = $(event.currentTarget).prop("video");
@@ -222,6 +231,8 @@
       if ( previous === current ) {
         return;
       }
+
+      isOpen = true;
 
       // Stop the primary main video and fade to 50%
       this.$primary.media.pause();
@@ -250,7 +261,7 @@
       // This is somewhat insane and hard to look at.
       $("#caption").css({
 
-        top: (parseInt(video.css("top"), 10) + parseInt(video.height(), 10) - 30)  + "px",
+        top: (parseInt(video.css("top"), 10) + parseInt(video.css("height"), 10) - 10)  + "px",
         left: video.css("left"),
         width: dims.width / 2 + "px"
 
@@ -268,6 +279,7 @@
       // This will cause the video to close and the
       // primary video to fade in/restore
       video.add( this.$primary ).one("ended wheel mousewheel", function() {
+        this.isOpen = false;
         this.$primary.triggerHandler("click");
       }.bind(this));
 
@@ -296,7 +308,9 @@
 
 
       previous = current;
-    }.bind(this));
+    }.bind(this);
+
+    $("#reinvention-road").on("click", ".icons", handler );
 
 
     // this.$primary.media.play();
