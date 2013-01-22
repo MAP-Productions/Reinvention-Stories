@@ -100,6 +100,10 @@
     font: 500 12px/13.38px brandon_grotesque, sans-serif;
 }
 
+.email-modal-content .content-right .fields {
+    overflow: hidden;
+}
+
 .email-modal-content .content-right input[type=text] {
     border: none;
     box-shadow: 1px 0 2px 1px #c2c2c2 inset;
@@ -151,6 +155,28 @@
     background: -ms-linear-gradient(-45deg,  #ed137b 0%,#ed137b 49%,#db0e72 51%,#db0e72 100%); /* IE10+ */
     background: linear-gradient(135deg,  #ed137b 0%,#ed137b 49%,#db0e72 51%,#db0e72 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ed137b', endColorstr='#db0e72',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.email-modal-content .content-right .follow-links {
+    margin: 13px 0 0;
+    overflow: hidden;
+}
+
+.email-modal-content .content-right .follow-links a {
+    float: left;
+    padding-left: 24px;
+    height: 16px;
+    color: #ed177e;
+    font: normal 11px/18px adelle_basic, serif;
+}
+
+.email-modal-content .content-right .follow-links a.follow-fb {
+    background: url(../img/facebook-icon.png) no-repeat;
+}
+
+.email-modal-content .content-right .follow-links a.follow-twitter {
+    background: url(../img/twitter-icon.png) no-repeat;
+    float: right;
 }
 
 .email-modal-content .content-right .release-dates {
