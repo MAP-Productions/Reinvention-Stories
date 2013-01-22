@@ -5,28 +5,28 @@
     "video": "Road_Act1",
     "cues": [
       {
-        "clip": "SV_A1_BlessingoftheBikes2",
-        "caption": "The bikes!",
+        "clip": "SV_A1_MuralProject",
+        "caption": "The mural!",
         "start": 1
-      },
-      {
-        "clip": "SV_A1_FestivalMontage",
-        "caption": "The festival!",
-        "start": 8
       },
       {
         "clip": "SV_A1_GayMensChorus",
         "caption": "The gay men's chorus",
-        "start": 15
-      },
-      {
-        "clip": "SV_A1_MuralProject",
-        "caption": "The mural!",
-        "start": 22
+        "start": 8
       },
       {
         "clip": "SV_A1_WordlCup",
         "caption": "The world cup!",
+        "start": 15
+      },
+      {
+        "clip": "SV_A1_BlessingoftheBikes2",
+        "caption": "The bikes!",
+        "start": 22
+      },
+      {
+        "clip": "SV_A1_FestivalMontage",
+        "caption": "The festival!",
         "start": 29
       }
     ]
