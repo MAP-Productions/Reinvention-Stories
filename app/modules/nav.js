@@ -7,6 +7,8 @@ function() {
     last = 0;
 
     function mousemove( event ) {
+        var $navContent;
+
         event = event || { pageY: 0 };
 
         // Upvars declared in enclosing scope
