@@ -9,6 +9,7 @@
 }
 
 .close-modal {
+    cursor: pointer;
     position: absolute;
     width: 17px;
     height: 17px;
