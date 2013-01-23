@@ -77,6 +77,7 @@ define([
         },
 
         initialize: function( config ) {
+            _.bindAll(this, 'updateTimeline');
             this.model = Story.Items.get( config.id );
         },
 
@@ -89,6 +90,9 @@ define([
             // http://alpha.zeega.org/74868
             // http://alpha.zeega.org/__ID__
             var config, id, act, data, zp, isLast;
+
+            // elements
+            this.$timelineEl = this.$('.timeline-indicator');
 
             config = {
                 target: "#reinvention-story",
@@ -121,7 +125,16 @@ define([
                     App.goto( act, "road" );
                 }
             });
+                  
+            zp.on("media_timeupdate", this.updateTimeline);
+            
+        },
+
+        updateTimeline: function(e) {
+            var percent = (e.current_time / e.duration) * 100;
+            this.$timelineEl.css('width', percent + "%");
         }
+
     });
 
     return Story;
