@@ -10,6 +10,17 @@ function( App, Router ) {
 
     App.router = new Router();
 
+
+    // Create the "goto" api now that App.router is initialized
+    App.goto = function( act, type ) {
+        var args = type === "intro" ?
+            [ 1, "intro", 1 ] :
+            Act.Items.get( act ).next( type );
+
+        App.router.go.apply( null, args );
+    };
+
+
     Backbone.history.start({
         root: App.root
     });
