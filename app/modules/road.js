@@ -57,14 +57,11 @@ define([
             id = this.model.get("id");
 
             scs = new ScrollableCueset(
-                Abstract.merge(
-                    { selector: "#video-" + id },
-                    this.model.attributes
-                )
+                Abstract.merge( {}, this.model.attributes )
             );
 
             // Jump to the reststop
-            scs.scrollable.on("ended", function() {
+            scs.video.on("ended", function() {
                 App.goto( act, "reststop" );
             });
         }
