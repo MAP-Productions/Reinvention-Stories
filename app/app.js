@@ -110,14 +110,6 @@ function( $, _, Backbone, Layout ) {
             return this.layout = new Backbone.Layout(
                 Abstract.merge({ el: "#main" }, options )
             );
-        },
-
-        goto: function( act, type ) {
-            var args = type === "intro" ?
-                [ 1, "intro", 1 ] :
-                Act.Items.get( act ).next( type );
-
-            App.router.go.apply( null, args );
         }
     }, Backbone.Events );
 });
