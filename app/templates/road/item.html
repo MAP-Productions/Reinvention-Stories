@@ -1,11 +1,9 @@
-<div id="reinvention-road">
+<div id="reinvention-road" data-view="<%=model.get("id")%>">
 
-  <video muted id="video-<%=model.get("id")%>" role="primary" controls>
+  <video id="<%=model.get("video")%>" role="primary" controls>
     <source src="/app/video/<%=model.get("video")%>.webm"></source>
     <source src="/app/video/<%=model.get("video")%>.ogv"></source>
     <source src="/app/video/<%=model.get("video")%>.mp4"></source>
   </video>
-
+  <audio id="<%=model.get("audio")%>" autoplay loop src="/app/audio/<%=model.get("audio")%>.mp3"></audio>
 </div>
-
-<audio autoplay src="/app/audio/<%=model.get("audio")%>.mp3"></audio>
