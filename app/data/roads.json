@@ -3,6 +3,7 @@
     "id": 1,
     "act": 1,
     "video": "Road_Act1",
+    "audio": "city-traffic-1",
     "cues": [
       {
         "clip": "SV_A1_MuralProject",
