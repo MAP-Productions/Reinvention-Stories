@@ -4,6 +4,11 @@
     width: 20px;
     height: 29px;
     background: url(../img/plus-circle.png) no-repeat 0 9px;
+
+    -webkit-animation: pulse 5s infinite ease-in-out; /* Safari 5, Chrome */
+       -moz-animation: pulse 5s infinite ease-in-out; /* Firefox 5-15 */
+         -o-animation: pulse 5s infinite ease-in-out; /* Opera 12+ */
+            animation: pulse 5s infinite ease-in-out; /* Safari 5, Chrome, Firefox 16+ */
 }
 
 .reststop-question {
@@ -158,4 +163,26 @@
 .reststop-nextoptions .view-map:hover {
     border-color: #ee127b;
     text-decoration: none;
+}
+
+
+@-webkit-keyframes pulse {
+    0%   { opacity: 0.15; }
+    50%  { opacity: 0.85; }
+    100% { opacity: 0.15; }
+}
+@-moz-keyframes pulse {
+    0%   { opacity: 0.15; }
+    50%  { opacity: 0.85; }
+    100% { opacity: 0.15; }
+}
+@-o-keyframes pulse {
+    0%   { opacity: 0.15; }
+    50%  { opacity: 0.85; }
+    100% { opacity: 0.15; }
+}
+@keyframes pulse {
+    0%   { opacity: 0.15; }
+    50%  { opacity: 0.85; }
+    100% { opacity: 0.15; }
 }
