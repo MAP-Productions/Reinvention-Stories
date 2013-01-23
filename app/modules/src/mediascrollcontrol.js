@@ -24,27 +24,30 @@
     return e.wheelDeltaY;
   }
 
-  function Scrollable( selector ) {
+  function Scrollable( container, media ) {
     if ( !(this instanceof Scrollable) ) {
-      return new Scrollable( selector );
+      return new Scrollable( container, media );
     }
     // Initialize |last| at -1
     this.last = -1;
 
+    this.container = container.nodeType ?
+      container : document.getElementById( container );
+
     // |media| accepts either a provided element
     // or string selector.
-    this.media = selector.nodeType ?
-      selector : document.querySelector( selector );
+    this.media = media.nodeType ?
+      selector : document.getElementById( media );
 
     // If |media| is not found or is an invalid
     // DOM node, then thrhow-nothing we can do with this.
     if ( !this.media || this.media.nodeType !== 1 ) {
-      throw new Error( "Cannot find node matching " + selector );
+      throw new Error( "Cannot find node matching " + media );
     }
 
     // "wheel" is the new Gecko event
     [ "wheel", "mousewheel" ].forEach(function( type ) {
-      this.media.addEventListener( type, this.handler.bind( this ), false );
+      this.container.addEventListener( type, this.handler.bind( this ), false );
     }, this);
   }
 
@@ -96,7 +99,8 @@
       if ( !media.paused ) {
         media.pause();
       }
-      media.currentTime -= 0.33;
+      // media.currentTime -= 0.15;
+      media.currentTime -= 0.05;
     }
 
     this.last = scaled;
