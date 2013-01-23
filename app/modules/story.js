@@ -52,6 +52,26 @@ define([
             };
         },
 
+        events: {
+            "click .controls-bar .pause" : "togglePlayPause",
+            "click .controls-bar .play" : "togglePlayPause"
+        },
+
+        togglePlayPause: function(e) {
+
+            var $elem = $(e.target);
+
+            // Because the controls for the player are bound using the data-controls
+            // attribute, switch the pause button to a play button so it can do
+            // double duty.
+            if ( $elem.data("controls") === "pause" ) {
+                $elem.data("controls", "play").removeClass("pause").addClass("play");
+            } else if ( $elem.data("controls") === "play" ) {
+                $elem.data("controls", "pause").removeClass("play").addClass("pause");
+            }
+
+        },
+
         initialize: function( config ) {
             this.model = Story.Items.get( config.id );
         },
@@ -61,6 +81,7 @@ define([
         },
 
         afterRender: function() {
+            console.log('render story');
             // http://alpha.zeega.org/74868
             // http://alpha.zeega.org/__ID__
             var config, id, act, data, zp, isLast;
