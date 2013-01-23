@@ -50,40 +50,52 @@
 
 
   function ScrollableCueset( options ) {
-    var images, videos, captions, current, previous, dims, $container, handler, isOpen;
+    var images, videos, captions, current, previous, dims, $container, playChild;
 
     Abstract.put.call( this, options );
+
+    this.isOpen = false;
+    this.pop = {};
+
+    this.$container = $container =  $("#reinvention-road[data-view='" + options.id + "']");
 
     // Use the provided selector to find
     // the given video element that will serve
     // as the primary for this ScrollableCueset
-    this.node = document.querySelector( this.selector );
-    this.original = this.node.cloneNode();
-    // this.node.innerHTML = sources( VIDEO_PATH, this.video );
-
-    this.scrollable = Popcorn( Scrollable( this.node ).media, {
+    this.video = Popcorn(
+      Scrollable( this.$container[0], this.video ).media, {
       frameAnimation: true
     });
 
-    this.$primary = $(this.scrollable.media);
-    this.$primary.media = this.scrollable;
-    this.$container = $container = this.$primary.parent();
+    if ( this.audio ) {
+      this.audio = Popcorn( document.getElementById(this.audio) );
 
-    isOpen = false;
+      // Silence the primary video, since there an explicit audio track
+      // has been provided.
+      this.video.muted(true);
+      this.video.volume(0);
+    }
+
+    this.$primary = $(this.video.media);
 
     images = {};
     videos = {};
     captions = {};
 
     dims = {
-      width: this.$container.width(),
-      height: this.$container.height()
+      width: parseInt( this.$container.css("width"), 10 ),
+      height: parseInt( this.$container.css("height"), 10 )
+    };
+
+    dims.center = {
+      x: dims.width / 2,
+      y: dims.height / 2,
     };
 
     if ( this.cues.length ) {
 
       this.cues.forEach(function( cue, k ) {
-        var image, video, side, last, relative, step, fade;
+        var image, video, side, last, relative, step, fade, isLocked;
 
         // Register behaviours to execute at
         // the start and end phase of a popcorn
@@ -110,7 +122,9 @@
           }
         };
 
-        this.scrollable.register(
+        isLocked = false;
+
+        this.video.register(
           Abstract.merge({}, cue, {
 
             onStart: function( track ) {
@@ -119,6 +133,9 @@
               );
 
               console.log( "start", track );
+
+              // Smooth out the playbackRate
+              this.playbackRate(1);
             },
 
             onFrame: function( track ) {
@@ -145,15 +162,18 @@
                 opacity: opacity
               });
 
-              if ( Math.round(current) === cue.start + 3 && !this.paused() && !isOpen ) {
+              // WARNING:
+              //
+              // This is a bad user experience.
+              if ( Math.round(current) === cue.start + 3 && !this.paused() &&
+                  !this.isOpen && !isLocked ) {
+                isLocked = true;
                 this.pause();
 
-                handler({
+                playChild({
                   currentTarget: image[0]
                 });
               }
-
-
 
               last = current;
             },
@@ -168,6 +188,19 @@
           })
         );
 
+        // Set a generic cue to always unlock the child video
+        // at an explicit point in the playback, relative to the
+        // time the child is expected to be opened.
+        this.video.cue( cue.start + 4, function() {
+          isLocked = false;
+        });
+
+        this.video.cue( cue.start + 2, function() {
+          isLocked = false;
+        });
+
+
+
         // Alternatate which side the image is
         // displayed on.
         side = k % 2 === 0 ? "left" : "right";
@@ -180,7 +213,7 @@
         });
 
         image.attr( "id", "image-" + cue.clip ).css({
-          top: (dims.height / 2 - 125) + "px"
+          top: (dims.center.y - 125) + "px"
         });
 
         // Generate an element in a jQuery object for the
@@ -210,16 +243,31 @@
       }.bind(this));
     }
 
+
+    // Place arrow
+    this.$arrow = $("<img>").addClass("arrow").attr({
+      src: "/app/img/road-arrow.png"
+    });
+
+
+
+    this.$container.append(
+      this.$arrow
+    );
+
+
     this.$primary.on("click", function() {
       // Remove any residual video elements
       // TODO: Abstract this operation
-      this.$container.find("video:not(#video-" + this.id + "),#caption").remove();
+      this.$container.find("video:not(#" + this.video.media.id + "),#caption").remove();
       this.$primary.animate({ opacity: 1 }, "fast");
+
+      this.unmute();
 
       previous = null;
     }.bind(this));
 
-    handler = function( event ) {
+    playChild = function( event ) {
       var current, caption, video;
 
       current = $(event.currentTarget).prop("video");
@@ -227,20 +275,21 @@
       video = videos[ current ];
       video.media = Popcorn( video[0] );
 
+      this.mute();
 
       if ( previous === current ) {
         return;
       }
 
-      isOpen = true;
+      this.isOpen = true;
 
       // Stop the primary main video and fade to 50%
-      this.$primary.media.pause();
+      this.video.pause();
       this.$primary.animate({ opacity: 0.5 }, "fast");
 
       // Remove any residual video elements
       // TODO: Abstract this operation
-      this.$container.find("video:not(#video-" + this.id + "),#caption").remove();
+      this.$container.find("video:not(#" + this.video.media.id + "),#caption").remove();
 
 
       // Reset video to play from beginning
@@ -249,9 +298,11 @@
       // Set the child element's position, relative
       // to the dimensions of the primary video
       video.css({
-        top: dims.height / 4 + "px",
-        left: dims.width / 4 + "px",
-        width: dims.width / 2 + "px"
+        // top: dims.height / 4 + "px",
+        // left: dims.width / 4 + "px",
+        width: dims.center.x + "px",
+        marginLeft: "-" + (dims.center.x / 2) + "px",
+        marginTop: "-" + (dims.center.y / 2) + "px"
       });
 
       // Append the child video element
@@ -260,10 +311,9 @@
 
       // This is somewhat insane and hard to look at.
       $("#caption").css({
-
-        top: (parseInt(video.css("top"), 10) + parseInt(video.css("height"), 10) - 10)  + "px",
-        left: video.css("left"),
-        width: dims.width / 2 + "px"
+        top: video.offset().top + parseInt( video.css("height"), 10 ) + "px",
+        left: video.offset().left + "px",
+        width: dims.center.x + "px"
 
       }).find(".text").html( caption );
 
@@ -278,7 +328,9 @@
       //
       // This will cause the video to close and the
       // primary video to fade in/restore
-      video.add( this.$primary ).one("ended wheel mousewheel", function() {
+      //
+
+      video.add( this.$primary ).one("ended wheel mousewheel", function( event ) {
         this.isOpen = false;
         this.$primary.triggerHandler("click");
       }.bind(this));
@@ -306,21 +358,37 @@
         });
       }.bind(this));
 
-
       previous = current;
+
+    // End "playChild"
     }.bind(this);
 
-    $("#reinvention-road").on("click", ".icons", handler );
-
-
-    // this.$primary.media.play();
+    this.$container.on("click", ".icons", playChild );
   }
 
-
-  ScrollableCueset.prototype.reset = function() {
-    this.node.parentNode.appendChild( this.original );
+  ScrollableCueset.prototype.mute = function() {
+    if ( this.audio ) {
+      if ( !this.audio.muted() ) {
+        this.audio.mute();
+      }
+    } else {
+      if ( !this.video.muted() ) {
+        this.video.mute();
+      }
+    }
   };
 
+  ScrollableCueset.prototype.unmute = function() {
+    if ( this.audio ) {
+      if ( this.audio.muted() ) {
+        this.audio.unmute();
+      }
+    } else {
+      if ( this.video.muted() ) {
+        this.video.unmute();
+      }
+    }
+  };
 
   exports.ScrollableCueset = ScrollableCueset;
 
