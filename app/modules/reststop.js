@@ -2,14 +2,13 @@ define([
     "app",
     "modules/tweet",
     "moment",
-
     "modules/data",
     "text!templates/reststop/answer.html"
-
 ], function( App, Tweet, Moment, Data, answer ) {
 
     var Reststop,
-        TWITTER_USER = "rwaldron";
+        TWITTER_USER = "reinventdayton";
+
 
     Reststop = App.module();
 
@@ -47,7 +46,7 @@ define([
         template: "reststop/item",
 
         events: {
-            "click [name='shuffle']": "ask",
+            "click [data-role='shuffle']": "ask",
             "submit #reststop-question-form": "submit"
         },
 
@@ -66,25 +65,55 @@ define([
             Answer.isValid.knownIds = new Set();
         },
         afterRender: function() {
-            var interval = setInterval(function() {
-                // If the current view |id| has change
+
+            // WARNING: Clients may not make more than 150 requests per hour.
+            //          LIMIT REQUEST INTERVALS TO ONCE PER MINUTE!!!
+            setInterval(function() {
+                // If the view is current, make a request for updates from Twitter
                 if ( App.isCurrent( this ) ) {
-                    clearInterval(interval);
-                } else {
-                    Answer.request();
+                    Answer.request({ isUpdate: true });
                 }
-            }.bind(this), 2e5);
+            }.bind(this), 60000);
 
             // Make an initial request for existing answer submissions
             Answer.request();
+
+            (function reveal() {
+                var index;
+
+                if ( Answer.Cache.length ) {
+                    index = Math.floor(Math.random() * Answer.Cache.length - 1) + 1;
+                    Answer.Cache[ index ].reveal();
+                }
+
+                setTimeout( reveal.bind(this), 5000 );
+            }).call(this);
 
             this.ask();
         },
 
         submit: function( event ) {
+            var $form, content;
+
             event.preventDefault();
 
-            console.log( "submit the form" );
+            $form = $(event.currentTarget);
+            content = $form.serializeForm();
+
+            $form[0].reset();
+
+            // Eventually will have "in reply to"
+            // console.log( "Posting to twitter", update );
+
+            Tweet.post( content, function( response ) {
+                console.log( "Posting to twitter: success.", response );
+
+                if ( response.created_at ) {
+                    Answer.create( response, { isUpdate: true });
+
+                    this.ask();
+                }
+            }.bind(this));
         },
 
         ask: function() {
@@ -115,7 +144,7 @@ define([
     });
 
 
-    function Answer( tweet ) {
+    function Answer( tweet, options ) {
         // Add this tweet's id to the known set of valid ids.
         // ... This will be used to prevent duplicates in the future.
         Answer.isValid.knownIds.add( tweet.id );
@@ -168,6 +197,15 @@ define([
         }.bind(this));
 
         Answer.Rendered.push( this.$answer );
+        Answer.Cache.push( this );
+
+        if ( options.isUpdate ) {
+            this.reveal();
+
+            setTimeout(function() {
+                this.conceal();
+            }.bind(this), 10000);
+        }
     }
 
     Answer.prototype.conceal = function( options ) {
@@ -179,13 +217,14 @@ define([
     Answer.prototype.reveal = function() {
         this.conceal({ except: this.$answer });
 
-        this.$answer.appendTo( this.$reststop ).fadeIn();
+        this.$answer.appendTo( this.$reststop ).fadeIn(800);
 
         return this;
     };
 
     // Cache of all jQuery objects
     Answer.Rendered = [];
+    Answer.Cache = [];
 
     // Validation for tweets
     Answer.isValid = function( tweet ) {
@@ -213,21 +252,29 @@ define([
 
     // Request tweets from twitter API. These are used to
     // populate the reststop view with mousesensitive "points"
-    Answer.request = function() {
+    //
+    // IMPORTANT! Clients may not make more than 150 requests per hour.
+    //
+    Answer.request = function( options ) {
+        options = options || {};
+
+        console.log( "Answer.request", options );
+
         return $.ajax({
             type: "GET",
             url: "https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&screen_name=" + TWITTER_USER + "&count=20&callback=?",
             dataType: "jsonp",
             success: function( data ) {
-                // console.log( data );
-                data.filter( Answer.isValid ).slice(0, 25).forEach( Answer.create );
+                data.filter( Answer.isValid ).slice(0, 25).forEach(function( answer ) {
+                    Answer.create( answer, options );
+                });
             }
         });
     };
 
     // Answer factory
-    Answer.create = function( tweet ) {
-        return new Answer( tweet );
+    Answer.create = function( tweet, options ) {
+        return new Answer( tweet, options );
     };
 
     return Reststop;
