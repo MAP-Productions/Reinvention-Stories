@@ -5,7 +5,8 @@ define([
     "backbone",
     "layout",
     "scrollable",
-    "scrollablecueset"
+    "scrollablecueset",
+    "serializeform"
 ],
 
 function( $, _, Backbone, Layout ) {

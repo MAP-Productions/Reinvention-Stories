@@ -12,6 +12,7 @@ require.config({
 
         text: "../vendor/js/plugins/text",
         json: "../vendor/js/plugins/json",
+        serializeform: "../vendor/js/plugins/serializeForm",
 
         // Libraries.
         jquery: "../vendor/js/libs/jquery",
@@ -48,6 +49,10 @@ require.config({
         backbone: {
             deps: [ "lodash", "jquery" ],
             exports: "Backbone"
+        },
+
+        serializeform: {
+            deps: [ "jquery" ]
         },
 
         layout: [ "backbone" ],
