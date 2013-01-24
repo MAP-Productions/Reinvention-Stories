@@ -114,6 +114,8 @@ define([
             App.global.zeega = zp = new Zeega.player( config );
             isLast = false;
 
+            zp.on("can_play window_resized", this.updateVideoPosition, this);
+
             zp.on("deadend_frame", function() {
                 isLast = true;
             });
@@ -125,9 +127,26 @@ define([
                     App.goto( act, "road" );
                 }
             });
-                  
+
             zp.on("media_timeupdate", this.updateTimeline);
             
+        },
+
+        /* temporary until full-bleed video support is added to the player */
+        updateVideoPosition : function() {
+          _.defer( function() {
+            console.log('resposition before', $('.ZEEGA-player .visual-element-video').css('left') );
+            var width = window.innerHeight * (16 / 9);
+            var left = (window.innerWidth - width) / 2;
+            
+            $('.ZEEGA-player .visual-element-video').css({
+              'height': window.innerHeight,
+              'width' : width,
+              'left' : left
+            });
+
+            console.log('resposition after', $('.ZEEGA-player .visual-element-video').css('left') );
+          });
         },
 
         updateTimeline: function(e) {
