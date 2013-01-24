@@ -65,3 +65,86 @@
   background-position: 0 -24px;
   margin-left: 2px;
 }
+
+#reinvention-story-controls .controls-bar .acts-chapters {
+  position: absolute;
+  left: 93px;
+  right: 10px;
+  top: 0;
+  height: 22px;
+  margin: 0;
+}
+
+#reinvention-story-controls .controls-bar .acts-chapters ul {
+  display: inline;
+}
+
+#reinvention-story-controls .controls-bar .acts-chapters li,
+#reinvention-story-controls .controls-bar .acts-chapters a,
+#reinvention-story-controls .controls-bar .acts-chapters .act-time {
+  float: left;
+  margin: 0;
+  list-style-type: none;
+}
+
+/* act titles */
+#reinvention-story-controls .controls-bar .act-listing.active .act-title {
+  color: #242424;
+  font: 900 12px brandon_grotesque, sans-serif;
+  text-transform: uppercase;
+  margin: 3px 7px 0 0;
+  letter-spacing: 0.1em;
+}
+
+/* all act info other than title - appears only if the act is active */
+#reinvention-story-controls .controls-bar .act-listing .act-info {
+  width: 0;
+  float: left;
+}
+
+#reinvention-story-controls .controls-bar .act-listing.active .act-info {
+  width: auto;
+}
+
+#reinvention-story-controls .controls-bar .act-info .act-time {
+  font: 500 11px brandon_grotesque, sans-serif;
+  margin: 5px 3px 0 0;
+}
+
+#reinvention-story-controls .controls-bar .act-info .chapter {
+  font: bold 12px adelle_basic, serif;
+}
+
+#reinvention-story-controls .controls-bar .act-info .chapter:before {
+  content: "";
+  float: left;
+  width: 25px;
+  border-top: 1px solid #4e4b4b;
+  margin: 12px 4px 0;
+  letter-spacing: 0.1em;
+}
+
+#reinvention-story-controls .controls-bar .act-info .chapter a {
+  color: #242424;
+  margin: 5px 0 0;
+}
+
+#reinvention-story-controls .controls-bar .act-info .chapter .time {
+  display: none;
+  font-family: brandon_grotesque, sans-serif;
+  font-weight: 500;
+}
+
+#reinvention-story-controls .controls-bar .act-info .chapter a:hover {
+  color: #757474;
+  text-decoration: none;
+}
+
+#reinvention-story-controls .controls-bar .act-info .chapter.active a {
+  color: #f31e87;
+}
+
+
+#reinvention-story-controls .controls-bar .act-info .chapter.active .time {
+  display: inline-block;
+}
