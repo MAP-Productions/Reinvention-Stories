@@ -15,9 +15,18 @@ body {
   z-index: 10;
 }
 
+/* necessary for Zeega player to fill viewport */
+#reinvention-viewport > div {
+  height: 100%;
+}
+
 #reinvention-reststop {
   width: 100%;
   z-index: 994;
+}
+
+#reinvention-story {
+  height: 100%;
 }
 
 #reinvention-story-controls {
