@@ -188,30 +188,37 @@ body {
   width: 720px;
   left: 50%;
   top: 50%;
-  background-color: rgb(241, 241, 241);
-
 }
 
 #caption .progress-outer {
   width: 100%;
-  height: 20px;
+  height: 2px;
+  margin-top: 1px;
 }
 
 #caption .progress-inner {
   width: 0px;
-  height: 5px;
-  background-color: magenta;
+  height: 2px;
+  background-color: #9e2656;
 }
 
 #caption .text {
-  width: 85%;
+  color: #fff;
   float: left;
-}
-#caption .time {
-  width: 15%;
-  float: right;
+  font: 700 12px brandon_grotesque, sans-serif;
+  text-transform: uppercase;
+  width: 85%;
+  margin-top: 6px;
 }
 
+#caption .time {
+  color: #fff;
+  font: 700 10.4px brandon_grotesque, sans-serif;
+  width: 15%;
+  float: right;
+  text-align: right;
+  margin-top: 6px;
+}
 
 [class^="icon-"] {
   background-image: url("/vendor/bootstrap/img/glyphicons-halflings.png");
