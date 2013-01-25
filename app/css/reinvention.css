@@ -100,7 +100,10 @@ body {
 }
 
 #reinvention-intro video {
- width: 100%;
+  position: fixed;
+  width: 50%;
+  left: 50%;
+  top: 50%;
 }
 
 #reinvention-reststop-background {
