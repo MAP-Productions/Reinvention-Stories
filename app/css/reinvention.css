@@ -149,6 +149,10 @@ body {
   visibility: hidden;
 }
 
+.displaynone {
+  display: none !important;
+}
+
 .image {
   position: absolute;
 }
