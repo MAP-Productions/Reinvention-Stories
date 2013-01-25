@@ -25,7 +25,11 @@ function( $, _, Backbone, Layout ) {
             path: "",
             id: 0,
             act: 0
-        }
+        },
+        global: {
+            zeega: {}
+        },
+        views: {}
     };
 
     // Localize or create a new JavaScript Template object.
@@ -66,10 +70,6 @@ function( $, _, Backbone, Layout ) {
 
     // Mix Backbone.Events, modules, and layout management into the App object.
     return Abstract.merge( App, {
-
-        global: {},
-
-        views: {},
 
         isCurrent: function( id, type ) {
             var self = (this === App) ? this : App;
