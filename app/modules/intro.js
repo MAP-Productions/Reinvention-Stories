@@ -52,6 +52,12 @@ define([
                     this.off( "click", handler );
                 }
             }).on( "ended", handler );
+
+            // Pause the intro video at 1:35 (95s)
+            $pop.cue( 95, function() {
+                this.pause();
+            });
+
         }
     });
 
