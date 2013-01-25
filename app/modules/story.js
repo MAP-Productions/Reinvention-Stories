@@ -4,10 +4,25 @@ define([
 
 ], function( App, Data ) {
 
-    var Story, ZEEGA_URL;
+    var Story, zeegaUrl, controls;
 
     Story = App.module();
-    ZEEGA_URL = "http://alpha.zeega.org/api/items/";
+
+    zeegaUrl = "http://alpha.zeega.org/api/items/";
+    controls = {
+        player: {
+            play: "play",
+            pause: "pause",
+            prev: "cuePrev",
+            next: "cueNext"
+        },
+        toggles: {
+            play: "pause",
+            pause: "play"
+        }
+    };
+
+
 
 
     Story.Model = Backbone.Model.extend({
@@ -17,7 +32,7 @@ define([
             type: "story"
         },
         url: function() {
-            return ZEEGA_URL + this.id;
+            return zeegaUrl + this.id;
         },
         parse: function( obj ) {
             return obj.items[ 0 ];
@@ -53,32 +68,16 @@ define([
         },
 
         events: {
-            "click .controls-bar .pause" : "togglePlayPause",
-            "click .controls-bar .play" : "togglePlayPause"
-        },
-
-        togglePlayPause: function(e) {
-
-            var $elem = $(e.target);
-
-            // Because the controls for the player are bound using the data-controls
-            // attribute, switch the pause button to a play button so it can do
-            // double duty.
-            // _.defer insures that this does not happen until after the player
-            // responds to the event.
-            _.defer( function() {
-                if ( $elem.data("controls") === "pause" ) {
-                    $elem.data("controls", "play").removeClass("pause").addClass("play");
-                } else if ( $elem.data("controls") === "play" ) {
-                    $elem.data("controls", "pause").removeClass("play").addClass("pause");
-                }
-            });
-
+            "click .control": "control"
         },
 
         initialize: function( config ) {
-            _.bindAll(this, 'updateTimeline');
             this.model = Story.Items.get( config.id );
+
+            // The zeega player and $timeline bar will be assigned when it's
+            // initialized in the afterRender phase of the view.
+            this.zeega = null;
+            this.timeline = null;
         },
 
         beforeRender: function() {
@@ -86,13 +85,9 @@ define([
         },
 
         afterRender: function() {
-            console.log('render story');
             // http://alpha.zeega.org/74868
             // http://alpha.zeega.org/__ID__
-            var config, id, act, data, zp, isLast;
-
-            // elements
-            this.$timelineEl = this.$('.timeline-indicator');
+            var config, id, act, data, isLast;
 
             config = {
                 target: "#reinvention-story",
@@ -103,6 +98,7 @@ define([
             id = this.model.get("id");
             act = this.model.get("act");
             data = this.model.get("text");
+            isLast = false;
 
             // Sometimes the Zeega Project data hasn't returned soon enough,
             // in these cases, provide the url instead. This will give the
@@ -111,16 +107,18 @@ define([
             config[ !data ? "url" : "data" ] = !data ?
                 this.model.url() : data;
 
-            App.global.zeega = zp = new Zeega.player( config );
-            isLast = false;
+            // Initialize a new Zeega.player instance with the |config| objecr
+            this.zeega = new Zeega.player( config );
+            // TODO: Determine a better way to identify the timeline/progress
+            // indicator. This is too dependent on the UI having a specific class.
+            this.timeline = $("[data-timeline]");
 
-            zp.on("frame_rendered can_play window_resized", this.updateVideoPosition, this);
 
-            zp.on("deadend_frame", function() {
+            this.zeega.on("deadend_frame", function() {
                 isLast = true;
             });
 
-            zp.on("ended", function() {
+            this.zeega.on("ended", function() {
                 console.log( "ended" );
 
                 if ( isLast ) {
@@ -128,30 +126,37 @@ define([
                 }
             });
 
-            zp.on("media_timeupdate", this.updateTimeline);
-            
+            this.zeega.on("media_timeupdate", this.progress.bind(this));
         },
 
-        /* temporary until full-bleed video support is added to the player */
-        updateVideoPosition : function() {
-          _.defer( function() {
-            console.log('resposition before', $('.ZEEGA-player .visual-element-video').css('left') );
-            var width = window.innerHeight * (16 / 9);
-            var left = (window.innerWidth - width) / 2;
-            
-            $('.ZEEGA-player .visual-element-video').css({
-              'height': window.innerHeight,
-              'width' : width,
-              'left' : left
+        control: function( event ) {
+            var $elem, control, action, toggles;
+
+            event.preventDefault();
+
+            $elem = $(event.currentTarget);
+            control = $elem.data("controls");
+            action = controls.player[ control ];
+            toggles = controls.toggles[ control ];
+
+            if ( action && this.zeega[ action ] ) {
+                // Dispatch the control action (play, pause, cueNext, cuePrev )
+                // to the Zeega player that is currently playing
+                this.zeega[ action ]();
+            }
+
+            // If this is a toggle action, update the UI
+            if ( toggles ) {
+                $elem.addClass("displaynone");
+                $("[data-controls='" + toggles + "']")
+                    .removeClass("displaynone");
+            }
+        },
+
+        progress: function( event ) {
+            this.timeline.css({
+                width: ((event.current_time / event.duration) * 100) + "%"
             });
-
-            console.log('resposition after', $('.ZEEGA-player .visual-element-video').css('left') );
-          });
-        },
-
-        updateTimeline: function(e) {
-            var percent = (e.current_time / e.duration) * 100;
-            this.$timelineEl.css('width', percent + "%");
         }
 
     });
