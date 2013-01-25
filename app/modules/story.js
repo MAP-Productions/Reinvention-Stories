@@ -114,7 +114,7 @@ define([
             App.global.zeega = zp = new Zeega.player( config );
             isLast = false;
 
-            zp.on("can_play window_resized", this.updateVideoPosition, this);
+            zp.on("frame_rendered can_play window_resized", this.updateVideoPosition, this);
 
             zp.on("deadend_frame", function() {
                 isLast = true;
