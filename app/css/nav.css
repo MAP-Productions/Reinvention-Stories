@@ -33,11 +33,34 @@
     height: 77px;
     margin: 0;
     list-style-type: none;
+    position: relative;
 }
 
 #reinvention-menu .menu-section.icons {
     padding: 0 8px 0 4px;
     border-left: 1px solid #d2d2d3;
+}
+
+#reinvention-menu .menu-section.disabled .section-title,
+#reinvention-menu .menu-section.disabled .image-link {
+    opacity: 0.5;
+}
+
+#reinvention-menu .menu-section .disabled-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
+}
+
+#reinvention-menu .menu-section .disabled-overlay.act-two {
+    background: url(../img/disabled-act-two.png) no-repeat center center;
+}
+
+#reinvention-menu .menu-section .disabled-overlay.act-three {
+    background: url(../img/disabled-act-three.png) no-repeat center center;
 }
 
 #reinvention-menu .menu-section .section-title {
