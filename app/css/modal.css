@@ -236,5 +236,77 @@
 
 /* share modal */
 .share-modal {
-    
+    border: 1px solid #dfdfdd;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -91px 0 0 -260px;
+    background: #fff;
+    width: 520px;
+    height: 182px;
+}
+
+.share-modal-content {
+    width: 505px;
+    height: 169px;
+    margin: 6px auto 0;
+    position: relative;
+    box-shadow: 0 0 6px #e5e2e0 inset;
+}
+
+.share-modal-content h1 {
+    color: #6d6a63;
+    border-bottom: 1px solid #f6f3ed;
+    padding: 8px 0 6px;
+    text-align: center;
+    margin: 0;
+    font: bold 20px adelle_basic, serif;
+    text-transform: uppercase;
+}
+
+.share-modal-content ul.share-links {
+    list-style-type: none;
+    margin: 7px 0;
+    overflow: hidden;
+}
+
+.share-modal-content ul.share-links li {
+    float: left;
+    width: 167px;
+    height: 114px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 114px;
+    border-right: 1px solid #eee8da;
+    border-left: 1px solid #f6f3ec;
+}
+
+.share-modal-content ul.share-links li:first-child {
+    border-left: none;
+}
+
+.share-modal-content ul.share-links li:last-child {
+    border-right: none;
+}
+
+.share-modal-content ul.share-links li a {
+    height: 48px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 56px;
+    background: url(../img/share-icons.png);
+    text-indent: -9999px;
+}
+
+.share-modal-content ul.share-links li a.twitter {
+    background-position: 0 0;
+}
+
+.share-modal-content ul.share-links li a.facebook {
+    background-position: 0 -48px;
+    margin-top: -4px;
+}
+
+.share-modal-content ul.share-links li a.email {
+    background-position: 0 -97px;
 }
