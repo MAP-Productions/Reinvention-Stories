@@ -1,4 +1,4 @@
-require([],
+define([],
 function() {
 
     var $nav, isRolledup, isLocked, last;

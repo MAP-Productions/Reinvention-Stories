@@ -1,8 +1,9 @@
 define([
     "app",
+    "modules/nav",
     "modules/data"
 
-], function( App, Data ) {
+], function( App, Nav, Data ) {
 
     var Story, zeegaUrl, controls;
 
@@ -127,6 +128,10 @@ define([
             });
 
             this.zeega.on("media_timeupdate", this.progress.bind(this));
+
+            // Trick the navigation into opening
+            Nav.mousemove({ pageY: 10 });
+
         },
 
         control: function( event ) {
