@@ -68,14 +68,31 @@
     display: inline-block;
     font: 900 11.5px/11px brandon_grotesque, sans-serif;
     text-transform: uppercase;
-    border-right: 1px solid #a6a6a8;
-    padding-right: 7px;
-    margin-right: 3px;
+    border-left: 1px solid #a6a6a8;
+    padding-left: 7px;
+    margin-left: 3px;
     height: 11px;
 }
 
-#reinvention-menu .meta-menu li:last-child {
+#reinvention-menu .meta-menu li:first-child {
     border: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+#reinvention-menu .meta-menu li.fullscreen {
+    border-left: none;
+}
+
+#reinvention-menu .meta-menu li.fullscreen a {
+    padding: 0;
+    margin: -3px 0 0 39px;
+    text-indent: -9999px;
+    width: 15px;
+    height: 13px;
+    display: inline-block;
+    vertical-align: middle;
+    background: url(../img/fullscreen-gray.png);
 }
 
 #reinvention-menu .meta-menu li a {
