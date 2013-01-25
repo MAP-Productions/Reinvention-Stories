@@ -1,10 +1,11 @@
 require([
     "app",
     "router",
+    "modules/act",
     "modules/nav"
 ],
 
-function( App, Router ) {
+function( App, Router, Act ) {
 
     var $window, $document, $body;
 
