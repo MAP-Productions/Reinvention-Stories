@@ -213,7 +213,8 @@
         });
 
         image.attr( "id", "image-" + cue.clip ).css({
-          top: (dims.center.y - 125) + "px"
+          top: (dims.center.y - 125) + "px",
+          width: (dims.width / 5) + "px"
         });
 
         // Generate an element in a jQuery object for the
