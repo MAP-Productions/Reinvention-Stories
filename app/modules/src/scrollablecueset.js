@@ -165,15 +165,15 @@
               // WARNING:
               //
               // This is a bad user experience.
-              if ( Math.round(current) === cue.start + 3 && !this.paused() &&
-                  !this.isOpen && !isLocked ) {
-                isLocked = true;
-                this.pause();
+              // if ( Math.round(current) === cue.start + 3 && !this.paused() &&
+              //     !this.isOpen && !isLocked ) {
+              //   isLocked = true;
+              //   this.pause();
 
-                playChild({
-                  currentTarget: image[0]
-                });
-              }
+              //   playChild({
+              //     currentTarget: image[0]
+              //   });
+              // }
 
               last = current;
             },
@@ -191,13 +191,13 @@
         // Set a generic cue to always unlock the child video
         // at an explicit point in the playback, relative to the
         // time the child is expected to be opened.
-        this.video.cue( cue.start + 4, function() {
-          isLocked = false;
-        });
+        // this.video.cue( cue.start + 4, function() {
+        //   isLocked = false;
+        // });
 
-        this.video.cue( cue.start + 2, function() {
-          isLocked = false;
-        });
+        // this.video.cue( cue.start + 2, function() {
+        //   isLocked = false;
+        // });
 
 
 
