@@ -79,7 +79,7 @@
         media.play();
       }
 
-      media.playbackRate += 0.25;
+      media.playbackRate += 0.20;
     }
 
     // 0 is the center value. If the mousewheel is at 0
