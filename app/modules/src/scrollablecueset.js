@@ -245,9 +245,11 @@
 
 
     // Place arrow
-    this.$arrow = $("<img>").addClass("arrow").attr({
-      src: "/app/img/road-arrow.png"
-    });
+    // TODO: This shouldn't be here, but it works for now :(
+    this.$arrow = $("<div>").addClass("arrow-instruction").html(
+      "<img src='/app/img/road-arrow.png' class='arrow'>" +
+      "Scroll up to move forward and meet our neighbors"
+    );
 
 
 

@@ -44,13 +44,8 @@ define([
         initialize: function( config ) {
             this.model = Road.Items.get( config.id );
         },
-        beforeRender: function() {
-            console.log( "Road.Views.Item: beforeRender" );
 
-
-        },
         afterRender: function() {
-            console.log( "Road.Views.Item: afterRender" );
             var act, id, scs;
 
             act = this.model.get("act");
