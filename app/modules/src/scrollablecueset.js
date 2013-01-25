@@ -114,10 +114,10 @@
         fade = {
           up: {
             start: cue.start,
-            end: cue.start + 3
+            end: cue.start + 2
           },
           down: {
-            start: cue.end - 3,
+            start: cue.end - 2,
             end: cue.end
           }
         };
