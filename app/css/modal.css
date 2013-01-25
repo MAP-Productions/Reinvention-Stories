@@ -19,6 +19,7 @@
     text-indent: -99999px;
 }
 
+/* email/get involved modal */
 .email-modal {
     border: 1px solid #dfdfdd;
     position: absolute;
@@ -231,4 +232,9 @@
 
 .email-modal-content .content-right .release-dates li:last-child {
     border-right: none;
+}
+
+/* share modal */
+.share-modal {
+    
 }
