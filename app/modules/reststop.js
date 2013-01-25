@@ -258,8 +258,6 @@ define([
     Answer.request = function( options ) {
         options = options || {};
 
-        console.log( "Answer.request", options );
-
         return $.ajax({
             type: "GET",
             url: "https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&screen_name=" + TWITTER_USER + "&count=20&callback=?",
