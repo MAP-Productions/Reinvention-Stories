@@ -4,6 +4,7 @@
     width: 20px;
     height: 29px;
     background: url(../img/plus-circle.png) no-repeat 0 9px;
+    z-index: 10;
 
     -webkit-animation: pulse 5s infinite ease-in-out; /* Safari 5, Chrome */
        -moz-animation: pulse 5s infinite ease-in-out; /* Firefox 5-15 */
@@ -17,14 +18,35 @@
     right: 7%;
     width: 374px;
     background: rgba(255,255,255,0.8);
+    z-index: 20;
 }
 
-.reststop-question h1 {
+.reststop-question .question-top {
     background: #fff;
     color: #ee127b;
+    margin: 0;
+    padding: 13px 60px 11px 30px;
+    position: relative;
+}
+
+.reststop-question .question-top h1 {
     font: bold 22.3px/26.77px adelle_basic, serif;
     margin: 0;
-    padding: 13px 30px 11px;
+}
+
+.reststop-question .question-top .shuffle-button {
+    background: none;
+    border: none;
+    bottom: 18px;
+    color: #ff3399;
+    cursor: pointer;
+    font: 700 8px/11px brandon_grotesque, sans-serif;
+    height: 20px;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    text-transform: uppercase;
+    width: 55px;
 }
 
 .reststop-question .fields {
@@ -55,7 +77,6 @@
     color: #7c7c7c;
 }
 
-.reststop-question .fields [type=button],
 .reststop-question .fields [type=submit] {
     display: inline-block;
     height: 27px;
@@ -82,6 +103,7 @@
     padding-left: 30px;
     text-shadow: 4px 0 10px rgba(0,0,0,0.55);
     background: url(../img/plus-circle.png) no-repeat 0 9px;
+    z-index: 10;
 }
 
 .reststop-answer p {
