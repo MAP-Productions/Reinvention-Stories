@@ -6,7 +6,7 @@ require([
 
 function( App, Router ) {
 
-    var $window, $document, $body, controls;
+    var $window, $document, $body;
 
     App.router = new Router();
 
@@ -35,17 +35,5 @@ function( App, Router ) {
         $body: $body
     };
 
-
-    controls = {
-        play: "play",
-        pause: "pause",
-        prev: "cuePrev",
-        next: "cueNext"
-    };
-
-    $body.on("click", "[data-controls]", function( event ) {
-        event.preventDefault();
-
-        App.global.zeega[ controls[ $(this).data("controls") ] ]();
-    });
+    //
 });
