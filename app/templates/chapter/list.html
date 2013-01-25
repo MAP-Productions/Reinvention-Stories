@@ -1,0 +1,26 @@
+<% for ( var i = 1; i < 4; i++ ) { %>
+  <li class="act-listing active">
+
+  <% if ( i === model.get("act") ) { %>
+    <a class="act-title" href="#<%=i%>">Act <%=i%></a>
+    <span class="act-time"><%=model.get("duration")%></span>
+    <ul class="chapters">
+
+      <% model.get("chapters").forEach(function( chap, k ) { %>
+
+      <% console.log( chap, chap.title, chap.cue_out );  %>
+        <li class="chapter" id="<%=chap.id%>">
+          <a href="#"><%=chap.title%> <span class="time">(<span data-time>00:00</span>/<%=chap.smpte%> )</span></a>
+        </li>
+      <% }); %>
+
+    </ul>
+  <% } else { %>
+    <span class="act-title" href="#<%=i%>">Act <%=i%></span>
+  <% } %>
+  </li>
+<% } %>
+
+
+
+<!-- class="acts-chapters" -->

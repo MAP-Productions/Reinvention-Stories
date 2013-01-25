@@ -1,15 +1,17 @@
 define([
     "app",
+    "modules/chapter",
     "modules/nav",
     "modules/data"
 
-], function( App, Nav, Data ) {
+], function( App, Chapter, Nav, Data ) {
 
     var Story, zeegaUrl, controls;
 
     Story = App.module();
 
     zeegaUrl = "http://alpha.zeega.org/api/items/";
+
     controls = {
         player: {
             play: "play",
@@ -22,9 +24,6 @@ define([
             pause: "play"
         }
     };
-
-
-
 
     Story.Model = Backbone.Model.extend({
         defaults: {
@@ -69,16 +68,19 @@ define([
         },
 
         events: {
-            "click .control": "control"
+            "click .control": "control",
+            "click .chapter": "jump"
         },
 
         initialize: function( config ) {
             this.model = Story.Items.get( config.id );
 
-            // The zeega player and $timeline bar will be assigned when it's
-            // initialized in the afterRender phase of the view.
+            // The zeega player, timeline and chapters menu
+            // will be assigned and rendered during the
+            // afterRender phase of the view.
             this.zeega = null;
             this.timeline = null;
+            this.chapters = null;
         },
 
         beforeRender: function() {
@@ -110,24 +112,28 @@ define([
 
             // Initialize a new Zeega.player instance with the |config| objecr
             this.zeega = new Zeega.player( config );
-            // TODO: Determine a better way to identify the timeline/progress
-            // indicator. This is too dependent on the UI having a specific class.
-            this.timeline = $("[data-timeline]");
 
-
+            // Bind all necessary events to newly initialized zeega.player instance
             this.zeega.on("deadend_frame", function() {
                 isLast = true;
             });
 
             this.zeega.on("ended", function() {
                 console.log( "ended" );
-
+                App.goto( act, "road" );
                 if ( isLast ) {
                     App.goto( act, "road" );
                 }
             });
 
             this.zeega.on("media_timeupdate", this.progress.bind(this));
+
+            this.zeega.on("data_loaded", Chapter.List.create.bind(this));
+
+            console.log( this.zeega );
+
+            // Capture the timeline node for this view.
+            this.timeline = $("[data-timeline]");
 
             // Trick the navigation into opening
             Nav.mousemove({ pageY: 10 });
@@ -158,12 +164,17 @@ define([
             }
         },
 
+        jump: function( event ) {
+            event.preventDefault();
+
+            this.zeega.cueFrame( $(event.currentTarget).attr("id") );
+        },
+
         progress: function( event ) {
             this.timeline.css({
                 width: ((event.current_time / event.duration) * 100) + "%"
             });
         }
-
     });
 
     return Story;
