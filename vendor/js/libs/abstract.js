@@ -22,10 +22,10 @@
 
       return O;
     },
-    merge: function() {
-      return [].slice.call( arguments ).reduce(function( initial, obj ) {
+    merge: function( target ) {
+      return [].slice.call( arguments, 1 ).reduce(function( initial, obj ) {
         return Abstract.assign( initial, obj );
-      }, {});
+      }, target);
     },
     // Shims ES6 Object.mixin()
     mixin: function( receiver, supplier ) {
