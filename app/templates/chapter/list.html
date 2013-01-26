@@ -1,12 +1,12 @@
 <% for ( var i = 1; i < 4; i++ ) { %>
   <li class="act-listing active">
 
-  <% if ( i === model.get("act") ) { %>
+  <% if ( i === act ) { %>
     <a class="act-title" href="#<%=i%>">Act <%=i%></a>
-    <span class="act-time"><%=model.get("duration")%></span>
+    <span class="act-time"><%=duration%></span>
     <ul class="chapters">
 
-      <% model.get("chapters").forEach(function( chap, k ) { %>
+      <% chapters.forEach(function( chap, k ) { %>
 
       <% console.log( chap, chap.title, chap.cue_out );  %>
         <li class="chapter" id="<%=chap.id%>">
