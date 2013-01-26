@@ -353,7 +353,7 @@
 
         video.media.on("timeupdate", function() {
           $progress.width(
-            (this.currentTime() / this.duration()) * 720
+            (this.currentTime() / this.duration()) * dims.center.x
           );
           $time.html(
             smpte( this.currentTime() ) + "/" + smpte( this.duration() )
