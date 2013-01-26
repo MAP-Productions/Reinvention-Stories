@@ -3,52 +3,11 @@ define([
     "modules/act",
     "modules/story",
     "modules/time",
-], function( App, Act, Story, time ) {
-
-
-    var Chapter;
-
-    Chapter = App.module();
-
-    // Chapter Lists displays are effectively static UI
-    // and do no incur the same cost as a complete model + view
-    Chapter.Model = Backbone.Model.extend({});
-
-
-    Chapter.List = Backbone.View.extend({
-
-        template: "chapter/list",
-
-        tagName: "ul",
-
-        data: function() {
-            return {
-                model: this.model
-            };
-        },
-
-        initialize: function( story ) {
-            this.model = new Chapter.Model(story);
-
-            // console.log( this.model );
-        },
-
-        afterRender: function() {
-            this.$el.addClass("acts-chapters");
-            this.model.get("target").append(this.$el);
-        }
-    });
-
-    // Must called as:
-    //
-    //  Chapter.List.create.bind(this)
-    //
-    // From a story view
-    //
+    "text!templates/chapter/list.html"
+], function( App, Act, Story, time, list ) {
 
     function getChapters( project ) {
         return project.frames.map(function( frame ) {
-            console.log( frame );
             return {
                 id: frame.id,
                 title: frame.layers[0].attr.title,
@@ -58,23 +17,22 @@ define([
         });
     }
 
-    Chapter.List.create = function() {
-        var chapters, duration;
+    function ChapterMenu( act, project ) {
+        this.act = act;
+        this.chapters = getChapters( project );
+        this.duration = time.smpte(
+            this.chapters.reduce(function( val, chap ) {
+                return val + chap.cue_out;
+            }, 0)
+        );
 
-        chapters = getChapters( this.zeega.getProjectData() );
-        duration = chapters.reduce(function( val, chap ) {
-            return val + chap.cue_out;
-        }, 0);
+        this.html = ChapterMenu.template( this );
 
+        ChapterMenu.Rendered.push( this );
+    }
 
+    ChapterMenu.template = _.template( list );
+    ChapterMenu.Rendered = [];
 
-        new Chapter.List({
-            target: this.$el.find(".controls-bar"),
-            act: this.model.get("act"),
-            chapters: chapters,
-            duration: time.smpte( duration )
-        }).render();
-    };
-
-    return Chapter;
+    return ChapterMenu;
 });

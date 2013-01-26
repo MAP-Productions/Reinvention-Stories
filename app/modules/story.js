@@ -4,7 +4,7 @@ define([
     "modules/nav",
     "modules/data"
 
-], function( App, Chapter, Nav, Data ) {
+], function( App, ChapterMenu, Nav, Data ) {
 
     var Story, zeegaUrl, controls;
 
@@ -39,7 +39,9 @@ define([
         },
         initialize: function( story ) {
             this.set(
-                Abstract.merge( story, Data.from("stories").byId( story.id ) )
+                Abstract.merge( story, Data.from("stories").byId( story.id ), {
+                    zeega: null
+                })
             );
             this.collection.add( this );
         }
@@ -75,12 +77,11 @@ define([
         initialize: function( config ) {
             this.model = Story.Items.get( config.id );
 
-            // The zeega player, timeline and chapters menu
-            // will be assigned and rendered during the
-            // afterRender phase of the view.
-            this.zeega = null;
+            // The zeega player and timeline are rendered
+            // during the afterRender phase of the view.
+            // this.zeega is a reference to this.model.get("zeega")
+            this.zeega = this.model.get("zeega");
             this.timeline = null;
-            this.chapters = null;
         },
 
         beforeRender: function() {
@@ -110,30 +111,50 @@ define([
             config[ !data ? "url" : "data" ] = !data ?
                 this.model.url() : data;
 
-            // Initialize a new Zeega.player instance with the |config| objecr
-            this.zeega = new Zeega.player( config );
 
-            // Bind all necessary events to newly initialized zeega.player instance
-            this.zeega.on("deadend_frame", function() {
-                isLast = true;
-            });
+            if ( !this.zeega ) {
+                // Initialize a new Zeega.player instance with the |config| objecr
+                this.zeega = new Zeega.player( config );
 
-            this.zeega.on("ended", function() {
-                console.log( "ended" );
-                App.goto( act, "road" );
-                if ( isLast ) {
+                this.zeega.on("ended", function() {
                     App.goto( act, "road" );
-                }
-            });
+                });
 
-            this.zeega.on("media_timeupdate", this.progress.bind(this));
+                this.zeega.on("media_timeupdate", function( event ) {
+                    $("[data-timeline]").css({
+                        width: (event.current_time / event.duration) * 100 + "%"
+                    });
+                }.bind(this));
 
-            this.zeega.on("data_loaded", Chapter.List.create.bind(this));
+                this.model.set({
+                    zeega: this.zeega
+                });
 
-            console.log( this.zeega );
+            } else {
+                // Previously rendered Zeega player layout elements can
+                // be directly appended.
+                $("#reinvention-story").append(this.zeega.Layout.el);
+            }
 
-            // Capture the timeline node for this view.
-            this.timeline = $("[data-timeline]");
+
+            // TODO: Now that this works correctly, DRY-out and refactor
+            if ( data ) {
+                this.menu = new ChapterMenu( act, this.zeega.getProjectData() );
+
+                this.$el.find(".acts-chapters").html(
+                    this.menu.html
+                );
+            } else {
+                this.zeega.on("data_loaded", function() {
+                    this.menu = new ChapterMenu( act, this.zeega.getProjectData() );
+
+                    this.$el.find(".acts-chapters").html(
+                        this.menu.html
+                    );
+                }.bind(this));
+            }
+
+
 
             // Trick the navigation into opening
             Nav.mousemove({ pageY: 10 });
@@ -168,14 +189,24 @@ define([
             event.preventDefault();
 
             this.zeega.cueFrame( $(event.currentTarget).attr("id") );
-        },
-
-        progress: function( event ) {
-            this.timeline.css({
-                width: ((event.current_time / event.duration) * 100) + "%"
-            });
         }
+
+        // ,
+
+        // progress: function( event ) {
+        //     this.timeline.width(
+        //         event.current_time / event.duration * 720
+        //       );
+
+
+        //     this.timeline.css({
+        //         width: ((event.current_time / event.duration) * 100) + "%"
+        //     });
+        // }
     });
+
+
+    // TODO: Define Chapter here, similar to the way Answers are defined for reststops
 
     return Story;
 });
