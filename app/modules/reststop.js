@@ -105,6 +105,9 @@ define([
             // Eventually will have "in reply to"
             // console.log( "Posting to twitter", update );
 
+            // TODO: Set thank you message.
+
+
             Tweet.post( content, function( response ) {
                 console.log( "Posting to twitter: success.", response );
 
