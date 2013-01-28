@@ -19,6 +19,7 @@ require.config({
         jquery: "../vendor/js/libs/jquery",
         lodash: "../vendor/js/libs/lodash",
         backbone: "../vendor/js/libs/backbone",
+        unprefix: "../vendor/js/libs/unprefix",
         bootstrap: "../vendor/bootstrap/js/bootstrap",
         es6shim: "../vendor/js/libs/es6",
         abstract: "../vendor/js/libs/abstract",
@@ -50,6 +51,10 @@ require.config({
         backbone: {
             deps: [ "lodash", "jquery" ],
             exports: "Backbone"
+        },
+
+        alias: {
+            deps: [ "zeegaplayer" ]
         },
 
         serializeform: {

@@ -7,7 +7,8 @@ define([
     "alias",
     "scrollable",
     "scrollablecueset",
-    "serializeform"
+    "serializeform",
+    "unprefix"
 ],
 
 function( $, _, Backbone, Layout ) {
