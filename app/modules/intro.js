@@ -63,6 +63,9 @@ define([
                 marginLeft: "-" + (parseInt( this.$el.css("width"), 10 ) / 4) + "px",
                 marginTop: "-" + (parseInt( this.$el.css("height"), 10 ) / 4) + "px"
             });
+
+            // Trick the navigation to hidden state.
+            Nav.mousemove({ pageY: 101 });
         }
     });
 
