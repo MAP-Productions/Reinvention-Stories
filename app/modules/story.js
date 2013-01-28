@@ -2,9 +2,10 @@ define([
     "app",
     "modules/chapter",
     "modules/nav",
-    "modules/data"
+    "modules/data",
+    "modules/time"
 
-], function( App, ChapterMenu, Nav, Data ) {
+], function( App, ChapterMenu, Nav, Data, time ) {
 
     var Story, zeegaUrl, controls;
 
@@ -91,7 +92,7 @@ define([
         afterRender: function() {
             // http://alpha.zeega.org/74868
             // http://alpha.zeega.org/__ID__
-            var config, id, act, data, isLast;
+            var config, id, act, data, isLast, $timeline, createChapterMenu;
 
             config = {
                 target: "#reinvention-story",
@@ -112,18 +113,36 @@ define([
                 this.model.url() : data;
 
 
+
             if ( !this.zeega ) {
                 // Initialize a new Zeega.player instance with the |config| objecr
                 this.zeega = new Zeega.player( config );
 
-                this.zeega.on("ended", function() {
-                    App.goto( act, "road" );
+                this.zeega.on("frame_rendered", function( frame ) {
+                    $(".chapter").removeClass("active").filter("#" + frame.id).addClass("active");
                 });
 
-                this.zeega.on("media_timeupdate", function( event ) {
-                    $("[data-timeline]").css({
-                        width: (event.current_time / event.duration) * 100 + "%"
+                this.zeega.on("deadend_frame", function() {
+                    isLast = true;
+                });
+
+                this.zeega.on("ended", function() {
+                    if ( isLast ) {
+                        App.goto( act, "road" );
+                        isLast = false;
+                    }
+                });
+
+                $timeline = $("[data-timeline]");
+
+                this.zeega.on("media_timeupdate", function( frame ) {
+                    // Update the window-width progress bar
+                    $timeline.css({
+                        width: (frame.current_time / frame.duration) * 100 + "%"
                     });
+
+                    // Update the current time display for this chapter/frame
+                    $(".chapter.active [data-time]").html( time.smpte(frame.current_time) );
                 }.bind(this));
 
                 this.model.set({
@@ -137,28 +156,24 @@ define([
             }
 
 
-            // TODO: Now that this works correctly, DRY-out and refactor
-            if ( data ) {
+
+            createChapterMenu = function() {
                 this.menu = new ChapterMenu( act, this.zeega.getProjectData() );
 
                 this.$el.find(".acts-chapters").html(
                     this.menu.html
                 );
+            }.bind(this);
+
+            // TODO: Now that this works correctly, DRY-out and refactor
+            if ( data ) {
+                createChapterMenu();
             } else {
-                this.zeega.on("data_loaded", function() {
-                    this.menu = new ChapterMenu( act, this.zeega.getProjectData() );
-
-                    this.$el.find(".acts-chapters").html(
-                        this.menu.html
-                    );
-                }.bind(this));
+                this.zeega.on("data_loaded", createChapterMenu );
             }
-
-
 
             // Trick the navigation into opening
             Nav.mousemove({ pageY: 10 });
-
         },
 
         control: function( event ) {
@@ -188,7 +203,16 @@ define([
         jump: function( event ) {
             event.preventDefault();
 
+            // Pause the currently playing frame.
+            this.zeega.pause();
+
+            // Cue a jump to the frame being requested
             this.zeega.cueFrame( $(event.currentTarget).attr("id") );
+
+            // Once that frame is rendered, play the frame.
+            this.zeega.on("frame_rendered", function() {
+                this.zeega.play();
+            }.bind(this));
         }
 
         // ,
