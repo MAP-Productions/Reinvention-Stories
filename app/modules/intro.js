@@ -34,7 +34,10 @@ define([
         },
 
         afterRender: function() {
-            var $pop = Popcorn("#reinvention-intro video");
+            var $video, $audio;
+
+            $video = Popcorn("#reinvention-intro video");
+            $audio = Popcorn("#reinvention-intro audio");
 
             function handler() {
                 App.goto( 1, "story" );
@@ -42,7 +45,7 @@ define([
 
             // Set up "Skip Intro" from 8s-12s.
             // Jump when the video ends.
-            $pop.register({
+            $video.register({
                 start: 8,
                 end: 12,
                 onStart: function() {
@@ -53,9 +56,23 @@ define([
                 }
             }).on( "ended", handler );
 
+            // Begin playing the Billboard loop at 1:34 (94s)
+            $video.cue( 94, function() {
+                $audio.volume(0).play();
+            });
+
             // Pause the intro video at 1:35 (95s)
-            $pop.cue( 95, function() {
+            $video.cue( 95, function() {
                 this.pause();
+
+                // Any single mousemovement will restart the video
+                // and stop the looping audio
+                App.DOM.$body.one("mousemove", function() {
+                    $video.play();
+                    $audio.volumeOut( 500, function() {
+                        this.pause();
+                    });
+                });
             });
 
             // Set the correct margins to pull the video into the center
