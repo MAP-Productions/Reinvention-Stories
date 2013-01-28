@@ -1,7 +1,7 @@
 define([
-    "app"
-
-], function( App ) {
+    "app",
+    "modules/nav"
+], function( App, Nav ) {
 
     var Intro = App.module();
 
@@ -42,7 +42,7 @@ define([
 
             // Set up "Skip Intro" from 8s-12s.
             // Jump when the video ends.
-            $pop.code({
+            $pop.register({
                 start: 8,
                 end: 12,
                 onStart: function() {

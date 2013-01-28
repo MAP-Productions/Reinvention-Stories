@@ -4,6 +4,7 @@ define([
     "lodash",
     "backbone",
     "layout",
+    "alias",
     "scrollable",
     "scrollablecueset",
     "serializeform"

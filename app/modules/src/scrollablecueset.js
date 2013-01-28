@@ -1,8 +1,4 @@
 (function( exports ) {
-  // Alias $p.code` to something that sounds more like
-  // what it does.
-  Popcorn.prototype.register = Popcorn.prototype.code;
-
   var IMAGE_PATH = "/app/image/",
       VIDEO_PATH = "/app/video/",
       JST = exports.JST || {};

@@ -12,6 +12,7 @@ require.config({
 
         text: "../vendor/js/plugins/text",
         json: "../vendor/js/plugins/json",
+        alias: "../vendor/js/plugins/alias",
         serializeform: "../vendor/js/plugins/serializeForm",
 
         // Libraries.
