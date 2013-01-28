@@ -85,7 +85,7 @@
 
     dims.center = {
       x: dims.width / 2,
-      y: dims.height / 2,
+      y: dims.height / 2
     };
 
     if ( this.cues.length ) {
