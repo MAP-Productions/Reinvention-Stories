@@ -245,15 +245,12 @@
     // TODO: This shouldn't be here, but it works for now :(
     this.$arrow = $("<div>").addClass("arrow-instruction").html(
       "<img src='/app/img/road-arrow.png' class='arrow'>" +
-      "Scroll up to move forward and meet our neighbors"
+      "<p>Scroll up to move forward and meet our neighbors</p>"
     );
-
-
 
     this.$container.append(
       this.$arrow
     );
-
 
     this.$primary.on("click", function() {
       // Remove any residual video elements
@@ -265,6 +262,13 @@
 
       previous = null;
     }.bind(this));
+
+    // When the Primary video is "scrolled", hide the text from the on-surface
+    // scrolling prompt. #40
+    this.$primary.on("wheel mousewheel", function() {
+      this.$arrow.find("p").fadeOut(800);
+    }.bind(this));
+
 
     playChild = function( event ) {
       var current, caption, video;
