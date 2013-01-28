@@ -4,7 +4,7 @@
       JST = exports.JST || {};
 
   // TODO: This should be moved to a file and dynamically preloaded
-  JST.close = "<div id='close'>X</div>";
+  JST.close = "<a id='close' class='close-modal'>close</a>";
 
   JST.caption = "<div id='caption'><div class='progress-outer'><div class='progress-inner'></div></div><div class='text'></div><div class='time'></div></div>";
 
@@ -211,7 +211,7 @@
         });
 
         image.attr( "id", "image-" + cue.clip ).css({
-          top: (dims.center.y - 150) + "px",
+          top: (dims.center.y - 100) + "px",
           width: width + "px"
         });
 
@@ -308,8 +308,8 @@
       // Adds "per-child" video "close" button.
       $("#close").css({
 
-        top: (video.offset().top - 30) + "px",
-        right: video.offset().left + "px",
+        top: video.offset().top + "px",
+        right: (video.offset().left - 22) + "px",
 
       }).one("click", closeChild );
 
