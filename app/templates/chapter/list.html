@@ -1,24 +1,25 @@
 <% for ( var i = 1; i < 4; i++ ) { %>
-  <li class="act-listing active">
-
   <% if ( i === act ) { %>
-    <a class="act-title" href="#<%=i%>">Act <%=i%></a>
-    <span class="act-time"><%=duration%></span>
-    <ul class="chapters">
+    <li class="act-listing active">
+      <a class="act-title" href="#<%=i%>">Act <%=i%></a>
+      <span class="act-time"><%=duration%></span>
+      <ul class="chapters">
 
-      <% chapters.forEach(function( chap, k ) { %>
+        <% chapters.forEach(function( chap, k ) { %>
 
-      <% console.log( chap, chap.title, chap.cue_out );  %>
-        <li class="chapter" id="<%=chap.id%>">
-          <a href="#"><%=chap.title%> <span class="time">(<span data-time>00:00</span>/<%=chap.smpte%> )</span></a>
-        </li>
-      <% }); %>
+        <% console.log( chap, chap.title, chap.cue_out );  %>
+          <li class="chapter" id="<%=chap.id%>">
+            <a href="#"><%=chap.title%> <span class="time">(<span data-time>00:00</span>/<%=chap.smpte%> )</span></a>
+          </li>
+        <% }); %>
 
-    </ul>
+      </ul>
+    </li>
   <% } else { %>
-    <span class="act-title" href="#<%=i%>">Act <%=i%></span>
+    <li class="act-listing">
+      <span class="act-title" href="#<%=i%>">Act <%=i%></span>
+    </li>
   <% } %>
-  </li>
 <% } %>
 
 

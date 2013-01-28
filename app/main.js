@@ -64,7 +64,7 @@ function( App, Router, Act ) {
         // When the window is resized, so to should any video currently
         // being displayed in the reinvention viewport.
         var $video = $("#reinvention-viewport").find("video");
-        console.log( $video );
+        // console.log( $video );
     });
 
     App.DOM.$body.on("click", "[data-command]", function( event ) {
