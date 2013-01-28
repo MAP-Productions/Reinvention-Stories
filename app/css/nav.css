@@ -26,6 +26,8 @@
     height: 77px;
     padding: 6px 14px 0;
     position: relative;
+    margin: 0 auto;
+    width: 1062px;
 }
 
 #reinvention-menu .menu-section {
