@@ -46,7 +46,16 @@ function( App, Router, Act ) {
             document.body.requestFullScreen(
                 Element.ALLOW_KEYBOARD_INPUT
             );
+        },
 
+        about: function() {
+            console.log( "Open 'about' modal" );
+        },
+        involved: function() {
+            console.log( "Open 'involved' modal" );
+        },
+        share: function() {
+            console.log( "Open 'share' modal" );
         }
     };
 
