@@ -91,17 +91,16 @@
     if ( this.cues.length ) {
 
       this.cues.forEach(function( cue, k ) {
-        var image, video, side, last, relative, step, fade, isLocked;
+        var image, video, side, last, fade, width, position;
+
+        // isLocked
 
         // Register behaviours to execute at
         // the start and end phase of a popcorn
         // track event.
         //
         //
-        isFading = false;
-        relative = 0;
         last = 0;
-        step = 0.05;
         isFwd = true;
 
         cue.end = cue.start + 7;
@@ -118,7 +117,7 @@
           }
         };
 
-        isLocked = false;
+        // isLocked = false;
 
         this.video.register(
           Abstract.merge({}, cue, {
@@ -128,7 +127,7 @@
                 images[ track.clip ]
               );
 
-              console.log( "start", track );
+              // console.log( "start", track );
 
               // Smooth out the playbackRate
               this.playbackRate(1);
@@ -200,6 +199,7 @@
         // Alternatate which side the image is
         // displayed on.
         side = k % 2 === 0 ? "left" : "right";
+        width = dims.width / 5;
 
         // Generate an element in a jQuery object for the
         // image icon to display
@@ -209,9 +209,17 @@
         });
 
         image.attr( "id", "image-" + cue.clip ).css({
-          top: (dims.center.y - 125) + "px",
-          width: (dims.width / 5) + "px"
+          top: (dims.center.y - 150) + "px",
+          width: width + "px"
         });
+
+
+        position = (dims.center.x / 2) + width;
+
+        // Set the "left" or "right" position in pixels to keep the
+        // bubbles snug against the child video that will eventually
+        // be placed in the center.
+        image.css( side, (dims.center.x - distance) + "px" );
 
         // Generate an element in a jQuery object for the
         // video that is associated with this image icon
@@ -312,8 +320,10 @@
       this.$container.append( video );
       this.$container.append( JST.caption );
 
+      // Set the caption box position
       // This is somewhat insane and hard to look at.
       $("#caption").css({
+
         top: video.offset().top + parseInt( video.css("height"), 10 ) + "px",
         left: video.offset().left + "px",
         width: dims.center.x + "px"
