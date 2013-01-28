@@ -51,11 +51,21 @@ function( App, Router, Act ) {
         about: function() {
             console.log( "Open 'about' modal" );
         },
+        email: function() {
+            console.log( "Open 'email' modal" );
+        },
         involved: function() {
             console.log( "Open 'involved' modal" );
         },
         share: function() {
             console.log( "Open 'share' modal" );
+
+            $(".modal-overlay, .share-modal")
+                .removeClass("displaynone");
+
+            $(".close-modal").one("click", function() {
+                $(".modal-overlay, .share-modal").addClass("displaynone");
+            });
         }
     };
 
