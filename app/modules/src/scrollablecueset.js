@@ -4,6 +4,8 @@
       JST = exports.JST || {};
 
   // TODO: This should be moved to a file and dynamically preloaded
+  JST.close = "<div id='close'>X</div>";
+
   JST.caption = "<div id='caption'><div class='progress-outer'><div class='progress-inner'></div></div><div class='text'></div><div class='time'></div></div>";
 
   function pad( value, width, padding ) {
@@ -46,7 +48,7 @@
 
 
   function ScrollableCueset( options ) {
-    var images, videos, captions, current, previous, dims, $container, playChild;
+    var images, videos, captions, current, previous, dims, $container, playChild, closeChild;
 
     Abstract.put.call( this, options );
 
@@ -219,7 +221,7 @@
         // Set the "left" or "right" position in pixels to keep the
         // bubbles snug against the child video that will eventually
         // be placed in the center.
-        image.css( side, (dims.center.x - distance) + "px" );
+        image.css( side, (dims.center.x - position) + "px" );
 
         // Generate an element in a jQuery object for the
         // video that is associated with this image icon
@@ -260,24 +262,6 @@
       this.$arrow
     );
 
-    this.$primary.on("click", function() {
-      // Remove any residual video elements
-      // TODO: Abstract this operation
-      this.$container.find("video:not(#" + this.video.media.id + "),#caption").remove();
-      this.$primary.animate({ opacity: 1 }, "fast");
-
-      this.unmute();
-
-      previous = null;
-    }.bind(this));
-
-    // When the Primary video is "scrolled", hide the text from the on-surface
-    // scrolling prompt. #40
-    this.$primary.on("wheel mousewheel", function() {
-      this.$arrow.find("p").fadeOut(800);
-    }.bind(this));
-
-
     playChild = function( event ) {
       var current, caption, video;
 
@@ -317,8 +301,17 @@
       });
 
       // Append the child video element
+      this.$container.append( JST.close );
       this.$container.append( video );
       this.$container.append( JST.caption );
+
+      // Adds "per-child" video "close" button.
+      $("#close").css({
+
+        top: (video.offset().top - 30) + "px",
+        right: video.offset().left + "px",
+
+      }).one("click", closeChild );
 
       // Set the caption box position
       // This is somewhat insane and hard to look at.
@@ -375,6 +368,27 @@
 
     // End "playChild"
     }.bind(this);
+
+
+    closeChild = function() {
+      // Remove any residual video elements
+      // TODO: Abstract this operation
+      this.$container.find("video:not(#" + this.video.media.id + "),#caption,#close").remove();
+      this.$primary.animate({ opacity: 1 }, "fast");
+
+      this.unmute();
+
+      previous = null;
+    }.bind(this);
+
+
+    this.$primary.on("click", closeChild );
+
+    // When the Primary video is "scrolled", hide the text from the on-surface
+    // scrolling prompt. #40
+    this.$primary.on("wheel mousewheel", function() {
+      this.$arrow.find("p").fadeOut(800);
+    }.bind(this));
 
     this.$container.on("click", ".icons", playChild );
   }

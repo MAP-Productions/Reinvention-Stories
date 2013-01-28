@@ -181,6 +181,14 @@ body {
   right: 5%;
 }
 
+#close {
+  /* REPLACE THIS WITH "CLOSE" BUTTON */
+  color: white;
+  z-index: 997;
+  position: absolute;
+  cursor: pointer;
+}
+
 #caption {
   z-index: 997;
   margin: auto auto;
