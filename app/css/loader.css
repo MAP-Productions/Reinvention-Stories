@@ -35,11 +35,11 @@
 
 .loader-overlay .loader-content a.fullscreen-link {
 	color: #e620a0;
-	font: 900 11.15px/13px brandon_grotesque, sans-serif;
+	font: 900 11.15px/12px brandon_grotesque, sans-serif;
 	text-transform: uppercase;
 	padding-left: 25px;
-	height: 13px;
+	height: 12px;
 	margin-top: 18px;
 	display: block;
-	background:  url(../img/fullscreen-magenta.png) no-repeat;
+	background:  url(../img/fullscreen-icons.png) no-repeat 0 -12px;
 }

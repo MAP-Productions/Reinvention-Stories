@@ -113,11 +113,15 @@
     padding: 0;
     margin: -3px 0 0 39px;
     text-indent: -9999px;
-    width: 15px;
-    height: 13px;
+    width: 14px;
+    height: 12px;
     display: inline-block;
     vertical-align: middle;
-    background: url(../img/fullscreen-gray.png);
+    background: url(../img/fullscreen-icons.png);
+}
+
+#reinvention-menu .meta-menu li.fullscreen a:hover {
+    background-position: 0 -12px;
 }
 
 #reinvention-menu .meta-menu li a {
