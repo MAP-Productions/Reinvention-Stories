@@ -328,6 +328,8 @@
       // video element's native play() method)
       video.get(0).play();
 
+      console.log( "Playing Source: ", video.get(0).currentSrc );
+
       // When the video has played to the end or is
       // scrolled by a mouse wheel, trigger a click on the
       // primary video surface. [pg 7]
