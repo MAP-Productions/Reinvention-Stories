@@ -56,13 +56,13 @@ define([
                 }
             }).on( "ended", handler );
 
-            // Begin playing the Billboard loop at 1:34 (94s)
-            $video.cue( 94, function() {
+            // Begin playing the Billboard loop at 1:10 (70s)
+            $video.cue( 70, function() {
                 $audio.volume(0).play();
             });
 
-            // Pause the intro video at 1:35 (95s)
-            $video.cue( 95, function() {
+            // Pause the intro video at 1:11 (71s)
+            $video.cue( 71, function() {
                 this.pause();
 
                 // Any single mousemovement will restart the video
