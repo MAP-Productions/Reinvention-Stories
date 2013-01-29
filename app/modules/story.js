@@ -92,6 +92,7 @@ define([
         afterRender: function() {
             // http://alpha.zeega.org/74868
             // http://alpha.zeega.org/__ID__
+            var _this = this;
             var config, id, act, data, isLast, $timeline, createChapterMenu;
 
             config = {
@@ -119,6 +120,7 @@ define([
                 this.zeega = new Zeega.player( config );
 
                 this.zeega.on("frame_rendered", function( frame ) {
+                    _this.showHide.showBriefly();
                     $(".chapter").removeClass("active").filter("#" + frame.id).addClass("active");
                 });
 
@@ -174,6 +176,10 @@ define([
 
             // Trick the navigation into opening
             Nav.mousemove({ pageY: 10 });
+
+            // todo: unbind when leaving view
+            _.bindAll(this, 'showHide.mousemove');
+            $('body').on('mousemove', this.showHide.mousemove);
         },
 
         control: function( event ) {
@@ -213,7 +219,57 @@ define([
             this.zeega.on("frame_rendered", function() {
                 this.zeega.play();
             }.bind(this));
-        }
+        },
+
+        // handle mouse movement to open/close bottom chapter nav
+        showHide: (function() {
+            var chapterNavHidden = false,
+                hideAfter = 3000, // how long after triggering to hide chapter nav
+                hideTimer,
+                mousemove = function(e) {
+                    var windowDims = {
+                            x: window.innerWidth,
+                            y: window.innerHeight
+                        },
+                        posFromBottom = windowDims.y - e.pageY,
+                        triggerHeight = 40; // how many pixels at the bottom of the screen trigger the nav
+
+                        if (posFromBottom < triggerHeight && chapterNavHidden) {
+                            clearTimeout(hideTimer);
+                            showChapterNav();
+                        } else if (posFromBottom > triggerHeight && !chapterNavHidden) {
+                            hideTimer = setTimeout(hideChapterNav, hideAfter);
+                        }
+
+                },
+
+                showBriefly = function() {
+                    showChapterNav();
+                    hideTimer = setTimeout(hideChapterNav, hideAfter);
+                };
+
+                showChapterNav = function() {
+                    chapterNavHidden = false;
+
+                    this.$('#reinvention-story-controls').stop().animate({
+                        opacity: 1
+                    }, 500);
+
+                },
+
+                hideChapterNav = function() {
+                    chapterNavHidden = true;
+
+                    this.$('#reinvention-story-controls').stop().animate({
+                        opacity: 0
+                    }, 500);
+                };
+
+            return {
+                mousemove: mousemove,
+                showBriefly: showBriefly
+            };
+        }())
 
         // ,
 
