@@ -92,7 +92,6 @@ define([
         afterRender: function() {
             // http://alpha.zeega.org/74868
             // http://alpha.zeega.org/__ID__
-            var _this = this;
             var config, id, act, data, isLast, $timeline, createChapterMenu;
 
             config = {
@@ -120,9 +119,9 @@ define([
                 this.zeega = new Zeega.player( config );
 
                 this.zeega.on("frame_rendered", function( frame ) {
-                    _this.showHide.showBriefly();
+                    this.showHide.showBriefly();
                     $(".chapter").removeClass("active").filter("#" + frame.id).addClass("active");
-                });
+                }.bind(this));
 
                 this.zeega.on("deadend_frame", function() {
                     isLast = true;
@@ -178,8 +177,8 @@ define([
             Nav.mousemove({ pageY: 10 });
 
             // todo: unbind when leaving view
-            _.bindAll(this, 'showHide.mousemove');
-            $('body').on('mousemove', this.showHide.mousemove);
+            _.bindAll(this, "showHide.mousemove");
+            App.DOM.$body.on('mousemove', this.showHide.mousemove);
         },
 
         control: function( event ) {
