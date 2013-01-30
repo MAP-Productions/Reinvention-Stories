@@ -161,3 +161,20 @@
 #reinvention-story-controls .controls-bar .act-listing .chapter.active .time {
   display: inline-block;
 }
+
+#act-bug {
+  background: rgba(135,134,131,0.4);
+  bottom: 7px;
+  border-radius: 19px;
+  color: #969696;
+  font: 700 12px/12px brandon_grotesque, sans-serif;
+  height: 31px;
+  left: 14px;
+  opacity: 0;
+  padding-top: 7px;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  width: 38px;
+  z-index: 19;
+}

@@ -230,13 +230,13 @@ define([
                             x: window.innerWidth,
                             y: window.innerHeight
                         },
-                        posFromBottom = windowDims.y - e.pageY,
-                        triggerHeight = 40; // how many pixels at the bottom of the screen trigger the nav
+                        pxFromBottom = windowDims.y - e.pageY,
+                        triggerHeight = 50; // how many pixels at the bottom of the screen trigger the nav
 
-                        if (posFromBottom < triggerHeight && chapterNavHidden) {
+                        if (pxFromBottom < triggerHeight && chapterNavHidden) {
                             clearTimeout(hideTimer);
                             showChapterNav();
-                        } else if (posFromBottom > triggerHeight && !chapterNavHidden) {
+                        } else if (pxFromBottom > triggerHeight && !chapterNavHidden) {
                             hideTimer = setTimeout(hideChapterNav, hideAfter);
                         }
 
@@ -250,8 +250,11 @@ define([
                 showChapterNav = function() {
                     chapterNavHidden = false;
 
-                    this.$('#reinvention-story-controls').stop().animate({
+                    this.$("#reinvention-story-controls").stop().animate({
                         opacity: 1
+                    }, 500);
+                    this.$("#act-bug").stop().animate({
+                        opacity: 0
                     }, 500);
 
                 },
@@ -259,8 +262,11 @@ define([
                 hideChapterNav = function() {
                     chapterNavHidden = true;
 
-                    this.$('#reinvention-story-controls').stop().animate({
+                    this.$("#reinvention-story-controls").stop().animate({
                         opacity: 0
+                    }, 500);
+                    this.$("#act-bug").stop().animate({
+                        opacity: 1
                     }, 500);
                 };
 
