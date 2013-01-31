@@ -6,27 +6,27 @@
     "audio": "city-traffic-1",
     "cues": [
       {
-        "clip": "SV_A1_MuralProject",
+        "clip": "act_1_road_story_1",
         "caption": "Twin Towers Neighborhood Mural Project with K12 Gallery",
         "start": 1
       },
       {
-        "clip": "SV_A1_GayMensChorus",
+        "clip": "act_1_road_story_2",
         "caption": "Dayton Gay Men's Chorus ExtrABBAganza",
         "start": 8
       },
       {
-        "clip": "SV_A1_WordlCup",
+        "clip": "act_1_road_story_3",
         "caption": "Dayton World Cup Soccer Tournament",
         "start": 15
       },
       {
-        "clip": "SV_A1_BlessingoftheBikes2",
+        "clip": "act_1_road_story_4",
         "caption": "Blessing of the Bikes",
         "start": 22
       },
       {
-        "clip": "SV_A1_FestivalMontage",
+        "clip": "act_1_road_story_5",
         "caption": "Downtown Dayton Revival Festival",
         "start": 29
       }
