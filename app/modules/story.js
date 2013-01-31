@@ -97,7 +97,8 @@ define([
             config = {
                 target: "#reinvention-story",
                 autoplay: true,
-                window_fit: true
+                cover: "vertical",
+                windowRatio: 16/9
             };
 
             id = this.model.get("id");
@@ -209,15 +210,18 @@ define([
             event.preventDefault();
 
             // Pause the currently playing frame.
-            this.zeega.pause();
+            //this.zeega.pause();
 
             // Cue a jump to the frame being requested
             this.zeega.cueFrame( $(event.currentTarget).attr("id") );
 
             // Once that frame is rendered, play the frame.
+            /*
             this.zeega.on("frame_rendered", function() {
+                console.log('frame_rendered bound after jump function');
                 this.zeega.play();
             }.bind(this));
+            */
         },
 
         // handle mouse movement to open/close bottom chapter nav

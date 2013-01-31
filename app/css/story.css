@@ -91,6 +91,11 @@
   margin-right: 15px;
 }
 
+/* Temporary until acts 2 and 3 are ready - only show act one. - Remove to show all acts. */
+#reinvention-story-controls .controls-bar .acts-chapters .act-listing:not(:first-child) {
+  display: block;
+}
+
 /* act titles */
 #reinvention-story-controls .controls-bar .act-listing .act-title {
   color: #242424;
@@ -146,6 +151,7 @@
   display: none;
   font-family: brandon_grotesque, sans-serif;
   font-weight: 500;
+  width: 85px;
 }
 
 #reinvention-story-controls .controls-bar .act-listing .chapter a:hover {
