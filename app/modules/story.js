@@ -98,8 +98,7 @@ define([
                 target: "#reinvention-story",
                 autoplay: true,
                 cover: "vertical",
-                windowRatio: 16/9,
-                debugEvents: true
+                windowRatio: 16/9
             };
 
             id = this.model.get("id");
