@@ -255,7 +255,7 @@
     // TODO: This shouldn't be here, but it works for now :(
     this.$arrow = $("<div>").addClass("arrow-instruction").html(
       "<img src='/app/img/road-arrow.png' class='arrow'>" +
-      "<p>Scroll up to move forward and meet our neighbors</p>"
+      "<p>Scroll here to see signs of life in Dayton</p>"
     );
 
     this.$container.append(
