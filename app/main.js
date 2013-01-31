@@ -54,17 +54,23 @@ function( App, Router, Act ) {
         email: function() {
             console.log( "Open 'email' modal" );
         },
-        involved: function() {
-            console.log( "Open 'involved' modal" );
-        },
         share: function() {
-            console.log( "Open 'share' modal" );
-
+            console.log( "Open 'involved' modal" );
             $(".modal-overlay, .share-modal")
                 .removeClass("displaynone");
 
             $(".close-modal").one("click", function() {
                 $(".modal-overlay, .share-modal").addClass("displaynone");
+            });
+        },
+        involved: function() {
+            console.log( "Open 'share' modal" );
+
+            $(".modal-overlay, .email-modal")
+                .removeClass("displaynone");
+
+            $(".close-modal").one("click", function() {
+                $(".modal-overlay, .email-modal").addClass("displaynone");
             });
         }
     };
