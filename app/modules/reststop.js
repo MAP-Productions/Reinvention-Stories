@@ -220,7 +220,7 @@ define([
     Answer.prototype.reveal = function() {
         this.conceal({ except: this.$answer });
 
-        this.$answer.appendTo( this.$reststop ).fadeIn(800);
+        this.$answer.appendTo( this.$reststop ).fadeIn(1000);
 
         return this;
     };
@@ -242,7 +242,7 @@ define([
 
         Answer.Rendered.forEach(function( answer ) {
             if ( options.except.indexOf( answer ) === -1 ) {
-                answer.fadeOut( 200 , function() {
+                answer.fadeOut( 1500 , function() {
                     answer.remove();
                 });
             }
