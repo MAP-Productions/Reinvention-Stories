@@ -146,6 +146,7 @@
   display: none;
   font-family: brandon_grotesque, sans-serif;
   font-weight: 500;
+  width: 79px;
 }
 
 #reinvention-story-controls .controls-bar .act-listing .chapter a:hover {
