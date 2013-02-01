@@ -75,14 +75,22 @@ define([
                 });
             });
 
+            this.centerIntroVideo();
+
+            App.DOM.$window.on("resize", function() {
+                this.centerIntroVideo();
+            }.bind(this) );
+
+            // Trick the navigation to hidden state.
+            Nav.mousemove({ pageY: 101 });
+        },
+
+        centerIntroVideo: function() {
             // Set the correct margins to pull the video into the center
             this.$el.find("video").css({
                 marginLeft: "-" + (parseInt( this.$el.css("width"), 10 ) / 4) + "px",
                 marginTop: "-" + (parseInt( this.$el.css("height"), 10 ) / 4) + "px"
             });
-
-            // Trick the navigation to hidden state.
-            Nav.mousemove({ pageY: 101 });
         }
     });
 
