@@ -1,9 +1,11 @@
 define([
     "app",
 
-    "modules/data"
+    "modules/data",
 
-], function( App, Data ) {
+    "modules/videopos"
+
+], function( App, Data, VideoPos ) {
 
     var Road;
 
@@ -47,6 +49,8 @@ define([
 
         afterRender: function() {
             var act, id, scs;
+
+            VideoPos.positionVideo( this.$("video") );
 
             act = this.model.get("act");
             id = this.model.get("id");

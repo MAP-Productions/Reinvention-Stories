@@ -3,8 +3,9 @@ define([
     "modules/tweet",
     "moment",
     "modules/data",
+    "modules/videopos",
     "text!templates/reststop/answer.html"
-], function( App, Tweet, Moment, Data, answer ) {
+], function( App, Tweet, Moment, Data, VideoPos, answer ) {
 
     var Reststop,
         TWITTER_USER = "reinventdayton";
@@ -65,6 +66,8 @@ define([
             Answer.isValid.knownIds = new Set();
         },
         afterRender: function() {
+
+            VideoPos.positionVideo( this.$("video") );
 
             // WARNING: Clients may not make more than 150 requests per hour.
             //          LIMIT REQUEST INTERVALS TO ONCE PER MINUTE!!!

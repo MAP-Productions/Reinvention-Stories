@@ -2,10 +2,11 @@ require([
     "app",
     "router",
     "modules/act",
+    "modules/videopos",
     "modules/nav"
 ],
 
-function( App, Router, Act ) {
+function( App, Router, Act, VideoPos ) {
 
     var $window, $document, $body, fullscreen, commands;
 
@@ -76,11 +77,10 @@ function( App, Router, Act ) {
     };
 
     App.DOM.$window.on("resize", function() {
-        // TODO:
-        // When the window is resized, so to should any video currently
+        // When the window is resized, so to should any full-bleed video currently
         // being displayed in the reinvention viewport.
-        var $video = $("#reinvention-viewport").find("video");
-        // console.log( $video );
+        var $video = $("#reinvention-viewport").find("video.full-bleed");
+        VideoPos.positionVideo( $video );
     });
 
     App.DOM.$body.on("click", "[data-command]", function( event ) {
