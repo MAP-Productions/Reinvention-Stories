@@ -94,8 +94,7 @@ body {
 }
 
 #reinvention-reststop video,
-#reinvention-road video,
-#reinvention-intro video  {
+#reinvention-road video {
   position: absolute;
   left: 0;
   top: 0;
@@ -104,12 +103,6 @@ body {
   z-index: 0;
 }
 
-#reinvention-intro video {
-  position: fixed;
-  width: 50%;
-  left: 50%;
-  top: 50%;
-}
 
 #reinvention-reststop-background {
   width: 100%;
