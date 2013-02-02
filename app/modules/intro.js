@@ -1,7 +1,8 @@
 define([
     "app",
-    "modules/nav"
-], function( App, Nav ) {
+    "modules/nav",
+    "modules/videopos"
+], function( App, Nav, VideoPos ) {
 
     var Intro = App.module();
 
@@ -34,10 +35,12 @@ define([
         },
 
         afterRender: function() {
-            var $video, $audio;
+            var $video, $audio, $videoEl;
 
             $video = Popcorn("#reinvention-intro video");
             $audio = Popcorn("#reinvention-intro audio");
+
+            $videoEl = $("#reinvention-intro video");
 
             function handler() {
                 App.goto( 1, "story" );
@@ -63,16 +66,20 @@ define([
 
             // Pause the intro video at 1:11 (71s)
             $video.cue( 71, function() {
-                this.pause();
+                $video.pause();
 
                 // Any single mousemovement will restart the video
                 // and stop the looping audio
                 App.DOM.$body.one("mousemove", function() {
+
+                    VideoPos.positionVideo($videoEl, { animate: true });
+                    $videoEl.addClass("full-bleed");
+
                     $video.play();
                     $audio.volumeOut( 500, function() {
                         this.pause();
                     });
-                });
+                } );
             });
 
             this.centerIntroVideo();
@@ -86,11 +93,13 @@ define([
         },
 
         centerIntroVideo: function() {
-            // Set the correct margins to pull the video into the center
-            this.$el.find("video").css({
-                marginLeft: "-" + (parseInt( this.$el.css("width"), 10 ) / 4) + "px",
-                marginTop: "-" + (parseInt( this.$el.css("height"), 10 ) / 4) + "px"
-            });
+            if ( !this.$el.find("video").hasClass("full-bleed") ) {
+                // set the correct margins to pull the video into the center
+                this.$el.find("video").css({
+                    marginLeft: "-" + (parseInt( this.$el.css("width"), 10 ) / 4) + "px",
+                    marginTop: "-" + (parseInt( this.$el.css("height"), 10 ) / 4) + "px"
+                });
+            }
         }
     });
 
