@@ -72,7 +72,9 @@ define([
                 // and stop the looping audio
                 App.DOM.$body.one("mousemove", function() {
 
+                    // animate video to full-bleed
                     VideoPos.positionVideo($videoEl, { animate: true });
+                    // this class will ensure full-bleed video positioning is retained on window resize
                     $videoEl.addClass("full-bleed");
 
                     $video.play();
@@ -94,7 +96,8 @@ define([
 
         centerIntroVideo: function() {
             if ( !this.$el.find("video").hasClass("full-bleed") ) {
-                // set the correct margins to pull the video into the center
+                // if the video hasn't been set to full-bleet, set
+                // the correct margins to pull the video into the center
                 this.$el.find("video").css({
                     marginLeft: "-" + (parseInt( this.$el.css("width"), 10 ) / 4) + "px",
                     marginTop: "-" + (parseInt( this.$el.css("height"), 10 ) / 4) + "px"

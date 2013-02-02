@@ -1,6 +1,7 @@
 #reinvention-intro {
 	position: absolute;
 	background: #000 url(../img/loader-bg.jpg) no-repeat center center;
+	background-size: cover;
 	left: 0;
 	top: 0;
 	width: 100%;
