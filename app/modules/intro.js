@@ -61,7 +61,7 @@ define([
 
             // Begin playing the Billboard loop at 1:10 (70s)
             $video.cue( 70, function() {
-                $audio.volume(0).play();
+                $audio.play();
             });
 
             // Pause the intro video at 1:11 (71s)
