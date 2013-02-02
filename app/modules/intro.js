@@ -40,9 +40,27 @@ define([
             $video = Popcorn("#reinvention-intro video");
             $audio = Popcorn("#reinvention-intro audio");
 
+            $loaderEl = $("#reinvention-intro .loader");
             $videoEl = $("#reinvention-intro video");
 
-            function handler() {
+            // when video is ready to play, fade out the loader and play
+            // delay if if it your first visit determined by App.firstVisit()
+            // TODO: animate the loader circle
+            $video.on("canplay", function() {
+                var introDelay = App.firstVisit() ? 7000 : 1000;
+
+                _.delay( function() {
+                    $loaderEl.fadeOut(1000);
+
+                    $videoEl.animate({
+                        opacity: 1
+                    }, 1000, function() {
+                        $video.play();
+                    });
+                }, introDelay );
+            });
+
+            function skipIntro() {
                 App.goto( 1, "story" );
             }
 
@@ -52,12 +70,12 @@ define([
                 start: 8,
                 end: 12,
                 onStart: function() {
-                    this.on( "click", handler );
+                    this.on( "click", skipIntro );
                 },
                 onEnd: function() {
-                    this.off( "click", handler );
+                    this.off( "click", skipIntro );
                 }
-            }).on( "ended", handler );
+            }).on( "ended", skipIntro );
 
             // Begin playing the Billboard loop at 1:10 (70s)
             $video.cue( 70, function() {

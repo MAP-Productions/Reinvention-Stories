@@ -96,5 +96,15 @@ function( App, Router, Act, VideoPos ) {
         }
     });
 
+    // returns true if this is your first time to the site
+    App.firstVisit = function() {
+      if (localStorage.visited === "true") {
+        return false;
+      } else {
+        localStorage.visited = true;
+        return true;
+      }
+    };
+
 
 });

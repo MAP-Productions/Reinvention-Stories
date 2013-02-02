@@ -14,10 +14,12 @@
   position: fixed;
   width: 50%;
   left: 50%;
+  opacity: 0;
   top: 50%;
+  z-index: 1;
 }
 
-#reinvention-intro .loader-content {
+#reinvention-intro .loader {
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -25,9 +27,10 @@
 	padding-left: 130px;
 	height: 140px;
 	margin: -70px 0 0 -260px;
+	z-index: 2;
 }
 
-#reinvention-intro .loader-content .pie {
+#reinvention-intro .loader .pie {
 	width: 107px;
 	height: 107px;
 	position: absolute;
@@ -36,13 +39,13 @@
 	background: url(../img/loading-pie.png) no-repeat;
 }
 
-#reinvention-intro .loader-content p {
+#reinvention-intro .loader p {
 	color: #fff;
 	margin-top: 14px;
 	font: 500 14px/18px "adelle_basic", serif;
 }
 
-#reinvention-intro .loader-content a.fullscreen-link {
+#reinvention-intro .loader a.fullscreen-link {
 	color: #e620a0;
 	font: 900 11.15px/12px brandon_grotesque, sans-serif;
 	text-transform: uppercase;
