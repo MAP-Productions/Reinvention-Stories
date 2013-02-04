@@ -309,7 +309,7 @@
       $("#close").css({
 
         top: video.offset().top + "px",
-        right: (video.offset().left - 22) + "px",
+        right: (video.offset().left - 22) + "px"
 
       }).one("click", closeChild );
 
@@ -389,7 +389,7 @@
     // When the Primary video is "scrolled", hide the text from the on-surface
     // scrolling prompt. #40
     this.$primary.on("wheel mousewheel", function() {
-      this.$arrow.find("p").fadeOut(800);
+      this.$arrow.fadeOut(800);
     }.bind(this));
 
     this.$container.on("click", ".icons", playChild );
