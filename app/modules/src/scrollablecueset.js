@@ -48,7 +48,7 @@
 
 
   function ScrollableCueset( options ) {
-    var images, videos, captions, current, previous, dims, $container, playChild, closeChild;
+    var images, childVideosInfo, captions, current, previous, dims, $container, playChild, closeChild;
 
     Abstract.put.call( this, options );
 
@@ -77,12 +77,12 @@
     this.$primary = $(this.video.media);
 
     images = {};
-    videos = {};
+    childVideosInfo = {};
     captions = {};
 
     dims = {
-      width: parseInt( this.$container.css("width"), 10 ),
-      height: parseInt( this.$container.css("height"), 10 )
+      width: this.$container.width(),
+      height: this.$container.height()
     };
 
     dims.center = {
@@ -230,9 +230,17 @@
         // TODO: The child video should adjust its size according to the window!!!
         //
         //
-        video = $("<video>").attr( "id", "video-" + cue.clip ).html(
-          sources( VIDEO_PATH, cue.clip )
-        );
+        //video = $("<video>").attr( "id", "video-" + cue.clip ).html(
+        //  sources( VIDEO_PATH, cue.clip )
+        //);
+
+        // Generate an object with everything we need to create the video element
+        // We can't creae a jQuery element just yet as we don't want the browser
+        // downloading all the videos just yet!
+        video = {
+          id: "video-" + cue.clip,
+          innerHtml: sources( VIDEO_PATH, cue.clip )
+        };
 
         // TODO: Experiment with making the image
         //        dimensions based on the video
@@ -244,7 +252,7 @@
         // Store references to the newly created image and video
         // jQuert elements in a free-var cache.
         images[ cue.clip ] = image;
-        videos[ cue.clip ] = video;
+        childVideosInfo[ cue.clip ] = video;
         captions[ cue.clip ] = cue.caption;
 
       }.bind(this));
@@ -263,12 +271,14 @@
     );
 
     playChild = function( event ) {
-      var current, caption, video;
+      var current, caption, $childVideo;
 
       current = $(event.currentTarget).prop("video");
       caption = captions[ current ];
-      video = videos[ current ];
-      video.media = Popcorn( video[0] );
+      videoInfo = childVideosInfo[ current ];
+      // create a jquery object for the video from the videoInfo object
+      $childVideo = $("<video>").attr( "id", videoInfo.id ).html(videoInfo.innerHtml);
+      $childVideo.media = Popcorn( $childVideo[0] );
 
       this.mute();
 
@@ -286,13 +296,17 @@
       // TODO: Abstract this operation
       this.$container.find("video:not(#" + this.video.media.id + "),#caption").remove();
 
+      // Append the child video element
+      this.$container.append( JST.close );
+      this.$container.append( $childVideo );
+      this.$container.append( JST.caption );
 
       // Reset video to play from beginning
-      video.get(0).currentTime = 0;
+      // $childVideo.get(0).currentTime = 0;
 
       // Set the child element's position, relative
       // to the dimensions of the primary video
-      video.css({
+      $childVideo.css({
         // top: dims.height / 4 + "px",
         // left: dims.width / 4 + "px",
         width: dims.center.x + "px",
@@ -300,16 +314,11 @@
         marginTop: "-" + (dims.center.y / 2) + "px"
       });
 
-      // Append the child video element
-      this.$container.append( JST.close );
-      this.$container.append( video );
-      this.$container.append( JST.caption );
-
       // Adds "per-child" video "close" button.
       $("#close").css({
 
-        top: video.offset().top + "px",
-        right: (video.offset().left - 22) + "px"
+        top: $childVideo.offset().top + "px",
+        right: ($childVideo.offset().left - 22) + "px"
 
       }).one("click", closeChild );
 
@@ -317,8 +326,8 @@
       // This is somewhat insane and hard to look at.
       $("#caption").css({
 
-        top: video.offset().top + parseInt( video.css("height"), 10 ) + "px",
-        left: video.offset().left + "px",
+        top: ( $childVideo.offset().top + $childVideo.height() + 30 ) + "px",
+        left: $childVideo.offset().left + "px",
         width: dims.center.x + "px"
 
       }).find(".text").html( caption );
@@ -326,9 +335,9 @@
       // Play the newly placed video element
       // (Dereference the jQuery object to use the
       // video element's native play() method)
-      video.get(0).play();
+      $childVideo.get(0).play();
 
-      console.log( "Playing Source: ", video.get(0).currentSrc );
+      console.log( "Playing Source: ", $childVideo.get(0).currentSrc );
 
       // When the video has played to the end or is
       // scrolled by a mouse wheel, trigger a click on the
@@ -338,7 +347,7 @@
       // primary video to fade in/restore
       //
 
-      video.add( this.$primary ).one("ended wheel mousewheel", function( event ) {
+      $childVideo.add( this.$primary ).one("ended wheel mousewheel", function( event ) {
         this.isOpen = false;
         this.$primary.triggerHandler("click");
       }.bind(this));
@@ -352,11 +361,11 @@
       // Intially based on:
       // http://jsfiddle.net/rwaldron/DY9jG/
       //
-      video.media.on("canplayall", function() {
+      $childVideo.media.on("canplayall", function() {
         var $progress = this.$container.find(".progress-inner"),
             $time = this.$container.find(".time");
 
-        video.media.on("timeupdate", function() {
+        $childVideo.media.on("timeupdate", function() {
           $progress.width(
             (this.currentTime() / this.duration()) * dims.center.x
           );
