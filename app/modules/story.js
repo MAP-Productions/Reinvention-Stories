@@ -98,7 +98,8 @@ define([
                 target: "#reinvention-story",
                 autoplay: true,
                 cover: "vertical",
-                windowRatio: 16/9
+                windowRatio: 16/9,
+                debugEvents: true
             };
 
             id = this.model.get("id");
@@ -119,7 +120,7 @@ define([
                 // Initialize a new Zeega.player instance with the |config| objecr
                 this.zeega = new Zeega.player( config );
 
-                this.zeega.on("frame_rendered", function( frame ) {
+                this.zeega.on("frame_play", function( frame ) {
                     this.showHide.showBriefly();
                     $(".chapter").removeClass("active").filter("#" + frame.id).addClass("active");
                 }.bind(this));
@@ -215,13 +216,6 @@ define([
             // Cue a jump to the frame being requested
             this.zeega.cueFrame( $(event.currentTarget).attr("id") );
 
-            // Once that frame is rendered, play the frame.
-            /*
-            this.zeega.on("frame_rendered", function() {
-                console.log('frame_rendered bound after jump function');
-                this.zeega.play();
-            }.bind(this));
-            */
         },
 
         // handle mouse movement to open/close bottom chapter nav
