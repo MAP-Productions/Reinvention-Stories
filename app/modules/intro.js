@@ -43,11 +43,17 @@ define([
             $loaderEl = $("#reinvention-intro .loader");
             $videoEl = $("#reinvention-intro video");
 
+            $video.on("progress", function() {
+                console.log( $video.buffered().end(0) );
+            });
+
+
             // when video is ready to play, fade out the loader and play
             // delay if if it your first visit determined by App.firstVisit()
             // TODO: animate the loader circle
-            $video.on("canplay", function() {
-                var introDelay = App.firstVisit() ? 7000 : 1000;
+            $video.on("canplaythrough", function() {
+                //var introDelay = App.firstVisit() ? 7000 : 1000;
+                var introDelay =  7000;
 
                 _.delay( function() {
                     $loaderEl.fadeOut(1000);

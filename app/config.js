@@ -25,6 +25,7 @@ require.config({
         abstract: "../vendor/js/libs/abstract",
         moment: "../vendor/js/libs/moment",
         store: "../vendor/js/libs/store",
+        progress: "../vendor/js/libs/progress",
 
         scrollable: "../app/modules/src/mediascrollcontrol",
         scrollablecueset: "../app/modules/src/scrollablecueset",
