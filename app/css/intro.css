@@ -30,13 +30,12 @@
 	z-index: 2;
 }
 
-#reinvention-intro .loader .pie {
+#reinvention-intro .loader canvas {
 	width: 107px;
 	height: 107px;
 	position: absolute;
 	left: 0;
 	top: 0;
-	background: url(../img/loading-pie.png) no-repeat;
 }
 
 #reinvention-intro .loader p {

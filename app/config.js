@@ -68,6 +68,10 @@ require.config({
 
         bootstrap: [ "jquery" ],
 
+        progress: {
+            exports: "ProgressCircle"
+        },
+
         scrollable: [ "zeegaplayer" ],
         scrollablecueset: [ "scrollable" ],
 

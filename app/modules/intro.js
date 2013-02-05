@@ -1,8 +1,9 @@
 define([
     "app",
     "modules/nav",
-    "modules/videopos"
-], function( App, Nav, VideoPos ) {
+    "modules/videopos",
+    "progress"
+], function( App, Nav, VideoPos, ProgressCircle ) {
 
     var Intro = App.module();
 
@@ -35,7 +36,9 @@ define([
         },
 
         afterRender: function() {
-            var $video, $audio, $videoEl;
+            var $video, $audio, $videoEl, pieCanvas, progressPie, timeAtStart, introDelay;
+
+            introDelay = App.firstVisit() ? introDelay : 1000;
 
             $video = Popcorn("#reinvention-intro video");
             $audio = Popcorn("#reinvention-intro audio");
@@ -43,17 +46,44 @@ define([
             $loaderEl = $("#reinvention-intro .loader");
             $videoEl = $("#reinvention-intro video");
 
-            $video.on("progress", function() {
-                console.log( $video.buffered().end(0) );
+            // todo: break pie stuff out
+            timeAtStart = new Date().getTime();
+            console.log(timeAtStart);
+
+            pieCanvas = this.$("#pie").get(0);
+
+            progressPie = new ProgressCircle({
+                canvas: pieCanvas,
+                minRadius: 0, // Inner radius of the innermost circle
+                arcWidth: 30, // Width of each circle
+                gapWidth: 0, // Space between adjacent circles
+                centerX: 53, // X coordinate of the circle center
+                centerY: 53 // Y coordinate of the circle center
             });
+
+            progressPie.addEntry({
+                fillColor: 'rgba(255, 0, 137, 0.75)',
+                progressListener: function() {
+                    var currentTime = new Date().getTime(),
+                        elapsed = currentTime - timeAtStart;
+                        console.log(elapsed);
+
+                        if (elapsed >= introDelay) {
+                            progressPie.stop();
+                            return 1;
+                        }
+
+                    return elapsed / introDelay; // between 0 and 1
+                }
+            });
+
+            progressPie.start(33);
 
 
             // when video is ready to play, fade out the loader and play
             // delay if if it your first visit determined by App.firstVisit()
             // TODO: animate the loader circle
             $video.on("canplaythrough", function() {
-                //var introDelay = App.firstVisit() ? 7000 : 1000;
-                var introDelay =  7000;
 
                 _.delay( function() {
                     $loaderEl.fadeOut(1000);
@@ -120,7 +150,7 @@ define([
 
         centerIntroVideo: function() {
             if ( !this.$el.find("video").hasClass("full-bleed") ) {
-                // if the video hasn't been set to full-bleet, set
+                // if the video hasn't been set to full-bleed, set
                 // the correct margins to pull the video into the center
                 this.$el.find("video").css({
                     marginLeft: "-" + (parseInt( this.$el.css("width"), 10 ) / 4) + "px",
