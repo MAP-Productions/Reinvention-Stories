@@ -53,7 +53,6 @@ define([
 
             // todo: break pie stuff out
             timeAtStart = new Date().getTime();
-            console.log(timeAtStart);
 
             pieCanvas = this.$("#pie").get(0);
 
@@ -71,7 +70,6 @@ define([
                 progressListener: function() {
                     var currentTime = new Date().getTime(),
                         elapsed = currentTime - timeAtStart;
-                        console.log(elapsed);
 
                         if (elapsed >= introDelay) {
                             progressPie.stop();
