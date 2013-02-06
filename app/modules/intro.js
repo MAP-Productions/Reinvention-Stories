@@ -38,7 +38,7 @@ define([
         afterRender: function() {
             var $video, $audio, $videoEl, pieCanvas, progressPie, timeAtStart, introDelay;
 
-            introDelay = App.firstVisit() ? introDelay : 1000;
+            introDelay = App.firstVisit() ? 7000 : 1000;
 
             $video = Popcorn("#reinvention-intro video");
             $audio = Popcorn("#reinvention-intro audio");
