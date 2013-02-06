@@ -1,5 +1,9 @@
 <div id="reinvention-road" data-view="<%=model.get("id")%>">
 
+  <div class="road-loading">
+    <p>Loading road...</p>
+  </div>
+
   <video class="full-bleed" id="<%=model.get("video")%>" role="primary" loop="true">
     <source src="/app/video/<%=model.get("video")%>.webm"></source>
     <source src="/app/video/<%=model.get("video")%>.ogv"></source>

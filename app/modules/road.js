@@ -59,6 +59,11 @@ define([
                 Abstract.merge( {}, this.model.attributes )
             );
 
+            // hide loader when the video can play
+            scs.video.on("canplaythrough", function() {
+                this.$(".road-loading").fadeOut(1000);
+            }.bind(this) );
+
             // Jump to the reststop
             scs.video.on("ended", function() {
                 App.goto( act, "reststop" );
