@@ -31,20 +31,25 @@ define([
             };
         },
 
+        events: {
+            "click .skip-intro" : "skipIntro"
+        },
+
         initialize: function( config ) {
             this.model = Intro.Items.get( config.id );
         },
 
         afterRender: function() {
-            var $video, $audio, $videoEl, pieCanvas, progressPie, timeAtStart, introDelay;
+            var $video, $audio, $videoEl, $skipLink, pieCanvas, progressPie, timeAtStart, introDelay;
 
             introDelay = App.firstVisit() ? 7000 : 1000;
 
             $video = Popcorn("#reinvention-intro video");
             $audio = Popcorn("#reinvention-intro audio");
 
-            $loaderEl = $("#reinvention-intro .loader");
-            $videoEl = $("#reinvention-intro video");
+            $loaderEl = this.$(".loader");
+            $videoEl = this.$("video");
+            $skipLink = this.$(".skip-intro");
 
             // todo: break pie stuff out
             timeAtStart = new Date().getTime();
@@ -87,6 +92,7 @@ define([
 
                 _.delay( function() {
                     $loaderEl.fadeOut(1000);
+                    $skipLink.fadeIn(1000);
 
                     $videoEl.animate({
                         opacity: 1
@@ -95,23 +101,6 @@ define([
                     });
                 }, introDelay );
             });
-
-            function skipIntro() {
-                App.goto( 1, "story" );
-            }
-
-            // Set up "Skip Intro" from 8s-12s.
-            // Jump when the video ends.
-            $video.register({
-                start: 8,
-                end: 12,
-                onStart: function() {
-                    this.on( "click", skipIntro );
-                },
-                onEnd: function() {
-                    this.off( "click", skipIntro );
-                }
-            }).on( "ended", skipIntro );
 
             // Begin playing the Billboard loop at 1:10 (70s)
             $video.cue( 70, function() {
@@ -157,6 +146,10 @@ define([
                     marginTop: "-" + (parseInt( this.$el.css("height"), 10 ) / 4) + "px"
                 });
             }
+        },
+
+        skipIntro: function() {
+            App.goto( 1, "story" );
         }
     });
 

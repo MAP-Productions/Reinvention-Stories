@@ -54,3 +54,14 @@
 	display: block;
 	background:  url(../img/fullscreen-icons.png) no-repeat 0 -12px;
 }
+
+#reinvention-intro .skip-intro {
+	color: #fff;
+	display: none;
+	cursor: pointer;
+	font: 16px hand_of_sean, sans-serif;
+	position: absolute;
+	right: 40px;
+	bottom: 30px;
+	z-index: 10;
+}
