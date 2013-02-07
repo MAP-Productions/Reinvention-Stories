@@ -40,7 +40,7 @@ define([
         },
 
         afterRender: function() {
-            var $video, $audio, $videoEl, $skipLink, pieCanvas, progressPie, timeAtStart, introDelay;
+            var $video, $audio, $videoEl, $skipLink;
 
             introDelay = App.firstVisit() ? 7000 : 1000;
 
@@ -51,37 +51,7 @@ define([
             $videoEl = this.$("video");
             $skipLink = this.$(".skip-intro");
 
-            // todo: break pie stuff out
-            timeAtStart = new Date().getTime();
-
-            pieCanvas = this.$("#pie").get(0);
-
-            progressPie = new ProgressCircle({
-                canvas: pieCanvas,
-                minRadius: 0, // Inner radius of the innermost circle
-                arcWidth: 30, // Width of each circle
-                gapWidth: 0, // Space between adjacent circles
-                centerX: 53, // X coordinate of the circle center
-                centerY: 53 // Y coordinate of the circle center
-            });
-
-            progressPie.addEntry({
-                fillColor: 'rgba(255, 0, 137, 0.75)',
-                progressListener: function() {
-                    var currentTime = new Date().getTime(),
-                        elapsed = currentTime - timeAtStart;
-
-                        if (elapsed >= introDelay) {
-                            progressPie.stop();
-                            return 1;
-                        }
-
-                    return elapsed / introDelay; // between 0 and 1
-                }
-            });
-
-            progressPie.start(33);
-
+            this.spinLoader();
 
             // when video is ready to play, fade out the loader and play
             // delay if if it your first visit determined by App.firstVisit()
@@ -89,7 +59,9 @@ define([
             $video.on("canplaythrough", function() {
 
                 _.delay( function() {
-                    $loaderEl.fadeOut(1000);
+                    $loaderEl.fadeOut(1000, function() {
+                        this.progressPie.stop();
+                    }.bind(this));
                     $skipLink.fadeIn(1000);
 
                     $videoEl.animate({
@@ -97,8 +69,9 @@ define([
                     }, 1000, function() {
                         $video.play();
                     });
-                }, introDelay );
-            });
+                }.bind(this), introDelay );
+
+            }.bind(this) );
 
             // Begin playing the Billboard loop at 1:10 (70s)
             $video.cue( 70, function() {
@@ -133,6 +106,34 @@ define([
 
             // Trick the navigation to hidden state.
             Nav.mousemove({ pageY: 101 });
+        },
+
+        spinLoader: function() {
+            var pieCanvas, timeAtStart, introDelay;
+
+            timeAtStart = new Date().getTime();
+
+            pieCanvas = this.$("#intro-loading-pie").get(0);
+
+            this.progressPie = new ProgressCircle({
+                canvas: pieCanvas,
+                minRadius: 0, // Inner radius of the innermost circle
+                arcWidth: 30, // Width of each circle
+                gapWidth: 0, // Space between adjacent circles
+                centerX: 53, // X coordinate of the circle center
+                centerY: 53 // Y coordinate of the circle center
+            });
+
+            this.progressPie.addEntry({
+                fillColor: 'rgba(255, 0, 137, 0.75)',
+                progressListener: function() {
+                    var elapsed =  new Date().getTime() - timeAtStart;
+
+                    return (elapsed % 1500) / 1500;
+                }
+            });
+
+            this.progressPie.start(33);
         },
 
         centerIntroVideo: function() {
