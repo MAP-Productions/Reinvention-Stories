@@ -45,12 +45,16 @@ define([
             };
         },
 
+        events: {
+            "click .next-stop" : "gotoRestStop"
+        },
+
         initialize: function( config ) {
             this.model = Road.Items.get( config.id );
         },
 
         afterRender: function() {
-            var act, id, scs;
+            var act, id, scs, length;
 
             VideoPos.positionVideo( this.$("video") );
 
@@ -61,6 +65,11 @@ define([
                 Abstract.merge( {}, this.model.attributes )
             );
 
+            // get the length once, after metadata has loaded
+            scs.video.on("loadedmetadata", function() {
+                length = scs.video.duration();
+            }.bind(this) );
+
             this.spinLoader();
 
             // hide loader when the video can play
@@ -70,10 +79,13 @@ define([
                 }.bind(this) ) ;
             }.bind(this) );
 
-            // Jump to the reststop
-            scs.video.on("ended", function() {
-                App.goto( act, "reststop" );
-            });
+            // show reststop link teaser if you have seen the whole video
+            // the "ended" event never fires so we need to do it this way
+            scs.video.on("timeupdate", function(e) {
+                if (scs.video.currentTime() >= (Math.floor(length) - 1)  ) {
+                    this.$(".next-stop").fadeIn(1000);
+                }
+            }.bind(this) );
         },
 
         spinLoader: function() {
@@ -102,7 +114,12 @@ define([
             });
 
             this.progressPie.start(33);
+        },
+
+        gotoRestStop: function() {
+            App.goto( this.model.get("act"), "reststop" );
         }
+
 
     });
 
