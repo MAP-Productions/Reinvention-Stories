@@ -67,7 +67,16 @@ define([
 
             // get the length once, after metadata has loaded
             scs.video.on("loadedmetadata", function() {
+
                 length = scs.video.duration();
+
+                // show reststop link teaser if you have seen the whole video
+                // the "ended" event never fires (because we're looping so
+                // we need to do it this way
+                scs.video.cue(Math.floor(length - 1), function() {
+                    this.$(".next-stop").fadeIn(1000);
+                }.bind(this) );
+
             }.bind(this) );
 
             this.spinLoader();
@@ -79,13 +88,6 @@ define([
                 }.bind(this) ) ;
             }.bind(this) );
 
-            // show reststop link teaser if you have seen the whole video
-            // the "ended" event never fires so we need to do it this way
-            scs.video.on("timeupdate", function(e) {
-                if (scs.video.currentTime() >= (Math.floor(length) - 1)  ) {
-                    this.$(".next-stop").fadeIn(1000);
-                }
-            }.bind(this) );
         },
 
         spinLoader: function() {
