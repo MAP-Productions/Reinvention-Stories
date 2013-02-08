@@ -1,4 +1,5 @@
 .reststop-point {
+    cursor: pointer;
     z-index: 995;
     position: absolute;
     width: 20px;
@@ -99,11 +100,24 @@
     position: absolute;
     left: 7%;
     top: 15%;
-    width: 282px;
-    padding-left: 30px;
+    width: 30px;
+    height: 30px;
     text-shadow: 4px 0 10px rgba(0,0,0,0.55);
     background: url(../img/plus-circle.png) no-repeat 0 9px;
     z-index: 10;
+}
+
+.reststop-answer .answer-content {
+    position: absolute;
+    width: 282px;
+    left: 30px;
+    top: 0;
+}
+
+.reststop-answer.text-left .answer-content {
+    left: auto;
+    right: 40px;
+    text-align: right;
 }
 
 .reststop-answer p {

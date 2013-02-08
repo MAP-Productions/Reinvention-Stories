@@ -190,6 +190,12 @@ define([
             )
         ).css( this.style );
 
+        // If the point is going to overlap the question box, add "text-left" class
+        // 0.93 = percentage of window where right of question box falls
+        // 700 = width of question box plus an answer (the overlapping realm)
+        if ( this.coords.x > ( App.DOM.$document.width() * 0.93 ) - 700 ) {
+            this.$answer.addClass("text-left");
+        }
 
         this.$point.on("mouseover mouseleave click", function( event ) {
             if ( event.type === "click" ) {
