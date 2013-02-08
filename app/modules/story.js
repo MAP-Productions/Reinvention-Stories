@@ -133,6 +133,8 @@ define([
                     if ( isLast ) {
                         App.goto( act, "road" );
                         isLast = false;
+                    } else {
+                        this.cueNext();
                     }
                 });
 
