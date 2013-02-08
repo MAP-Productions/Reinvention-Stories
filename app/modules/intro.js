@@ -98,6 +98,11 @@ define([
                 } );
             });
 
+            // Go to the first act when the intro is over.
+            $video.on("ended", function() {
+                App.goto( 1, "story" );
+            });
+
             this.centerIntroVideo();
 
             App.DOM.$window.on("resize", function() {
