@@ -1,5 +1,7 @@
 #reinvention-menu {
     height: 85px;
+    left: 0;
+    top: 0;
     padding-bottom: 23px;
     overflow: hidden;
     background: url(../img/menu-bg.png) repeat-x center;
