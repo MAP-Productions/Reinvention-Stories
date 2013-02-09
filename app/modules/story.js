@@ -36,12 +36,13 @@ define([
             return zeegaUrl + this.id;
         },
         parse: function( obj ) {
+            console.log("Story.Model.parse");
             return obj.items[ 0 ];
         },
         initialize: function( story ) {
             this.set(
                 Abstract.merge( story, Data.from("stories").byId( story.id ), {
-                    zeega: null
+                    zeegaData: null
                 })
             );
             this.collection.add( this );
@@ -76,12 +77,14 @@ define([
         },
 
         initialize: function( config ) {
+            console.log("story init");
             this.model = Story.Items.get( config.id );
 
             // The zeega player and timeline are rendered
             // during the afterRender phase of the view.
-            // this.zeega is a reference to this.model.get("zeega")
-            this.zeega = this.model.get("zeega");
+            // this.zeegaPrefetch is a reference to this.model.get("zeegaData")
+            // The reason for this: prefetch the collection.
+            this.zeegaPrefetch = this.model.get("zeegaData");
             this.timeline = null;
         },
 
@@ -112,13 +115,15 @@ define([
             // in these cases, provide the url instead. This will give the
             // Zeega-Player instance the info it needs to request the data
             // and build a player.
+            console.log("data", data);
             config[ !data ? "url" : "data" ] = !data ?
                 this.model.url() : data;
 
 
 
-            if ( !this.zeega ) {
+            //if ( !this.zeega ) {
                 // Initialize a new Zeega.player instance with the |config| objecr
+                console.log("this.zeega BEFORE INIT ZEEGAPLAYER", this.zeega);
                 this.zeega = new Zeega.player( config );
 
                 this.zeega.on("frame_play", function( frame ) {
@@ -142,6 +147,7 @@ define([
                 $timeline = $("[data-timeline]");
 
                 this.zeega.on("media_timeupdate", function( frame ) {
+                    console.log("updating time with:", frame.current_time);
                     // Update the window-width progress bar
                     $timeline.css({
                         width: (frame.current_time / frame.duration) * 100 + "%"
@@ -149,17 +155,17 @@ define([
 
                     // Update the current time display for this chapter/frame
                     $(".chapter.active [data-time]").html( time.smpte(frame.current_time) );
-                }.bind(this));
+                }.bind(this) );
 
-                this.model.set({
-                    zeega: this.zeega
-                });
+                //this.model.set({
+                //    zeega: this.zeega
+                //});
 
-            } else {
+            //} else {
                 // Previously rendered Zeega player layout elements can
                 // be directly appended.
-                $("#reinvention-story").append(this.zeega.Layout.el);
-            }
+                //$("#reinvention-story").append(this.zeega.Layout.el);
+            //}
 
 
 

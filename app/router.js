@@ -97,14 +97,17 @@ function( App, Intro, Act, Story, Road, Reststop, Session, Data ) {
 
                 // Create the key to either reference or define (or both)
                 // any cached or caching views.
-                key = [ type, id ].join("-");
+                //key = [ type, id ].join("-");
 
                 // Reuse or create a new view, as needed
-                view = App.views[ key ] ? App.views[ key ] :
-                    new Act.Types[ type ].Views.Item({ id: id });
+                //view = App.views[ key ] ? App.views[ key ] :
+                //    new Act.Types[ type ].Views.Item({ id: id });
 
                 // Cache or "Re-cache" the view for later
-                App.views[ key ] = view;
+                //App.views[ key ] = view;
+                console.log("App.views:", App.views);
+
+                view = new Act.Types[ type ].Views.Item({ id: id });
 
                 App.layout.setViews({
                     "#reinvention-viewport": view
