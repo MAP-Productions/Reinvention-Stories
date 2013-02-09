@@ -99,7 +99,8 @@ define([
                 autoplay: true,
                 cover: "vertical",
                 windowRatio: 16/9,
-                debugEvents: true
+                debugEvents: true,
+                keyboard: false
             };
 
             id = this.model.get("id");
