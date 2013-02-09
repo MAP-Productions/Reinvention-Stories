@@ -188,14 +188,15 @@ body {
 }
 
 #reinvention-road .next-stop {
-  background: url(../img/road-next-stop.png);
-  bottom: 4%;
+  background: url(../img/road-next-stop.png) no-repeat center;
+  background-size: contain;
+  top: 5%;
   cursor: pointer;
   display: none;
-  height: 286px;
   position: absolute;
-  right: 4%;
-  width: 300px;
+  right: 3%;
+  width: 25%;
+  height: 33%;
   z-index: 5;
 }
 
