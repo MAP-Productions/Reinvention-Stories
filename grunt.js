@@ -8,7 +8,7 @@ module.exports = function(grunt) {
         copy: {
             dist: {
                 files: {
-                    "dist/release/": "app/img/**",
+                    "dist/release/": [ "app/img/**", "app/fonts/**" ],
                     "app/img/layers/": "vendor/zeegaplayer/dist/release/img/layers/*",
                     "app/img/zeegaplayer/": "vendor/zeegaplayer/dist/release/img/*"
                 },
@@ -152,8 +152,12 @@ module.exports = function(grunt) {
                 // Map `server:release` to `release` folders.
                 folders: {
                     "app": "dist/release",
+                    "app/img": "dist/release",
                     "vendor/js/libs": "dist/release",
-                    "app/css": "dist/release"
+                    "app/css": "dist/release",
+                    "app/fonts/adelle-basic": "dist/release",
+                    "app/fonts/brandon": "dist/release",
+                    "app/fonts/hand-of-sean": "dist/release"
                 }
             }
         },
