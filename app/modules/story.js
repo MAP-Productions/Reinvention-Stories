@@ -264,7 +264,7 @@ define([
                         opacity: 0
                     }, 500);
 
-                },
+                };
 
                 hideChapterNav = function() {
                     chapterNavHidden = true;
