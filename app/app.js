@@ -5,8 +5,8 @@ define([
     "backbone",
     "layout",
     "alias",
-    "scrollable",
-    "scrollablecueset",
+    "modules/src/mediascrollcontrol",
+    "modules/src/scrollablecueset",
     "serializeform",
     "unprefix"
 ],
