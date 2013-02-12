@@ -138,7 +138,12 @@ module.exports = function(grunt) {
                 folders: {
                     "app": "dist/debug",
                     "vendor/js/libs": "dist/debug",
-                    "app/css": "dist/debug"
+                    "app/css": "dist/debug",
+                    "app/img": "dist/release",
+                    "app/fonts/adelle-basic": "dist/release",
+                    "app/fonts/brandon": "dist/release",
+                    "app/fonts/hand-of-sean": "dist/release",
+                    "app/templates" : "/app/templates"
                 }
             },
 

@@ -43,17 +43,19 @@ function( $, _, Backbone, Layout ) {
         // Allow LayoutManager to augment Backbone.View.prototype.
         manage: true,
 
-        prefix: "app/templates/",
+        // prefix: "app/templates/",
 
         fetch: function( path ) {
             // Put fetch into `async-mode`.
             var done = this.async();
+            console.log("fetching a template: " + path);
 
             // Concatenate the file extension.
-            path = path + ".html";
+            path = "app/templates/" + path + ".html";
 
             // If cached, use the compiled template.
             if ( JST[ path ] ) {
+                console.log ("using JST: " + path);
                 return JST[ path ];
             }
 
