@@ -129,6 +129,7 @@ define([
                 this.zeega.on("frame_play", function( frame ) {
                     this.showHide.showBriefly();
                     $(".chapter").removeClass("active").filter("#" + frame.id).addClass("active");
+                    this.rewind( frame );
                 }.bind(this));
 
                 this.zeega.on("deadend_frame", function() {
@@ -147,7 +148,7 @@ define([
                 $timeline = $("[data-timeline]");
 
                 this.zeega.on("media_timeupdate", function( frame ) {
-                    console.log("updating time with:", frame.current_time);
+                    // console.log("updating time with:", frame.current_time);
                     // Update the window-width progress bar
                     $timeline.css({
                         width: (frame.current_time / frame.duration) * 100 + "%"
@@ -224,6 +225,18 @@ define([
 
             // Cue a jump to the frame being requested
             this.zeega.cueFrame( $(event.currentTarget).attr("id") );
+
+        },
+
+        // start frame's video layer from the cue_in time
+        rewind: function( frame ) {
+            var frameModel = this.zeega.project.getFrame( frame.id );
+
+            frameModel.layers.each( function( layer ){
+                if (layer.get( "type" ) == "Video" ) {
+                    layer.visualElement.mediaPlayer.popcorn.currentTime( layer.get( "attr" ).cue_in );
+                }
+            } );
 
         },
 
