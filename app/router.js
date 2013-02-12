@@ -81,6 +81,13 @@ function( App, Intro, Act, Story, Road, Reststop, Session, Data ) {
 
             if ( [ "intro", "road", "reststop", "story" ].indexOf(type) > -1 ) {
 
+                // Emit the kill_player event if loading a view other than story.
+                // The Zeega player instance created in the story view will destroy.
+                // This prevents problems.
+                if ( [ "intro", "road", "reststop" ].indexOf(type) > -1 ) {
+                    App.trigger("kill_player");
+                }
+
                 // Prevent attempts to re-render the current view: if this
                 // type and id are already in the viewport, do nothing.
                 if ( App.isCurrent( id, type ) ) {

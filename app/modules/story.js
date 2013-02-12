@@ -145,6 +145,11 @@ define([
                     }
                 });
 
+                App.on( "kill_player", function() {
+                    console.log("kill_player");
+                    this.destroy();
+                }.bind(this) );
+
                 $timeline = $("[data-timeline]");
 
                 this.zeega.on("media_timeupdate", function( frame ) {
@@ -215,6 +220,14 @@ define([
                 $("[data-controls='" + toggles + "']")
                     .removeClass("displaynone");
             }
+        },
+
+        destroy: function() {
+
+            // This is a terrible hack to squelch media_timeupdate events from this
+            // instance of the player. The player destroy() event needs work, so we're
+            // using this isntead just to fix that issue.
+            this.zeega.status.emit = function() {};
         },
 
         jump: function( event ) {
