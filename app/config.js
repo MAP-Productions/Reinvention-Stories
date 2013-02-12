@@ -27,9 +27,6 @@ require.config({
         store: "../vendor/js/libs/store",
         progress: "../vendor/js/libs/progress",
 
-        scrollable: "../app/modules/src/mediascrollcontrol",
-        scrollablecueset: "../app/modules/src/scrollablecueset",
-
         // Specialty
         zeegaplayer: "../vendor/zeegaplayer/dist/debug/zeega",
 
@@ -71,9 +68,6 @@ require.config({
         progress: {
             exports: "ProgressCircle"
         },
-
-        scrollable: [ "zeegaplayer" ],
-        scrollablecueset: [ "scrollable" ],
 
         main: [ "layout" ]
     }
