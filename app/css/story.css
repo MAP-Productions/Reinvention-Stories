@@ -93,7 +93,7 @@
 
 /* Temporary until acts 2 and 3 are ready - only show act one. - Remove to show all acts. */
 #reinvention-story-controls .controls-bar .acts-chapters .act-listing:not(:first-child) {
-  display: block;
+  display: none;
 }
 
 /* act titles */
