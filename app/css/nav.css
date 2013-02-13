@@ -177,3 +177,35 @@
 #reinvention-menu .image-link.act3-reststop {
     background-position: 0 -420px;
 }
+
+#reinvention-menu .image-link.map:hover {
+    background-position: -61px 0;
+}
+
+#reinvention-menu .image-link.road:hover {
+    background-position: -61px -60px;
+}
+
+#reinvention-menu .image-link.act1-story:hover {
+    background-position: -61px -120px;
+}
+
+#reinvention-menu .image-link.act2-story:hover {
+    background-position: -61px -180px;
+}
+
+#reinvention-menu .image-link.act3-story:hover {
+    background-position: -61px -240px;
+}
+
+#reinvention-menu .image-link.act1-reststop:hover {
+    background-position: -61px -300px;
+}
+
+#reinvention-menu .image-link.act2-reststop:hover {
+    background-position: -61px -360px;
+}
+
+#reinvention-menu .image-link.act3-reststop:hover {
+    background-position: -61px -420px;
+}
