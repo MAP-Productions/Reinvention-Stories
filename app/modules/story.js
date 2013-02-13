@@ -146,8 +146,11 @@ define([
                 });
 
                 App.on( "kill_player", function() {
-                    console.log("kill_player");
                     this.destroy();
+                }.bind(this) );
+
+                App.on( "pause_player", function() {
+                    this.zeega.pause();
                 }.bind(this) );
 
                 $timeline = $("[data-timeline]");

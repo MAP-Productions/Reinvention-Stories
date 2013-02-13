@@ -47,32 +47,6 @@ function( App, Router, Act, VideoPos ) {
             document.body.requestFullScreen(
                 Element.ALLOW_KEYBOARD_INPUT
             );
-        },
-
-        about: function() {
-            console.log( "Open 'about' modal" );
-        },
-        email: function() {
-            console.log( "Open 'email' modal" );
-        },
-        share: function() {
-            console.log( "Open 'involved' modal" );
-            $(".modal-overlay, .share-modal")
-                .removeClass("displaynone");
-
-            $(".close-modal").one("click", function() {
-                $(".modal-overlay, .share-modal").addClass("displaynone");
-            });
-        },
-        involved: function() {
-            console.log( "Open 'share' modal" );
-
-            $(".modal-overlay, .email-modal")
-                .removeClass("displaynone");
-
-            $(".close-modal").one("click", function() {
-                $(".modal-overlay, .email-modal").addClass("displaynone");
-            });
         }
     };
 

@@ -40,6 +40,8 @@ function( App, Intro, Act, Story, Road, Reststop, Session, Data ) {
 
         routes: {
             "": "index",
+            "share": "share",
+            "get-involved": "involved",
             ":act": "show",
             ":act/:type/:id": "show"
         },
@@ -54,8 +56,49 @@ function( App, Intro, Act, Story, Road, Reststop, Session, Data ) {
             this.go( 1, "intro", 1 );
         },
 
+        share: function() {
+            App.trigger("pause_player");
+
+            $(".modal-overlay, .share-modal")
+                .removeClass("displaynone");
+
+            $(".close-modal").one("click", function() {
+                App.trigger("kill_player");
+                $(".modal-overlay, .share-modal").addClass("displaynone");
+                console.log("LASTCONTENT: ", App.router.lastContent);
+                if ( _.isUndefined(App.router.lastContent) ) {
+                     App.router.navigate( "", { trigger: true } );
+                }
+                else {
+                    App.router.navigate( App.router.lastContent, { trigger: true } );
+                }
+            });
+        },
+
+        involved: function() {
+            App.trigger("pause_player");
+
+            $(".modal-overlay, .email-modal")
+                .removeClass("displaynone");
+
+            $(".close-modal").one("click", function() {
+                App.trigger("kill_player");
+                $(".modal-overlay, .share-modal").addClass("displaynone");
+                console.log("LASTCONTENT: ", App.router.lastContent);
+                if ( _.isUndefined(App.router.lastContent) ) {
+                     App.router.navigate( "", { trigger: true } );
+                }
+                else {
+                    App.router.navigate( App.router.lastContent, { trigger: true } );
+                }
+            });
+        },
+
         show: function( act, type, id ) {
             var key, view;
+
+            // save lastContent so we can return from a modal
+            App.router.lastContent = Backbone.history.getFragment();
 
             // Support "default" Act urls.
             //
