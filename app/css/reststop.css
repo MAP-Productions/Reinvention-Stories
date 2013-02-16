@@ -15,10 +15,11 @@
 
 .reststop-question {
     position: absolute;
-    top: 11%;
+    top: 39%;
     right: 7%;
     width: 374px;
-    background: rgba(255,255,255,0.8);
+    margin-top: -82px;
+    background: rgba(255,255,255,0.65);
     z-index: 20;
 }
 
@@ -52,6 +53,10 @@
 
 .reststop-question .fields {
     padding: 10px 23px 13px;
+}
+
+.reststop-question .fields form {
+    margin: 0;
 }
 
 .reststop-question .fields textarea {
