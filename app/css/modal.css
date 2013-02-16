@@ -28,12 +28,12 @@
     margin: -174px 0 0 -260px;
     background: #fff;
     width: 520px;
-    height: 294px;
+    height: 345px;
 }
 
 .email-modal-content {
     width: 505px;
-    height: 279px;
+    height: 331px;
     margin: 6px auto 0;
     position: relative;
     box-shadow: 0 0 6px #e5e2e0 inset;
@@ -69,14 +69,19 @@
 .email-modal-content .content-left {
     float: left;
     width: 205px;
-    height: 215px;
+    height: 259px;
     border-right: 1px solid #eee8dc;
     border-top: 1px solid #eee8dc;
+    padding-top: 10px;
 }
 
 .email-modal-content .content-left p {
     font: normal 12px/15.49px adelle_basic, serif;
-    padding: 20px 20px 0;
+    margin: 0 12px 3px;
+}
+
+.email-modal-content .content-left p a {
+    color: #ed177e;
 }
 
 .email-modal-content .content-left p strong {
@@ -87,7 +92,7 @@
 .email-modal-content .content-right {
     float: right;
     width: 298px;
-    height: 215px;
+    height: 271px;
     border-top: 1px solid #eee8dc;
     border-left: 1px solid #f6f3ed;
     position: relative;
