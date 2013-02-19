@@ -2,6 +2,10 @@
 .DS_Store
 node_modules
 dist/debug/
+dist/release/video
+dist/release/audio
+dist/release/image
+twitter/config.php
 app/video/*
 !app/video/README.md
 !app/video/list.txt
