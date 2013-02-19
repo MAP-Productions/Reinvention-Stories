@@ -101,7 +101,12 @@ define([
             event.preventDefault();
 
             $form = $(event.currentTarget);
-            content = $form.serializeForm();
+            
+            console.log($form);
+
+            content = {
+                status: $form.find('textarea').val()
+            };
 
             $form[0].reset();
 
