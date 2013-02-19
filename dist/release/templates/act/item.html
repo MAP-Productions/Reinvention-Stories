@@ -1,0 +1,14 @@
+
+  <span class="section-title">Act One</span>
+
+  <a class="image-link act<%= model.get("id")%>-story" href="#act/<%= model.get("id")%>/story/<%= model.get("story").get("id") %>" data-bypass>Story</a>
+
+  <a class="image-link road" href="#act/<%= model.get("id")%>/road/<%= model.get("road").get("id") %>" data-bypass>Road</a>
+
+  <a class="image-link act<%= model.get("id")%>-reststop" href="#act/<%= model.get("id")%>/reststop/<%= model.get("reststop").get("id") %>" data-bypass>Reststop</a>
+
+<!--
+<a href="#/<%= model.get("id")%>/story/<%= model.get("story").get("id") %>" data-nav>Story</a>
+<a href="#/<%= model.get("id")%>/road/<%= model.get("road").get("id") %>" data-nav>Road</a>
+<a href="#/<%= model.get("id")%>/reststop/<%= model.get("reststop").get("id") %>" data-nav>Reststop</a>
+ -->

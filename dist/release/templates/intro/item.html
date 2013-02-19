@@ -1,0 +1,23 @@
+<div id="reinvention-intro">
+
+  <div class="loader">
+    <canvas id="intro-loading-pie" width="107" height="107"></canvas>
+    <p>Welcome to <strong>REINVENTION STORIES</strong>, an interactive film experience. This is about Dayton Ohio, birthplace of the airplane, cash register and pop top can.</p>
+    <p>We ask the question: How are people in our city of inventors reinventing themselves in these new economic times?</p>
+    <a href="#" class="fullscreen-link" data-command="fullscreen">View in fullscreen</a>
+  </div>
+
+  <span class="skip-intro">Skip Intro</span>
+
+  <video>
+    <source src="/app/video/<%=model.get("video")%>.mp4"></source>
+    <source src="/app/video/<%=model.get("video")%>.ogv"></source>
+    <source src="/app/video/<%=model.get("video")%>.webm"></source>
+  </video>
+
+  <audio id="billboard-rumbleloop" loop="true">
+    <source src="/app/audio/Intro-Billboard-RumbleLoop.mp3"></source>
+    <source src="/app/audio/Intro-Billboard-RumbleLoop.ogg"></source>
+    <source src="/app/audio/Intro-Billboard-RumbleLoop.aif"></source>
+  </audio>
+</div>

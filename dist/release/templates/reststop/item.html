@@ -1,0 +1,33 @@
+<div id="reinvention-reststop" data-view="<%=model.get("id")%>">
+  <video class="full-bleed" autoplay loop>
+    <source src="/app/video/<%=model.get("video")%>.webm"></source>
+    <source src="/app/video/<%=model.get("video")%>.ogv"></source>
+    <source src="/app/video/<%=model.get("video")%>.mp4"></source>
+  </video>
+
+
+  <div class="reststop-question">
+    <div class="question-top">
+      <h1>In a time of personal struggle, how did you lift yourself up?</h1>
+      <span class="shuffle-button" data-role="shuffle">New Question</span>
+    </div>
+    <div class="fields">
+      <form id="reststop-question-form">
+      <textarea name="status" placeholder="Start typing here or hit 'New Question' for a new question to consider."></textarea>
+      <!--
+      <input type="text" placeholder="Name" />
+      <input type="text" placeholder="Location" />
+      -->
+      <input type="submit" data-role="submit" value="Submit">
+      </form>
+    </div>
+  </div>
+
+  <% if ( model.get("next") ) { %>
+  <div class="reststop-nextoptions">
+    <!-- you can have either one, or both, of these links present -->
+    <a class="next-act" href="#<%=model.get("next")%>">Seen enough for now?<br/> Head to the next act!</a>
+    <a class="view-map" href="#">Or view map</a>
+  </div>
+  <% } %>
+</div>
