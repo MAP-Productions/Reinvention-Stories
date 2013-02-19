@@ -8,11 +8,26 @@ module.exports = function(grunt) {
         copy: {
             dist: {
                 files: {
-                    "dist/release/": [ "app/img/**", "app/fonts/**" ],
+                    "dist/release/img/": "app/img/**",
                     "app/img/layers/": "vendor/zeegaplayer/dist/release/img/layers/*",
-                    "app/img/zeegaplayer/": "vendor/zeegaplayer/dist/release/img/*"
+                    "app/img/zeegaplayer/": "vendor/zeegaplayer/dist/release/img/*",
+                    "app/img/": "vendor/zeegaplayer/dist/release/img/*"
                 },
-                options: { "basePath": "/", "flatten": true }
+                options: {
+                    cwd: "/",
+                    flatten: true
+                }
+            },
+
+            fonts: {
+                files: {
+                    "dist/release/fonts/": "app/fonts/**"
+                },
+
+                options: {
+                    cwd: "/",
+                    flatten: false
+                }
             }
         },
 
@@ -75,8 +90,8 @@ module.exports = function(grunt) {
         // also minifies all the CSS as well.  This is named index.css, because we
         // only want to load one stylesheet in index.html.
         mincss: {
-            "dist/release/index.css": [
-                "dist/debug/index.css"
+            "dist/release/css/index.css": [
+                "dist/debug/css/index.css"
             ]
         },
 
@@ -87,7 +102,7 @@ module.exports = function(grunt) {
         styles: {
             // Out the concatenated contents of the following styles into the below
             // development file path.
-            "dist/debug/index.css": {
+            "dist/debug/css/index.css": {
                 // Point this to where your `index.css` file is location.
                 src: "app/css/index.css",
 
