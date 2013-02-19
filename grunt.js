@@ -9,6 +9,7 @@ module.exports = function(grunt) {
             dist: {
                 files: {
                     "dist/release/img/": "app/img/**",
+                    "dist/release/templates/": "app/templates/**",
                     "app/img/layers/": "vendor/zeegaplayer/dist/release/img/layers/*",
                     "app/img/zeegaplayer/": "vendor/zeegaplayer/dist/release/img/*",
                     "app/img/": "vendor/zeegaplayer/dist/release/img/*"
