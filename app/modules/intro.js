@@ -25,7 +25,7 @@ define([
 
         template: "intro/item",
 
-        data: function() {
+        serialize: function() {
             return {
                 model: this.model
             };
@@ -74,12 +74,12 @@ define([
             }.bind(this) );
 
             // Begin playing the Billboard loop at 1:10 (70s)
-            $video.cue( 70, function() {
+            $video.cue( 55.5, function() {
                 $audio.play();
             });
 
             // Pause the intro video at 1:11 (71s)
-            $video.cue( 71, function() {
+            $video.cue( 56.5, function() {
                 $video.pause();
 
                 // Any single mousemovement will restart the video

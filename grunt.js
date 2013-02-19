@@ -60,7 +60,7 @@ module.exports = function(grunt) {
             dist: {
                 src: [
                     "vendor/js/libs/almond.js",
-                    "dist/debug/templates.js",
+                    //"dist/debug/templates.js",
                     "dist/debug/require.js"
                 ],
 
@@ -140,10 +140,13 @@ module.exports = function(grunt) {
                     "vendor/js/libs": "dist/debug",
                     "app/css": "dist/debug",
                     "app/img": "dist/release",
+                    "app/audio": "app/audio",
+                    "app/video": "app/video",
+                    "app/image": "app/image",
                     "app/fonts/adelle-basic": "dist/release",
                     "app/fonts/brandon": "dist/release",
                     "app/fonts/hand-of-sean": "dist/release",
-                    "app/templates" : "/app/templates"
+                    "app/templates" : "app/templates"
                 }
             },
 
@@ -158,11 +161,15 @@ module.exports = function(grunt) {
                 folders: {
                     "app": "dist/release",
                     "app/img": "dist/release",
+                    "app/audio": "app/audio",
+                    "app/video": "app/video",
+                    "app/image": "app/image",
                     "vendor/js/libs": "dist/release",
                     "app/css": "dist/release",
                     "app/fonts/adelle-basic": "dist/release",
                     "app/fonts/brandon": "dist/release",
-                    "app/fonts/hand-of-sean": "dist/release"
+                    "app/fonts/hand-of-sean": "dist/release",
+                    "app/templates" : "app/templates"
                 }
             }
         },

@@ -54,7 +54,7 @@ function( $, _, Backbone, Layout ) {
             path = "app/templates/" + path + ".html";
 
             // If cached, use the compiled template.
-            if ( JST[ path ] ) {
+            if ( JST[ path ] && false ) {
                 console.log ("using JST: " + path);
                 return JST[ path ];
             }

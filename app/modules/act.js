@@ -100,7 +100,7 @@ function( App, Intro, Story, Road, Reststop ) {
 
         className: "menu-section icons",
 
-        data: function() {
+        serialize: function() {
             return {
                 model: this.model
             };
