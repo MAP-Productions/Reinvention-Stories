@@ -65,7 +65,7 @@ define([
 
         template: "story/item",
 
-        data: function() {
+        serialize: function() {
             return {
                 model: this.model
             };

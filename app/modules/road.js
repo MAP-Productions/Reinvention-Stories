@@ -39,7 +39,7 @@ define([
 
         template: "road/item",
 
-        data: function() {
+        serialize: function() {
             return {
                 model: this.model
             };

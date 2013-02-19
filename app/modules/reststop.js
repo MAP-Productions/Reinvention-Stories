@@ -51,7 +51,7 @@ define([
             "submit #reststop-question-form": "submit"
         },
 
-        data: function() {
+        serialize: function() {
             return {
                 model: this.model
             };

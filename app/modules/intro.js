@@ -25,7 +25,7 @@ define([
 
         template: "intro/item",
 
-        data: function() {
+        serialize: function() {
             return {
                 model: this.model
             };
