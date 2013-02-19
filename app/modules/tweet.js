@@ -2,7 +2,7 @@ define([],
 
 function() {
 
-    var PROXY_URL = "http://reinvention.zeega.org/twitter/post.php";
+    var PROXY_URL = "twitter/post.php";
 
     return {
         post: function( data, callback ) {
