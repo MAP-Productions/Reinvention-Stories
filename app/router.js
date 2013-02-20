@@ -78,6 +78,15 @@ function( App, Intro, Act, Story, Road, Reststop, Session, Data ) {
         involved: function() {
             App.trigger("pause_player");
 
+
+            $('#email-submit').unbind("click").bind("click", function(){
+
+                var url = "https://docs.google.com/forms/d/17H_UdbzwnMr4FJQ1rq305Z6EYvHf2lCrsilBPRGY7l8/viewform?entry.4343096=";
+                url = url + $("#email-input").val();
+                window.open(url);
+
+            });
+
             $(".modal-overlay, .email-modal")
                 .removeClass("displaynone");
 
