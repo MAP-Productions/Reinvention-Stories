@@ -390,6 +390,13 @@
       this.unmute();
 
       previous = null;
+      var scs = this;
+      _.delay( function(){
+          if( scs.video.paused ){
+            scs.video.playbackRate( 0.25 );
+            scs.video.play();
+          }
+      }, 1000 );
     }.bind(this);
 
 

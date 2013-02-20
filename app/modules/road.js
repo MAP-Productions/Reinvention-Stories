@@ -83,6 +83,13 @@ define([
 
             // hide loader when the video can play
             scs.video.on("canplaythrough", function() {
+                _.delay( function(){
+                    if( scs.video.paused ){
+                         scs.video.playbackRate( 0.25 );
+                        scs.video.play();
+                    }
+                },2000);
+               
                 this.$(".road-loading").fadeOut(1000, function() {
                     this.progressPie.stop();
                 }.bind(this) ) ;

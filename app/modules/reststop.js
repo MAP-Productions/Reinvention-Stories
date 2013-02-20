@@ -101,11 +101,9 @@ define([
             event.preventDefault();
 
             $form = $(event.currentTarget);
-            
-            console.log($form);
 
             content = {
-                status: $form.find('textarea').val()
+                status: $form.find("textarea").val()
             };
 
             $form[0].reset();
