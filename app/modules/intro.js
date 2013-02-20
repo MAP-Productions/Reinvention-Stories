@@ -74,28 +74,34 @@ define([
             }.bind(this) );
 
             // Begin playing the Billboard loop at 1:10 (70s)
-            $video.cue( 55.5, function() {
-                $audio.play();
-            });
+            // $video.cue( 55.5, function() {
+            //     $audio.play();
+            // });
 
             // Pause the intro video at 1:11 (71s)
-            $video.cue( 56.5, function() {
-                $video.pause();
+            // $video.cue( 56.5, function() {
+            //     //$video.pause();
 
                 // Any single mousemovement will restart the video
                 // and stop the looping audio
-                App.DOM.$body.one("mousemove", function() {
+                //App.DOM.$body.one("mousemove", function() {
 
                     // animate video to full-bleed
+                    // VideoPos.positionVideo($videoEl, { animate: true });
+                    // // this class will ensure full-bleed video positioning is retained on window resize
+                    // $videoEl.addClass("full-bleed");
+
+                    // $video.play();
+                    // $audio.volumeOut( 500, function() {
+                    //     this.pause();
+                    // });
+               // } );
+            // });
+            
+            $video.cue( 56.5, function() {
                     VideoPos.positionVideo($videoEl, { animate: true });
                     // this class will ensure full-bleed video positioning is retained on window resize
                     $videoEl.addClass("full-bleed");
-
-                    $video.play();
-                    $audio.volumeOut( 500, function() {
-                        this.pause();
-                    });
-                } );
             });
 
             // Go to the first act when the intro is over.
