@@ -21,7 +21,7 @@ define([
         defaults: {
             id: null,
             // The view is preloaded to the first question
-            question: 0,
+            question: -1,
             type: "reststop"
         },
 
@@ -85,8 +85,7 @@ define([
                 var index;
 
                 if ( Answer.Cache.length ) {
-                    //index = Math.floor(Math.random() * Answer.Cache.length - 1) + 1;
-                    index = 0;
+                    index = Math.floor(Math.random() * Answer.Cache.length - 1) + 1;
                     Answer.Cache[ index ].reveal();
                 }
 
@@ -127,19 +126,23 @@ define([
         },
 
         ask: function() {
+
+            console.log("ASK");
             var questions, current, index;
 
             questions = this.model.get("questions");
             current = this.model.get("question");
-            index = (function() {
-                var k = 0;
+            // index = (function() {
+            //     var k = 0;
 
-                do {
-                    k = Math.round( Math.random() * questions.length - 1 );
-                } while ( k === current );
+            //     do {
+            //         k = Math.round( Math.random() * questions.length - 1 );
+            //     } while ( k === current );
 
-                return k;
-            }());
+            //     return k;
+            // }());
+
+            index = current + 1;
 
             if ( !questions[ index ] ) {
                 index = 0;
