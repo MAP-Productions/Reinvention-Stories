@@ -85,7 +85,8 @@ define([
                 var index;
 
                 if ( Answer.Cache.length ) {
-                    index = Math.floor(Math.random() * Answer.Cache.length - 1) + 1;
+                    //index = Math.floor(Math.random() * Answer.Cache.length - 1) + 1;
+                    index = 0;
                     Answer.Cache[ index ].reveal();
                 }
 
