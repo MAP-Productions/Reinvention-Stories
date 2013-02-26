@@ -37,9 +37,11 @@ define([
 
         initialize: function( config ) {
             this.model = Intro.Items.get( config.id );
+            this.model.hash = Math.floor(Math.random()*1000) + "";
         },
 
         afterRender: function() {
+
             var $video, $videoEl, $skipLink;
 
             introDelay = App.firstVisit() ? 7000 : 1000;
