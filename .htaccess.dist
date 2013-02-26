@@ -73,3 +73,4 @@ DirectorySlash Off
 # Map resources to release distribution
 
 RewriteRule ^app/(.*)$ dist/release/$1 [NC,L]
+RewriteRule ^zeegaapi/(.*)$ http://alpha.zeega.org/api/$1 [P]
