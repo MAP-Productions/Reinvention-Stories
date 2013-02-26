@@ -11,7 +11,7 @@ define([
 
     Story = App.module();
 
-    zeegaUrl = "http://alpha.zeega.org/api/items/";
+    zeegaUrl = "zeegaapi/items/";
 
     controls = {
         player: {
