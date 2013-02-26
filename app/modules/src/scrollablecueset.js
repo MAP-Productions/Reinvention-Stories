@@ -1,5 +1,5 @@
 (function( exports ) {
-  var IMAGE_PATH = "/app/image/",
+  var IMAGE_PATH = "/app/img/",
       VIDEO_PATH = "/app/video/",
       JST = exports.JST || {};
 
