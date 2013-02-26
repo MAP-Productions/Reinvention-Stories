@@ -1,5 +1,5 @@
-  <video controls>
-    <source src="/app/video/<%=model.get("video")%>.ogv"></source>
-    <source src="/app/video/<%=model.get("video")%>.mp4"></source>
-    <source src="/app/video/<%=model.get("video")%>.webm"></source>
+  <video controls preload="auto">
+    <source type="video/ogg" src="/app/video/<%=model.get("video")%>.ogv"></source>
+    <source type="video/mp4" src="/app/video/<%=model.get("video")%>.mp4"></source>
+    <source type="video/webm" src="/app/video/<%=model.get("video")%>.webm"></source>
   </video>

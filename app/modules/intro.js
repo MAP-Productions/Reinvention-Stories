@@ -49,6 +49,23 @@ define([
             $video = Popcorn("#reinvention-intro video");
             //$audio = Popcorn("#reinvention-intro audio");
 
+            $video.on("canplaythrough", function() {
+
+                _.delay( function() {
+                    $loaderEl.fadeOut(1000, function() {
+                        this.progressPie.stop();
+                    }.bind(this));
+                    $skipLink.fadeIn(1000);
+
+                    $videoEl.animate({
+                        opacity: 1
+                    }, 1000, function() {
+                        $video.play();
+                    });
+                }.bind(this), introDelay );
+
+            }.bind(this) );
+
             $loaderEl = this.$(".loader");
             $videoEl = this.$("video");
             $skipLink = this.$(".skip-intro");
