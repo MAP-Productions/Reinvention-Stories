@@ -40,12 +40,12 @@ define([
         },
 
         afterRender: function() {
-            var $video, $audio, $videoEl, $skipLink;
+            var $video, $videoEl, $skipLink;
 
             introDelay = App.firstVisit() ? 7000 : 1000;
 
             $video = Popcorn("#reinvention-intro video");
-            $audio = Popcorn("#reinvention-intro audio");
+            //$audio = Popcorn("#reinvention-intro audio");
 
             $loaderEl = this.$(".loader");
             $videoEl = this.$("video");
