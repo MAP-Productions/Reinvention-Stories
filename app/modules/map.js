@@ -1,7 +1,8 @@
 define([
     "app",
-    "leaflet"
-], function( App, L ) {
+    "leaflet",
+    "modules/icon"
+], function( App, L, Icon ) {
 
     var Map;
 
@@ -49,15 +50,48 @@ define([
         createMarkers: function(collection) { // we must pass in context as this is called from the response of the collection's fetch
 
             collection.each( function(item) {
-                var latLng, marker;
+                var latLng, marker, iconTypes, iconLabel, icon;
 
-                // In case lat and lng are undefined, just pick a random point close to the center
+                 // In case lat and lng are undefined, just pick a random point close to the center
                 latLng = [
                     item.get('media_geo_latitude') ? item.get('media_geo_latitude') : Map.center[0] + ( ( Math.random() * 0.04 ) - 0.02 ),
                     item.get('media_geo_longitude') ? item.get('media_geo_longitude') : Map.center[1] + ( ( Math.random() * 0.04 ) - 0.02 )
                 ];
 
-                marker = new L.marker( latLng ).addTo( this.leafletMap );
+                // Figure out which icon to use
+                if ( item.get("icon") === null ) {
+
+                    // Parse tags to check for icon to be used
+
+                    iconTypes = _.filter( item.get("tags"), function( tag ){
+                        return tag.indexOf("icon-") === 0;
+                    });
+
+                    if( iconTypes.length > 0 ){
+                        iconLabel = iconTypes[ 0 ].substring( 5 );
+                    } else {
+                        iconLabel = "standard";
+                    }
+
+
+                    // Generate an Icon/Leaflet marker, which is added to the
+                    // main map surface.
+                    icon = new Icon({ latlng: latlng, use: iconLabel }).addTo( surface );
+
+                    // Update the item model, these properties will signify
+                    // to later render() calls that these marks do not need
+                    // to be rendered to icons
+
+                    item.set({
+                        latlng: latlng,
+                        icon: icon
+                    });
+                }
+
+                console.log("ICON", icon);
+
+
+                marker = new L.marker( latLng, { icon : icon } ).addTo( this.leafletMap );
 
                 marker.bindPopup("<img src='" + item.get("thumbnail_url") + "' width='144' height='144'>");
 
