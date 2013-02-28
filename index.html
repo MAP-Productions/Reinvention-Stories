@@ -27,9 +27,6 @@
   })();
 
 </script>
-<script>
-    window.console = {log: function() {}};
-</script>
 
 </head>
 
@@ -48,13 +45,10 @@
               </ul>
           </div>
 
-          <!-- #33, hide "map" in top nav -->
-          <!--
           <div class="menu-section icons">
               <span class="section-title">Map</span>
-              <a href="#" class="image-link map">Map</a>
+              <a href="#map" class="image-link map">Map</a>
           </div>
-          -->
 
           <div class="menu-section icons">
               <span class="section-title">Act One</span>
@@ -170,7 +164,7 @@
 
   <!-- Production source. -->
  
-  <script src="dist/release/require.js"></script>
+  <script data-main="app/config.js" src="vendor/js/libs/require.js"></script>
 
 
 </body>
