@@ -26,6 +26,7 @@ require.config({
         moment: "../vendor/js/libs/moment",
         store: "../vendor/js/libs/store",
         progress: "../vendor/js/libs/progress",
+        leaflet: "../vendor/leaflet/leaflet",
 
         // Specialty
         zeegaplayer: "../vendor/zeegaplayer/dist/debug/zeega",
@@ -67,6 +68,10 @@ require.config({
 
         progress: {
             exports: "ProgressCircle"
+        },
+
+        leaflet: {
+            exports: "L"
         },
 
         main: [ "layout" ]

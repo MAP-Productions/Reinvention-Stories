@@ -6,13 +6,14 @@ define([
     "modules/story",
     "modules/road",
     "modules/reststop",
+    "modules/map",
     "modules/session",
 
     // Data
     "modules/data"
 ],
 
-function( App, Intro, Act, Story, Road, Reststop, Session, Data ) {
+function( App, Intro, Act, Story, Road, Reststop, Map, Session, Data ) {
     var Router;
 
     // window.Session = window.Session || Session;
@@ -42,6 +43,7 @@ function( App, Intro, Act, Story, Road, Reststop, Session, Data ) {
             "": "index",
             "share": "share",
             "get-involved": "involved",
+            "map": "map",
             ":act": "show",
             ":act/:type/:id": "show"
         },
@@ -164,14 +166,58 @@ function( App, Intro, Act, Story, Road, Reststop, Session, Data ) {
 
                 // Cache or "Re-cache" the view for later
                 App.views[ key ] = view;
-                console.log("App.views:", App.views);
-
-                view = new Act.Types[ type ].Views.Item({ id: id });
 
                 App.layout.setViews({
                     "#reinvention-viewport": view
                 }).render();
             }
+        },
+
+        map: function() {
+            var view, key;
+
+            // TODO: Refactor this into 'show' as there is a lot of repeated code.
+
+            // save lastContent so we can return from a modal
+            App.router.lastContent = Backbone.history.getFragment();
+
+            // Emit the kill_player event.
+            // The Zeega player instance created in the story view will destroy.
+            // This prevents problems.
+            App.trigger("kill_player");
+
+
+            // Prevent attempts to re-render the current view: if this
+            // type and id are already in the viewport, do nothing.
+            if ( App.isCurrent( 0, "map" ) ) {
+                console.log( "Prevent attempts to re-render the current view" );
+                return;
+            }
+
+            // Update the current view type and id.
+            // Faking this for the map view.
+            Abstract.merge( App.current, {
+                id: 0,
+                type: "map"
+            });
+
+            // Create the key to either reference or define (or both)
+            // any cached or caching views.
+            key = "map-0";
+
+            // Reuse or create a new view, as needed
+            view = App.views[ key ] ? App.views[ key ] :
+               new Map.View({
+                    collection: new Map.Collection()
+               });
+
+            // Cache or "Re-cache" the view for later
+            App.views[ key ] = view;
+
+            App.layout.setViews({
+                "#reinvention-viewport": view
+            }).render();
+        
         }
     });
     return Router;
