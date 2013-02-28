@@ -7,13 +7,15 @@ define([
 
     Map = App.module();
 
-    Map.zeegaCollectionId = 53567; // temp AMM data
+    Map.center = [39.749434,-84.195786];
+
+    Map.zeegaCollectionId = 89649;
 
     Map.Model = Backbone.Model.extend({
         defaults: {
             "thumbnail_url" : "http:\/\/static.zeega.org\/community\/items\/0\/41337\/502d0dd2ddb07.jpg",
-            "media_geo_latitude" : 39.749434,
-            "media_geo_longitude" : -84.195786
+            "media_geo_latitude" : Map.center[0],
+            "media_geo_longitude" : Map.center[1]
         }
     });
 
@@ -31,13 +33,12 @@ define([
     Map.View = Backbone.LayoutView.extend({
         template : 'map/basemap',
         afterRender: function() {
-            //this.leafletMap = L.map('mapView').setView([39.749434,-84.195786], 13);
-            this.leafletMap = L.map('mapView').setView([30.262626,-97.739182], 13); // temp just so we can see our temp data
+            this.leafletMap = L.map('mapView').setView( Map.center, 14 );
 
             this.collection.fetch({
                 success: function(collection, response) {
                     console.log(response);
-                    this.plotCollection(collection);
+                    this.createMarkers(collection);
                 }.bind(this)
             });
 
@@ -47,21 +48,21 @@ define([
             }).addTo( this.leafletMap );
         },
 
-        plotCollection: function(collection) { // we must pass in context as this is called from the response of the collection's fetch
-            console.log("THIS" + this);
+        createMarkers: function(collection) { // we must pass in context as this is called from the response of the collection's fetch
+
             collection.each( function(item) {
-                console.log(item);
-                var marker, placeInfo;
+                var latLng, marker;
 
-                placeInfo = {
-                    lat: item.get('media_geo_latitude'),
-                    long: item.get('media_geo_longitude'),
-                    image: item.get("thumbnail_url")
-                };
+                // In case lat and lng are undefined, just pick a random point close to the center
+                latLng = [
+                    item.get('media_geo_latitude') ? item.get('media_geo_latitude') : Map.center[0] + ( ( Math.random() * 0.04 ) - 0.02 ),
+                    item.get('media_geo_longitude') ? item.get('media_geo_longitude') : Map.center[1] + ( ( Math.random() * 0.04 ) - 0.02 )
+                ];
 
-                marker = new L.marker( [ placeInfo.lat, placeInfo.long ] ).addTo( this.leafletMap );
+                marker = new L.marker( latLng ).addTo( this.leafletMap );
 
-                marker.bindPopup("<img src='" + placeInfo.image + "' width='144' height='144'>");
+                marker.bindPopup("<img src='" + item.get("thumbnail_url") + "' width='144' height='144'>");
+
             }.bind(this) );
         }
     });
