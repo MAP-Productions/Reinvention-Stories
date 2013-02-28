@@ -42,10 +42,8 @@ define([
                 }.bind(this)
             });
 
-            // add an OpenStreetMap tile layer
-            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo( this.leafletMap );
+            // add tile layer
+            L.tileLayer('http://{s}.tiles.mapbox.com/v3/zeega.map-0ik131wz/{z}/{x}/{y}.png').addTo( this.leafletMap );
         },
 
         createMarkers: function(collection) { // we must pass in context as this is called from the response of the collection's fetch
