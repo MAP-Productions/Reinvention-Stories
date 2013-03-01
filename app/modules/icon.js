@@ -73,7 +73,55 @@ define([], function() {
 
         // begin temporary for testing
 
+        standard: {
+            construct: "CircleMarker",
+            args: function( opts ) {
+                return [
+                    opts.latlng,
+                    {
+                        radius: opts.radius || 10,
+                        color: "#5c7b80",
+                        fillColor: "#5c7b80",
+                        fillOpacity: 0.7,
+                        opacity: 0.7
+                    }
+                ];
+            }
+        },
+
         stories: {
+            construct: "CircleMarker",
+            args: function( opts ) {
+                return [
+                    opts.latlng,
+                    {
+                        radius: opts.radius || 10,
+                        color: "#5c7b80",
+                        fillColor: "#5c7b80",
+                        fillOpacity: 0.7,
+                        opacity: 0.7
+                    }
+                ];
+            }
+        },
+
+        history: {
+            construct: "CircleMarker",
+            args: function( opts ) {
+                return [
+                    opts.latlng,
+                    {
+                        radius: opts.radius || 10,
+                        color: "#5c7b80",
+                        fillColor: "#5c7b80",
+                        fillOpacity: 0.7,
+                        opacity: 0.7
+                    }
+                ];
+            }
+        },
+
+        events: {
             construct: "CircleMarker",
             args: function( opts ) {
                 return [
