@@ -14,7 +14,7 @@ define([
 
     Map.Model = Backbone.Model.extend({
         defaults: {
-            "thumbnail_url" : "http:\/\/static.zeega.org\/community\/items\/0\/41337\/502d0dd2ddb07.jpg",
+            "thumbnail_url" : "http:\/\/static.zeega.org\/community\/items\/0\/41337\/502d0dd2ddb07.jpg",   
             "media_geo_latitude" : Map.center[0],
             "media_geo_longitude" : Map.center[1]
         }
@@ -50,19 +50,20 @@ define([
         createMarkers: function(collection) { // we must pass in context as this is called from the response of the collection's fetch
 
             collection.each( function(item) {
-                var latLng, marker, iconTypes, iconLabel, icon;
+                var latlng, marker, iconTypes, iconLabel, icon;
 
                  // In case lat and lng are undefined, just pick a random point close to the center
-                latLng = [
+                latlng = [
                     item.get('media_geo_latitude') ? item.get('media_geo_latitude') : Map.center[0] + ( ( Math.random() * 0.04 ) - 0.02 ),
                     item.get('media_geo_longitude') ? item.get('media_geo_longitude') : Map.center[1] + ( ( Math.random() * 0.04 ) - 0.02 )
                 ];
 
+                console.log( "get icon!", item.get("icon") );
+
                 // Figure out which icon to use
-                if ( item.get("icon") === null ) {
+                if ( !item.get( "icon" ) ) {
 
                     // Parse tags to check for icon to be used
-
                     iconTypes = _.filter( item.get("tags"), function( tag ){
                         return tag.indexOf("icon-") === 0;
                     });
@@ -73,10 +74,8 @@ define([
                         iconLabel = "standard";
                     }
 
-
-                    // Generate an Icon/Leaflet marker, which is added to the
-                    // main map surface.
-                    icon = new Icon({ latlng: latlng, use: iconLabel }).addTo( surface );
+                    // Generate an Icon based on the label
+                    icon = new Icon({ latlng: latlng, use: iconLabel }).addTo( this.leafletMap );
 
                     // Update the item model, these properties will signify
                     // to later render() calls that these marks do not need
@@ -86,14 +85,10 @@ define([
                         latlng: latlng,
                         icon: icon
                     });
+
+                    icon.bindPopup("<img src='" + item.get("thumbnail_url") + "' width='144' height='144'>");
                 }
 
-                console.log("ICON", icon);
-
-
-                marker = new L.marker( latLng, { icon : icon } ).addTo( this.leafletMap );
-
-                marker.bindPopup("<img src='" + item.get("thumbnail_url") + "' width='144' height='144'>");
 
             }.bind(this) );
         }
