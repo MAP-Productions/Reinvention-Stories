@@ -56,6 +56,7 @@ define([
                 if ( !item.get( "icon" ) ) {
 
                     // In case lat and lng are undefined, just pick a random point close to the center
+                    // TODO: Investigate why this doesn't work in the compiled version. All the points just get centered.
                     latlng = [
                         item.get('media_geo_latitude') ? item.get('media_geo_latitude') : Map.center[0] + ( ( Math.random() * 0.04 ) - 0.02 ),
                         item.get('media_geo_longitude') ? item.get('media_geo_longitude') : Map.center[1] + ( ( Math.random() * 0.04 ) - 0.02 )
@@ -81,6 +82,18 @@ define([
                     item.set({
                         latlng: latlng,
                         icon: icon
+                    });
+
+                    icon.on("mouseover", function(e) {
+                        this.setStyle({
+                            radius: 12
+                        });
+                    });
+
+                    icon.on("mouseout", function(e) {
+                        this.setStyle({
+                            radius: 8
+                        });
                     });
 
                     icon.bindPopup("<img src='" + item.get("thumbnail_url") + "' width='144' height='144'>");
