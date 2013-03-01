@@ -73,33 +73,18 @@ define([], function() {
 
         // begin temporary for testing
 
-        standard: {
+        people: {
             construct: "CircleMarker",
             args: function( opts ) {
                 return [
                     opts.latlng,
                     {
-                        radius: opts.radius || 10,
-                        color: "#5c7b80",
-                        fillColor: "#5c7b80",
-                        fillOpacity: 0.7,
-                        opacity: 0.7
-                    }
-                ];
-            }
-        },
-
-        stories: {
-            construct: "CircleMarker",
-            args: function( opts ) {
-                return [
-                    opts.latlng,
-                    {
-                        radius: opts.radius || 10,
-                        color: "#5c7b80",
-                        fillColor: "#5c7b80",
-                        fillOpacity: 0.7,
-                        opacity: 0.7
+                        radius: opts.radius || 8,
+                        color: "#ffffff",
+                        fillColor: "#ee2984",
+                        fillOpacity: 1,
+                        opacity: 1,
+                        weight: 2
                     }
                 ];
             }
@@ -111,11 +96,12 @@ define([], function() {
                 return [
                     opts.latlng,
                     {
-                        radius: opts.radius || 10,
-                        color: "#5c7b80",
-                        fillColor: "#5c7b80",
-                        fillOpacity: 0.7,
-                        opacity: 0.7
+                        radius: opts.radius || 8,
+                        color: "#ffffff",
+                        fillColor: "#cc4f04",
+                        fillOpacity: 1,
+                        opacity: 1,
+                        weight: 2
                     }
                 ];
             }
@@ -127,11 +113,29 @@ define([], function() {
                 return [
                     opts.latlng,
                     {
-                        radius: opts.radius || 10,
-                        color: "#5c7b80",
-                        fillColor: "#5c7b80",
-                        fillOpacity: 0.7,
-                        opacity: 0.7
+                        radius: opts.radius || 8,
+                        color: "#ffffff",
+                        fillColor: "#ed933b",
+                        fillOpacity: 1,
+                        opacity: 1,
+                        weight: 2
+                    }
+                ];
+            }
+        },
+
+        stories: {
+            construct: "CircleMarker",
+            args: function( opts ) {
+                return [
+                    opts.latlng,
+                    {
+                        radius: opts.radius || 8,
+                        color: "#ffffff",
+                        fillColor: "#7a1d4f",
+                        fillOpacity: 1,
+                        opacity: 1,
+                        weight: 2
                     }
                 ];
             }

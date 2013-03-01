@@ -52,16 +52,14 @@ define([
             collection.each( function(item) {
                 var latlng, marker, iconTypes, iconLabel, icon;
 
-                 // In case lat and lng are undefined, just pick a random point close to the center
-                latlng = [
-                    item.get('media_geo_latitude') ? item.get('media_geo_latitude') : Map.center[0] + ( ( Math.random() * 0.04 ) - 0.02 ),
-                    item.get('media_geo_longitude') ? item.get('media_geo_longitude') : Map.center[1] + ( ( Math.random() * 0.04 ) - 0.02 )
-                ];
-
-                console.log( "get icon!", item.get("icon") );
-
-                // Figure out which icon to use
+                // If icon is set, it's already on the map
                 if ( !item.get( "icon" ) ) {
+
+                    // In case lat and lng are undefined, just pick a random point close to the center
+                    latlng = [
+                        item.get('media_geo_latitude') ? item.get('media_geo_latitude') : Map.center[0] + ( ( Math.random() * 0.04 ) - 0.02 ),
+                        item.get('media_geo_longitude') ? item.get('media_geo_longitude') : Map.center[1] + ( ( Math.random() * 0.04 ) - 0.02 )
+                    ];
 
                     // Parse tags to check for icon to be used
                     iconTypes = _.filter( item.get("tags"), function( tag ){
@@ -71,7 +69,7 @@ define([
                     if( iconTypes.length > 0 ){
                         iconLabel = iconTypes[ 0 ].substring( 5 );
                     } else {
-                        iconLabel = "standard";
+                        iconLabel = "stories";
                     }
 
                     // Generate an Icon based on the label
@@ -80,7 +78,6 @@ define([
                     // Update the item model, these properties will signify
                     // to later render() calls that these marks do not need
                     // to be rendered to icons
-
                     item.set({
                         latlng: latlng,
                         icon: icon
