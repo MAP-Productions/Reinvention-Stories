@@ -14,9 +14,8 @@ define([
 
     Map.Model = Backbone.Model.extend({
         defaults: {
-            "thumbnail_url" : "http:\/\/static.zeega.org\/community\/items\/0\/41337\/502d0dd2ddb07.jpg",   
-            "media_geo_latitude" : Map.center[0],
-            "media_geo_longitude" : Map.center[1]
+            icon: null,
+            latlng: null
         }
     });
 
@@ -53,14 +52,15 @@ define([
                 var latlng, marker, iconTypes, iconLabel, icon;
 
                 // If icon is set, it's already on the map
-                if ( !item.get( "icon" ) ) {
+                if ( item.get( "icon" ) === null ) {
 
-                    // In case lat and lng are undefined, just pick a random point close to the center
-                    // TODO: Investigate why this doesn't work in the compiled version. All the points just get centered.
+                    // In case lat and lng were undefined, just pick a random point close to the map center
                     latlng = [
-                        item.get('media_geo_latitude') ? item.get('media_geo_latitude') : Map.center[0] + ( ( Math.random() * 0.04 ) - 0.02 ),
-                        item.get('media_geo_longitude') ? item.get('media_geo_longitude') : Map.center[1] + ( ( Math.random() * 0.04 ) - 0.02 )
+                        item.get("media_geo_latitude") ? item.get("media_geo_latitude") : Map.center[0] + ( ( Math.random() * 0.04 ) - 0.02 ),
+                        item.get("media_geo_longitude") ? item.get("media_geo_longitude") : Map.center[1] + ( ( Math.random() * 0.04 ) - 0.02 )
                     ];
+
+                    console.log( item.get("media_geo_longitude") );
 
                     // Parse tags to check for icon to be used
                     iconTypes = _.filter( item.get("tags"), function( tag ){
