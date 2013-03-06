@@ -202,6 +202,9 @@ function( App, Intro, Act, Story, Road, Reststop, Map, Session, Data ) {
 
         story: function( id ){
 
+            // save lastContent so we can return from a modal
+            App.router.lastContent = Backbone.history.getFragment();
+
             // The story modal can only be accessed from the map or hitting the route directly.
             // If the map is the current view in #main, don't render it again.
             // If the map is not the current view it means you came in directly, so render the map
@@ -229,11 +232,10 @@ function( App, Intro, Act, Story, Road, Reststop, Map, Session, Data ) {
                 });
 
                 $(".player-close").on("click", function(e) {
-                    e.preventDefault();
                     player.destroy();
                     $(".story-player").fadeOut();
 
-                    App.router.navigate( "#map", { silent: true } );
+                    // App.router.navigate( "#map", { silent: true } );
                 });
 
                 // we have to do this because the story collection may or may not be loaded
