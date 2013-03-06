@@ -1,3 +1,22 @@
 #mapView {
     height: 100%;
 }
+
+#mapView .leaflet-popup-content {
+    color: #464241;
+    font: 700 11px/11px adelle_basic, serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 6px 12px 4px;
+}
+
+#mapView .leaflet-popup-tip-container {
+    display: none;
+}
+
+#mapView .leaflet-popup-content-wrapper {
+    border: 1px solid #edf2ef;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}

@@ -84,11 +84,28 @@ define([
                         icon: icon
                     });
 
-                    icon.on("mouseover", function(e) {
-                        this.setStyle({
+                    icon.on("mouseover", function(event) {
+                        var point, popup;
+
+                        point = event.target;
+
+                        point.setStyle({
                             radius: 12
                         });
-                    });
+
+                        popup = new L.popup({
+                            minWidth: 100,
+                            maxWidth: 100,
+                            closeButton: false,
+                            offset: new L.Point(85,11)
+
+                        });
+                        
+                        popup.setLatLng([ point.getLatLng().lat, point.getLatLng().lng ])
+                            .setContent( item.get("title") )
+                            .openOn( this.leafletMap );
+                        
+                    }.bind(this) );
 
                     icon.on("mouseout", function(e) {
                         this.setStyle({
@@ -96,7 +113,6 @@ define([
                         });
                     });
 
-                    icon.bindPopup("<img src='" + item.get("thumbnail_url") + "' width='144' height='144'>");
                 }
 
 
