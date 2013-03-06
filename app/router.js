@@ -45,7 +45,8 @@ function( App, Intro, Act, Story, Road, Reststop, Map, Session, Data ) {
             "get-involved": "involved",
             "map": "map",
             ":act": "show",
-            ":act/:type/:id": "show"
+            ":act/:type/:id": "show",
+            "story/:id" : "story"
         },
 
         go: function() {
@@ -218,6 +219,10 @@ function( App, Intro, Act, Story, Road, Reststop, Map, Session, Data ) {
                 "#reinvention-viewport": view
             }).render();
         
+        },
+
+        story: function(id) {
+            alert(id);
         }
     });
     return Router;
