@@ -36,6 +36,7 @@ function( App, Intro, Act, Story, Road, Reststop, Map, Session, Data ) {
 
     Router = Backbone.Router.extend({
         initialize: function() {
+            console.log("initialize router");
             App.useLayout("main");
         },
 
@@ -174,10 +175,10 @@ function( App, Intro, Act, Story, Road, Reststop, Map, Session, Data ) {
             }
         },
 
+
+        // Actual map view startup happens in renderMapView();
         map: function() {
             var view, key;
-
-            // TODO: Refactor this into 'show' as there is a lot of repeated code.
 
             // save lastContent so we can return from a modal
             App.router.lastContent = Backbone.history.getFragment();
@@ -195,33 +196,19 @@ function( App, Intro, Act, Story, Road, Reststop, Map, Session, Data ) {
                 return;
             }
 
-            // Update the current view type and id.
-            // Faking this for the map view.
-            Abstract.merge( App.current, {
-                id: 0,
-                type: "map"
-            });
-
-            // Create the key to either reference or define (or both)
-            // any cached or caching views.
-            key = "map-0";
-
-            // Reuse or create a new view, as needed
-            view = App.views[ key ] ? App.views[ key ] :
-               new Map.View({
-                    collection: new Map.Collection()
-               });
-
-            // Cache or "Re-cache" the view for later
-            App.views[ key ] = view;
-
-            App.layout.setViews({
-                "#reinvention-viewport": view
-            }).render();
+            this.renderMapView();
 
         },
 
         story: function( id ){
+
+            // The story modal can only be accessed from the map or hitting the route directly.
+            // If the map is the current view in #main, don't render it again.
+            // If the map is not the current view it means you came in directly, so render the map
+            // so it is visible in the background.
+            if ( !App.isCurrent( 0, "map" ) ) {
+               this.renderMapView();
+            }
 
             _.delay(function(){
                 $(".ZEEGA-player").remove();
@@ -257,11 +244,37 @@ function( App, Intro, Act, Story, Road, Reststop, Map, Session, Data ) {
                 //     $(".share-fb").attr("href", "http://www.facebook.com/sharer.php?u=http://sonictrace.kcrw.com/" + id );
                 //     $(".share-email").attr("href", "mailto:friend@example.com?subject=Check out this story on Sonic Trace!&body=http://sonictrace.kcrw.com/" + id );
                 // });
-                // TODO: Figure out how to get title
+
                 $(".story-player").fadeIn();
 
             }, 1000);
 
+        },
+
+        renderMapView: function() {
+            // Update the current view type and id.
+            // Faking this for the map view.
+            Abstract.merge( App.current, {
+                id: 0,
+                type: "map"
+            });
+
+            // Create the key to either reference or define (or both)
+            // any cached or caching views.
+            key = "map-0";
+
+            // Reuse or create a new view, as needed
+            view = App.views[ key ] ? App.views[ key ] :
+               new Map.View({
+                    collection: new Map.Collection()
+               });
+
+            // Cache or "Re-cache" the view for later
+            App.views[ key ] = view;
+
+            App.layout.setViews({
+                "#reinvention-viewport": view
+            }).render();
         }
     });
     return Router;
