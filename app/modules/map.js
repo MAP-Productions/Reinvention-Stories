@@ -33,7 +33,9 @@ define([
     Map.View = Backbone.LayoutView.extend({
         template : 'map/basemap',
         afterRender: function() {
-            this.leafletMap = L.map('mapView').setView( Map.center, 14 );
+            this.leafletMap = L.map('mapView', {
+                zoomControl: false
+            }).setView( Map.center, 14 );
 
             this.collection.fetch({
                 success: function(collection, response) {
@@ -100,11 +102,11 @@ define([
                             offset: new L.Point(85,11)
 
                         });
-                        
+
                         popup.setLatLng([ point.getLatLng().lat, point.getLatLng().lng ])
                             .setContent( item.get("title") )
                             .openOn( this.leafletMap );
-                        
+
                     }.bind(this) );
 
                     icon.on("mouseout", function(e) {
@@ -115,75 +117,8 @@ define([
 
                     icon.on("click", function(event){
 
-                        var point = e.target;
+                        App.router.navigate("#story/" + item.get("id"), { trigger : true } );
 
-                        var story = this.collection.get( point.get("id") );
-                            
-                        
-                        //App.router.navigate("#story/" + story.id, { silent : true });
-                        // By binding the click handler here, we create an
-                        // upvar for |mark|
-
-                        
-
-                        // Tasks Controlled by this event...
-                        //
-                        // 1. Remove existing player (unless it is the same story)
-                        //
-                        // 2. Load a story into a zeega player
-                        //
-                        //      2.A. If the story is not yet fetched, then wait until it is
-                        //
-                        // 3. Move the mini-map pointer
-                        //
-                        //      3.A. Not sure how this is actually going to work?
-                        //          The only way to draw these is to use a canvas,
-                        //          but the canvas will overlay across the entire
-                        //          viewport—which means it will intercept click events.
-                        //
-                        //
-
-                        // Remove the previously rendered Player
-                        // TODO: Make this conditional
-                        $(".ZEEGA-player").remove();
-
-                        
-
-                        // If the Story.Model has already been requested.
-                        // This is sort of pointless right now since the
-                        // |data| property is being rejected by Zeega.player
-                        //
-                        // TODO: Investigate this failure.
-                        //
-                        if ( story && story.get("isAvailable") ) {
-
-                            new Zeega.player({
-                                controls: {
-                                  arrows: true,
-                                  playpause: true,
-                                  close: false
-                                },
-                                autoplay: true,
-                                // data: story.attributes,
-                            
-                                //
-                                target: "#zeega-player",
-                                //
-                                //  TODO: Investigate why passing previously requested data
-                                //  doesn't work.
-                                url: story.url()
-                            });
-
-                            $(".surface-player").addClass("center");
-
-                            $(".player-title").text( story.get( "title" ) );
-
-                            $(".share-twitter").attr("href", "https://twitter.com/intent/tweet?original_referer=http://sonictrace.org/%23story/" + story.get("id") + "&text=Sonic%20Trace%3A%20" + story.get( "title" ) + "&url=http://sonictrace.org/%23story/" + story.get( "id" ) );
-                            $(".share-fb").attr("href", "http://www.facebook.com/sharer.php?u=http://sonictrace.org/%23story/" + story.get("id") );
-                            $(".share-email").attr("href", "mailto:friend@example.com?subject=Check out this story on Sonic Trace!&body=http://sonictrace.org/%23story/" + story.get("id") );
-
-
-                        }
 
                     });
 
