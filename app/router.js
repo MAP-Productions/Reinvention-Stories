@@ -218,11 +218,50 @@ function( App, Intro, Act, Story, Road, Reststop, Map, Session, Data ) {
             App.layout.setViews({
                 "#reinvention-viewport": view
             }).render();
-        
+
         },
 
-        story: function(id) {
-            alert(id);
+        story: function( id ){
+
+            _.delay(function(){
+                $(".ZEEGA-player").remove();
+                var player = new Zeega.player({
+                    controls: {
+                        arrows: true,
+                        playpause: true,
+                        close: false
+                    },
+                    autoplay: true,
+                    // data: story.attributes,
+
+                    target: "#story-zeega-player",
+                    //
+                    //  TODO: Investigate why passing previously requested data
+                    //  doesn't work.
+                    url: "/zeegaapi/items/" + id
+                });
+
+                $(".player-close").on("click", function(e) {
+                    e.preventDefault();
+                    player.destroy();
+                    $(".story-player").fadeOut();
+
+                    App.router.navigate( "#map", { silent: true } );
+                });
+
+                // we have to do this because the story collection may or may not be loaded
+                // player.on("sequence_enter", function(info) {
+                //     $(".player-title").text( player.project.get( "title" ) );
+
+                //     $(".share-twitter").attr("href", "https://twitter.com/intent/tweet?original_referer=http://sonictrace.kcrw.com/#story/" + id + "&text=Sonic%20Trace%3A%20" + player.project.get( "title" ) + "&url=http://sonictrace.kcrw.com/#story/" + id );
+                //     $(".share-fb").attr("href", "http://www.facebook.com/sharer.php?u=http://sonictrace.kcrw.com/" + id );
+                //     $(".share-email").attr("href", "mailto:friend@example.com?subject=Check out this story on Sonic Trace!&body=http://sonictrace.kcrw.com/" + id );
+                // });
+                // TODO: Figure out how to get title
+                $(".story-player").fadeIn();
+
+            }, 1000);
+
         }
     });
     return Router;
