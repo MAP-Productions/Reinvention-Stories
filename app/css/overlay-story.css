@@ -8,12 +8,12 @@
 }
 
 .story-player .player-container {
-  width: 518px;
-  height: 399px;
+  width: 710px;
+  height: 400px;
   position: absolute;
   left: 50%;
   top: 50%;
-  margin: -200px 0 0 -259px;
+  margin: -200px 0 0 -355px;
   z-index: 300;
 }
 
@@ -63,10 +63,11 @@
 
 .story-player .player-close {
   position: absolute;
-  top: -11px;
-  right: -10px;
+  top: -14px;
+  right: -35px;
   width: 28px;
   height: 27px;
   background: url(/app/img/close-btn.png);
   text-indent: -9999px;
+  z-index: 1;
 }

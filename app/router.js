@@ -234,8 +234,6 @@ function( App, Intro, Act, Story, Road, Reststop, Map, Session, Data ) {
                 $(".player-close").on("click", function(e) {
                     player.destroy();
                     $(".story-player").fadeOut();
-
-                    // App.router.navigate( "#map", { silent: true } );
                 });
 
                 // we have to do this because the story collection may or may not be loaded
