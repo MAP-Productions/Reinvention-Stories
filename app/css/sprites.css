@@ -1,0 +1,479 @@
+.play-zcon,
+.pause-zcon {
+  background-image: url('/app//img/playpause.png');
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+}
+.pause-zcon {
+  background-position: -25px 0px;
+}
+[class^="zsocial-"] {
+  background-image: url('/app//img/social-sprites-20px.png');
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 17px;
+  vertical-align: text-top;
+  width: 17px;
+}
+.zsocial-twitter {
+  background-position: 0px 0px;
+}
+.zsocial-facebook {
+  background-position: 0px -17px;
+}
+.zsocial-tumblr {
+  background-position: 0px -34px;
+}
+.zsocial-email {
+  background-position: 0px -51px;
+}
+[class^="zitem-"] {
+  background-image: url('/app//img/zitems-50px.png');
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 50px;
+  vertical-align: text-top;
+  width: 50px;
+}
+[class^="zitem-"].zitem-30 {
+  background-image: url('/app//img/zitems-30px.png');
+  height: 30px;
+  width: 30px;
+}
+.zitem-zeega00 {
+  background-position: -50px 0px;
+}
+.zitem-zeega00.loaded {
+  background-position: 0 0px;
+}
+.zitem-zeega00.loaded {
+  background-position: -100px 0px;
+}
+.zitem-zeega00.zitem-30 {
+  background-position: -30px 0px;
+}
+.zitem-zeega00.zitem-30.loaded {
+  background-position: 0 0px;
+}
+.zitem-zeega00.zitem-30.error {
+  background-position: -60px 0px;
+}
+.zitem-zeega01 {
+  background-position: -50px -50px;
+}
+.zitem-zeega01.loaded {
+  background-position: 0 -50px;
+}
+.zitem-zeega01.loaded {
+  background-position: -100px -50px;
+}
+.zitem-zeega01.zitem-30 {
+  background-position: -30px -30px;
+}
+.zitem-zeega01.zitem-30.loaded {
+  background-position: 0 -30px;
+}
+.zitem-zeega01.zitem-30.error {
+  background-position: -60px -30px;
+}
+.zitem-flickr {
+  background-position: -50px -100px;
+}
+.zitem-flickr.loaded {
+  background-position: 0 -100px;
+}
+.zitem-flickr.loaded {
+  background-position: -100px -100px;
+}
+.zitem-flickr.zitem-30 {
+  background-position: -30px -60px;
+}
+.zitem-flickr.zitem-30.loaded {
+  background-position: 0 -60px;
+}
+.zitem-flickr.zitem-30.error {
+  background-position: -60px -60px;
+}
+.zitem-vimeo {
+  background-position: -50px -150px;
+}
+.zitem-vimeo.loaded {
+  background-position: 0 -150px;
+}
+.zitem-vimeo.loaded {
+  background-position: -100px -150px;
+}
+.zitem-vimeo.zitem-30 {
+  background-position: -30px -90px;
+}
+.zitem-vimeo.zitem-30.loaded {
+  background-position: 0 -90px;
+}
+.zitem-vimeo.zitem-30.error {
+  background-position: -60px -90px;
+}
+.zitem-youtube {
+  background-position: -50px -200px;
+}
+.zitem-youtube.loaded {
+  background-position: 0 -200px;
+}
+.zitem-youtube.loaded {
+  background-position: -100px -200px;
+}
+.zitem-youtube.zitem-30 {
+  background-position: -30px -120px;
+}
+.zitem-youtube.zitem-30.loaded {
+  background-position: 0 -120px;
+}
+.zitem-youtube.zitem-30.error {
+  background-position: -60px -120px;
+}
+.zitem-twitter {
+  background-position: -50px -250px;
+}
+.zitem-twitter.loaded {
+  background-position: 0 -250px;
+}
+.zitem-twitter.loaded {
+  background-position: -100px -250px;
+}
+.zitem-twitter.zitem-30 {
+  background-position: -30px -150px;
+}
+.zitem-twitter.zitem-30.loaded {
+  background-position: 0 -150px;
+}
+.zitem-twitter.zitem-30.error {
+  background-position: -60px -150px;
+}
+.zitem-facebook {
+  background-position: -50px -300px;
+}
+.zitem-facebook.loaded {
+  background-position: 0 -300px;
+}
+.zitem-facebook.loaded {
+  background-position: -100px -300px;
+}
+.zitem-facebook.zitem-30 {
+  background-position: -30px -180px;
+}
+.zitem-facebook.zitem-30.loaded {
+  background-position: 0 -180px;
+}
+.zitem-facebook.zitem-30.error {
+  background-position: -60px -180px;
+}
+.zitem-google {
+  background-position: -50px -350px;
+}
+.zitem-google.loaded {
+  background-position: 0 -350px;
+}
+.zitem-google.loaded {
+  background-position: -100px -350px;
+}
+.zitem-google.zitem-30 {
+  background-position: -30px -210px;
+}
+.zitem-google.zitem-30.loaded {
+  background-position: 0 -210px;
+}
+.zitem-google.zitem-30.error {
+  background-position: -60px -210px;
+}
+.zitem-lastfm {
+  background-position: -50px -400px;
+}
+.zitem-lastfm.loaded {
+  background-position: 0 -400px;
+}
+.zitem-lastfm.loaded {
+  background-position: -100px -400px;
+}
+.zitem-lastfm.zitem-30 {
+  background-position: -30px -240px;
+}
+.zitem-lastfm.zitem-30.loaded {
+  background-position: 0 -240px;
+}
+.zitem-lastfm.zitem-30.error {
+  background-position: -60px -240px;
+}
+.zitem-tumblr {
+  background-position: -50px -450px;
+}
+.zitem-tumblr.loaded {
+  background-position: 0 -450px;
+}
+.zitem-tumblr.loaded {
+  background-position: -100px -450px;
+}
+.zitem-tumblr.zitem-30 {
+  background-position: -30px -270px;
+}
+.zitem-tumblr.zitem-30.loaded {
+  background-position: 0 -270px;
+}
+.zitem-tumblr.zitem-30.error {
+  background-position: -60px -270px;
+}
+.zitem-rss {
+  background-position: -50px -500px;
+}
+.zitem-rss.loaded {
+  background-position: 0 -500px;
+}
+.zitem-rss.loaded {
+  background-position: -100px -500px;
+}
+.zitem-rss.zitem-30 {
+  background-position: -30px -300px;
+}
+.zitem-rss.zitem-30.loaded {
+  background-position: 0 -300px;
+}
+.zitem-rss.zitem-30.error {
+  background-position: -60px -300px;
+}
+.zitem-picasa {
+  background-position: -50px -550px;
+}
+.zitem-picasa.loaded {
+  background-position: 0 -550px;
+}
+.zitem-picasa.loaded {
+  background-position: -100px -550px;
+}
+.zitem-picasa.zitem-30 {
+  background-position: -30px -330px;
+}
+.zitem-picasa.zitem-30.loaded {
+  background-position: 0 -330px;
+}
+.zitem-picasa.zitem-30.error {
+  background-position: -60px -330px;
+}
+.zitem-audio {
+  background-position: -50px -600px;
+}
+.zitem-audio.loaded {
+  background-position: 0 -600px;
+}
+.zitem-audio.loaded {
+  background-position: -100px -600px;
+}
+.zitem-audio.zitem-30 {
+  background-position: -30px -360px;
+}
+.zitem-audio.zitem-30.loaded {
+  background-position: 0 -360px;
+}
+.zitem-audio.zitem-30.error {
+  background-position: -60px -360px;
+}
+.zitem-geo {
+  background-position: -50px -650px;
+}
+.zitem-geo.loaded {
+  background-position: 0 -650px;
+}
+.zitem-geo.loaded {
+  background-position: -100px -650px;
+}
+.zitem-geo.zitem-30 {
+  background-position: -30px -390px;
+}
+.zitem-geo.zitem-30.loaded {
+  background-position: 0 -390px;
+}
+.zitem-geo.zitem-30.error {
+  background-position: -60px -390px;
+}
+.zitem-image {
+  background-position: -50px -700px;
+}
+.zitem-image.loaded {
+  background-position: 0 -700px;
+}
+.zitem-image.loaded {
+  background-position: -100px -700px;
+}
+.zitem-image.zitem-30 {
+  background-position: -30px -420px;
+}
+.zitem-image.zitem-30.loaded {
+  background-position: 0 -420px;
+}
+.zitem-image.zitem-30.error {
+  background-position: -60px -420px;
+}
+.zitem-video {
+  background-position: -50px -750px;
+}
+.zitem-video.loaded {
+  background-position: 0 -750px;
+}
+.zitem-video.loaded {
+  background-position: -100px -750px;
+}
+.zitem-video.zitem-30 {
+  background-position: -30px -450px;
+}
+.zitem-video.zitem-30.loaded {
+  background-position: 0 -450px;
+}
+.zitem-video.zitem-30.error {
+  background-position: -60px -450px;
+}
+.zitem-dropbox {
+  background-position: -50px -800px;
+}
+.zitem-dropbox.loaded {
+  background-position: 0 -800px;
+}
+.zitem-dropbox.loaded {
+  background-position: -100px -800px;
+}
+.zitem-dropbox.zitem-30 {
+  background-position: -30px -480px;
+}
+.zitem-dropbox.zitem-30.loaded {
+  background-position: 0 -480px;
+}
+.zitem-dropbox.zitem-30.error {
+  background-position: -60px -480px;
+}
+.zitem-soundcloud {
+  background-position: -50px -850px;
+}
+.zitem-soundcloud.loaded {
+  background-position: 0 -850px;
+}
+.zitem-soundcloud.loaded {
+  background-position: -100px -850px;
+}
+.zitem-soundcloud.zitem-30 {
+  background-position: -30px -510px;
+}
+.zitem-soundcloud.zitem-30.loaded {
+  background-position: 0 -510px;
+}
+.zitem-soundcloud.zitem-30.error {
+  background-position: -60px -510px;
+}
+.zitem-mapbox {
+  background-position: -50px -900px;
+}
+.zitem-mapbox.loaded {
+  background-position: 0 -900px;
+}
+.zitem-mapbox.loaded {
+  background-position: -100px -900px;
+}
+.zitem-mapbox.zitem-30 {
+  background-position: -30px -540px;
+}
+.zitem-mapbox.zitem-30.loaded {
+  background-position: 0 -540px;
+}
+.zitem-mapbox.zitem-30.error {
+  background-position: -60px -540px;
+}
+.zitem-absolute {
+  background-position: -50px -950px;
+}
+.zitem-absolute.loaded {
+  background-position: 0 -950px;
+}
+.zitem-absolute.loaded {
+  background-position: -100px -950px;
+}
+.zitem-absolute.zitem-30 {
+  background-position: -30px -570px;
+}
+.zitem-absolute.zitem-30.loaded {
+  background-position: 0 -570px;
+}
+.zitem-absolute.zitem-30.error {
+  background-position: -60px -570px;
+}
+.zitem-internetarchive {
+  background-position: -50px -1000px;
+}
+.zitem-internetarchive.loaded {
+  background-position: 0 -1000px;
+}
+.zitem-internetarchive.loaded {
+  background-position: -100px -1000px;
+}
+.zitem-internetarchive.zitem-30 {
+  background-position: -30px -600px;
+}
+.zitem-internetarchive.zitem-30.loaded {
+  background-position: 0 -600px;
+}
+.zitem-internetarchive.zitem-30.error {
+  background-position: -60px -600px;
+}
+.zitem-documentcloud {
+  background-position: -50px -1050px;
+}
+.zitem-documentcloud.loaded {
+  background-position: 0 -1050px;
+}
+.zitem-documentcloud.loaded {
+  background-position: -100px -1050px;
+}
+.zitem-documentcloud.zitem-30 {
+  background-position: -30px -630px;
+}
+.zitem-documentcloud.zitem-30.loaded {
+  background-position: 0 -630px;
+}
+.zitem-documentcloud.zitem-30.error {
+  background-position: -60px -630px;
+}
+.zitem-testamonial {
+  background-position: -50px -1100px;
+}
+.zitem-testamonial.loaded {
+  background-position: 0 -1100px;
+}
+.zitem-testamonial.loaded {
+  background-position: -100px -1100px;
+}
+.zitem-testamonial.zitem-30 {
+  background-position: -30px -660px;
+}
+.zitem-testamonial.zitem-30.loaded {
+  background-position: 0 -660px;
+}
+.zitem-testamonial.zitem-30.error {
+  background-position: -60px -660px;
+}
+.zitem-instagram {
+  background-position: -50px -1150px;
+}
+.zitem-instagram.loaded {
+  background-position: 0 -1150px;
+}
+.zitem-instagram.loaded {
+  background-position: -100px -1150px;
+}
+.zitem-instagram.zitem-30 {
+  background-position: -30px -690px;
+}
+.zitem-instagram.zitem-30.loaded {
+  background-position: 0 -690px;
+}
+.zitem-instagram.zitem-30.error {
+  background-position: -60px -690px;
+}
