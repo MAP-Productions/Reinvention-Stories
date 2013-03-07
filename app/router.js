@@ -228,7 +228,8 @@ function( App, Intro, Act, Story, Road, Reststop, Map, Session, Data ) {
                     //
                     //  TODO: Investigate why passing previously requested data
                     //  doesn't work.
-                    url: "/zeegaapi/items/" + id
+                    url: "/zeegaapi/items/" + id,
+                    windowRatio: 16/9
                 });
 
                 $(".player-close").on("click", function(e) {
