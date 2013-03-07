@@ -222,29 +222,38 @@ function( App, Intro, Act, Story, Road, Reststop, Map, Session, Data ) {
                         close: false
                     },
                     autoplay: true,
-                    // data: story.attributes,
-
                     target: "#story-zeega-player",
-                    //
-                    //  TODO: Investigate why passing previously requested data
-                    //  doesn't work.
                     url: "/zeegaapi/items/" + id,
                     windowRatio: 16/9
                 });
 
-                $(".player-close").on("click", function(e) {
+                // update share URLs
+                player.on("sequence_enter", function(info) {
+                    $(".share-twitter").attr("href", "https://twitter.com/intent/tweet?original_referer=http://reinventionstories.org/%23story/" + id + "&text=Reinvention%20Stories%3A%20" + player.project.get( "title" ) + "&url=http://reinventionstories.org/%23story/" + id );
+                    $(".share-fb").attr("href", "http://www.facebook.com/sharer.php?u=http://reinventionstories.org/%23story/" + id );
+                    $(".share-email").attr("href", "mailto:friend@example.com?subject=Check out this story on Reinvention Stories!&body=http://reinventionstories.org/%23story/" + id );
+                });
+
+                $(".player-close").on( "click", function(e) {
                     player.destroy();
                     $(".story-player").fadeOut();
                 });
 
-                // we have to do this because the story collection may or may not be loaded
-                // player.on("sequence_enter", function(info) {
-                //     $(".player-title").text( player.project.get( "title" ) );
+                $(".fullscreen").on( "click", function(){
+                    var $playerElem = $(".ZEEGA-player").get(0);
 
-                //     $(".share-twitter").attr("href", "https://twitter.com/intent/tweet?original_referer=http://sonictrace.kcrw.com/#story/" + id + "&text=Sonic%20Trace%3A%20" + player.project.get( "title" ) + "&url=http://sonictrace.kcrw.com/#story/" + id );
-                //     $(".share-fb").attr("href", "http://www.facebook.com/sharer.php?u=http://sonictrace.kcrw.com/" + id );
-                //     $(".share-email").attr("href", "mailto:friend@example.com?subject=Check out this story on Sonic Trace!&body=http://sonictrace.kcrw.com/" + id );
-                // });
+                    if ($playerElem.requestFullscreen) {
+                      $playerElem.requestFullscreen();
+                    } else if ($playerElem.mozRequestFullScreen) {
+                      $playerElem.mozRequestFullScreen();
+                    } else if ($playerElem.webkitRequestFullscreen) {
+                      $playerElem.webkitRequestFullscreen();
+                    }
+                });
+
+                $(".share").on( "click", function(){
+                    $(this).find(".icons").toggle();
+                });
 
                 $(".story-player").fadeIn();
 
