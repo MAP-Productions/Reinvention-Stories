@@ -76,7 +76,7 @@
     right: 11px;
     top: 290px;
     width: 113px;
-    z-index: 9;
+    z-index: 11;
     padding: 20px 22px 0 56px;
 }
 
@@ -86,7 +86,7 @@
 
 .map-share-callout h3 {
     color: #fff;
-    font: bold 12px adelle_basic, serif;
+    font: bold 13px adelle_basic, serif;
     margin: 0 0 3px 0;
 }
 
