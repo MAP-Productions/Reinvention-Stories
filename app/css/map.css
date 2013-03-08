@@ -2,6 +2,7 @@
     height: 100%;
 }
 
+/* leaflet elements */
 #mapView .leaflet-top {
     top: 85px; /* override on all elements attached to top so they clear site nav */
 }
@@ -53,4 +54,45 @@
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
     border-radius: 0;
+}
+
+/* elements outside of leaflet */
+.map-overlay {
+    position: absolute;
+    z-index: 10;
+}
+
+.map-key {
+    background: url(/app/img/map-key.png);
+    height: 220px;
+    right: 11px;
+    top: 101px;
+    width: 190px;
+}
+
+.map-share-callout {
+    background: url(/app/img/map-share-callout-bg.png);
+    height: 69px;
+    right: 11px;
+    top: 290px;
+    width: 113px;
+    z-index: 9;
+    padding: 20px 22px 0 56px;
+}
+
+.map-share-callout:hover {
+    text-decoration: none;
+}
+
+.map-share-callout h3 {
+    color: #fff;
+    font: bold 12px adelle_basic, serif;
+    margin: 0 0 3px 0;
+}
+
+.map-share-callout p {
+    color: #fff;
+    font: 700 8px brandon_grotesque, sans-serif;
+    text-transform: uppercase;
+    margin: 0;
 }
