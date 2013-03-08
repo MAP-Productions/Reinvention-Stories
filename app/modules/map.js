@@ -26,16 +26,14 @@ define([
         },
         parse: function(response) {
             //return response.items[0].child_items;
-            return response.items   ;
+            return response.items;
         }
     });
 
     Map.View = Backbone.LayoutView.extend({
         template : 'map/basemap',
         afterRender: function() {
-            this.leafletMap = L.map('mapView', {
-                zoomControl: false
-            }).setView( Map.center, 14 );
+            this.leafletMap = L.map('mapView').setView( Map.center, 14 );
 
             this.collection.fetch({
                 success: function(collection, response) {

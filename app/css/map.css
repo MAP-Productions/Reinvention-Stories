@@ -2,6 +2,40 @@
     height: 100%;
 }
 
+#mapView .leaflet-top {
+    top: 85px; /* override on all elements attached to top so they clear site nav */
+}
+
+#mapView .leaflet-control-zoom {
+    background: rgba(255,255,255, 0.15);
+    border: 1px solid #fff;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 25px 0 0 25px;
+    padding: 15px;
+}
+
+#mapView .leaflet-control-zoom a {
+    background: url(/app/img/map-zoom-controls.png);
+    border: none;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    box-shadow: none;
+    text-indent: -9999px;
+    width: 21px;
+}
+
+#mapView .leaflet-control-zoom a.leaflet-control-zoom-in {
+    margin-bottom: 9px;
+}
+
+#mapView .leaflet-control-zoom a.leaflet-control-zoom-out {
+    background-position: 0 -20px;
+}
+
 #mapView .leaflet-popup-content {
     color: #464241;
     font: 700 11px/11px adelle_basic, serif;
