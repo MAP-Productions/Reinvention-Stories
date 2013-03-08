@@ -7,13 +7,14 @@ define([
     "modules/road",
     "modules/reststop",
     "modules/map",
+    "modules/contribute",
     "modules/session",
 
     // Data
     "modules/data"
 ],
 
-function( App, Intro, Act, Story, Road, Reststop, Map, Session, Data ) {
+function( App, Intro, Act, Story, Road, Reststop, Map, Contribute, Session, Data ) {
     var Router;
 
     // window.Session = window.Session || Session;
@@ -45,9 +46,10 @@ function( App, Intro, Act, Story, Road, Reststop, Map, Session, Data ) {
             "share": "share",
             "get-involved": "involved",
             "map": "map",
+            "contribute": "contribute",
+            "story/:id" : "story",
             ":act": "show",
-            ":act/:type/:id": "show",
-            "story/:id" : "story"
+            ":act/:type/:id": "show"
         },
 
         go: function() {
@@ -258,6 +260,48 @@ function( App, Intro, Act, Story, Road, Reststop, Map, Session, Data ) {
                 $(".story-player").fadeIn();
 
             }, 1000);
+
+        },
+
+        contribute: function() {
+            var view, key;
+
+            // save lastContent so we can return from a modal
+            App.router.lastContent = Backbone.history.getFragment();
+
+            // Emit the kill_player event.
+            // The Zeega player instance created in the story view will destroy.
+            // This prevents problems.
+            App.trigger("kill_player");
+
+            // Prevent attempts to re-render the current view: if this
+            // type and id are already in the viewport, do nothing.
+            if ( App.isCurrent( 0, "contribute" ) ) {
+                console.log( "Prevent attempts to re-render the current view" );
+                return;
+            }
+
+            // Update the current view type and id.
+            // Faking this for the contribute view.
+            Abstract.merge( App.current, {
+                id: 0,
+                type: "contribute"
+            });
+
+            // Create the key to either reference or define (or both)
+            // any cached or caching views.
+            key = "contribute-0";
+
+            // Reuse or create a new view, as needed
+            view = App.views[ key ] ? App.views[ key ] :
+               new Contribute.View();
+
+            // Cache or "Re-cache" the view for later
+            App.views[ key ] = view;
+
+            App.layout.setViews({
+                "#reinvention-viewport": view
+            }).render();
 
         },
 
