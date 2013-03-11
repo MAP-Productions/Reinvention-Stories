@@ -11,6 +11,8 @@ define([
     Contribute.View = Backbone.LayoutView.extend({
         template: "contribute/contribute",
 
+        className: "contribute-view",
+
         afterRender: function() {
             var $bg = this.$(".contribute-bg");
 
