@@ -1,3 +1,13 @@
+.contribute-view {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    z-index: 1;
+}
+
 .contribute-bg {
     max-width: none;
     opacity: 0.35;
