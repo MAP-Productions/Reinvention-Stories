@@ -1,6 +1,7 @@
 define([
-    "app"
-], function( App ) {
+    "app",
+    "modules/videopos"
+], function( App, VideoPos ) {
 
     var Contribute;
 
@@ -8,9 +9,18 @@ define([
 
 
     Contribute.View = Backbone.LayoutView.extend({
-        template: "contribute/contribute"
-    });
+        template: "contribute/contribute",
 
+        afterRender: function() {
+            var $bg = this.$(".contribute-bg");
+
+            VideoPos.positionVideo( $bg );
+            
+            App.DOM.$window.on( "resize", function() {
+                VideoPos.positionVideo( $bg );
+            });
+        }
+    });
 
     return Contribute;
 });

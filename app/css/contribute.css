@@ -1,0 +1,37 @@
+.contribute-bg {
+    max-width: none;
+    opacity: 0.35;
+    position: absolute;
+    z-index: 1;
+}
+
+.contribute-nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin: 0 0 10px;
+    z-index: 2;
+}
+
+.contribute-nav li {
+    border-right: 1px solid #e1e1e0;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font: 700 14px brandon_grotesque, sans-serif;
+    height: 15px;
+    letter-spacing: 0.1em;
+    line-height: 15px;
+    padding: 0 11px 0 7px;
+    text-transform: uppercase;
+}
+
+.contribute-nav li:last-child {
+    border: none;
+}
+
+.contribute-nav li.active {
+    color: #ed007b;
+}
