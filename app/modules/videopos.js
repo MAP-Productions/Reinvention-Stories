@@ -2,7 +2,7 @@
 define([
     "app"
 ], function( App ) {
-    // centers a video for full-bleed
+    // centers a video (or other element) for full-bleed
     // $el : video to position
     // options : only one, { animate: true/false }
     function positionVideo($el, options) {
