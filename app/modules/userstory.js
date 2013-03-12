@@ -97,6 +97,12 @@ define([
                 this.attributes.text.layers[ i + startIndex ].attr.uri = url;
                 this.attributes.text.layers[ i + startIndex ].attr.attribution_uri = url;
             }
+        },
+
+        // adds email to project description for use by Project admin
+        setEmail: function ( email ) {
+            this.set("description",email);
+
         }
 
 
