@@ -33,15 +33,27 @@
     "data": [
       {
         "type": "Story",
-        "data": {}
+        "data": {
+          "id": 79433,
+          "act": 2,
+          "fetch": true
+        }
       },
       {
         "type": "Road",
-        "data": {}
+        "data": {
+          "id": 2,
+          "act": 2,
+          "fetch": false
+        }
       },
       {
         "type": "Reststop",
-        "data": {}
+        "data": {
+          "id": 2,
+          "act": 2,
+          "fetch": false
+        }
       }
     ]
   },
