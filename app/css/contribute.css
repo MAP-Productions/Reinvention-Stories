@@ -8,6 +8,24 @@
     z-index: 1;
 }
 
+.contribute-view .arrow {
+    background: url(/app/img/contribute-arrows.png);
+    cursor: pointer;
+    height: 43px;
+    left: 43px;
+    margin: -21px 0 0;
+    position: absolute;
+    top: 50%;
+    width: 46px;
+    z-index: 4;
+}
+
+.contribute-view .arrow.next {
+    background-position: 0 -43px;
+    left: auto;
+    right: 43px;
+}
+
 .contribute-bg {
     max-width: none;
     opacity: 0.35;
@@ -44,4 +62,28 @@
 
 .contribute-nav li.active {
     color: #ed007b;
+}
+
+.contribute-section {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}
+
+.contribute-section .content {
+    bottom: 85px;
+    left: 50%;
+    margin-left: -337px;
+    overflow: auto;
+    position: absolute;
+    top: 96px;
+    width: 675px;
+}
+
+.contribute-section .content h1 {
+    color: #fff;
+    font-size: 90px;
 }
