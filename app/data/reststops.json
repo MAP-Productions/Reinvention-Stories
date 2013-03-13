@@ -10,11 +10,16 @@
       "What is your favorite place in Dayton?"
     ]
   },
-  {
+ {
     "id": 2,
     "act": 2,
     "next": false,
-    "video": "RestStop2"
+    "video": "RestStop2",
+    "questions": [
+      "What gives you hope for our City?",
+      "How do you keep faith in the future?",
+      "What helps you believe things can get better?"
+    ]
   },
   {
     "id": 3,
