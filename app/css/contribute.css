@@ -79,11 +79,90 @@
     margin-left: -337px;
     overflow: auto;
     position: absolute;
-    top: 96px;
+    text-align: center;
+    top: 110px;
     width: 675px;
 }
 
-.contribute-section .content h1 {
+.contribute-section .line {
+    display: block;
+    margin-bottom: 26px;
+}
+
+.contribute-section label {
+    color: #ed007c;
+    display: inline-block;
+    font: 700 30px brandon_grotesque, sans-serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+.contribute-section label.beneath-standalone {
+    display: block;
+    font-size: 14px;
+    margin: 0 auto;
+    text-align: left;
+    width: 410px;
+}
+
+.contribute-section label.block {
+    display: block;
+    text-align: left;
+}
+
+.contribute-section input[type="text"] {
+    border-color: #fff;
+    border-radius: 0;
+    border-width: 0 0 2px 0;
+    background: rgba(255,255,255,0.1);
     color: #fff;
-    font-size: 90px;
+    display: inline-block;
+    vertical-align: middle;
+    font: normal 30px adelle_basic, serif;
+    height: 30px;
+    margin-left: 30px;
+    width: 400px;
+}
+
+.contribute-section textarea {
+    border-radius: 0;
+    border: none;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font: normal 24px/36px adelle_basic, serif;
+    width: 645px;
+    padding: 15px 15px;
+    position: absolute;
+    left: 0;
+    top: 43px;
+    bottom: 0;
+}
+
+.contribute-section input.standalone {
+    margin: 0 auto 3px;
+}
+
+.contribute-section p {
+    color: #fff;
+    font: normal 14px/20px adelle_basic, serif;
+    margin: 0 auto 20px;
+    width: 546px;
+}
+
+.contribute-section p strong{
+    color: #ed007c;
+    font-family: brandon_grotesque;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.contribute-section .add-photo {
+    display: inline-block;
+    width: 176px;
+    height: 113px;
+    border: 1px solid #fff;
+    margin: 0 5px 15px;
+    text-indent: -9999px;
+    background: rgba(255,255,255,0.1) url(/app/img/add-circle.png) no-repeat 50% 50%;
 }
