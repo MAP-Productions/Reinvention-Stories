@@ -92,6 +92,11 @@
   margin-right: 15px;
 }
 
+/* hide act 3 until launch */
+#reinvention-story-controls .controls-bar .acts-chapters .act-listing.act-3 {
+  display: none;
+}
+
 /* act titles */
 #reinvention-story-controls .controls-bar .act-listing .act-title {
   color: #242424;
