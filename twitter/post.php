@@ -3,30 +3,41 @@
     require_once("twitteroauth/twitteroauth.php");
     require_once("config.php");
      
-    /* Create a TwitterOauth object with consumer/user tokens. */
-    $connection = new TwitterOAuth( CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET );
+
     
     $post_data = file_get_contents("php://input");
     $fields = json_decode( $post_data, true ); 
 
 
-    if( isset( $fields["in_reply_to_status_id"])) {
+    
+    if( isset( $fields["act"])) {
 
-        $id = $fields["in_reply_to_status_id"];
+        $act = $fields["act"];
 
-    } else if( isset( $_GET["in_reply_to_status_id"])) {
+    } else if( isset( $_GET["act"])) {
 
-        $id = $_GET["in_reply_to_status_id"];
+        $act = $_GET["act"];
 
-    } else if( isset( $_POST["in_reply_to_status_id"])) {
+    } else if( isset( $_POST["act"])) {
 
-        $id = $_POST["in_reply_to_status_id"];
+        $act = $_POST["act"];
 
     } else{
 
-        $id = 293807845525311488;
+        $act = 1;
 
     }
+
+    /* Create a TwitterOauth object with consumer/user tokens. */
+
+    if( $act == 1 ){
+        $connection = new TwitterOAuth( CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET );
+    } else if ( $act == 2 ){
+        $connection = new TwitterOAuth( CONSUMER_KEY_2, CONSUMER_SECRET_2, ACCESS_TOKEN_2, ACCESS_TOKEN_SECRET_2 );
+    } else {
+        $connection = new TwitterOAuth( CONSUMER_KEY_3, CONSUMER_SECRET_3, ACCESS_TOKEN_3, ACCESS_TOKEN_SECRET_3 );
+    }
+    
 
     if( isset($fields["status"]) ){
 
@@ -47,7 +58,7 @@
 
     }
 
-    $response = $connection->post("statuses/update", array("status" => $status, "in_reply_to_status_id" => $id, "truncated" => true ));
+    $response = $connection->post("statuses/update", array("status" => $status, "truncated" => true ));
     
     echo json_encode( $response );
     

@@ -74,12 +74,15 @@ define([
             setInterval(function() {
                 // If the view is current, make a request for updates from Twitter
                 if ( App.isCurrent( this ) ) {
-                    Answer.request({ isUpdate: true });
+                    Answer.request({
+                        isUpdate: true,
+                        twitter_account: this.model.get("twitter_account")
+                    });
                 }
-            }.bind(this), 60000);
+            }.bind(this), 300000);
 
             // Make an initial request for existing answer submissions
-            Answer.request();
+            Answer.request({ twitter_account: this.model.get("twitter_account")});
 
             (function reveal() {
                 var index;
@@ -97,14 +100,17 @@ define([
 
         submit: function( event ) {
             var $form, content;
-
+                
             event.preventDefault();
 
             $form = $(event.currentTarget);
 
             content = {
-                status: $form.find("textarea").val()
+                status: $form.find("textarea").val(),
+                act: this.model.get("act")
             };
+
+
 
             $form[0].reset();
 
@@ -132,16 +138,6 @@ define([
 
             questions = this.model.get("questions");
             current = this.model.get("question");
-            // index = (function() {
-            //     var k = 0;
-
-            //     do {
-            //         k = Math.round( Math.random() * questions.length - 1 );
-            //     } while ( k === current );
-
-            //     return k;
-            // }());
-
             index = current + 1;
 
             if ( !questions[ index ] ) {
@@ -276,10 +272,9 @@ define([
     //
     Answer.request = function( options ) {
         options = options || {};
-
         return $.ajax({
             type: "GET",
-            url: "https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&screen_name=" + TWITTER_USER + "&count=20&callback=?",
+            url: "https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&screen_name=" + options.twitter_account + "&count=20&callback=?",
             dataType: "jsonp",
             success: function( data ) {
                 data.filter( Answer.isValid ).slice(0, 25).forEach(function( answer ) {
