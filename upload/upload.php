@@ -98,7 +98,7 @@ $filename="";
 // Uncomment these lines and remove html below to with independent script 
 
 // header('Content-type: application/json');
-// echo json_encode(array( "url" => "http://reinventionstories.org/upload/" . $filename, "error" => $error, "message" =>$message  ));
+// echo json_encode(array( "url" => "http://" . $_SERVER["SERVER_NAME"] . "/upload/" . $filename, "error" => $error, "message" =>$message  ));
 
  
 ?>
