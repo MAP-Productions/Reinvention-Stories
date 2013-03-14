@@ -4,6 +4,7 @@
     "act": 1,
     "next": false,
     "video": "RestStop1",
+    "twitter_account" : "ReinventDayton",
     "questions": [
       "Where do you see signs of life in Dayton?",
       "What city event do you most look forward to each year?",
@@ -15,6 +16,7 @@
     "act": 2,
     "next": false,
     "video": "RestStop2",
+    "twitter_account" : "reinventdayton_",
     "questions": [
       "What gives you hope for our City?",
       "How do you keep faith in the future?",
@@ -24,6 +26,7 @@
   {
     "id": 3,
     "act": 3,
+    "twitter_account" : "_reinventdayton",
     "next": false,
     "video": "RestStop3"
   }

@@ -1,6 +1,21 @@
 <?php
 
+//twitter account for act 1
 define("CONSUMER_KEY", "");
 define("CONSUMER_SECRET", "");
 define("ACCESS_TOKEN", "");
 define("ACCESS_TOKEN_SECRET", "");
+
+
+//twitter account for act 2
+define("CONSUMER_KEY_2", "");
+define("CONSUMER_SECRET_2", "");
+define("ACCESS_TOKEN_2", "");
+define("ACCESS_TOKEN_SECRET_2", "");
+
+//twitter account for act 3
+define("CONSUMER_KEY_3", "");
+define("CONSUMER_SECRET_3", "");
+define("ACCESS_TOKEN_3", "");
+define("ACCESS_TOKEN_SECRET_3", "");
+
