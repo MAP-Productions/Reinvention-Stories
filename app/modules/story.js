@@ -147,7 +147,7 @@ define([
                 });
 
                 App.on( "kill_player", function() {
-                    this.destroy();
+                    this.destroyPlayer();
                 }.bind(this) );
 
                 App.on( "pause_player", function() {
@@ -226,12 +226,8 @@ define([
             }
         },
 
-        destroy: function() {
-
-            // This is a terrible hack to squelch media_timeupdate events from this
-            // instance of the player. The player destroy() event needs work, so we're
-            // using this isntead just to fix that issue.
-            this.zeega.status.emit = function() {};
+        destroyPlayer: function() {
+            this.zeega.destroy();
         },
 
         jump: function( event ) {
