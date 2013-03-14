@@ -100,6 +100,7 @@ define([
             config = {
                 target: "#reinvention-story",
                 autoplay: true,
+                controls: false,
                 cover: "vertical",
                 windowRatio: 16/9,
                 debugEvents: true,

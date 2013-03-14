@@ -18,4 +18,4 @@
   </div>
 </div>
 
-<div id="act-bug">Act<br>One</div>
+<div id="act-bug">Act<br><%= [ "One", "Two", "Three" ][ model.get("act") - 1 ] %></div>

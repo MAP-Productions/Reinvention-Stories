@@ -73,6 +73,7 @@
   top: 0;
   height: 22px;
   margin: 0;
+  width: 3000px; /* prevent items from dropping down */
 }
 
 #reinvention-story-controls .controls-bar .acts-chapters ul {
@@ -89,11 +90,6 @@
 
 #reinvention-story-controls .controls-bar .acts-chapters .act-listing {
   margin-right: 15px;
-}
-
-/* Temporary until acts 2 and 3 are ready - only show act one. - Remove to show all acts. */
-#reinvention-story-controls .controls-bar .acts-chapters .act-listing:not(:first-child) {
-  display: none;
 }
 
 /* act titles */
