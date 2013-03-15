@@ -24,7 +24,7 @@ define([
             });
 
             // create new user story model now
-            this.storyToSubmit = new UserStory.Model();
+            this.storyModel = new UserStory.Model();
         },
 
         events: {
@@ -90,37 +90,36 @@ define([
                 prev = current.prev(".contribute-section"),
                 windowWidth = App.DOM.$body.width();
 
-            // send the current section off to the right of the screen
-            current.removeClass("active-section").animate( {
-                left: windowWidth
-            }, function() {
-                $(this).hide();
-            } );
+            // We need to check if there is anything previons in case they
+            // hit the previous arrow very fast while it is fading out.
+            if ( prev.length > 0) {
 
-            // position the next section to the left of the viewport and make it visible
-            prev.addClass("active-section").css({
-                left: windowWidth * -1
-            }).show();
+                // send the current section off to the right of the screen
+                current.removeClass("active-section").animate( {
+                    left: windowWidth
+                }, function() {
+                    $(this).hide();
+                } );
 
-            // slide the next section into position
-            prev.animate( {
-                left: 0
-            } );
+                // position the next section to the left of the viewport and make it visible
+                prev.addClass("active-section").css({
+                    left: windowWidth * -1
+                }).show();
 
-            this.updateNavAndArrows();
+                // slide the next section into position
+                prev.animate( {
+                    left: 0
+                } );
+
+                this.updateNavAndArrows();
+
+            }
         },
 
         updateNavAndArrows: function() {
             var index = this.$(".active-section").index(".contribute-section");
 
-            // show or hide next arrow
-            // if ( this.$(".active-section").next(".contribute-section").length > 0 ) {
-            //     this.$(".next").fadeIn();
-            // } else {
-            //     this.$(".next").fadeOut();
-            // }
-
-            // show or hide previous arrow
+            // show or hide previous arrow (next arrow is used for submission, so it stays always)
             if ( this.$(".active-section").prev(".contribute-section").length > 0 ) {
                 this.$(".prev").fadeIn();
             } else {
@@ -135,7 +134,14 @@ define([
         },
 
         submitStory: function() {
-            
+            this.storyModel.setTitle( this.$("#storyname").val() );
+            this.storyModel.setAuthor( this.$("#name").val() );
+            this.storyModel.setNeighborhood( this.$("#from").val() );
+            this.storyModel.setStory( 0, this.$("#whowereyou").val() );
+            this.storyModel.setStory( 1, this.$("#whathappened").val() );
+            this.storyModel.setStory( 2, this.$("#whoareyounow").val() );
+
+            this.storyModel.save();
         }
 
     });
