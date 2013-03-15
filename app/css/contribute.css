@@ -166,12 +166,30 @@
     text-transform: uppercase;
 }
 
+.contribute-section form {
+    display: inline;
+}
+
 .contribute-section .add-photo {
     display: inline-block;
     width: 176px;
     height: 113px;
     border: 1px solid #fff;
     margin: 0 5px 15px;
+    position: relative;
+    overflow: hidden;
     text-indent: -9999px;
     background: rgba(255,255,255,0.1) url(/app/img/add-circle.png) no-repeat 50% 50%;
+}
+
+.contribute-section .add-photo input {
+    cursor: pointer;
+    font-size: 90px;
+    height: 100%;
+    height: 113px;
+    right: 0;
+    line-height:176px;
+    opacity: 0;
+    position: absolute;
+    top: 0;
 }

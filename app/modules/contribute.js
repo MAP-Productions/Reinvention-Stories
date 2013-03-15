@@ -15,7 +15,7 @@ define([
         className: "contribute-view",
 
         afterRender: function() {
-            var $bg = this.$(".contribute-bg");
+            var $bg = this.$(".contribute-bg"), imageData;
 
             VideoPos.positionVideo( $bg );
             
@@ -23,13 +23,18 @@ define([
                 VideoPos.positionVideo( $bg );
             });
 
-            // create new user story model now
+            // create new user story model
             this.storyModel = new UserStory.Model();
+
+            // create array to store uploaded image URLs
+            this.imageUrls = [];
+
         },
 
         events: {
             "click .next" : "validateSection",
-            "click .prev" : "prevSection"
+            "click .prev" : "prevSection",
+            "change .add-photo input" : "imageUpload"
         },
 
         validateSection: function() {
@@ -133,6 +138,33 @@ define([
 
         },
 
+        imageUpload: function(event) {
+            var fileInput = event.target, imageData;
+            
+            imageData = new FormData();
+            
+            imageData.append( "file", fileInput.files[0] );
+
+            $.ajax({
+                url: "upload/upload.php",
+                data: imageData,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                success: function( data ) {
+
+                    $(fileInput).parent('span').css({
+                        "background-image" : "url(" + data.url + ")",
+                        "background-size" : "cover"
+                    });
+                    this.imageUrls[ $(fileInput).index("input[type='file']") ] = data.url;
+
+                    console.log(this.imageUrls);
+                }.bind(this)
+            });
+        },
+
         submitStory: function() {
             this.storyModel.setTitle( this.$("#storyname").val() );
             this.storyModel.setAuthor( this.$("#name").val() );
@@ -140,6 +172,9 @@ define([
             this.storyModel.setStory( 0, this.$("#whowereyou").val() );
             this.storyModel.setStory( 1, this.$("#whathappened").val() );
             this.storyModel.setStory( 2, this.$("#whoareyounow").val() );
+            _.each(this.imageUrls, function( value, index ) {
+                this.storyModel.setImage( index, value );
+            }.bind(this) );
 
             this.storyModel.save();
         }
