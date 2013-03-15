@@ -1,7 +1,8 @@
 define([
     "app",
+    "modules/userstory",
     "modules/videopos"
-], function( App, VideoPos ) {
+], function( App, UserStory, VideoPos ) {
 
     var Contribute;
 
@@ -21,11 +22,41 @@ define([
             App.DOM.$window.on( "resize", function() {
                 VideoPos.positionVideo( $bg );
             });
+
+            // create new user story model now
+            this.storyToSubmit = new UserStory.Model();
         },
 
         events: {
-            "click .next" : "nextSection",
+            "click .next" : "validateSection",
             "click .prev" : "prevSection"
+        },
+
+        validateSection: function() {
+            var activeSection = this.$(".active-section"),
+                activeId = activeSection.attr("id"),
+                inputs = activeSection.find("input[type='text'], textarea"),
+                valid = true;
+
+            inputs.each( function(i,v) {
+                if ( $(this).val().length === 0 ) {
+                    $(this).addClass("invalid");
+                    valid = false;
+                } else {
+                    $(this).removeClass("invalid");
+                }
+            });
+
+            if ( valid ) {
+                if ( activeSection .hasClass("last-section") ) {
+                    // on the last section, submit
+                   this.submitStory();
+                } else {
+                    // not on the last section, go to next section
+                    this.nextSection();
+                }
+            }
+            
         },
 
         nextSection: function() {
@@ -83,11 +114,11 @@ define([
             var index = this.$(".active-section").index(".contribute-section");
 
             // show or hide next arrow
-            if ( this.$(".active-section").next(".contribute-section").length > 0 ) {
-                this.$(".next").fadeIn();
-            } else {
-                this.$(".next").fadeOut();
-            }
+            // if ( this.$(".active-section").next(".contribute-section").length > 0 ) {
+            //     this.$(".next").fadeIn();
+            // } else {
+            //     this.$(".next").fadeOut();
+            // }
 
             // show or hide previous arrow
             if ( this.$(".active-section").prev(".contribute-section").length > 0 ) {
@@ -101,6 +132,10 @@ define([
                 .siblings().removeClass("active");
 
 
+        },
+
+        submitStory: function() {
+            
         }
 
     });

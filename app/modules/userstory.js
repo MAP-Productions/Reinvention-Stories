@@ -7,20 +7,21 @@ define([
 ], function( App, Data ) {
 
     var UserStory;
-    zeegaUrl = "http://alpha.zeega.org/api/items";
 
     UserStory = App.module();
+    
+    UserStory.zeegaUrl = "/post.php";
 
     UserStory.Model = Backbone.Model.extend({
 
         initialize: function() {
             this.set(
-                Data.from("userstory").byIndex( 0 ) 
+                Data.from("userstory").byIndex( 0 )
             );
         },
 
         url: function() {
-            return zeegaUrl;
+            return UserStory.zeegaUrl;
         },
 
         setTitle: function( title ) {

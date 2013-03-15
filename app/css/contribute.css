@@ -125,6 +125,10 @@
     width: 400px;
 }
 
+.contribute-section input[type="text"].invalid {
+    border-color: red;
+}
+
 .contribute-section textarea {
     border-radius: 0;
     border: none;
@@ -137,6 +141,11 @@
     left: 0;
     top: 43px;
     bottom: 0;
+}
+
+.contribute-section textarea.invalid {
+    border: 1px solid red;
+    width: 643px; /* make room for the border */
 }
 
 .contribute-section input.standalone {
