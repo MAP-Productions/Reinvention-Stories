@@ -10,3 +10,4 @@ app/video/*
 !app/video/README.md
 !app/video/list.txt
 !app/video/get.sh
+post.php
