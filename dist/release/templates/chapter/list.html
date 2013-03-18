@@ -1,6 +1,6 @@
 <% for ( var i = 1; i < 4; i++ ) { %>
   <% if ( i === act ) { %>
-    <li class="act-listing active">
+    <li class="act-listing act-<%=i%> active">
       <a class="act-title" href="#<%=i%>">Act <%=i%></a>
       <span class="act-time"><%=duration%></span>
       <ul class="chapters">
@@ -16,8 +16,8 @@
       </ul>
     </li>
   <% } else { %>
-    <li class="act-listing">
-      <span class="act-title" href="#<%=i%>">Act <%=i%></span>
+    <li class="act-listing act-<%=i%>">
+      <a class="act-title" href="#<%=i%>">Act <%=i%></a>
     </li>
   <% } %>
 <% } %>
