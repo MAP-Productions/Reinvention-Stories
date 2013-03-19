@@ -4,6 +4,7 @@
     "act": 1,
     "video": "Road_Act1",
     "audio": "city-traffic-1",
+    "text": "Scroll here to see signs of life in Dayton",
     "cues": [
       {
         "clip": "act_1_road_story_1",
@@ -37,6 +38,7 @@
     "act": 2,
     "video": "Road_Act2",
     "audio": "act_2_road",
+    "text": "Scroll here to see signs of hope in Dayton",
     "cues": [
       {
         "clip": "act_2_road_story_1",
