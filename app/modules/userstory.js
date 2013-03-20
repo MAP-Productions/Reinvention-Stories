@@ -94,9 +94,9 @@ define([
 
             // set all subsequent image layers to use same image
             // allows for upload of 1, 2 or 3 distinct images
-            for( var i = index; i++; i < 3 ) {
-                this.attributes.text.layers[ i + startIndex ].attr.uri = url;
-                this.attributes.text.layers[ i + startIndex ].attr.attribution_uri = url;
+            for( var i = 0; i++; i < 3 - index ) {
+                this.attributes.text.layers[ index + startIndex ].attr.uri = url;
+                this.attributes.text.layers[ index + startIndex ].attr.attribution_uri = url;
             }
         },
 
