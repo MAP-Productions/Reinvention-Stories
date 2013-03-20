@@ -12,3 +12,4 @@ app/video/*
 !app/video/get.sh
 post.php
 upload/images/*
+index.html
