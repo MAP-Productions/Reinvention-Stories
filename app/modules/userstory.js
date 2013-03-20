@@ -35,7 +35,7 @@ define([
 
             //retrieve html and update user story data
             newContent = content.wrap("<div/>").parent().html();
-            this.attributes.text.layers[ 0 ].content = newContent;
+            this.attributes.text.layers[ 0 ].attr.content = newContent;
 
         },
         
@@ -50,7 +50,7 @@ define([
 
             //retrieve html and update user story data
             newContent = content.wrap("<div/>").parent().html();
-            this.attributes.text.layers[ 1 ].content = newContent;
+            this.attributes.text.layers[ 1 ].attr.content = newContent;
 
         },
 
@@ -65,7 +65,7 @@ define([
 
             //retrieve html and update user story data
             newContent = content.wrap("<div/>").parent().html();
-            this.attributes.text.layers[ 2 ].content = newContent;
+            this.attributes.text.layers[ 2 ].attr.content = newContent;
 
         },
 
@@ -83,7 +83,7 @@ define([
 
             //retrieve html and update user story data
             newContent = content.wrap("<div/>").parent().html();
-            this.attributes.text.layers[ startIndex + index ].content = newContent;
+            this.attributes.text.layers[ startIndex + index ].attr.content = newContent;
 
         },
 
@@ -102,7 +102,7 @@ define([
 
         // adds email to project description for use by Project admin
         setEmail: function ( email ) {
-            this.set("description",email);
+            this.set( "description" , email );
 
         }
 
