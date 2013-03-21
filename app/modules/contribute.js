@@ -54,20 +54,26 @@ define([
 
             this.$("textarea").each( function(i,v) {
                 var $el = $(this),
-                    maxLength = $el.attr("maxlength"),
+                    maxChars = $el.attr("maxlength"),
                     $counter;
 
+                // find the counter element in relation to the textarea
                 $counter = $el.parents(".content")
                     .siblings(".char-count")
                     .find(".chars");
 
+                // update the max chars display from the maxlength attribute
+                $counter.siblings(".max-chars").text( maxChars );
+
+                // bind char count update to keyup
                 $el.on("keyup", function(e) {
                     var chars = $el.val().length;
 
                     $counter.text( chars );
                 });
+
             });
-            
+
         },
 
         validateSection: function() {
