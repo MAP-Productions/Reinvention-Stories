@@ -41,10 +41,10 @@ define([
         
         setAuthor: function( author ) {
             console.log(author, "is the author");
-            var content, newContent;
 
             this.attributes.text.layers[ 1 ].attr.content = author;
             this.attributes.text.authors = author;
+
 
         },
 
@@ -101,7 +101,7 @@ define([
 
         // adds email to project description for use by Project admin
         setEmail: function ( email ) {
-            this.set( "description" , email );
+            this.set("description",email);
 
         }
 
