@@ -40,12 +40,26 @@ define([
                 centerY: 53 // Y coordinate of the circle center
             });
 
+            this.bindCharCounters();
+
         },
 
         events: {
             "click .next" : "validateSection",
             "click .prev" : "prevSection",
             "change .add-photo input" : "imageUpload"
+        },
+
+        bindCharCounters: function() {
+            this.$("textarea").on("keyup", function(e) {
+                var chars = $(this).val().length;
+                
+                $(this)
+                    .parents(".content")
+                    .siblings(".char-count")
+                    .find(".chars").text( chars );
+
+            });
         },
 
         validateSection: function() {

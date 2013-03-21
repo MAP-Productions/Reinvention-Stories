@@ -90,6 +90,20 @@
     z-index: 3;
 }
 
+.contribute-section .char-count {
+    color: #fff;
+    font: normal 12px/14px adelle_basic, serif;
+    position: absolute;
+    right: 43px;
+    text-align: right;
+    top: 100px;
+    width: 130px;
+}
+
+.contribute-section .char-count .chars {
+    color: #ed007b;
+}
+
 .contribute-section .content {
     bottom: 85px;
     left: 50%;
