@@ -42,6 +42,8 @@ define([
         setAuthor: function( author ) {
             var content, newContent;
 
+            this.attributes.text.authors = author;
+
             //retrieve template
             content = $(this.get("text").layers[ 1 ].attr.content);
             
@@ -102,7 +104,7 @@ define([
 
         // adds email to project description for use by Project admin
         setEmail: function ( email ) {
-            this.set( "description" , email );
+            this.set("description",email);
 
         }
 
