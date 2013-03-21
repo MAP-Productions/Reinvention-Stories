@@ -255,6 +255,7 @@ define([
             //console.log("Zeega created. ID is " + response.items[0].id + "." );
             console.log( response );
             this.$(".loading-overlay").hide();
+            this.$(".contribute-nav").fadeOut();
             this.$(".active-section").fadeOut();
             this.$(".arrow").fadeOut();
             this.$(".contribute-thanks").fadeIn();
