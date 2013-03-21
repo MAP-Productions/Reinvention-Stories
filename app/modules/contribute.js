@@ -1,8 +1,9 @@
 define([
     "app",
     "modules/userstory",
-    "modules/videopos"
-], function( App, UserStory, VideoPos ) {
+    "modules/videopos",
+    "progress"
+], function( App, UserStory, VideoPos, ProgressCircle ) {
 
     var Contribute;
 
@@ -28,6 +29,16 @@ define([
 
             // create array to store uploaded image URLs
             this.imageUrls = [];
+
+            // setup loading spinner
+            this.spinner = new ProgressCircle({
+                canvas: this.$("#contribute-loading-pie").get(0),
+                minRadius: 0, // Inner radius of the innermost circle
+                arcWidth: 30, // Width of each circle
+                gapWidth: 0, // Space between adjacent circles
+                centerX: 53, // X coordinate of the circle center
+                centerY: 53 // Y coordinate of the circle center
+            });
 
         },
 
@@ -166,17 +177,59 @@ define([
         },
 
         submitStory: function() {
+
+            this.showLoading();
+
             this.storyModel.setTitle( this.$("#storyname").val() );
             this.storyModel.setAuthor( this.$("#name").val() );
             this.storyModel.setNeighborhood( this.$("#from").val() );
             this.storyModel.setStory( 0, this.$("#whowereyou").val() );
             this.storyModel.setStory( 1, this.$("#whathappened").val() );
             this.storyModel.setStory( 2, this.$("#whoareyounow").val() );
+
             _.each(this.imageUrls, function( value, index ) {
                 this.storyModel.setImage( index, value );
             }.bind(this) );
 
-            this.storyModel.save();
+            this.storyModel.save( {}, {
+                success: function() {
+                    this.showThanks();
+                }.bind(this)
+            });
+
+        },
+
+        showLoading: function() {
+            var timeAtStart = new Date().getTime();
+
+            this.$(".loading-overlay").show();
+
+            // start progress spinner
+            this.spinner.addEntry({
+                fillColor: 'rgba(255, 0, 137, 0.75)',
+                progressListener: function() {
+                    var elapsed =  new Date().getTime() - timeAtStart;
+
+                    return (elapsed % 1500) / 1500;
+                }
+            });
+
+            this.spinner.start(33);
+        },
+
+        hideLoading: function() {
+            this.spinner.stop();
+            this.$(".loading-overlay").hide();
+        },
+
+        showThanks: function(model, response, options) {
+            this.hideLoading();
+            //console.log("Zeega created. ID is " + response.items[0].id + "." );
+            console.log( response );
+            this.$(".loading-overlay").hide();
+            this.$(".active-section").fadeOut();
+            this.$(".arrow").fadeOut();
+            this.$(".contribute-thanks").fadeIn();
         }
 
     });

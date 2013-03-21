@@ -8,6 +8,23 @@
     z-index: 1;
 }
 
+.contribute-view .loading-overlay {
+    background: rgba(0,0,0,0.75);
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 5;
+}
+
+.contribute-view .loading-overlay canvas {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -54px 0 0 -54px;
+}
+
 .contribute-view .arrow {
     background: url(/app/img/contribute-arrows.png);
     cursor: pointer;
@@ -192,4 +209,31 @@
     opacity: 0;
     position: absolute;
     top: 0;
+}
+
+.contribute-thanks {
+    background: rgba(255,255,255,0.10);
+    height: 134px;
+    left: 50%;
+    margin: -97px 0 0 -275px;
+    padding: 30px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 490px;
+    z-index: 4;
+}
+
+.contribute-thanks p {
+    color: #ed007c;
+    font: 700 30px/32px brandon_grotesque, sans-serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.contribute-thanks a {
+    color: #fff;
+    display: block;
+    font: normal 24px adelle_basic, serif;
+    margin: 18px 0 0;
 }
