@@ -51,15 +51,23 @@ define([
         },
 
         bindCharCounters: function() {
-            this.$("textarea").on("keyup", function(e) {
-                var chars = $(this).val().length;
-                
-                $(this)
-                    .parents(".content")
-                    .siblings(".char-count")
-                    .find(".chars").text( chars );
 
+            this.$("textarea").each( function(i,v) {
+                var $el = $(this),
+                    maxLength = $el.attr("maxlength"),
+                    $counter;
+
+                $counter = $el.parents(".content")
+                    .siblings(".char-count")
+                    .find(".chars");
+
+                $el.on("keyup", function(e) {
+                    var chars = $el.val().length;
+
+                    $counter.text( chars );
+                });
             });
+            
         },
 
         validateSection: function() {
