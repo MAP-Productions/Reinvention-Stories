@@ -83,7 +83,7 @@ define([
                 valid = true;
 
             inputs.each( function(i,v) {
-                if ( $(this).val().length === 0 ) {
+                if ( $(this).val().length === 0 || $(this).val().length > 600 ) {
                     $(this).addClass("invalid");
                     valid = false;
                 } else {
