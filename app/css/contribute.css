@@ -160,23 +160,33 @@
     border-color: red;
 }
 
+.contribute-section .textarea-wrap {
+    background: rgba(255,255,255,0.1);
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    top: 43px;
+    width: 645px;
+}
+
 .contribute-section textarea {
+    background: transparent;
     border-radius: 0;
     border: none;
-    background: rgba(255,255,255,0.1);
+    box-shadow: none;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     color: #fff;
     font: normal 24px/36px adelle_basic, serif;
-    width: 645px;
+    height: 100%;
+    margin: 0;
     padding: 15px 15px;
-    position: absolute;
-    left: 0;
-    top: 43px;
-    bottom: 0;
+    resize: none;
+    width: 100%;
 }
 
 .contribute-section textarea.invalid {
     border: 1px solid red;
-    width: 643px; /* make room for the border */
 }
 
 .contribute-section input.standalone {
