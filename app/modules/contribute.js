@@ -79,7 +79,7 @@ define([
         validateSection: function() {
             var activeSection = this.$(".active-section"),
                 activeId = activeSection.attr("id"),
-                inputs = activeSection.find("input[type='text'], textarea"),
+                inputs = activeSection.find("input[type='text'], textarea, select"),
                 valid = true;
 
             inputs.each( function(i,v) {

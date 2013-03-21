@@ -156,6 +156,19 @@
     width: 400px;
 }
 
+.contribute-section select {
+    margin-left: 30px;
+    background: rgba(255,255,255,0.1);
+    border: 0;
+    color: #fff;
+    padding: 5px 0 5px;
+    line-height: 30px;
+}
+
+.contribute-section select.invalid {
+    border: 1px solid red;
+}
+
 .contribute-section input[type="text"].invalid {
     border-color: red;
 }
