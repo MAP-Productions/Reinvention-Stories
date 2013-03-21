@@ -40,17 +40,11 @@ define([
         },
         
         setAuthor: function( author ) {
+            console.log(author, "is the author");
             var content, newContent;
 
-            //retrieve template
-            content = $(this.get("text").layers[ 1 ].attr.content);
-            
-            //update template content with neighborhood
-            content.html(author);
-
-            //retrieve html and update user story data
-            newContent = content.wrap("<div/>").parent().html();
-            this.attributes.text.layers[ 1 ].attr.content = newContent;
+            this.attributes.text.layers[ 1 ].attr.content = author;
+            this.attributes.text.authors = author;
 
         },
 
@@ -89,15 +83,20 @@ define([
 
         // index starts at 0
         setImage: function ( index, url ) {
+            
             //image layers are indexed at 6,7,8
             var startIndex = 6;
-
             // set all subsequent image layers to use same image
             // allows for upload of 1, 2 or 3 distinct images
-            for( var i = 0; i++; i < 3 - index ) {
+            for( var i = 0;  i < 3 - index; i++) {
                 this.attributes.text.layers[ index + startIndex ].attr.uri = url;
                 this.attributes.text.layers[ index + startIndex ].attr.attribution_uri = url;
             }
+
+            if(index === 0){
+                this.set("thumbnail_url", url );
+            }
+
         },
 
         // adds email to project description for use by Project admin
