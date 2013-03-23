@@ -8,12 +8,13 @@
 }
 
 .story-player .player-container {
-  width: 709px;
-  height: 399px;
+  box-shadow: 0 0 24px rgba(0,0,0,0.75);
+  width: 882px;
+  height: 496px;
   position: absolute;
   left: 50%;
   top: 50%;
-  margin: -200px 0 0 -355px;
+  margin: -248px 0 0 -441px;
   z-index: 300;
 }
 
@@ -63,11 +64,11 @@
 
 .story-player .player-close {
   position: absolute;
-  top: -14px;
-  right: -35px;
-  width: 28px;
-  height: 27px;
-  background: url(/app/img/close-btn.png);
+  top: 0;
+  right: 0;
+  width: 17px;
+  height: 17px;
+  background: url(/app/img/close-story-overlay.png);
   text-indent: -9999px;
   z-index: 1;
 }
