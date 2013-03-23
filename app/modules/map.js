@@ -1,8 +1,9 @@
 define([
     "app",
     "leaflet",
-    "modules/icon"
-], function( App, L, Icon ) {
+    "modules/icon",
+    "modules/tumblr"
+], function( App, L, Icon, Tumblr ) {
 
     var Map;
 
@@ -33,6 +34,8 @@ define([
     Map.View = Backbone.LayoutView.extend({
         template : 'map/basemap',
         afterRender: function() {
+            var tumblrNewsView;
+
             this.leafletMap = L.map('mapView').setView( Map.center, 14 );
 
             this.collection.fetch({
@@ -44,6 +47,11 @@ define([
 
             // add tile layer
             L.tileLayer('http://{s}.tiles.mapbox.com/v3/zeega.map-0ik131wz/{z}/{x}/{y}.png').addTo( this.leafletMap );
+
+            // add tumblr feed view
+            tumblrNewsView = new Tumblr.View();
+            this.insertView("", tumblrNewsView);
+            tumblrNewsView.render();
         },
 
         createMarkers: function(collection) {
