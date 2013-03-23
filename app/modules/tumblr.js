@@ -62,7 +62,9 @@ define([
             }
         },
         hide: function() {
-            this.remove();
+            this.$el.fadeOut( function() {
+                this.remove();
+            });
         }
     });
 
