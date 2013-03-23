@@ -116,10 +116,11 @@ define([
                     }.bind(this) );
 
                     icon.on("mouseout", function(e) {
-                        this.setStyle({
+                        e.target.setStyle({
                             radius: 8
                         });
-                    });
+                        this.leafletMap.closePopup();
+                    }.bind(this) );
 
                     icon.on("click", function(event){
 
