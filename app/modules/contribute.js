@@ -47,7 +47,8 @@ define([
         events: {
             "click .next" : "validateSection",
             "click .prev" : "prevSection",
-            "change .add-photo input" : "imageUpload"
+            "change .add-photo input" : "imageUpload",
+            "click .submit-story" : "submitStory"
         },
 
         bindCharCounters: function() {
@@ -92,13 +93,7 @@ define([
             });
 
             if ( valid ) {
-                if ( activeSection .hasClass("last-section") ) {
-                    // on the last section, submit
-                   this.submitStory();
-                } else {
-                    // not on the last section, go to next section
-                    this.nextSection();
-                }
+                this.nextSection();
             }
             
         },
@@ -108,24 +103,29 @@ define([
                 next = current.next(".contribute-section"),
                 windowWidth = App.DOM.$body.width();
 
-            // send the current section off to the left of the screen
-            current.removeClass("active-section").animate( {
-                left: windowWidth * -1
-            }, function() {
-                $(this).hide();
-            } );
+            // We need to check if there is anything next in case they
+            // hit the previous arrow very fast while it is fading out.
+            if ( next.length > 0) {
 
-            // position the next section to the right of the viewport and make it visible
-            next.addClass("active-section").css({
-                left: windowWidth
-            }).show();
+                // send the current section off to the left of the screen
+                current.removeClass("active-section").animate( {
+                    left: windowWidth * -1
+                }, function() {
+                    $(this).hide();
+                } );
 
-            // slide the next section into position
-            next.animate( {
-                left: 0
-            } );
+                // position the next section to the right of the viewport and make it visible
+                next.addClass("active-section").css({
+                    left: windowWidth
+                }).show();
 
-            this.updateNavAndArrows();
+                // slide the next section into position
+                next.animate( {
+                    left: 0
+                } );
+
+                this.updateNavAndArrows();
+            }
 
         },
 
@@ -134,7 +134,7 @@ define([
                 prev = current.prev(".contribute-section"),
                 windowWidth = App.DOM.$body.width();
 
-            // We need to check if there is anything previons in case they
+            // We need to check if there is anything previous in case they
             // hit the previous arrow very fast while it is fading out.
             if ( prev.length > 0) {
 
@@ -163,11 +163,18 @@ define([
         updateNavAndArrows: function() {
             var index = this.$(".active-section").index(".contribute-section");
 
-            // show or hide previous arrow (next arrow is used for submission, so it stays always)
+            // show or hide previous arrow
             if ( this.$(".active-section").prev(".contribute-section").length > 0 ) {
                 this.$(".prev").fadeIn();
             } else {
                 this.$(".prev").fadeOut();
+            }
+
+            // show or hide next arrow
+            if ( this.$(".active-section").next(".contribute-section").length > 0 ) {
+                this.$(".next").fadeIn();
+            } else {
+                this.$(".next").fadeOut();
             }
 
             // activate the correct section name in the list
@@ -178,11 +185,11 @@ define([
         },
 
         imageUpload: function(event) {
-            var fileInput = event.target, imageData;
+            var $fileInput = $(event.target), imageData;
             
             imageData = new FormData();
             
-            imageData.append( "file", fileInput.files[0] );
+            imageData.append( "file", $fileInput.get(0).files[0] );
 
             $.ajax({
                 url: "upload/upload.php",
@@ -193,11 +200,18 @@ define([
                 type: 'POST',
                 success: function( data ) {
 
-                    $(fileInput).parent('span').css({
+                    // set upload ui element bg to the image url
+                    $fileInput.parent('span').css({
                         "background-image" : "url(" + data.url + ")",
                         "background-size" : "cover"
                     });
-                    this.imageUrls[ $(fileInput).index("input[type='file']") ] = data.url;
+
+                    // set review image ui element bg to the image url
+                    this.$(".review-photo").eq( $fileInput.parent().index(".add-photo") ).css({
+                        "background-image" : "url(" + data.url + ")"
+                    });
+
+                    this.imageUrls[ $fileInput.index("input[type='file']") ] = data.url;
 
                     console.log(this.imageUrls);
                 }.bind(this)

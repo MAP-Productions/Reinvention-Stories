@@ -247,6 +247,63 @@
     top: 0;
 }
 
+.contribute-section .review {
+    background: rgba(255,255,255,0.10);
+    height: 364px;
+    left: 50%;
+    margin: -182px 0 0 -337px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 675px;
+    z-index: 4;
+}
+
+.contribute-section .review h3 {
+    color: #ed007c;
+    font: 700 30px/32px brandon_grotesque, sans-serif;
+    letter-spacing: 0.05em;
+    margin: 55px 0 0;
+    text-transform: uppercase;
+}
+
+.contribute-section .review p {
+    color: #fff;
+    font: normal 24px adelle_basic, serif;
+}
+
+.contribute-section .review .submit-story {
+    background: #ed007c;
+    color: #fff;
+    cursor: pointer;
+    font: 900 19px/30px brandon_grotesque, sans-serif;
+    line-height: 30px;
+    display: inline-block;
+    text-transform: uppercase;
+    vertical-align: middle;
+    padding: 0 10px;
+}
+
+.contribute-section .review .review-photo {
+    display: inline-block;
+    width: 125px;
+    height: 92px;
+    margin: 20px;
+    position: relative;
+    overflow: hidden;
+    text-indent: -9999px;
+    background-color: rgba(255,255,255,0.1);
+    background-position: center;
+    background-size: cover;
+}
+
+.contribute-section .review .submit-story img {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -5px;
+    padding: 0 2px;
+}
+
 .contribute-thanks {
     background: rgba(255,255,255,0.10);
     height: 134px;
