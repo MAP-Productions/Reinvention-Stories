@@ -59,8 +59,7 @@ define([
             "click .next" : "validateSection",
             "click .prev" : "prevSection",
             "change .add-photo input" : "imageUpload",
-            "click .submit-story" : "submitStory",
-            "click .submit-email" : "validateEmail"
+            "click .submit-story" : "validateEmail"
         },
 
         bindCharCounters: function() {
@@ -240,6 +239,7 @@ define([
             this.storyModel.setStory( 0, this.$("#whowereyou").val() );
             this.storyModel.setStory( 1, this.$("#whathappened").val() );
             this.storyModel.setStory( 2, this.$("#whoareyounow").val() );
+            this.storyModel.setEmail( this.$("#email").val() );
 
             _.each(this.imageUrls, function( value, index ) {
                 this.storyModel.setImage( index, value );
@@ -281,13 +281,7 @@ define([
             entered = this.$("#email").val();
 
             if( regexp.test( entered ) ) {
-                this.showLoading();
-                this.storyModel.setEmail( entered );
-                this.storyModel.save( {
-                    success: function() {
-                        App.router.navigate( "#map", { trigger: true } );
-                    }
-                });
+                this.submitStory();
             } else {
                 this.$("#email").addClass("invalid");
             }

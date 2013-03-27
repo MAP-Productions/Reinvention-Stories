@@ -268,9 +268,9 @@
 
 .contribute-section .review {
     background: rgba(255,255,255,0.10);
-    height: 364px;
+    height: 440px;
     left: 50%;
-    margin: -182px 0 0 -337px;
+    margin: -220px 0 0 -337px;
     position: absolute;
     text-align: center;
     top: 50%;
@@ -304,6 +304,34 @@
     background-size: cover;
 }
 
+
+.contribute-section .review .email-input-wrap {
+    margin: 38px 0;
+}
+
+.contribute-section .review label {
+    display: inline-block;
+    color: #fff;
+    width: 260px;
+    font: normal 16px/18px adelle_basic, serif;
+    text-align: left;
+    text-transform: none;
+}
+
+.contribute-section .review input[type="text"] {
+    border: none;
+    font-size: 24px;
+    margin-left: 0;
+    padding: 6px 17px;
+    width: 256px;
+}
+
+
+.contribute-section .review input.invalid {
+    border-bottom: 2px solid red;
+    padding-bottom: 4px
+}
+
 .contribute-thanks {
     height: 234px;
     left: 50%;
@@ -311,7 +339,7 @@
     position: absolute;
     text-align: center;
     top: 50%;
-    width: 600;
+    width: 600px;
     z-index: 4;
 }
 
@@ -327,30 +355,4 @@
     display: block;
     font: normal 24px adelle_basic, serif;
     margin: 18px 0 0;
-}
-
-.contribute-thanks .input-wrap {
-    margin: 38px 0;
-}
-
-.contribute-thanks label {
-    display: inline-block;
-    color: #fff;
-    width: 260px;
-    font: normal 16px/18px adelle_basic, serif;
-    text-align: left;
-}
-
-.contribute-thanks input[type="text"] {
-    border: none;
-    font-size: 24px;
-    margin-left: 0;
-    padding: 6px 17px;
-    width: 256px;
-}
-
-
-.contribute-thanks input.invalid {
-    border-bottom: 2px solid red;
-    padding-bottom: 4px
 }
