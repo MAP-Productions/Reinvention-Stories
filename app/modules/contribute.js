@@ -16,7 +16,9 @@ define([
         className: "contribute-view",
 
         afterRender: function() {
-            var $bg = this.$(".contribute-bg"), imageData;
+            var imageData, timeAtStart, $bg = this.$(".contribute-bg");
+
+            timeAtStart = new Date().getTime();
 
             VideoPos.positionVideo( $bg );
             
@@ -40,6 +42,15 @@ define([
                 centerY: 53 // Y coordinate of the circle center
             });
 
+            this.spinner.addEntry({
+                fillColor: 'rgba(255, 0, 137, 0.75)',
+                progressListener: function() {
+                    var elapsed =  new Date().getTime() - timeAtStart;
+
+                    return (elapsed % 1500) / 1500;
+                }
+            });
+
             this.bindCharCounters();
 
         },
@@ -48,7 +59,8 @@ define([
             "click .next" : "validateSection",
             "click .prev" : "prevSection",
             "change .add-photo input" : "imageUpload",
-            "click .submit-story" : "submitStory"
+            "click .submit-story" : "submitStory",
+            "click .submit-email" : "validateEmail"
         },
 
         bindCharCounters: function() {
@@ -178,8 +190,8 @@ define([
             }
 
             // activate the correct section name in the list
-            this.$(".contribute-nav li").eq( index ).addClass("active")
-                .siblings().removeClass("active");
+            this.$(".contribute-nav li").removeClass("active")
+                .eq( index ).addClass("active");
 
 
         },
@@ -242,20 +254,7 @@ define([
         },
 
         showLoading: function() {
-            var timeAtStart = new Date().getTime();
-
             this.$(".loading-overlay").show();
-
-            // start progress spinner
-            this.spinner.addEntry({
-                fillColor: 'rgba(255, 0, 137, 0.75)',
-                progressListener: function() {
-                    var elapsed =  new Date().getTime() - timeAtStart;
-
-                    return (elapsed % 1500) / 1500;
-                }
-            });
-
             this.spinner.start(33);
         },
 
@@ -273,6 +272,26 @@ define([
             this.$(".active-section").fadeOut();
             this.$(".arrow").fadeOut();
             this.$(".contribute-thanks").fadeIn();
+        },
+
+        validateEmail: function() {
+            var regexp, entered;
+
+            regexp = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            entered = this.$("#email").val();
+
+            if( regexp.test( entered ) ) {
+                this.showLoading();
+                this.storyModel.setEmail( entered );
+                this.storyModel.save( {
+                    success: function() {
+                        App.router.navigate( "#map", { trigger: true } );
+                    }
+                });
+            } else {
+                this.$("#email").addClass("invalid");
+            }
+
         }
 
     });

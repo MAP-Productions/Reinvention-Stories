@@ -43,6 +43,25 @@
     right: 43px;
 }
 
+.contribute-view .submit {
+    background: #ed007c;
+    color: #fff;
+    cursor: pointer;
+    font: 900 19px/30px brandon_grotesque, sans-serif;
+    line-height: 30px;
+    display: inline-block;
+    text-transform: uppercase;
+    vertical-align: middle;
+    padding: 0 10px;
+}
+
+.contribute-view .submit img {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -5px;
+    padding: 0 2px;
+}
+
 .contribute-bg {
     max-width: none;
     opacity: 0.35;
@@ -142,7 +161,7 @@
     text-align: left;
 }
 
-.contribute-section input[type="text"] {
+.contribute-view input[type="text"] {
     border-color: #fff;
     border-radius: 0;
     border-width: 0 0 2px 0;
@@ -272,18 +291,6 @@
     font: normal 24px adelle_basic, serif;
 }
 
-.contribute-section .review .submit-story {
-    background: #ed007c;
-    color: #fff;
-    cursor: pointer;
-    font: 900 19px/30px brandon_grotesque, sans-serif;
-    line-height: 30px;
-    display: inline-block;
-    text-transform: uppercase;
-    vertical-align: middle;
-    padding: 0 10px;
-}
-
 .contribute-section .review .review-photo {
     display: inline-block;
     width: 125px;
@@ -297,23 +304,14 @@
     background-size: cover;
 }
 
-.contribute-section .review .submit-story img {
-    display: inline-block;
-    vertical-align: middle;
-    margin-top: -5px;
-    padding: 0 2px;
-}
-
 .contribute-thanks {
-    background: rgba(255,255,255,0.10);
-    height: 134px;
+    height: 234px;
     left: 50%;
-    margin: -97px 0 0 -275px;
-    padding: 30px;
+    margin: -117px 0 0 -300px;
     position: absolute;
     text-align: center;
     top: 50%;
-    width: 490px;
+    width: 600;
     z-index: 4;
 }
 
@@ -329,4 +327,30 @@
     display: block;
     font: normal 24px adelle_basic, serif;
     margin: 18px 0 0;
+}
+
+.contribute-thanks .input-wrap {
+    margin: 38px 0;
+}
+
+.contribute-thanks label {
+    display: inline-block;
+    color: #fff;
+    width: 260px;
+    font: normal 16px/18px adelle_basic, serif;
+    text-align: left;
+}
+
+.contribute-thanks input[type="text"] {
+    border: none;
+    font-size: 24px;
+    margin-left: 0;
+    padding: 6px 17px;
+    width: 256px;
+}
+
+
+.contribute-thanks input.invalid {
+    border-bottom: 2px solid red;
+    padding-bottom: 4px
 }
