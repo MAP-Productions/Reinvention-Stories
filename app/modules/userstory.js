@@ -27,6 +27,9 @@ define([
         setTitle: function( title ) {
             var content, newContent;
 
+            // set title for display in library/on map
+            this.set("title", title);
+
             //retrieve template
             content = $(this.get("text").layers[ 0 ].attr.content);
             
