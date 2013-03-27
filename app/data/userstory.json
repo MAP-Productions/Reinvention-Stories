@@ -10,9 +10,7 @@
             "date_created": "03/12/2013 ",
             "date_updated": "1363072032",
             "date_published": "1363071733",
-            "tags": [
-                "map-for-review"
-            ],
+            "tags": "",
             "authors": "",
             "cover_image": "http://farm4.staticflickr.com/3349/3526294014_3368a2343b_z.jpg?zz=1",
             "enabled": true,
@@ -494,7 +492,7 @@
         "child_items_count": 0,
         "attributes": "N;",
         "child_items": [],
-        "tags": [],
+        "tags": [ "map-for-review" ],
         "editable": true,
         "published": true,
         "enabled": true

@@ -101,7 +101,7 @@ define([
 
         // adds email to project description for use by Project admin
         setEmail: function ( email ) {
-            this.set("description",email);
+            this.set("description", "Submitted by " + email );
 
         }
 
