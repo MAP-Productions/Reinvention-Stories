@@ -32,9 +32,6 @@ define([
     Tumblr.View = Backbone.LayoutView.extend({
         template: "tumblr",
         className: "tumblr-news",
-        events: {
-            "click .close-news" : "hide"
-        },
         initialize: function() {
             this.model = new Tumblr.Model();
 
@@ -60,11 +57,6 @@ define([
                     date: ""
                 };
             }
-        },
-        hide: function() {
-            this.$el.fadeOut( function() {
-                this.remove();
-            });
         }
     });
 

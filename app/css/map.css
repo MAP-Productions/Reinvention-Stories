@@ -99,33 +99,21 @@
 
 /* tumblr news view */
 .tumblr-news {
-    background: #fff url(/app/img/map-news-bg.png);
-    bottom: 0;
+    bottom: 25px;
     left: 25px;
     width: 262px;
     position: absolute;
     z-index: 10;
-    padding: 20px 20px 10px;
-}
-
-.tumblr-news .close-news {
-    cursor: pointer;
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 17px;
-    width: 17px;
-    background: url(/app/img/map-news-close.png);
 }
 
 .tumblr-news a {
-    color: #ee2984;
+    color: #fff;
     display: block;
     font: bold 18px/20px adelle_basic, serif;
 }
 
 .tumblr-news .meta {
-    color: #2c2c2c;
+    color: #fff;
     font: 700 10px brandon_grotesque, serif;
     text-transform: uppercase;
 }
