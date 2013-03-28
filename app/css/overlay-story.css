@@ -17,7 +17,7 @@
   margin: -248px 0 0 -441px;
   z-index: 300;
 }
-
+  
 #story-zeega-player{
   position: relative;
   height: 100%;
@@ -59,7 +59,7 @@
 }
 
 #story-zeega-player .ZEEGA-player {
-  font-size: 4px; /* only for scaling down the arrows, which are sized in ems */
+  font-size: 11px;
 }
 
 .story-player .player-close {
