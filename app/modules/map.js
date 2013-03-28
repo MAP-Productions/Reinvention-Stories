@@ -33,10 +33,11 @@ define([
 
     Map.View = Backbone.LayoutView.extend({
         template : 'map/basemap',
+        className : "map-view",
         afterRender: function() {
             var tumblrNewsView;
 
-            this.leafletMap = L.map('mapView').setView( Map.center, 14 );
+            this.leafletMap = L.map('mapContainer').setView( Map.center, 14 );
 
             this.collection.fetch({
                 success: function(collection, response) {

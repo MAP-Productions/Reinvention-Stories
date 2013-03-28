@@ -1,13 +1,22 @@
-#mapView {
+.map-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 18;
+}
+
+#mapContainer {
     height: 100%;
 }
 
 /* leaflet elements */
-#mapView .leaflet-top {
+#mapContainer .leaflet-top {
     top: 85px; /* override on all elements attached to top so they clear site nav */
 }
 
-#mapView .leaflet-control-zoom {
+#mapContainer .leaflet-control-zoom {
     background: rgba(255,255,255, 0.15);
     border: 1px solid #fff;
     -moz-border-radius: 0;
@@ -18,7 +27,7 @@
     padding: 15px;
 }
 
-#mapView .leaflet-control-zoom a {
+#mapContainer .leaflet-control-zoom a {
     background: url(/app/img/map-zoom-controls.png);
     border: none;
     -moz-border-radius: 0;
@@ -29,15 +38,15 @@
     width: 21px;
 }
 
-#mapView .leaflet-control-zoom a.leaflet-control-zoom-in {
+#mapContainer .leaflet-control-zoom a.leaflet-control-zoom-in {
     margin-bottom: 9px;
 }
 
-#mapView .leaflet-control-zoom a.leaflet-control-zoom-out {
+#mapContainer .leaflet-control-zoom a.leaflet-control-zoom-out {
     background-position: 0 -20px;
 }
 
-#mapView .leaflet-popup-content {
+#mapContainer .leaflet-popup-content {
     color: #464241;
     font: 700 11px/11px adelle_basic, serif;
     text-transform: uppercase;
@@ -45,11 +54,11 @@
     margin: 6px 12px 4px;
 }
 
-#mapView .leaflet-popup-tip-container {
+#mapContainer .leaflet-popup-tip-container {
     display: none;
 }
 
-#mapView .leaflet-popup-content-wrapper {
+#mapContainer .leaflet-popup-content-wrapper {
     border: 1px solid #edf2ef;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;

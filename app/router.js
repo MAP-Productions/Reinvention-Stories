@@ -7,6 +7,7 @@ define([
     "modules/road",
     "modules/reststop",
     "modules/map",
+    "modules/storyoverlay",
     "modules/contribute",
     "modules/session",
 
@@ -14,7 +15,7 @@ define([
     "modules/data"
 ],
 
-function( App, Intro, Act, Story, Road, Reststop, Map, Contribute, Session, Data ) {
+function( App, Intro, Act, Story, Road, Reststop, Map, StoryOverlay, Contribute, Session, Data ) {
     var Router;
 
     // window.Session = window.Session || Session;
@@ -203,6 +204,7 @@ function( App, Intro, Act, Story, Road, Reststop, Map, Contribute, Session, Data
         },
 
         story: function( id ){
+            var storyView;
 
             // save lastContent so we can return from a modal
             App.router.lastContent = Backbone.history.getFragment();
@@ -215,51 +217,12 @@ function( App, Intro, Act, Story, Road, Reststop, Map, Contribute, Session, Data
                this.renderMapView();
             }
 
-            _.delay(function(){
-                $(".ZEEGA-player").remove();
-                var player = new Zeega.player({
-                    controls: {
-                        arrows: true,
-                        playpause: true,
-                        close: false
-                    },
-                    autoplay: true,
-                    target: "#story-zeega-player",
-                    url: "/zeegaapi/items/" + id,
-                    windowRatio: 16/9
-                });
+            // insert story overlay view
+            storyView = new StoryOverlay.View({ id: id });
+            App.layout.insertView( "#reinvention-viewport", storyView );
+            storyView.render();
 
-                // update share URLs
-                player.on("sequence_enter", function(info) {
-                    $(".share-twitter").attr("href", "https://twitter.com/intent/tweet?original_referer=http://reinventionstories.org/%23story/" + id + "&text=Reinvention%20Stories%3A%20" + player.project.get( "title" ) + "&url=http://reinventionstories.org/%23story/" + id );
-                    $(".share-fb").attr("href", "http://www.facebook.com/sharer.php?u=http://reinventionstories.org/%23story/" + id );
-                    $(".share-email").attr("href", "mailto:friend@example.com?subject=Check out this story on Reinvention Stories!&body=http://reinventionstories.org/%23story/" + id );
-                });
 
-                $(".player-close").on( "click", function(e) {
-                    player.destroy();
-                    $(".story-player").fadeOut();
-                });
-
-                $(".fullscreen").on( "click", function(){
-                    var $playerElem = $(".ZEEGA-player").get(0);
-
-                    if ($playerElem.requestFullscreen) {
-                      $playerElem.requestFullscreen();
-                    } else if ($playerElem.mozRequestFullScreen) {
-                      $playerElem.mozRequestFullScreen();
-                    } else if ($playerElem.webkitRequestFullscreen) {
-                      $playerElem.webkitRequestFullscreen();
-                    }
-                });
-
-                $(".share").on( "click", function(){
-                    $(this).find(".icons").toggle();
-                });
-
-                $(".story-player").fadeIn();
-
-            }, 1000);
 
         },
 
