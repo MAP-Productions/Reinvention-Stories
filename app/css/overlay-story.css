@@ -88,7 +88,7 @@
 
 .story-player .arrow {
     background: url(/app/img/contribute-arrows.png);
-    bottom: 67px;
+    bottom: 87px;
     cursor: pointer;
     height: 43px;
     left: auto;
@@ -113,9 +113,22 @@
     font: 900 12px brandon_grotesque, sans-serif;
     position: absolute;
     right: 21px;
+    bottom: 59px;
+    z-index: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.075em;
+}
+
+.story-player .next-story {
+    color: #fff;
+    display: none;
+    font: 900 12px brandon_grotesque, sans-serif;
+    position: absolute;
+    right: 21px;
     bottom: 39px;
     z-index: 1;
     text-transform: uppercase;
+    letter-spacing: 0.075em;    
 }
 
 .story-player .timeline-bed {

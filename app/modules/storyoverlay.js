@@ -14,6 +14,7 @@ define([
         events: {
             "click .player-close" : "closeStory",
             "click .back-to-map" : "closeStory",
+            "click .next-story" : "closeStory",
             "click .fullscreen" : "goFullScreen",
             "click .share" : "showShareIcons",
             "click .next": "next",
@@ -48,6 +49,8 @@ define([
                 App.on( "kill_player", function() {
                     this.player.destroy();
                 }.bind(this) );
+
+                this.getNextStoryLink();
             }
 
         },
@@ -136,6 +139,36 @@ define([
                 s = "0" + s;
             }
             return m + ":" + s;
+        },
+
+        getNextStoryLink : function() {
+            var collection, currentIndex, nextId;
+
+            collection = App.views["map-0"].collection;
+
+            if ( collection.length > 0 ) {
+                // collection has fetched already
+
+                // finds the current story model's index in the collection
+                currentIndex = collection.indexOf( collection.get( { id: this.id } ) );
+
+                if (currentIndex < (collection.length - 1) ) {
+                    nextId = collection.at( currentIndex + 1 ).get("id");
+                } else {
+                    nextId = null;
+                }
+
+                if (nextId !== null) {
+                    this.$(".next-story").attr( "href", "/#story/" + nextId ).show();
+                }
+
+
+            } else {
+
+                // if the collection hasn't fetched yet, try again when it has
+                collection.bind("reset", this.getNextStoryLink, this );
+
+            }
         }
 
     });
