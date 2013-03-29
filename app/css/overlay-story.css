@@ -117,3 +117,18 @@
     z-index: 1;
     text-transform: uppercase;
 }
+
+.story-player .timeline-bed {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+}
+
+.story-player .timeline-bed .timeline-indicator {
+  height: 3px;
+  width: 0%;
+  background: #d24b24;
+}
