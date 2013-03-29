@@ -31,7 +31,7 @@
   cursor: pointer;
   height: 20px;
   position: absolute;
-  right: 10px;
+  right: 21px;
   text-indent: -9999px;
   width: 20px;
   z-index: 100000;
@@ -43,7 +43,7 @@
   cursor: pointer;
   height: 20px;
   position: absolute;
-  right: 40px;
+  right: 51px;
   z-index: 100000;
 }
 
@@ -72,4 +72,48 @@
   background: url(/app/img/close-story-overlay.png);
   text-indent: -9999px;
   z-index: 1;
+}
+
+.story-player .player-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 17px;
+  height: 17px;
+  background: url(/app/img/close-story-overlay.png);
+  text-indent: -9999px;
+  margin: 0;
+  z-index: 1;
+}
+
+.story-player .arrow {
+    background: url(/app/img/contribute-arrows.png);
+    bottom: 67px;
+    cursor: pointer;
+    height: 43px;
+    left: auto;
+    position: absolute;
+    right: 73px;
+    top: auto;
+    width: 46px;
+    z-index: 4;
+}
+
+.story-player .arrow.next {
+    background-position: 0 -43px;
+    right: 21px;
+}
+
+.story-player .arrow.disabled {
+    display: none;
+}
+
+.story-player .back-to-map {
+    color: #fff;
+    font: 900 12px brandon_grotesque, sans-serif;
+    position: absolute;
+    right: 21px;
+    bottom: 39px;
+    z-index: 1;
+    text-transform: uppercase;
 }

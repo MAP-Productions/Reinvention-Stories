@@ -13,17 +13,16 @@ define([
 
         events: {
             "click .player-close" : "closeStory",
+            "click .back-to-map" : "closeStory",
             "click .fullscreen" : "goFullScreen",
-            "click .share" : "showShareIcons"
+            "click .share" : "showShareIcons",
+            "click .next": "next",
+            "click .prev": "prev"
         },
 
         afterRender: function() {
             this.player = new Zeega.player({
-                controls: {
-                    arrows: true,
-                    playpause: true,
-                    close: false
-                },
+                controls: false,
                 autoplay: true,
                 target: "#story-zeega-player",
                 url: "/zeegaapi/items/" + this.id,
@@ -37,12 +36,13 @@ define([
                 $(".share-email").attr("href", "mailto:friend@example.com?subject=Check out this story on Reinvention Stories!&body=http://reinventionstories.org/%23story/" + this.id );
             }.bind(this) );
 
+            // update arrows
+            this.player.on("frame_play", this.updateArrowState, this);
+
             // kill player when App's kill_player event is triggered (when switching to another view)
             App.on( "kill_player", function() {
                 this.player.destroy();
             }.bind(this) );
-
-            $(".story-player").fadeIn();
 
         },
 
@@ -65,6 +65,44 @@ define([
 
         showShareIcons: function(event) {
             this.$(".share .icons").toggle();
+        },
+
+        next: function() {
+            this.player.cueNext();
+            return false;
+        },
+
+        prev: function() {
+            this.player.cuePrev();
+            return false;
+        },
+
+        updateArrowState: function( info ) {
+            switch(info._connections) {
+                case "l":
+                    this.activateArrow("prev");
+                    this.disableArrow("next");
+                    break;
+                case "r":
+                    this.disableArrow("prev");
+                    this.activateArrow("next");
+                    break;
+                case "lr":
+                    this.activateArrow("prev");
+                    this.activateArrow("next");
+                    break;
+                default:
+                    this.disableArrow("prev");
+                    this.disableArrow("next");
+            }
+        },
+
+        activateArrow: function(className) {
+            this.$("."+ className +".disabled").removeClass("disabled");
+        },
+
+        disableArrow: function(className) {
+            this.$("."+ className).addClass("disabled");
         }
 
     });
