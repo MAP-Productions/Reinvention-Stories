@@ -19,24 +19,22 @@
   <!-- Application styles. -->
   <link rel="stylesheet" href="/app/css/index.css">
 
+  <script type="text/javascript">
 
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-38779654-1']);
+    _gaq.push(['_setDomainName', 'reinventionstories.org']);
+    _gaq.push(['_trackPageview']);
 
-<script type="text/javascript">
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-38779654-1']);
-  _gaq.push(['_setDomainName', 'reinventionstories.org']);
-  _gaq.push(['_trackPageview']);
+  </script>
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-<!-- disable console.log - enable for production -->
+<!-- disable console.log - uncomment for production -->
 <!--
 <script>
     window.console = {log: function() {}};
@@ -166,12 +164,6 @@
     </div>
   </div>
 
-
-  <!-- CDN sources -->
-  <!--
-  <script src="http://leafletjs.com/dist/leaflet-src.js"></script>
-  <script src="http://maps.stamen.com/js/tile.stamen.js"></script>
-  -->
 
   <!-- Application source. -->
   <script data-main="/app/config" src="/vendor/js/libs/require.js"></script>
