@@ -202,6 +202,8 @@ define([
             
             imageData.append( "file", $fileInput.get(0).files[0] );
 
+            this.showLoading();
+
             $.ajax({
                 url: "upload/upload.php",
                 data: imageData,
@@ -210,6 +212,8 @@ define([
                 contentType: false,
                 type: 'POST',
                 success: function( data ) {
+
+                    this.hideLoading();
 
                     // set upload ui element bg to the image url
                     $fileInput.parent('span').css({
