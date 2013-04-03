@@ -60,7 +60,7 @@
 }
 
 .reststop-question .fields textarea {
-    color: #7c7c7c;
+    color: #000;
     font: normal 14px/17px adelle_basic, serif;
     width: 96%;
     padding: 2%;
@@ -68,6 +68,38 @@
     box-shadow: 0 0 1% #ededed inset;
     border-radius: 0;
     min-height: 45px;
+}
+
+.reststop-question .fields textarea::-webkit-input-placeholder {
+    color: #7c7c7c;
+}
+
+.reststop-question .fields textarea:-moz-placeholder {
+    color: #7c7c7c;
+}
+
+.reststop-question .fields textarea::-moz-placeholder {
+    color: #7c7c7c;
+}
+
+.reststop-question .fields textarea:-ms-input-placeholder {  
+   color: #7c7c7c;  
+}
+
+.reststop-question .fields textarea:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+.reststop-question .fields textarea:focus:-moz-placeholder {
+    color: transparent;
+}
+
+.reststop-question .fields textarea:focus::-moz-placeholder {
+    color: transparent;
+}
+
+.reststop-question .fields textarea:focus:-ms-input-placeholder {
+    color: transparent;
 }
 
 .reststop-question .fields input[type=text] {
