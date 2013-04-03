@@ -53,6 +53,8 @@ define([
 
             this.bindCharCounters();
 
+            this.$el.find("textarea, input").eq(0).focus();
+
         },
 
         events: {
@@ -133,6 +135,8 @@ define([
                 // slide the next section into position
                 next.animate( {
                     left: 0
+                }, function() {
+                    next.find("textarea, input").eq(0).focus();
                 } );
 
                 this.updateNavAndArrows();
@@ -164,6 +168,8 @@ define([
                 // slide the next section into position
                 prev.animate( {
                     left: 0
+                }, function() {
+                    prev.find("textarea, input").eq(0).focus();
                 } );
 
                 this.updateNavAndArrows();
