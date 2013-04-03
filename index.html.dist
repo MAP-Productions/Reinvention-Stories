@@ -5,6 +5,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
+  <meta property="og:title" content="Reinvention Stories"/>
+  <meta property="og:type" content="movie"/>
+  <meta property="og:url" content="http://reinventionstories.org/"/>
+
+  <meta property="og:image" content="http://reinventionstories.org/app/img/logo-reinvention.png"/>
+  <meta property="og:site_name" content="Reinvention Stories"/>
+  <meta property="og:description" content="Reinvention Stories is an interactive film experience about Dayton Ohio, birthplace of the airplane, cash register and pop top can." />
+
+
   <title>Reinvention</title>
 
   <!-- Application styles. -->
