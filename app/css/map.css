@@ -74,7 +74,7 @@
 
 .map-key {
     background: url(/app/img/map-key.png);
-    height: 220px;
+    height: 259px;
     right: 11px;
     top: 101px;
     width: 190px;
@@ -84,7 +84,7 @@
     background: url(/app/img/map-share-callout-bg.png);
     height: 69px;
     right: 11px;
-    top: 290px;
+    top: 329px;
     width: 113px;
     z-index: 11;
     padding: 20px 22px 0 56px;

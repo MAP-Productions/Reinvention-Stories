@@ -492,7 +492,7 @@
         "child_items_count": 0,
         "attributes": "N;",
         "child_items": [],
-        "tags": [ "map-for-review" ],
+        "tags": [ "map-for-review", "icon-participation" ],
         "editable": true,
         "published": true,
         "enabled": true

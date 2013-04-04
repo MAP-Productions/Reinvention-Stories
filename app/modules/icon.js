@@ -73,7 +73,41 @@ define([], function() {
 
         // begin temporary for testing
 
-        people: {
+        participation: {
+            construct: "CircleMarker",
+            args: function( opts ) {
+                return [
+                    opts.latlng,
+                    {
+                        radius: opts.radius || 8,
+                        color: "#ffffff",
+                        fillColor: "#23888e",
+                        fillOpacity: 1,
+                        opacity: 1,
+                        weight: 2
+                    }
+                ];
+            }
+        },
+
+        albums: {
+            construct: "CircleMarker",
+            args: function( opts ) {
+                return [
+                    opts.latlng,
+                    {
+                        radius: opts.radius || 8,
+                        color: "#ffffff",
+                        fillColor: "#7a1d4f",
+                        fillOpacity: 1,
+                        opacity: 1,
+                        weight: 2
+                    }
+                ];
+            }
+        },
+
+        neighbors: {
             construct: "CircleMarker",
             args: function( opts ) {
                 return [
@@ -90,24 +124,7 @@ define([], function() {
             }
         },
 
-        history: {
-            construct: "CircleMarker",
-            args: function( opts ) {
-                return [
-                    opts.latlng,
-                    {
-                        radius: opts.radius || 8,
-                        color: "#ffffff",
-                        fillColor: "#cc4f04",
-                        fillOpacity: 1,
-                        opacity: 1,
-                        weight: 2
-                    }
-                ];
-            }
-        },
-
-        events: {
+        happenings: {
             construct: "CircleMarker",
             args: function( opts ) {
                 return [
@@ -124,7 +141,7 @@ define([], function() {
             }
         },
 
-        stories: {
+        history: {
             construct: "CircleMarker",
             args: function( opts ) {
                 return [
@@ -132,7 +149,7 @@ define([], function() {
                     {
                         radius: opts.radius || 8,
                         color: "#ffffff",
-                        fillColor: "#7a1d4f",
+                        fillColor: "#1d41a4",
                         fillOpacity: 1,
                         opacity: 1,
                         weight: 2
@@ -140,6 +157,7 @@ define([], function() {
                 ];
             }
         }
+
     };
 
     return Icon;
