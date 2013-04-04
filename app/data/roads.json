@@ -70,7 +70,33 @@
   {
     "id": 3,
     "act": 3,
-    "video": false,
-    "cues": []
-  }
+    "video": "Road_Act3",
+    "audio": "act_3_road",
+    "text": "Scroll here to see signs of hope in Dayton",
+    "cues": [
+      {
+        "clip": "act_3_road_story_1",
+        "caption": "Anti-Violence Rally at Bancroft Apartments in Edgemont",
+        "start": 1
+      },
+      {
+        "clip": "act_3_road_story_2",
+        "caption": "Wilbur Wright Centennial Memorial at Woodland Cemetery",
+        "start": 8
+      },
+      {
+        "clip": "act_3_road_story_3",
+        "caption": "St. Mary's Church in Twin Towers",
+        "start": 15
+      },
+      {
+        "clip": "act_3_road_story_4",
+        "caption": "Praise Dancers Rehearsal at Residence Park Elementary School",
+        "start": 22
+      },
+      {
+        "clip": "act_3_road_story_5",
+        "caption": "July 4th Fireworks at RiverScape MetroPark",
+        "start": 29
+      }
 ]
