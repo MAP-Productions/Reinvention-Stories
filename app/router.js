@@ -140,12 +140,6 @@ function( App, Intro, Act, Story, Road, Reststop, Map, StoryOverlay, Contribute,
 
             if ( [ "intro", "road", "reststop", "story" ].indexOf(type) > -1 ) {
 
-                // Emit the kill_player event if loading a view other than story.
-                // The Zeega player instance created in the story view will destroy.
-                // This prevents problems.
-                if ( [ "intro", "road", "reststop" ].indexOf(type) > -1 ) {
-                    App.trigger("kill_player");
-                }
 
                 // Prevent attempts to re-render the current view: if this
                 // type and id are already in the viewport, do nothing.
@@ -153,6 +147,11 @@ function( App, Intro, Act, Story, Road, Reststop, Map, StoryOverlay, Contribute,
                     console.log( "Prevent attempts to re-render the current view" );
                     return;
                 }
+
+                // Emit the kill_player event.
+                // The Zeega player instance created in the story view will destroy.
+                // This prevents problems.
+                App.trigger("kill_player");
 
                 // Update the current view type and id
                 Abstract.merge( App.current, {

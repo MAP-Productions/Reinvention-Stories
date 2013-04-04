@@ -146,7 +146,7 @@ define([
                 });
 
                 App.on( "kill_player", function() {
-                    this.destroyPlayer();
+                    this.zeega.destroy();
                 }.bind(this) );
 
                 App.on( "pause_player", function() {
@@ -223,10 +223,6 @@ define([
                 $("[data-controls='" + toggles + "']")
                     .removeClass("displaynone");
             }
-        },
-
-        destroyPlayer: function() {
-            this.zeega.destroy();
         },
 
         jump: function( event ) {
