@@ -404,9 +404,13 @@
 
     // When the Primary video is "scrolled", hide the text from the on-surface
     // scrolling prompt. #40
-    this.$primary.on("wheel mousewheel", function() {
+    // this.$primary.on("wheel mousewheel", function() {
+    //   this.$arrow.fadeOut(800);
+    // }.bind(this));
+
+    this.video.cue(1, function() {
       this.$arrow.fadeOut(800);
-    }.bind(this));
+    }.bind(this) );
 
     this.$container.on("click", ".icons", playChild );
   }
