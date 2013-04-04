@@ -238,6 +238,25 @@
     text-decoration: none;
 }
 
+.reststop-map-callout {
+    background: #fff url(/app/img/map-callout-icon.png) center 11px no-repeat;
+    bottom: 0;
+    color: #1b1b1b;
+    font: 900 11.2px brandon_grotesque, sans-serif;
+    height: 11px;
+    padding: 87px 0 13px;
+    position: absolute;
+    right: 7%;
+    text-align: center;
+    text-transform: uppercase;
+    width: 101px;
+    z-index: 20;
+}
+
+.reststop-map-callout:hover {
+    color: #1b1b1b;
+    text-decoration: none;
+}
 
 @-webkit-keyframes pulse {
     0%   { opacity: 0.15; }
