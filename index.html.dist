@@ -80,11 +80,10 @@
 
           </div>
 
-           <div class="menu-section icons disabled">
-              <span class="disabled-overlay act-three"></span>
+           <div class="menu-section icons">
               <span class="section-title">Act Three</span>
 
-              <a class="image-link act3-story" href="#3/story/?">Story</a>
+              <a class="image-link act3-story" href="#3/story/79434">Story</a>
               <a class="image-link road" href="#3/road/3">Road</a>
               <a class="image-link act3-reststop" href="#3/reststop/3">Reststop</a>
 
