@@ -76,27 +76,27 @@
     "cues": [
       {
         "clip": "act_3_road_story_1",
-        "caption": "Anti-Violence Rally at Bancroft Apartments in Edgemont",
+        "caption": "South Park Urban Garden",
         "start": 1
       },
       {
         "clip": "act_3_road_story_2",
-        "caption": "Wilbur Wright Centennial Memorial at Woodland Cemetery",
+        "caption": "PechaKucha at Sunwatch Village",
         "start": 8
       },
       {
         "clip": "act_3_road_story_3",
-        "caption": "St. Mary's Church in Twin Towers",
+        "caption": "Mural Painters at 3rd Street Underpass",
         "start": 15
       },
       {
         "clip": "act_3_road_story_4",
-        "caption": "Praise Dancers Rehearsal at Residence Park Elementary School",
+        "caption": "Protesting Drones and War on 5th Street",
         "start": 22
       },
       {
         "clip": "act_3_road_story_5",
-        "caption": "July 4th Fireworks at RiverScape MetroPark",
+        "caption": "Garden Station, at E. 4th Street",
         "start": 29
       }
 ]
