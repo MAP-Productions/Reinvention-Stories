@@ -129,16 +129,14 @@
         </h1>
 
         <div class="content-left">
-          <p>Reinvention Stories will launch in three acts, with a new release every three weeks. Share your e-mail with us, or follow us on Facebook, and we'll make sure you’re the first to know when the next acts are released!</p>
-
-          <p>Follow Reinvention Stories on Twitter to hear what other Daytonians are thinking and saying.</p>
-
+          <p>Reinvention Stories can be a way for people to communicate with each other about life and change in Dayton. Our question pages ask: What do we value here? Do we hold hope for the future? What needs to be done? Is there progress? What can I do? How can I make a difference on my block, my neighborhood, my City?</p>
+          <p>Follow Reinvention Stories on Twitter to see what other Daytonians are thinking and saying. <a href="https://twitter.com/ReinventDayton" target="_blank">@ReinventDayton</a></p>
           <p>Get involved with our city! <a href="http://blog.reinventionstories.org/volunteer">Here are some cool organizations</a> that can use your time and talents.</p>
         </div>
 
         <div class="content-right">
           <div class="content-right-inner">
-            <p>Share your e-mail with us or follow us on facebook, and we'll make sure you’re the first to know when the next acts are released!</p>
+            <p>Share your e-mail with us or follow us on facebook.</p>
             <div class="fields">
               <input id="email-input" type="text" placeholder="Your E-mail">
               <button id="email-submit">Submit</button>
