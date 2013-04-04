@@ -26,8 +26,8 @@
   {
     "id": 3,
     "act": 3,
-    "twitter_account" : "_reinventdayton",
     "next": false,
-    "video": "RestStop3"
+    "video": "RestStop3",
+    "twitter_account" : "_reinventdayton",
   }
 ]
