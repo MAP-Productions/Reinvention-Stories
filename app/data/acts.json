@@ -62,15 +62,27 @@
     "data": [
       {
         "type": "Story",
-        "data": {}
+        "data": {
+          "id": 79434,
+          "act": 3,
+          "fetch": true
+        }
       },
       {
         "type": "Road",
-        "data": {}
+        "data": {
+          "id": 3,
+          "act": 3,
+          "fetch": false
+        }
       },
       {
         "type": "Reststop",
-        "data": {}
+        "data": {
+          "id": 3,
+          "act": 3,
+          "fetch": false
+        }
       }
     ]
   }
