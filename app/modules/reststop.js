@@ -178,8 +178,9 @@ define([
         }, 200 );
 
 
+        // The regex below turns twitter's created_at string into something IE's Date() can parse 
         this.created = Moment(
-            new Date( tweet.created_at )
+            new Date( tweet.created_at.replace(/(\+\S+) (.*)/, '$2 $1') )
         );
 
         this.$answer = $(
