@@ -18,17 +18,102 @@
         </span>
         <span class="line">
             <label for="from">and I'm from</label>
-            <input type="text" id="from">
+            <select id="from">
+                <option value="">select neighborhood</option>
+                <option>Arlington Heights</option>
+                <option>Beavercreek</option>
+                <option>Bellbrook</option>
+                <option>Belmont</option>
+                <option>Brookeville</option>
+                <option>Burkhardt</option>
+                <option>Carillon</option>
+                <option>Centerville</option>
+                <option>College Hill</option>
+                <option>Cornell Heights</option>
+                <option>Dayton View Triangle</option>
+                <option>DeWeese</option>
+                <option>Downtown</option>
+                <option>Eastern Hills</option>
+                <option>Eastmont</option>
+                <option>Edgemont</option>
+                <option>Englewood</option>
+                <option>Fairborn</option>
+                <option>Fairlane</option>
+                <option>Fairview</option>
+                <option>Five Oaks</option>
+                <option>Five Points</option>
+                <option>Forest Ridge</option>
+                <option>Gateway</option>
+                <option>Germantown Meadows</option>
+                <option>Grafton Hill</option>
+                <option>Greenwich Village</option>
+                <option>Hearthstone</option>
+                <option>Highview Hills</option>
+                <option>Hillcrest</option>
+                <option>Historic Inner East</option>
+                <option>Huber Heights</option>
+                <option>Kettering</option>
+                <option>Kittyhawk</option>
+                <option>Lakeview</option>
+                <option>Linden Heights</option>
+                <option>Little Richmond</option>
+                <option>MacFarlane</option>
+                <option>Madden Hills</option>
+                <option>McCook Field</option>
+                <option>McPherson </option>
+                <option>Miami Chapel</option>
+                <option>Miamisburg</option>
+                <option>Midtown</option>
+                <option>Moraine</option>
+                <option>Mount Vernon</option>
+                <option>North Riverdale</option>
+                <option>Northern Hills</option>
+                <option>Northridge Estates</option>
+                <option>Oakwood</option>
+                <option>Old Dayton View</option>
+                <option>Old North Dayton</option>
+                <option>Oregon</option>
+                <option>Patterson Park</option>
+                <option>Pheasant Hill</option>
+                <option>Philadelphia Woods</option>
+                <option>Pineview</option>
+                <option>Princeton Heights</option>
+                <option>Residence Park</option>
+                <option>Riverdale</option>
+                <option>Roosevelt</option>
+                <option>Santa Clara</option>
+                <option>Shroyer Park</option>
+                <option>South Park  </option>
+                <option>Southern Dayton View</option>
+                <option>Springboro</option>
+                <option>Springfield</option>
+                <option>Spring Valley</option>
+                <option>Stoney Ridge</option>
+                <option>Trotwood </option>
+                <option>Twin Towers</option>
+                <option>University Park</option>
+                <option>University Row</option>
+                <option>Vandalia</option>
+                <option>Walnut Hills</option>
+                <option>Webster Station</option>
+                <option>Wesleyan Hill</option>
+                <option>West Carrollton</option>
+                <option>Westwood</option>
+                <option>Wolf Creek</option>
+                <option>Wright View</option>
+                <option>Xenia</option>
+                <option>Yellow Springs</option>
+            </select>
         </span>
 
-        <span class="add-photo" href="#">
-            <input id="addPhotoOne" type="file" href="#"></input>
+        <span class="add-photo">
+            <input type="file" href="#"></input>
         </span>
-        <span class="add-photo" href="#">
-            <input id="addPhotoTwo" type="file" href="#"></input>
+        <span class="add-photo">
+            <input type="file" href="#"></input>
         </span>
-        <span class="add-photo" href="#">
-            <input id="addPhotoThree" type="file" href="#"></input>
+        <span class="add-photo">
+            <input type="file" href="#"></input>
         </span>
         <p><strong>Upload Photos</strong> Choose some images to tell your story. If you would like to skip uploading your own photos, we’ll match you with images from historic Dayton.</p>
         <input class="standalone" type="text" id="storyname">
@@ -39,20 +124,53 @@
 <div id="sectionWho" class="contribute-section" style="display: none;">
     <div class="content">
         <label class="block" for="whowereyou">Who were you?</label>
-        <textarea id="whowereyou"></textarea>
+        <div class="textarea-wrap">
+            <textarea maxlength="600" id="whowereyou"></textarea>
+        </div>
     </div>
+    <div class="char-count">Character Count: <span class="chars">0</span><br/>Maximum: <span class="max-chars">600</span></div>
 </div>
 
 <div id="sectionWhat" class="contribute-section" style="display: none;">
     <div class="content">
         <label class="block" for="whathappened">What happened?</label>
-        <textarea id="whathappened"></textarea>
+        <div class="textarea-wrap">
+            <textarea maxlength="600" id="whathappened"></textarea>
+        </div>
     </div>
+    <div class="char-count">Character Count: <span class="chars">0</span><br/>Maximum: <span class="max-chars">600</span></div>
 </div>
 
 <div id="sectionNow" class="contribute-section section-now last-section" style="display: none;">
     <div class="content">
         <label class="block" for="whoareyounow">Who are you now?</label>
-        <textarea id="whoareyounow"></textarea>
+        <div class="textarea-wrap">
+            <textarea maxlength="600" id="whoareyounow"></textarea>
+        </div>
     </div>
+    <div class="char-count">Character Count: <span class="chars">0</span><br/>Maximum: <span class="max-chars">600</span></div>
+</div>
+
+<div id="sectionReview" class="contribute-section" style="display: none;">
+    <div class="review">
+        <h3>You're all finished</h3>
+        <span class="review-photo"></span>
+        <span class="review-photo"></span>
+        <span class="review-photo"></span>
+        <p>Submit your story to add it to the map!</p>
+        <div class="email-input-wrap">
+            <label for="email">Enter your email and we’ll let you know when your story is up.</label>
+            <input type="text" id="email">
+        </div>
+        <span class="submit submit-story"><img src="/app/img/small-arrow-white-r.png" width="11" height="11">submit<img src="/app/img/small-arrow-white-l.png" width="11" height="11"></span>
+    </div>
+</div>
+
+<div class="contribute-thanks" style="display: none;">
+    <p>Thank you for sharing<br/>your story with us!</p>
+    <a href="#map">Back to the map</a>
+</div>
+
+<div class="loading-overlay" style="display: none;">
+    <canvas id="contribute-loading-pie" width="108" height="108"></canvas>
 </div>
