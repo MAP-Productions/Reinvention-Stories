@@ -32,8 +32,8 @@ RewriteCond %{HTTP_USER_AGENT} "MSIE 5" [OR]
 RewriteCond %{HTTP_USER_AGENT} "MSIE 6" [OR]
 RewriteCond %{HTTP_USER_AGENT} "MSIE 7" [OR]
 RewriteCond %{HTTP_USER_AGENT} "MSIE 8" [OR]
-RewriteCond %{HTTP_USER_AGENT} "Firefox/[1-15]\." [OR]
-RewriteCond %{HTTP_USER_AGENT} "Firefox/[1-9][0-5]?\."
+RewriteCond %{HTTP_USER_AGENT} "Firefox/[1-9]\." [OR]
+RewriteCond %{HTTP_USER_AGENT} "Firefox/[1][0-5]\."
 RewriteRule ^ /old-browser.html [R,L,NE]
 
 
