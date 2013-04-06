@@ -49,7 +49,7 @@ define([
 
             // set author for display in library/on map
             this.set("author", author);
-            this.attributes.text.title = title;
+            this.attributes.text.authors = author;
 
             //retrieve template
             content = $(this.get("text").layers[ 1 ].attr.content);
@@ -60,7 +60,7 @@ define([
             //retrieve html and update user story data
             newContent = content.wrap("<div/>").parent().html();
             this.attributes.text.layers[ 1 ].attr.content = newContent;
-            this.attributes.text.authors = author;
+            
 
 
         },
