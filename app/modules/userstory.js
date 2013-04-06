@@ -35,7 +35,7 @@ define([
             content = $(this.get("text").layers[ 0 ].attr.content);
             
             //update template content with neighborhood
-            content.html(title);
+            content.html( "\"" + title + "\"" );
 
             //retrieve html and update user story data
             newContent = content.wrap("<div/>").parent().html();
@@ -44,9 +44,22 @@ define([
         },
         
         setAuthor: function( author ) {
-            console.log(author, "is the author");
+            
+            var content, newContent;
 
-            this.attributes.text.layers[ 1 ].attr.content = author;
+            // set author for display in library/on map
+            this.set("author", author);
+            this.attributes.text.title = title;
+
+            //retrieve template
+            content = $(this.get("text").layers[ 1 ].attr.content);
+            
+            //update template content with neighborhood
+            content.html(author);
+
+            //retrieve html and update user story data
+            newContent = content.wrap("<div/>").parent().html();
+            this.attributes.text.layers[ 1 ].attr.content = newContent;
             this.attributes.text.authors = author;
 
 
