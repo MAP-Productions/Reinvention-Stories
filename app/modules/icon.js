@@ -39,11 +39,15 @@ define([], function() {
     function Icon( config ) {
         var preset, constructor, child;
 
-        preset = Icon.Presets[ config.use ];
-
-        if ( !preset ) {
-            throw Error( config.use + " is not a valid Icon.Preset." );
+        if ( Icon.Presets[ config.use ] ) {
+            preset = Icon.Presets[ config.use ];
+        } else {
+            preset = Icon.Presets["default"];
         }
+
+        // if ( !preset ) {
+        //     throw Error( config.use + " is not a valid Icon.Preset." );
+        // }
 
         // Using a valid Icon.Preset, derive the correct Leaflet marker constructor.
         constructor = L[ preset.construct ];
@@ -71,7 +75,22 @@ define([], function() {
         // new Icon({ latlng: latlng, use: "magenta" })
         //
 
-        // begin temporary for testing
+        default: {
+            construct: "CircleMarker",
+            args: function( opts ) {
+                return [
+                    opts.latlng,
+                    {
+                        radius: opts.radius || 8,
+                        color: "#ffffff",
+                        fillColor: "#000000",
+                        fillOpacity: 1,
+                        opacity: 1,
+                        weight: 2
+                    }
+                ];
+            }
+        },
 
         participation: {
             construct: "CircleMarker",

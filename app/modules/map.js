@@ -79,7 +79,7 @@ define([
                     if( iconTypes.length > 0 ){
                         iconLabel = iconTypes[ 0 ].substring( 5 );
                     } else {
-                        iconLabel = "participation";
+                        iconLabel = "default";
                     }
 
                     // Generate an Icon based on the label
