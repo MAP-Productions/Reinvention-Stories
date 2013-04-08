@@ -32,6 +32,14 @@ define([
                     windowRatio: 16/9
                 });
 
+                // closeStory on esc key
+                App.DOM.$window.on("keydown", function(e) {
+                    if( e.keyCode == 27 ) {
+                        App.router.navigate("/#map");
+                        this.closeStory();
+                    }
+                }.bind(this) );
+
                 // update share URLs
                 this.player.on("sequence_enter", function(info) {
                     $(".share-twitter").attr("href", "https://twitter.com/intent/tweet?original_referer=http://reinventionstories.org/%23story/" + this.id + "&text=Reinvention%20Stories%3A%20" + this.player.project.get( "title" ) + "&url=http://reinventionstories.org/%23story/" + this.id );
@@ -55,7 +63,9 @@ define([
 
         },
 
+
         closeStory: function() {
+            App.DOM.$window.off("keydown");
             this.player.destroy();
             this.remove();
         },
