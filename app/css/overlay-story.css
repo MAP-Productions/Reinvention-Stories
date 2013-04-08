@@ -71,19 +71,8 @@
   height: 17px;
   background: url(/app/img/close-story-overlay.png);
   text-indent: -9999px;
-  z-index: 1;
-}
-
-.story-player .player-close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 17px;
-  height: 17px;
-  background: url(/app/img/close-story-overlay.png);
-  text-indent: -9999px;
   margin: 0;
-  z-index: 1;
+  z-index: 10;
 }
 
 .story-player .arrow {
@@ -114,7 +103,7 @@
     position: absolute;
     right: 21px;
     bottom: 59px;
-    z-index: 1;
+    z-index: 10;
     text-transform: uppercase;
     letter-spacing: 0.075em;
 }
@@ -126,7 +115,7 @@
     position: absolute;
     right: 21px;
     bottom: 39px;
-    z-index: 1;
+    z-index: 10;
     text-transform: uppercase;
     letter-spacing: 0.075em;    
 }
