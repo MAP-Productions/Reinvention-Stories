@@ -37,7 +37,7 @@ define([
         afterRender: function() {
             var tumblrNewsView;
 
-            this.leafletMap = L.map('mapContainer').setView( Map.center, 14 );
+            this.leafletMap = L.map('mapContainer', { attributionControl : false }).setView( Map.center, 14 );
 
             this.collection.fetch({
                 success: function(collection, response) {
@@ -48,6 +48,9 @@ define([
 
             // add tile layer
             L.tileLayer('http://{s}.tiles.mapbox.com/v3/zeega.map-0ik131wz/{z}/{x}/{y}.png').addTo( this.leafletMap );
+
+            // add custom attribution control
+            L.control.attribution({ prefix: "Stories made with <a href=\"http://zeega.com/\">Zeega</a>" }).addTo( this.leafletMap );
 
             // add tumblr feed view
             tumblrNewsView = new Tumblr.View();
