@@ -44,7 +44,7 @@ define([
                 this.player.on("sequence_enter", function(info) {
                     $(".share-twitter").attr("href", "https://twitter.com/intent/tweet?original_referer=http://reinventionstories.org/%23story/" + this.id + "&text=Reinvention%20Stories%3A%20" + this.player.project.get( "title" ) + "&url=http://reinventionstories.org/%23story/" + this.id );
                     $(".share-fb").attr("href", "http://www.facebook.com/sharer.php?u=http://reinventionstories.org/%23story/" + this.id );
-                    $(".share-email").attr("href", "mailto:friend@example.com?subject=Check out this story on Reinvention Stories!&body=http://reinventionstories.org/%23story/" + this.id );
+                    $(".share-email").attr("href", "mailto:?subject=Check out this story on Reinvention Stories!&body=http://reinventionstories.org/%23story/" + this.id );
                 }.bind(this) );
 
                 // bind progress bar for playback time display
