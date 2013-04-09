@@ -28,9 +28,9 @@ function( App, Intro, Act, Story, Road, Reststop, Map, StoryOverlay, Contribute,
     //     "isFirst", Session.get("isFirst") === undefined ? true : false
     // );
 
-    Object.keys( Act.Types ).forEach(function( key ) {
-        Act.Types[ key.toLowerCase() ] = Act.Types[ key ];
-    });
+    // Object.keys( Act.Types ).forEach(function( key ) {
+    //     Act.Types[ key.toLowerCase() ] = Act.Types[ key ];
+    // });
 
 
     // Spin up the app with some sortof-bootstrapped data!
@@ -162,14 +162,16 @@ function( App, Intro, Act, Story, Road, Reststop, Map, StoryOverlay, Contribute,
 
                 // Create the key to either reference or define (or both)
                 // any cached or caching views.
-                key = [ type, id ].join("-");
+                // key = [ type, id ].join("-");
 
                 // Reuse or create a new view, as needed
-                view = App.views[ key ] ? App.views[ key ] :
-                   new Act.Types[ type ].Views.Item({ id: id });
+                // view = App.views[ key ] ? App.views[ key ] :
+                //    new Act.Types[ type ].Views.Item({ id: id });
 
                 // Cache or "Re-cache" the view for later
-                App.views[ key ] = view;
+                // App.views[ key ] = view;
+
+                view = new Act.Types[ type ].Views.Item({ id: id });
 
                 App.layout.setViews({
                     "#reinvention-viewport": view
@@ -252,14 +254,16 @@ function( App, Intro, Act, Story, Road, Reststop, Map, StoryOverlay, Contribute,
 
             // Create the key to either reference or define (or both)
             // any cached or caching views.
-            key = "contribute-0";
+            // key = "contribute-0";
 
             // Reuse or create a new view, as needed
-            view = App.views[ key ] ? App.views[ key ] :
-               new Contribute.View();
+            // view = App.views[ key ] ? App.views[ key ] :
+            //    new Contribute.View();
 
             // Cache or "Re-cache" the view for later
-            App.views[ key ] = view;
+            // App.views[ key ] = view;
+
+            view = new Contribute.View();
 
             App.layout.setViews({
                 "#reinvention-viewport": view
@@ -277,16 +281,20 @@ function( App, Intro, Act, Story, Road, Reststop, Map, StoryOverlay, Contribute,
 
             // Create the key to either reference or define (or both)
             // any cached or caching views.
-            key = "map-0";
+            // key = "map-0";
 
             // Reuse or create a new view, as needed
-            view = App.views[ key ] ? App.views[ key ] :
-               new Map.View({
-                    collection: new Map.Collection()
-               });
+            // view = App.views[ key ] ? App.views[ key ] :
+            //    new Map.View({
+            //         collection: new Map.Collection()
+            //    });
 
             // Cache or "Re-cache" the view for later
-            App.views[ key ] = view;
+            //App.views[ key ] = view;
+
+            view = new Map.View({
+                collection: new Map.Collection()
+            });
 
             App.layout.setViews({
                 "#reinvention-viewport": view
