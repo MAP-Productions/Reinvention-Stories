@@ -76,21 +76,20 @@
 }
 
 .story-player .arrow {
-    background: url(/app/img/contribute-arrows.png);
-    bottom: 87px;
+    background: url(/app/img/story-overlay-arrows.png);
+    top: 215px;
     cursor: pointer;
-    height: 43px;
-    left: auto;
+    height: 31px;
+    left: 21px;
     position: absolute;
-    right: 73px;
-    top: auto;
-    width: 46px;
+    width: 28px;
     z-index: 4;
 }
 
 .story-player .arrow.next {
-    background-position: 0 -43px;
-    right: 21px;
+    background-position: -28px 0;
+    right: -14px;
+    left: auto;
 }
 
 .story-player .arrow.disabled {
