@@ -47,8 +47,7 @@ define([
 
             clearTimeout( this.introTimer );
 
-            //introDelay = App.firstVisit() ? 7000 : 1000;
-            introDelay = 4000;
+            introDelay = App.firstVisit() ? 7000 : 1000;
 
             this.$video = Popcorn("#reinvention-intro video");
 
