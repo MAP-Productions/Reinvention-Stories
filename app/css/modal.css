@@ -39,6 +39,10 @@
     box-shadow: 0 0 6px #e5e2e0 inset;
 }
 
+.email-modal-content a {
+    color: #ed177e;
+}
+
 .email-modal-content h1 {
     height: 48px;
     color: #6d6a63;
@@ -101,6 +105,15 @@
 .email-modal-content .content-right .content-right-inner {
     margin: 20px auto 0;
     width: 240px;
+}
+
+.email-modal-content .content-right h3 {
+    font: 500 14px/13.38px brandon_grotesque, sans-serif;
+    margin: 7px 0;
+}
+
+.email-modal-content .content-right a.email {
+    font-size: 14px;
 }
 
 .email-modal-content .content-right p {
@@ -171,7 +184,7 @@
 
 .email-modal-content .content-right .follow-links a {
     float: left;
-    padding-left: 24px;
+    padding: 0 6px 10px 24px;
     height: 16px;
     color: #ed177e;
     font: normal 11px/18px adelle_basic, serif;
@@ -183,7 +196,6 @@
 
 .email-modal-content .content-right .follow-links a.follow-twitter {
     background: url(../img/twitter-icon.png) no-repeat;
-    float: right;
 }
 
 .email-modal-content .content-right .release-dates {
