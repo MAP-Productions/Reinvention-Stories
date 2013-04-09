@@ -29,7 +29,7 @@ define([
                     autoplay: true,
                     target: "#story-zeega-player",
                     url: "/zeegaapi/items/" + this.id,
-                    windowRatio: 16/9
+                    windowRatio: 4/3
                 });
 
                 // closeStory on esc key
