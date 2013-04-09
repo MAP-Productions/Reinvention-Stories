@@ -75,7 +75,7 @@ define([], function() {
         // new Icon({ latlng: latlng, use: "magenta" })
         //
 
-        default: {
+        "default" : {
             construct: "CircleMarker",
             args: function( opts ) {
                 return [
