@@ -136,6 +136,8 @@
 
         <div class="content-right">
           <div class="content-right-inner">
+            <h3>Email Us</h3>
+            <p><a class="email" href="mailto:reinventionstories@gmail.com">reinventionstories@gmail.com</a></p>
             <p>Share your e-mail with us or follow us on facebook.</p>
             <div class="fields">
               <input id="email-input" type="text" placeholder="Your E-mail">
@@ -143,7 +145,8 @@
             </div>
             <div class="follow-links">
               <a href="http://www.facebook.com/ReInventionStories" target="_blank" class="follow-fb">Follow us!</a>
-              <a href="http://twitter.com/WYSO" target="_blank" class="follow-twitter">Follow WYSO on Twitter!</a>
+              <a href="http://twitter.com/WYSO" target="_blank" class="follow-twitter">Follow WYSO on Twitter!</a><br/>
+              <a href="http://twitter.com/ReinventDayton" target="_blank" class="follow-twitter" style="clear: left;">Follow ReinventDayton on Twitter!</a>
             </div>
           </div>
           <div class="release-dates">
