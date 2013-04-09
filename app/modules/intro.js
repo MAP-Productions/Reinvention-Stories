@@ -35,59 +35,52 @@ define([
             "click .skip-intro" : "skipIntro"
         },
 
+        canPlay: false,
+
         initialize: function( config ) {
             this.model = Intro.Items.get( config.id );
             this.model.hash = Math.floor(Math.random()*1000) + "";
         },
 
         afterRender: function() {
-            console.log("INTRO RENDER");
-
-            var $video, $videoEl, $skipLink;
+            var $videoEl, $skipLink;
 
             clearTimeout( this.introTimer );
 
-            introDelay = App.firstVisit() ? 7000 : 1000;
+            //introDelay = App.firstVisit() ? 7000 : 1000;
+            introDelay = 4000;
 
-            $video = Popcorn("#reinvention-intro video");
-            //$audio = Popcorn("#reinvention-intro audio");
+            this.$video = Popcorn("#reinvention-intro video");
 
-            $loaderEl = this.$(".loader");
-            $videoEl = this.$("video");
-            $skipLink = this.$(".skip-intro");
+            console.log( this.$video.readyState() );
+
+            this.$loaderEl = this.$(".loader");
+            this.$videoEl = this.$("video");
+            this.$skipLink = this.$(".skip-intro");
 
             this.spinLoader();
 
             // when video is ready to play, fade out the loader and play
             // delay if if it your first visit determined by App.firstVisit()
             // TODO: animate the loader circle
-            $video.on("canplaythrough", function() {
-
-                this.introTimer = setTimeout( function() {
-                    $loaderEl.fadeOut(1000, function() {
-                        this.progressPie.stop();
-                    }.bind(this));
-                    $skipLink.fadeIn(1000);
-
-                    $videoEl.animate({
-                        opacity: 1
-                    }, 1000, function() {
-                        if (App.isCurrent( 1, "intro" ) ) {
-                            $video.play();
-                        }
-                    });
-                }.bind(this), introDelay );
-
-            }.bind(this) );
+            if ( this.canPlay ) {
+                console.log("ALREADY CANPLAY");
+                this.startVideo();
+            } else {
+                this.$video.on("canplaythrough", function() {
+                    console.log("CANPLAY");
+                    this.startVideo();
+                }.bind(this) );
+            }
             
-            $video.cue( 56.5, function() {
+            this.$video.cue( 56.5, function() {
                     VideoPos.positionVideo($videoEl, { animate: true });
                     // this class will ensure full-bleed video positioning is retained on window resize
-                    $videoEl.addClass("full-bleed");
+                    this.$videoEl.addClass("full-bleed");
             });
 
             // Go to the first act when the intro is over.
-            $video.on("ended", function() {
+            this.$video.on("ended", function() {
                 App.goto( 1, "story" );
             });
 
@@ -103,9 +96,40 @@ define([
             Nav.mousemove({ pageY: 101 });
         },
 
+        startVideo: function() {
+            this.canPlay = true;
+            console.log("THIS", this);
+
+            this.introTimer = setTimeout( function() {
+                console.log("THIS", this);
+
+                this.$loaderEl.fadeOut(1000, function() {
+                    this.progressPie.stop();
+                }.bind(this));
+                this.$skipLink.fadeIn(1000);
+
+                this.$videoEl.animate({
+                    opacity: 1
+                }, 1000, function() {
+                    console.log("INTRO fadeout callback");
+                    if (App.isCurrent( 1, "intro" ) ) {
+                        console.log("INTRO play video");
+                        console.log( "PREPLAY STATE", this.$video.readyState() );
+                        this.$video.play();
+                    }
+                }.bind( this) );
+
+            }.bind(this) , introDelay );
+
+        },
+
         quitIntro: function() {
-            console.log("QUIITIIIITE", this.introTimer );
+            console.log("KILL");
             clearTimeout( this.introTimer );
+            // no idea why this works but if the video hasn't played it won't work upon returning to the view.
+            // (readystate would be 0 forever)
+            this.$video.play().destroy();
+            delete( this.$video );
             App.off("kill_player", this.quitIntro, this);
         },
 
