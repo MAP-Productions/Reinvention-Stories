@@ -53,9 +53,9 @@ define([
             L.control.attribution({ prefix: "Stories made with <a href=\"http://zeega.com/\">Zeega</a>" }).addTo( this.leafletMap );
 
             // add tumblr feed view
-            tumblrNewsView = new Tumblr.View();
-            this.insertView("", tumblrNewsView);
-            tumblrNewsView.render();
+            // tumblrNewsView = new Tumblr.View();
+            // this.insertView("", tumblrNewsView);
+            // tumblrNewsView.render();
         },
 
         createMarkers: function(collection) {
