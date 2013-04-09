@@ -41,30 +41,16 @@ define([
         },
 
         afterRender: function() {
+            console.log("INTRO RENDER");
 
             var $video, $videoEl, $skipLink;
+
+            clearTimeout( this.introTimer );
 
             introDelay = App.firstVisit() ? 7000 : 1000;
 
             $video = Popcorn("#reinvention-intro video");
             //$audio = Popcorn("#reinvention-intro audio");
-
-            $video.on("canplaythrough", function() {
-
-                _.delay( function() {
-                    $loaderEl.fadeOut(1000, function() {
-                        this.progressPie.stop();
-                    }.bind(this));
-                    $skipLink.fadeIn(1000);
-
-                    $videoEl.animate({
-                        opacity: 1
-                    }, 1000, function() {
-                        $video.play();
-                    });
-                }.bind(this), introDelay );
-
-            }.bind(this) );
 
             $loaderEl = this.$(".loader");
             $videoEl = this.$("video");
@@ -77,7 +63,7 @@ define([
             // TODO: animate the loader circle
             $video.on("canplaythrough", function() {
 
-                _.delay( function() {
+                this.introTimer = setTimeout( function() {
                     $loaderEl.fadeOut(1000, function() {
                         this.progressPie.stop();
                     }.bind(this));
@@ -86,36 +72,13 @@ define([
                     $videoEl.animate({
                         opacity: 1
                     }, 1000, function() {
-                        $video.play();
+                        if (App.isCurrent( 1, "intro" ) ) {
+                            $video.play();
+                        }
                     });
                 }.bind(this), introDelay );
 
             }.bind(this) );
-
-            // Begin playing the Billboard loop at 1:10 (70s)
-            // $video.cue( 55.5, function() {
-            //     $audio.play();
-            // });
-
-            // Pause the intro video at 1:11 (71s)
-            // $video.cue( 56.5, function() {
-            //     //$video.pause();
-
-                // Any single mousemovement will restart the video
-                // and stop the looping audio
-                //App.DOM.$body.one("mousemove", function() {
-
-                    // animate video to full-bleed
-                    // VideoPos.positionVideo($videoEl, { animate: true });
-                    // // this class will ensure full-bleed video positioning is retained on window resize
-                    // $videoEl.addClass("full-bleed");
-
-                    // $video.play();
-                    // $audio.volumeOut( 500, function() {
-                    //     this.pause();
-                    // });
-               // } );
-            // });
             
             $video.cue( 56.5, function() {
                     VideoPos.positionVideo($videoEl, { animate: true });
@@ -134,8 +97,16 @@ define([
                 this.centerIntroVideo();
             }.bind(this) );
 
+            App.on("kill_player", this.quitIntro, this);
+
             // Trick the navigation to hidden state.
             Nav.mousemove({ pageY: 101 });
+        },
+
+        quitIntro: function() {
+            console.log("QUIITIIIITE", this.introTimer );
+            clearTimeout( this.introTimer );
+            App.off("kill_player", this.quitIntro, this);
         },
 
         spinLoader: function() {
