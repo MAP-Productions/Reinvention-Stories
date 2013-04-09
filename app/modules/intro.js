@@ -52,8 +52,6 @@ define([
 
             this.$video = Popcorn("#reinvention-intro video");
 
-            console.log( this.$video.readyState() );
-
             this.$loaderEl = this.$(".loader");
             this.$videoEl = this.$("video");
             this.$skipLink = this.$(".skip-intro");
@@ -64,11 +62,9 @@ define([
             // delay if if it your first visit determined by App.firstVisit()
             // TODO: animate the loader circle
             if ( this.canPlay ) {
-                console.log("ALREADY CANPLAY");
                 this.startVideo();
             } else {
                 this.$video.on("canplaythrough", function() {
-                    console.log("CANPLAY");
                     this.startVideo();
                 }.bind(this) );
             }
@@ -98,10 +94,8 @@ define([
 
         startVideo: function() {
             this.canPlay = true;
-            console.log("THIS", this);
 
             this.introTimer = setTimeout( function() {
-                console.log("THIS", this);
 
                 this.$loaderEl.fadeOut(1000, function() {
                     this.progressPie.stop();
@@ -111,10 +105,7 @@ define([
                 this.$videoEl.animate({
                     opacity: 1
                 }, 1000, function() {
-                    console.log("INTRO fadeout callback");
                     if (App.isCurrent( 1, "intro" ) ) {
-                        console.log("INTRO play video");
-                        console.log( "PREPLAY STATE", this.$video.readyState() );
                         this.$video.play();
                     }
                 }.bind( this) );
@@ -124,7 +115,6 @@ define([
         },
 
         quitIntro: function() {
-            console.log("KILL");
             clearTimeout( this.introTimer );
             // no idea why this works but if the video hasn't played it won't work upon returning to the view.
             // (readystate would be 0 forever)
