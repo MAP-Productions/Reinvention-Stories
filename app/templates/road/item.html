@@ -9,9 +9,9 @@
   </div>
 
   <video class="full-bleed" id="<%=model.get("video")%>" role="primary" loop="true" preload="auto">
-    <source type="video/mp4" src="/app/video/<%=model.get("video")%>.mp4"></source>
-    <source type="video/webm" src="/app/video/<%=model.get("video")%>.webm"></source>
-    <source type="video/ogv" src="/app/video/<%=model.get("video")%>.ogv"></source>
+    <source type="video/mp4" src="http://reinventionmedia.s3.amazonaws.com/<%=model.get("video")%>.mp4"></source>
+    <source type="video/webm" src="http://reinventionmedia.s3.amazonaws.com/<%=model.get("video")%>.webm"></source>
+    <source type="video/ogv" src="http://reinventionmedia.s3.amazonaws.com/<%=model.get("video")%>.ogv"></source>
   </video>
-  <audio id="<%=model.get("audio")%>" autoplay loop src="/app/audio/<%=model.get("audio")%>.mp3"></audio>
+  <audio id="<%=model.get("audio")%>" autoplay loop src="http://reinventionmedia.s3.amazonaws.com/<%=model.get("audio")%>.mp3"></audio>
 </div>
