@@ -10,12 +10,12 @@
 
 .story-player .player-container {
   box-shadow: 0 0 24px rgba(0,0,0,0.75);
-  width: 664px;
-  height: 498px;
+  width: 745px;
+  height: 560px;
   position: absolute;
   left: 50%;
   top: 50%;
-  margin: -249px 0 0 -332px;
+  margin: -280px 0 0 -372px;
   z-index: 300;
 }
   
