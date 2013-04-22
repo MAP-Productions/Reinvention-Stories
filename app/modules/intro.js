@@ -68,12 +68,6 @@ define([
                 }.bind(this) );
             }
             
-            this.$video.cue( 56.5, function() {
-                    VideoPos.positionVideo($videoEl, { animate: true });
-                    // this class will ensure full-bleed video positioning is retained on window resize
-                    this.$videoEl.addClass("full-bleed");
-            });
-
             // Go to the first act when the intro is over.
             this.$video.on("ended", function() {
                 App.goto( 1, "story" );
@@ -115,9 +109,7 @@ define([
 
         quitIntro: function() {
             clearTimeout( this.introTimer );
-            // no idea why this works but if the video hasn't played it won't work upon returning to the view.
-            // (readystate would be 0 forever)
-            this.$video.play().destroy();
+            this.$video.destroy();
             delete( this.$video );
             App.off("kill_player", this.quitIntro, this);
         },
@@ -151,14 +143,10 @@ define([
         },
 
         centerIntroVideo: function() {
-            if ( !this.$el.find("video").hasClass("full-bleed") ) {
-                // if the video hasn't been set to full-bleed, set
-                // the correct margins to pull the video into the center
-                this.$el.find("video").css({
-                    marginLeft: "-" + (parseInt( this.$el.css("width"), 10 ) / 4) + "px",
-                    marginTop: "-" + (parseInt( this.$el.css("height"), 10 ) / 4) + "px"
-                });
-            }
+            this.$el.find("video").css({
+                marginLeft: "-" + (parseInt( this.$el.css("width"), 10 ) / 4) + "px",
+                marginTop: "-" + (parseInt( this.$el.css("height"), 10 ) / 4) + "px"
+            });
         },
 
         skipIntro: function() {
