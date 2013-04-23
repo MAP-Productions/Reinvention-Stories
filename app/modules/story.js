@@ -146,6 +146,9 @@ define([
                 });
 
                 App.on( "kill_player", function() {
+                    // this is a terrible hack to squelch media_timeupdate messages,
+                    // as destroy() doesn't do that correctly in this version of the player
+                    this.zeega.status.emit = function() {};
                     this.zeega.destroy();
                 }.bind(this) );
 
