@@ -220,7 +220,8 @@ function( App, Intro, Act, Story, Road, Reststop, Map, StoryOverlay, Contribute,
 
             // insert story overlay view
             storyView = new StoryOverlay.View({ id: id });
-            App.layout.insertView( "#reinvention-viewport", storyView );
+            //App.layout.insertView( "#reinvention-viewport", storyView );
+            App.layout.setView( "#overlay-viewport", storyView );
             storyView.render();
 
 
