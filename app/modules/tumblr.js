@@ -2,22 +2,19 @@ define([
     "app"
 ], function( App ) {
     
-    var Tumblr;
+    var Tumblr, jsonpSync;
+
+    jsonpSync = function (method, model, options) {
+        options.timeout = 10000; // for 404 responses
+        options.dataType = "jsonp";
+        return Backbone.sync(method, model, options);
+    };
 
     Tumblr = App.module();
 
     Tumblr.Model = Backbone.Model.extend({
         // override sync as Tumblr uses JSONP
-        sync: function(method, model, options) {
-            var params = _.extend({
-                type: 'GET',
-                dataType: 'jsonp',
-                url: this.url(),
-                processData: false
-            }, options);
-
-            return $.ajax(params);
-        },
+        sync: jsonpSync,
 
         // we're only interested in the latest post
         parse: function(response) {
