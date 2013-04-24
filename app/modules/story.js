@@ -93,8 +93,6 @@ define([
         },
 
         afterRender: function() {
-            // http://alpha.zeega.org/74868
-            // http://alpha.zeega.org/__ID__
             var config, id, act, data, isLast, $timeline, createChapterMenu;
 
             config = {
@@ -200,7 +198,6 @@ define([
             Nav.mousemove({ pageY: 10 });
 
             // todo: unbind when leaving view
-            _.bindAll(this, "showHide.mousemove");
             App.DOM.$body.on('mousemove', this.showHide.mousemove);
         },
 
