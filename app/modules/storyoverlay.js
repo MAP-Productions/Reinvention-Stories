@@ -55,14 +55,12 @@ define([
 
                 // kill player when App's kill_player event is triggered (when switching to another view)
                 App.on( "kill_player", function() {
-                    this.player.destroy();
+                    this.closeStory();
                 }.bind(this) );
 
-                //this.getNextStoryLink();
             }
 
         },
-
 
         closeStory: function() {
             App.DOM.$window.off("keydown");
