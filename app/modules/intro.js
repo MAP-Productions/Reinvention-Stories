@@ -82,7 +82,7 @@ define([
             App.on("kill_player", this.quitIntro, this);
 
             // Trick the navigation to hidden state.
-            Nav.mousemove({ pageY: 101 });
+            // Nav.mousemove({ pageY: 101 });
         },
 
         startVideo: function() {

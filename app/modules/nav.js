@@ -1,30 +1,30 @@
 define([],
 function() {
 
-    var $nav, isRolledup, isLocked, last;
+    var $nav, $navContent, triggerHeight, isRolledup, isLocked, initialOpen, last;
 
     isLocked = false;
-    last = 0;
+    initialOpen = true;
+    last = -1;
+    triggerHeight = 100; // distance from top of screen that triggers nav opening
+
+    $nav = $("#reinvention-menu");
+    $navContent = $nav.find(".menu-content");
 
     function mousemove( event ) {
-        var $navContent;
 
         event = event || { pageY: 0 };
 
         // Upvars declared in enclosing scope
-        $nav = $("#reinvention-menu");
-        $navContent = $nav.find(".menu-content");
+        
         isRolledup = $nav.hasClass("rolledup");
 
-        if ( last > 100 && event.pageY <= 100 ) {
-            isLocked = false;
-        }
-
-        if ( isLocked ) {
+        if ( isLocked || initialOpen ) {
+            last = event.pageY;
             return;
         }
 
-        if ( event.pageY > 100 ) {
+        if ( event.pageY > triggerHeight ) {
             if ( !isRolledup ) {
                 /* hide nav, fade out content */
                 isLocked = true;
@@ -47,6 +47,16 @@ function() {
                 $navContent.fadeIn(500);
             }
         }
+
+        last = event.pageY;
+    }
+
+    function startHiding() {
+        initialOpen = false;
+
+        if ( last < 0 || last > triggerHeight ) {
+            mousemove({ pageY: 2000 }); // force close
+        }
     }
 
     $(document).on( "mousemove", mousemove );
@@ -54,7 +64,7 @@ function() {
     // Trigger the mousemove with a fake event.pageY = 99 to hold the menu open.
     // NOTE: this is note straight forward, because the the transition timer
     // is buried in CSS
-    setTimeout( mousemove, 2000 );
+    setTimeout( startHiding, 2000 );
 
 
 
