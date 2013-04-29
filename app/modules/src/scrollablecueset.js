@@ -326,7 +326,7 @@
       // This is somewhat insane and hard to look at.
       $("#caption").css({
 
-        top: ( $childVideo.offset().top + $childVideo.height() + 30 ) + "px",
+        top: ( $childVideo.offset().top + $childVideo.height() + 44 ) + "px",
         left: $childVideo.offset().left + "px",
         width: dims.center.x + "px"
 
