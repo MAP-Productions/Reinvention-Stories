@@ -195,7 +195,7 @@ define([
             }
 
             // Trick the navigation into opening
-            Nav.mousemove({ pageY: 10 });
+            // Nav.mousemove({ pageY: 10 });
 
             // todo: unbind when leaving view
             App.DOM.$body.on('mousemove', this.showHide.mousemove);
@@ -261,12 +261,20 @@ define([
                         pxFromBottom = windowDims.y - e.pageY,
                         triggerHeight = 50; // how many pixels at the bottom of the screen trigger the nav
 
-                        if (pxFromBottom < triggerHeight && chapterNavHidden) {
-                            clearTimeout(hideTimer);
+                        if ( chapterNavHidden ) {
                             showChapterNav();
-                        } else if (pxFromBottom > triggerHeight && !chapterNavHidden) {
-                            hideTimer = setTimeout(hideChapterNav, hideAfter);
+
+                            if ( pxFromBottom > triggerHeight ) {
+                                hideTimer = setTimeout(hideChapterNav, hideAfter);
+                            }
+                        } else {
+                            clearTimeout( hideTimer );
+                            if ( pxFromBottom > triggerHeight ) {
+                                hideTimer = setTimeout(hideChapterNav, hideAfter);
+                            }
                         }
+
+
 
                 },
 
@@ -289,6 +297,8 @@ define([
 
                 hideChapterNav = function() {
                     chapterNavHidden = true;
+
+                    console.log("hide chapter nav");
 
                     this.$("#reinvention-story-controls").stop().animate({
                         opacity: 0
