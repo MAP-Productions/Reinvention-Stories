@@ -28,10 +28,10 @@ if(isset($_POST["status"]) && isset($_POST["act"])){
 
 	$result=mysql_query($query);
 
+	 $date = date('Y/m/d H:i:s');
 
 
-
-	echo json_encode( array("act"=>$act, "text"=>$text, "question"=>"where do you go?", "created_at"=>"Oct 1"));
+	echo json_encode( array("act"=>$act, "text"=>$text, "question"=>"where do you go?", "created_at"=>$date));
 
 }
 
