@@ -2,7 +2,8 @@ define([],
 
 function() {
 
-    var PROXY_URL = "http://reinventionstories.org/twitter/post.php";
+    //var PROXY_URL = "http://reinventionstories.org/twitter/submit.php";
+    var PROXY_URL = "twitter/submit.php";
 
     return {
         post: function( data, callback ) {

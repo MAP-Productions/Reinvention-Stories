@@ -76,7 +76,7 @@ define([
                 if ( App.isCurrent( this ) ) {
                     Answer.request({
                         isUpdate: true,
-                        twitter_account: this.model.get("twitter_account")
+                        act: this.model.get("act")
                     });
                 }
             }.bind(this), 300000);
@@ -178,9 +178,10 @@ define([
         }, 200 );
 
 
-        // The regex below turns twitter's created_at string into something IE's Date() can parse 
+        // The regex below turns twitter's created_at string into something IE's Date() can parse
         this.created = Moment(
-            new Date( tweet.created_at.replace(/(\+\S+) (.*)/, '$2 $1') )
+            // new Date( tweet.created_at.replace(/(\+\S+) (.*)/, '$2 $1') )
+             new Date( tweet.created_at )
         );
 
         this.$answer = $(
@@ -275,8 +276,8 @@ define([
         options = options || {};
         return $.ajax({
             type: "GET",
-            url: "https://api.twitter.com/1/statuses/user_timeline.json?include_entities=true&include_rts=true&screen_name=" + options.twitter_account + "&count=20&callback=?",
-            dataType: "jsonp",
+            url: "twitter/fetch.php?act="+options.act,
+            dataType: "json",
             success: function( data ) {
                 data.filter( Answer.isValid ).slice(0, 25).forEach(function( answer ) {
                     Answer.create( answer, options );
