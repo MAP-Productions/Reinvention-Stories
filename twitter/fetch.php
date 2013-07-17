@@ -18,7 +18,7 @@
 
 	$act = $_GET["act"];
 
-	$sth = mysql_query("SELECT * FROM Answers where act = $act");
+	$sth = mysql_query("SELECT * FROM Answers where act = $act ORDER BY created_at DESC LIMIT 100");
 	$rows = array();
 	while($r = mysql_fetch_assoc($sth)) {
 	    $rows[] = $r;
