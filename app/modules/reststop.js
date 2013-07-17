@@ -82,7 +82,7 @@ define([
             }.bind(this), 300000);
 
             // Make an initial request for existing answer submissions
-            Answer.request({ twitter_account: this.model.get("twitter_account")});
+            Answer.request({ act: this.model.get("act")});
 
             (function reveal() {
                 var index;
@@ -274,6 +274,7 @@ define([
     //
     Answer.request = function( options ) {
         options = options || {};
+        console.log("options",options);
         return $.ajax({
             type: "GET",
             url: "twitter/fetch.php?act="+options.act,
