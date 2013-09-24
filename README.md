@@ -1,4 +1,4 @@
-# Reinvention
+# Reinvention Stories
 
 ### Install at the web root or sub-domain, not in a sub-directory.
 
