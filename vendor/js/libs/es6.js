@@ -1,4 +1,4 @@
-"WeakMap" in this || (function (module) {"use strict";
+"WeakMap" in this && "Map" in this && "Set" in this || (function (module) {"use strict";
 
   //!(C) WebReflection - Mit Style License
   // size and performances oriented polyfill for ES6
